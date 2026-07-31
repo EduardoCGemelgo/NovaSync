@@ -4,6 +4,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="NovaSync — gestão inteligente para operações de Field Service de TI.">
   <title>NovaSync — Field Service de TI</title>
+  <link rel="icon" type="image/png" href="logo-star.png">
   <style>
     :root {
       --bg: oklch(0.10 0.025 300);
@@ -52,7 +53,7 @@
     }
     a { color: inherit; text-decoration: none; }
     button { font: inherit; }
-    a:focus-visible, button:focus-visible, summary:focus-visible, input:focus-visible { outline: 3px solid var(--accent-readable); outline-offset: 4px; }
+    a:focus-visible, button:focus-visible, summary:focus-visible, input:focus-visible, select:focus-visible { outline: 3px solid var(--accent-readable); outline-offset: 4px; }
     .skip-link { position: absolute; left: 16px; top: 12px; z-index: 10; padding: 10px 14px; border-radius: 8px; background: var(--fg); color: var(--bg); transform: translateY(-160%); }
     .skip-link:focus { transform: translateY(0); }
     .shell { width: min(1120px, calc(100% - 48px)); margin: 0 auto; }
@@ -507,7 +508,7 @@
       position: fixed;
       z-index: 8;
       top: 50%;
-      right: max(4px, calc((100vw - 1280px) / 2 - 20px));
+      right: 12px;
       display: grid;
       gap: 16px;
       opacity: 0;
@@ -670,6 +671,23 @@
     .coverage-stat strong { display: block; color: var(--accent-readable); font-size: 28px; letter-spacing: -.06em; }
     .coverage-stat span { display: block; margin-top: 6px; color: var(--muted); font: 11px "SF Mono", ui-monospace, monospace; letter-spacing: .08em; text-transform: uppercase; }
 
+    .technical-registration { padding: 104px 0; }
+    .technical-registration-layout { display: grid; grid-template-columns: .72fr 1.28fr; gap: 72px; align-items: start; }
+    .technical-registration-copy h2 { margin-top: 14px; font-size: clamp(35px, 4vw, 56px); letter-spacing: -.06em; line-height: 1; }
+    .technical-registration-copy p { max-width: 420px; margin-top: 18px; color: var(--muted); line-height: 1.65; }
+    .technical-registration-note { margin-top: 34px; padding-top: 18px; border-top: 1px solid var(--border); color: var(--muted); font-size: 13px; line-height: 1.55; }
+    .technical-form { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px 14px; padding: 28px; border: 1px solid var(--border); border-radius: 10px; background: var(--surface); }
+    .technical-form-field { display: grid; gap: 8px; }
+    .technical-form-field.is-wide { grid-column: 1 / -1; }
+    .technical-form label { color: var(--fg); font-size: 13px; line-height: 1.35; }
+    .technical-form input { width: 100%; min-height: 48px; padding: 0 14px; border: 1px solid var(--border); border-radius: 8px; background: color-mix(in oklab, var(--bg), var(--surface) 50%); color: var(--fg); font: inherit; transition: border-color .2s ease, background .2s ease; }
+     .technical-form input::placeholder { color: var(--muted); }
+     .technical-form input:focus { border-color: var(--accent-readable); background: var(--bg); outline: none; }
+     .technical-form input[aria-invalid="true"] { border-color: var(--accent-readable); }
+     .technical-form .btn { grid-column: 1 / -1; justify-self: start; margin-top: 4px; }
+     .technical-form-status { grid-column: 1 / -1; min-height: 20px; color: var(--accent-readable); font-size: 14px; line-height: 1.45; }
+     .technical-form-status.is-error { color: var(--fg); }
+
     main > section {
       background-image: linear-gradient(180deg, color-mix(in oklab, var(--surface), transparent 90%), transparent 48%, color-mix(in oklab, var(--accent), transparent 92%));
     }
@@ -698,6 +716,7 @@
        .calculator-layout { grid-template-columns: 1fr; gap: 36px; }
        .sectors-layout { grid-template-columns: 1fr; gap: 36px; }
        .coverage-layout { grid-template-columns: 1fr; gap: 36px; }
+       .technical-registration-layout { grid-template-columns: 1fr; gap: 36px; }
          .coverage-map { width: min(100%, 720px); justify-self: center; }
             .brazil-map-svg, .brazil-map-fallback { width: 170%; height: 170%; transform: translate(calc(-50% + 40px), -50%); }
        }
@@ -722,6 +741,8 @@
           .coverage-map { width: 100%; height: 450px; min-height: 0; }
               .brazil-map-svg, .brazil-map-fallback { width: 160%; height: 160%; transform: translate(calc(-50% + 30px), -50%); }
        .coverage-panel { padding: 22px; }
+       .technical-form { grid-template-columns: 1fr; padding: 22px; }
+       .technical-form-field.is-wide, .technical-form .btn, .technical-form-status { grid-column: auto; }
        .feature { min-height: 190px; }
       .feature-icon { margin-bottom: 30px; }
       .section { padding: 74px 0; }
@@ -779,13 +800,13 @@
     </nav>
     <a href="#inicio" class="brand" aria-label="NovaSync, início"><img src="logo-star.png" alt="NovaSync" style="display:block;width:42px;height:auto"></a>
     <div class="nav-cta desktop-actions" style="display:flex;gap:8px">
-      <a class="btn" href="mailto:contato@novasync.example?subject=Cadastro%20t%C3%A9cnico">Cadastro técnico</a>
+       <a class="btn" href="#cadastro-tecnico">Cadastro técnico</a>
        <a class="btn" href="https://wa.me/5511993287070">Contato</a>
     </div>
     <details class="mobile-menu mobile-menu-right" data-od-id="mobile-contact-menu">
       <summary aria-label="Abrir contatos"><span aria-hidden="true"></span></summary>
       <div class="mobile-menu-panel">
-        <a href="mailto:contato@novasync.example?subject=Cadastro%20t%C3%A9cnico">Cadastro técnico</a>
+         <a href="#cadastro-tecnico">Cadastro técnico</a>
         <a href="mailto:contato@novasync.example?subject=Parcerias">Parcerias</a>
       </div>
     </details>
@@ -966,6 +987,7 @@
       <a href="#trust-section" data-section-link="trust-section"><span>Benefícios</span></a>
       <a href="#cost-calculator" data-section-link="cost-calculator"><span>Calculadora</span></a>
       <a href="#setores" data-section-link="setores"><span>Setores</span></a>
+      <a href="#cadastro-tecnico" data-section-link="cadastro-tecnico"><span>Cadastro técnico</span></a>
       <a href="#final-cta" data-section-link="final-cta"><span>Contato</span></a>
     </nav>
 
@@ -1310,12 +1332,68 @@
       </div>
     </section>
 
+    <section class="technical-registration" id="cadastro-tecnico" data-od-id="technical-registration">
+      <div class="shell technical-registration-layout">
+        <div class="technical-registration-copy">
+          <p class="eyebrow">Rede NovaSync</p>
+          <h2>Faça parte da nossa rede de <span class="accent-word">técnicos.</span></h2>
+          <p>Preencha seus dados para que nossa equipe avalie seu perfil e entre em contato sobre oportunidades de atendimento em campo.</p>
+          <p class="technical-registration-note">Seus dados serão usados exclusivamente para contato sobre o cadastro técnico.</p>
+        </div>
+        <form class="technical-form" id="technical-registration-form" action="https://api.sheetmonkey.io/form/4KXW8HY77CP5Mt4ySXYqVt" method="post" data-od-id="technical-registration-form">
+          <div class="technical-form-field is-wide">
+            <label for="technical-full-name">Nome completo</label>
+            <input id="technical-full-name" name="nome" type="text" autocomplete="name" placeholder="Digite seu nome completo" required>
+          </div>
+          <div class="technical-form-field">
+            <label for="technical-rg">RG</label>
+            <input id="technical-rg" name="rg" type="text" inputmode="numeric" autocomplete="off" placeholder="Digite seu RG" required>
+          </div>
+          <div class="technical-form-field">
+            <label for="technical-cpf">CPF</label>
+            <input id="technical-cpf" name="cpf" type="text" inputmode="numeric" autocomplete="off" placeholder="000.000.000-00" required>
+          </div>
+          <div class="technical-form-field">
+            <label for="technical-phone">Telefone</label>
+            <input id="technical-phone" name="telefone" type="tel" autocomplete="tel" placeholder="(00) 00000-0000" required>
+          </div>
+          <div class="technical-form-field">
+            <label for="technical-email">E-mail</label>
+            <input id="technical-email" name="email" type="email" autocomplete="email" placeholder="voce@exemplo.com" required>
+          </div>
+          <div class="technical-form-field is-wide">
+            <label for="technical-address">Endereço</label>
+            <input id="technical-address" name="endereco" type="text" autocomplete="street-address" placeholder="Rua, avenida ou rodovia" required>
+          </div>
+          <div class="technical-form-field">
+            <label for="technical-complement">Complemento</label>
+            <input id="technical-complement" name="complemento" type="text" autocomplete="address-line2" placeholder="Apto, sala ou referência">
+          </div>
+          <div class="technical-form-field">
+            <label for="technical-city">Cidade</label>
+            <input id="technical-city" name="cidade" type="text" autocomplete="address-level2" placeholder="Digite sua cidade" required>
+          </div>
+          <div class="technical-form-field">
+            <label for="technical-state">Estado</label>
+            <input id="technical-state" name="estado" type="text" autocomplete="address-level1" maxlength="2" placeholder="UF" required>
+          </div>
+          <div class="technical-form-field">
+            <label for="technical-zip">CEP</label>
+            <input id="technical-zip" name="cep" type="text" inputmode="numeric" autocomplete="postal-code" placeholder="00000-000" required>
+          </div>
+          <input type="hidden" name="Criado em" value="x-sheetmonkey-current-date-time">
+          <button class="btn btn-primary" type="submit" data-od-id="technical-registration-submit">Enviar cadastro <span aria-hidden="true">→</span></button>
+           <p class="technical-form-status" id="technical-form-status" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
+
     <section class="cta" id="final-cta" data-od-id="final-cta">
       <div class="shell">
         <p class="eyebrow">NovaSync para Field Service de TI</p>
         <h2>Faça sua operação trabalhar em <span class="accent-word">sincronia.</span></h2>
         <p>Converse com a NovaSync sobre a cobertura e o modelo de atendimento mais adequado para sua operação.</p>
-        <address aria-label="Canais de contato" style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px 32px;max-width:720px;margin:0 auto 32px;text-align:left;border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:24px 0;font-style:normal;">
+        <address aria-label="Canais de contato" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px 32px;max-width:720px;margin:0 auto 32px;text-align:left;border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:24px 0;font-style:normal;">
           <a href="mailto:contato@nova-sync.net" style="display:flex;flex-direction:column;gap:4px;color:var(--fg);line-height:1.4;overflow-wrap:anywhere;">
             <span class="mono" style="color:var(--muted);font-size:12px;">E-mail de contato</span>
             <span>contato@nova-sync.net</span>
@@ -1328,10 +1406,6 @@
             <span class="mono" style="color:var(--muted);font-size:12px;">Contato comercial</span>
             <span>(11) 99328-7070</span>
           </a>
-          <a href="tel:+5511999999999" style="display:flex;flex-direction:column;gap:4px;color:var(--fg);line-height:1.4;overflow-wrap:anywhere;">
-            <span class="mono" style="color:var(--muted);font-size:12px;">Contato para técnicos</span>
-            <span>(11) 99999-9999</span>
-          </a>
         </address>
         <a class="btn btn-primary" href="mailto:contato@nova-sync.net">Entre em contato <span aria-hidden="true">→</span></a>
       </div>
@@ -1339,6 +1413,55 @@
   </main>
 
   <script>
+    (function () {
+      const form = document.getElementById("technical-registration-form");
+      const status = document.getElementById("technical-form-status");
+      if (!form || !status) return;
+
+       const requiredFields = Array.from(form.querySelectorAll("[required]"));
+       const validateField = function (field) {
+         let message = "";
+         if (field.validity.valueMissing) message = "Este campo é obrigatório.";
+         else if (field.validity.typeMismatch) message = "Informe um e-mail válido.";
+         field.setCustomValidity(message);
+         field.setAttribute("aria-invalid", message ? "true" : "false");
+         return !message;
+       };
+
+       requiredFields.forEach(function (field) {
+         field.addEventListener("input", function () {
+           validateField(field);
+           if (form.checkValidity()) {
+             status.textContent = "";
+             status.classList.remove("is-error");
+           }
+         });
+       });
+
+       form.addEventListener("invalid", function (event) {
+         validateField(event.target);
+         status.textContent = "Preencha todos os campos obrigatórios para enviar o formulário.";
+         status.classList.add("is-error");
+       }, true);
+
+       form.addEventListener("submit", function (event) {
+         const valid = requiredFields.map(validateField).every(Boolean);
+         if (!valid) {
+           event.preventDefault();
+           status.textContent = "Preencha todos os campos obrigatórios para enviar o formulário.";
+           status.classList.add("is-error");
+           const firstInvalid = requiredFields.find(function (field) { return !field.checkValidity(); });
+           if (firstInvalid) {
+             firstInvalid.focus();
+             firstInvalid.reportValidity();
+           }
+           return;
+         }
+         status.textContent = "Enviando seu cadastro...";
+         status.classList.remove("is-error");
+       });
+    }());
+
     (function () {
       const sidebar = document.querySelector(".section-sidebar");
       const hero = document.getElementById("inicio");
