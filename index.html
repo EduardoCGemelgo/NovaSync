@@ -613,8 +613,11 @@
         .mobile-menu-left .mobile-menu-panel { left: 0; }
         .mobile-menu-right .mobile-menu-panel { right: 0; }
          .mobile-menu-panel a { display: block; min-height: 44px; padding: 13px 12px; color: var(--fg); font: 14px "SF Mono", ui-monospace, monospace; letter-spacing: .04em; line-height: 1.3; text-transform: uppercase; }
-        .mobile-menu-panel a + a { border-top: 1px solid var(--border); }
-         .mobile-menu-panel a:hover { color: var(--accent-readable); }
+       .mobile-menu-panel a + a { border-top: 1px solid var(--border); }
+          .mobile-menu-panel a:hover { color: var(--accent-readable); }
+        @media (max-width: 540px) {
+          [data-od-id="top-navigation"] { width: 100%; margin-inline: 0; padding-inline: 16px; }
+        }
       }
     </style>
     <details class="mobile-menu mobile-menu-left" data-od-id="mobile-navigation-menu">
