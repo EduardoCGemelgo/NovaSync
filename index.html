@@ -671,7 +671,7 @@
     .coverage-stat strong { display: block; color: var(--accent-readable); font-size: 28px; letter-spacing: -.06em; }
     .coverage-stat span { display: block; margin-top: 6px; color: var(--muted); font: 11px "SF Mono", ui-monospace, monospace; letter-spacing: .08em; text-transform: uppercase; }
 
-    .technical-registration { padding: 104px 0; }
+    .technical-registration { padding: 104px 0; border-top: 1px solid var(--border); }
     .technical-registration-layout { display: grid; grid-template-columns: .72fr 1.28fr; gap: 72px; align-items: start; }
     .technical-registration-copy h2 { margin-top: 14px; font-size: clamp(35px, 4vw, 56px); letter-spacing: -.06em; line-height: 1; }
     .technical-registration-copy p { max-width: 420px; margin-top: 18px; color: var(--muted); line-height: 1.65; }
@@ -1342,27 +1342,27 @@
         </div>
         <form class="technical-form" id="technical-registration-form" action="https://api.sheetmonkey.io/form/4KXW8HY77CP5Mt4ySXYqVt" method="post" data-od-id="technical-registration-form">
           <div class="technical-form-field is-wide">
-            <label for="technical-full-name">Nome completo</label>
+             <label for="technical-full-name">Nome completo *</label>
             <input id="technical-full-name" name="nome" type="text" autocomplete="name" placeholder="Digite seu nome completo" required>
           </div>
           <div class="technical-form-field">
-            <label for="technical-rg">RG</label>
-            <input id="technical-rg" name="rg" type="text" inputmode="numeric" autocomplete="off" placeholder="Digite seu RG" required>
+             <label for="technical-rg">RG *</label>
+            <input id="technical-rg" name="rg" type="text" inputmode="numeric" autocomplete="off" placeholder="00.000.000-0" maxlength="12" data-mask="rg" required>
           </div>
           <div class="technical-form-field">
-            <label for="technical-cpf">CPF</label>
-            <input id="technical-cpf" name="cpf" type="text" inputmode="numeric" autocomplete="off" placeholder="000.000.000-00" required>
+             <label for="technical-cpf">CPF *</label>
+            <input id="technical-cpf" name="cpf" type="text" inputmode="numeric" autocomplete="off" placeholder="000.000.000-00" maxlength="14" data-mask="cpf" required>
           </div>
           <div class="technical-form-field">
-            <label for="technical-phone">Telefone</label>
-            <input id="technical-phone" name="telefone" type="tel" autocomplete="tel" placeholder="(00) 00000-0000" required>
+             <label for="technical-phone">Telefone *</label>
+            <input id="technical-phone" name="telefone" type="tel" inputmode="numeric" autocomplete="tel" placeholder="(00) 00000-0000" maxlength="15" data-mask="phone" required>
           </div>
           <div class="technical-form-field">
-            <label for="technical-email">E-mail</label>
-            <input id="technical-email" name="email" type="email" autocomplete="email" placeholder="voce@exemplo.com" required>
+             <label for="technical-email">E-mail *</label>
+            <input id="technical-email" name="email" type="email" autocomplete="email" placeholder="voce@exemplo.com" pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}" title="Informe um e-mail válido no formato nome@dominio.com" required>
           </div>
           <div class="technical-form-field is-wide">
-            <label for="technical-address">Endereço</label>
+             <label for="technical-address">Endereço *</label>
             <input id="technical-address" name="endereco" type="text" autocomplete="street-address" placeholder="Rua, avenida ou rodovia" required>
           </div>
           <div class="technical-form-field">
@@ -1370,18 +1370,50 @@
             <input id="technical-complement" name="complemento" type="text" autocomplete="address-line2" placeholder="Apto, sala ou referência">
           </div>
           <div class="technical-form-field">
-            <label for="technical-city">Cidade</label>
-            <input id="technical-city" name="cidade" type="text" autocomplete="address-level2" placeholder="Digite sua cidade" required>
+             <label for="technical-state">Estado *</label>
+            <select id="technical-state" name="estado" autocomplete="address-level1" required style="width: 100%; min-height: 48px; padding: 0 14px; border: 1px solid var(--border); border-radius: 8px; background: color-mix(in oklab, var(--bg), var(--surface) 50%); color: var(--fg); font: inherit; transition: border-color .2s ease, background .2s ease;">
+              <option value="" selected disabled>Selecione a UF</option>
+              <option value="AC">AC - Acre</option>
+              <option value="AL">AL - Alagoas</option>
+              <option value="AP">AP - Amapá</option>
+              <option value="AM">AM - Amazonas</option>
+              <option value="BA">BA - Bahia</option>
+              <option value="CE">CE - Ceará</option>
+              <option value="DF">DF - Distrito Federal</option>
+              <option value="ES">ES - Espírito Santo</option>
+              <option value="GO">GO - Goiás</option>
+              <option value="MA">MA - Maranhão</option>
+              <option value="MT">MT - Mato Grosso</option>
+              <option value="MS">MS - Mato Grosso do Sul</option>
+              <option value="MG">MG - Minas Gerais</option>
+              <option value="PA">PA - Pará</option>
+              <option value="PB">PB - Paraíba</option>
+              <option value="PR">PR - Paraná</option>
+              <option value="PE">PE - Pernambuco</option>
+              <option value="PI">PI - Piauí</option>
+              <option value="RJ">RJ - Rio de Janeiro</option>
+              <option value="RN">RN - Rio Grande do Norte</option>
+              <option value="RS">RS - Rio Grande do Sul</option>
+              <option value="RO">RO - Rondônia</option>
+              <option value="RR">RR - Roraima</option>
+              <option value="SC">SC - Santa Catarina</option>
+              <option value="SP">SP - São Paulo</option>
+              <option value="SE">SE - Sergipe</option>
+               <option value="TO">TO - Tocantins</option>
+             </select>
+           </div>
+          <div class="technical-form-field">
+             <label for="technical-city">Cidade *</label>
+            <select id="technical-city" name="cidade" autocomplete="address-level2" required disabled style="width: 100%; min-height: 48px; padding: 0 14px; border: 1px solid var(--border); border-radius: 8px; background: color-mix(in oklab, var(--bg), var(--surface) 50%); color: var(--fg); font: inherit; transition: border-color .2s ease, background .2s ease;">
+              <option value="" selected>Selecione primeiro o estado</option>
+            </select>
           </div>
           <div class="technical-form-field">
-            <label for="technical-state">Estado</label>
-            <input id="technical-state" name="estado" type="text" autocomplete="address-level1" maxlength="2" placeholder="UF" required>
+             <label for="technical-zip">CEP *</label>
+            <input id="technical-zip" name="cep" type="text" inputmode="numeric" autocomplete="postal-code" placeholder="00000-000" maxlength="9" data-mask="cep" required>
           </div>
-          <div class="technical-form-field">
-            <label for="technical-zip">CEP</label>
-            <input id="technical-zip" name="cep" type="text" inputmode="numeric" autocomplete="postal-code" placeholder="00000-000" required>
-          </div>
-          <input type="hidden" name="Criado em" value="x-sheetmonkey-current-date-time">
+           <input type="hidden" name="x-sheetmonkey-redirect" value="https://nova-sync.net">
+           <input type="hidden" name="Criado em" value="x-sheetmonkey-current-date-time">
           <button class="btn btn-primary" type="submit" data-od-id="technical-registration-submit">Enviar cadastro <span aria-hidden="true">→</span></button>
            <p class="technical-form-status" id="technical-form-status" role="status" aria-live="polite"></p>
         </form>
@@ -1419,6 +1451,58 @@
       if (!form || !status) return;
 
        const requiredFields = Array.from(form.querySelectorAll("[required]"));
+        const stateField = document.getElementById("technical-state");
+        const cityField = document.getElementById("technical-city");
+        const loadCities = function (uf) {
+          cityField.innerHTML = "<option value=\"\">Carregando cidades...</option>";
+          cityField.disabled = true;
+          if (!uf) {
+            cityField.innerHTML = "<option value=\"\">Selecione primeiro o estado</option>";
+            return;
+          }
+          fetch("https://servicodados.ibge.gov.br/api/v1/localidades/estados/" + encodeURIComponent(uf) + "/municipios")
+            .then(function (response) {
+              if (!response.ok) throw new Error("Falha ao carregar cidades");
+              return response.json();
+            })
+            .then(function (cities) {
+              cityField.innerHTML = "<option value=\"\">Selecione a cidade</option>";
+              cities.forEach(function (city) {
+                const option = document.createElement("option");
+                option.value = city.nome;
+                option.textContent = city.nome;
+                cityField.appendChild(option);
+              });
+              cityField.disabled = false;
+            })
+            .catch(function () {
+              cityField.innerHTML = "<option value=\"\">Não foi possível carregar as cidades</option>";
+              cityField.disabled = false;
+              cityField.setCustomValidity("Selecione uma cidade após carregar a lista.");
+            });
+        };
+        if (stateField && cityField) {
+          stateField.addEventListener("change", function () {
+            cityField.setCustomValidity("");
+            loadCities(stateField.value);
+          });
+        }
+        const maskValue = function (field) {
+         const digits = field.value.replace(/\D/g, "");
+         if (field.dataset.mask === "rg") {
+           field.value = digits.slice(0, 9).replace(/^(\d{2})(\d)/, "$1.$2").replace(/^(\d{2})\.(\d{3})(\d)/, "$1.$2.$3").replace(/^(\d{2})\.(\d{3})\.(\d{3})(\d)/, "$1.$2.$3-$4");
+         } else if (field.dataset.mask === "cpf") {
+           field.value = digits.slice(0, 11).replace(/^(\d{3})(\d)/, "$1.$2").replace(/^(\d{3})\.(\d{3})(\d)/, "$1.$2.$3").replace(/^(\d{3})\.(\d{3})\.(\d{3})(\d)/, "$1.$2.$3-$4");
+         } else if (field.dataset.mask === "phone") {
+           field.value = digits.slice(0, 11).replace(/^(\d{2})(\d)/, "($1) $2").replace(/^(\(\d{2}\) \d{5})(\d)/, "$1-$2");
+         } else if (field.dataset.mask === "cep") {
+           field.value = digits.slice(0, 8).replace(/^(\d{5})(\d)/, "$1-$2");
+         }
+       };
+       form.querySelectorAll("[data-mask]").forEach(function (field) {
+         field.addEventListener("input", function () { maskValue(field); });
+         maskValue(field);
+       });
        const validateField = function (field) {
          let message = "";
          if (field.validity.valueMissing) message = "Este campo é obrigatório.";
