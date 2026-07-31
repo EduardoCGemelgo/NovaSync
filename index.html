@@ -18,7 +18,38 @@
 
     * { box-sizing: border-box; }
     html { scroll-behavior: smooth; background: var(--bg); }
-    body { margin: 0; background: var(--bg); color: var(--fg); font-family: Manrope, ui-sans-serif, system-ui, sans-serif; font-size: 16px; }
+    body { position: relative; isolation: isolate; margin: 0; background: transparent; color: var(--fg); font-family: Manrope, ui-sans-serif, system-ui, sans-serif; font-size: 16px; }
+    body::before {
+      content: "";
+      position: fixed;
+      z-index: -1;
+      inset: -18%;
+      pointer-events: none;
+      background:
+        radial-gradient(ellipse 42% 30% at 12% 18%, color-mix(in oklab, var(--accent-gradient), transparent 34%), transparent 72%),
+        radial-gradient(ellipse 36% 27% at 84% 42%, color-mix(in oklab, var(--accent), transparent 46%), transparent 72%),
+        radial-gradient(ellipse 48% 31% at 52% 88%, color-mix(in oklab, var(--accent-readable), transparent 89%), transparent 76%);
+      background-size: 138% 138%, 132% 132%, 145% 145%;
+      background-position: 0% 48%, 100% 42%, 50% 100%;
+      filter: blur(30px);
+      opacity: .72;
+      animation: site-wave-drift 19s ease-in-out infinite alternate;
+    }
+
+    @keyframes site-wave-drift {
+      0% {
+        background-position: 0% 48%, 100% 42%, 50% 100%;
+        transform: scale(1);
+      }
+      50% {
+        background-position: 34% 28%, 68% 64%, 26% 76%;
+        transform: scale(1.055);
+      }
+      100% {
+        background-position: 100% 56%, 8% 34%, 74% 18%;
+        transform: scale(1.02);
+      }
+    }
     a { color: inherit; text-decoration: none; }
     button { font: inherit; }
     a:focus-visible, button:focus-visible, summary:focus-visible, input:focus-visible { outline: 3px solid var(--accent-readable); outline-offset: 4px; }
@@ -474,9 +505,9 @@
 
     .section-sidebar {
       position: fixed;
-      z-index: 5;
+      z-index: 8;
       top: 50%;
-      right: 24px;
+      right: max(4px, calc((100vw - 1280px) / 2 - 20px));
       display: grid;
       gap: 16px;
       opacity: 0;
@@ -539,6 +570,106 @@
       transform: translateX(0);
     }
 
+    .coverage-section { padding: 104px 0; border-top: 1px solid var(--border); }
+    .coverage-layout { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(300px, .8fr); gap: 44px; align-items: center; }
+    .coverage-map-wrap { min-width: 0; }
+    .coverage-map {
+      position: relative;
+      width: min(100%, 680px);
+      aspect-ratio: 1 / 1;
+      min-height: 0;
+      margin: 0 auto;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: color-mix(in oklab, var(--bg), var(--surface) 42%);
+      overflow: hidden;
+    }
+    .coverage-map::before, .coverage-map::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px);
+      background-size: 44px 44px;
+      opacity: .22;
+      pointer-events: none;
+    }
+    .coverage-map::after { background: radial-gradient(circle at 50% 48%, color-mix(in oklab, var(--accent), transparent 84%), transparent 54%); }
+    .brazil-map-svg {
+      position: absolute;
+      z-index: 1;
+      left: 50%;
+      top: 50%;
+      width: 180%;
+      height: 180%;
+      overflow: visible;
+      transform: translate(calc(-50% + 43px), -50%);
+    }
+    .brazil-map-fallback {
+      position: absolute;
+      z-index: 0;
+      left: 50%;
+      top: 50%;
+      width: 180%;
+      height: 180%;
+      opacity: .34;
+      pointer-events: none;
+      object-fit: contain;
+      transform: translate(calc(-50% + 43px), -50%);
+    }
+    .brazil-map-svg use {
+      display: none;
+    }
+    .brazil-map-svg .map-state {
+      fill: color-mix(in oklab, var(--surface), var(--accent) 12%);
+      stroke: var(--border);
+      stroke-width: 55;
+      stroke-linejoin: round;
+      cursor: pointer;
+      outline: none;
+      transition: fill .18s ease, stroke .18s ease, stroke-width .18s ease, filter .18s ease;
+    }
+    .brazil-map-svg .map-state:hover,
+    .brazil-map-svg .map-state:focus-visible,
+    .brazil-map-svg .map-state.is-active {
+      fill: var(--accent-readable);
+      stroke: var(--fg);
+      stroke-width: 90;
+      filter: drop-shadow(0 0 9px color-mix(in oklab, var(--accent-readable), transparent 38%));
+    }
+    .brazil-map-svg .map-state:focus-visible { outline: 2px solid var(--fg); outline-offset: 3px; }
+    .brazil-map-svg use {
+      fill: color-mix(in oklab, var(--surface), var(--accent) 12%) !important;
+      stroke: var(--border) !important;
+      stroke-width: 1.2;
+      stroke-linejoin: round;
+      cursor: pointer;
+      outline: none;
+      transition: fill .18s ease, stroke .18s ease, stroke-width .18s ease, filter .18s ease;
+    }
+    .brazil-map-svg use:hover,
+    .brazil-map-svg use:focus-visible,
+    .brazil-map-svg use.is-active {
+      fill: var(--accent-readable) !important;
+      stroke: var(--fg) !important;
+      stroke-width: 2.2;
+      filter: drop-shadow(0 0 9px color-mix(in oklab, var(--accent-readable), transparent 38%));
+    }
+    .brazil-map-svg use:focus-visible { outline: 2px solid var(--fg); outline-offset: 3px; }
+    .coverage-panel { padding: 28px; border: 1px solid var(--border); border-radius: 10px; background: var(--surface); }
+    .coverage-panel .state-region { color: var(--accent-readable); font: 12px "SF Mono", ui-monospace, monospace; letter-spacing: .12em; text-transform: uppercase; }
+    .coverage-panel h3 { margin-top: 10px; font-size: clamp(28px, 3vw, 42px); letter-spacing: -.06em; line-height: 1; }
+    .coverage-panel hr { margin: 20px 0; border: 0; border-top: 1px solid var(--border); }
+    .coverage-count-label { color: var(--muted); font: 13px "SF Mono", ui-monospace, monospace; letter-spacing: .04em; text-transform: uppercase; }
+    .coverage-count { display: block; margin-top: 12px; color: var(--accent-readable); font-size: clamp(42px, 5vw, 68px); letter-spacing: -.08em; line-height: .95; }
+    .coverage-note { margin-top: 18px; padding: 14px; border-radius: 8px; background: color-mix(in oklab, var(--bg), var(--surface) 50%); color: var(--muted); font-size: 14px; line-height: 1.5; }
+    .coverage-note::before { content: ""; display: inline-block; width: 7px; height: 7px; margin: 0 9px 1px 0; border-radius: 50%; background: var(--accent-readable); }
+    .coverage-data-note { margin-top: 16px; color: var(--muted); font-size: 13px; line-height: 1.5; }
+    .coverage-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; margin-top: 46px; border-top: 1px solid var(--border); }
+    .coverage-stat { padding: 20px 16px 0; text-align: center; border-right: 1px solid var(--border); }
+    .coverage-stat:last-child { border-right: 0; }
+    .coverage-stat strong { display: block; color: var(--accent-readable); font-size: 28px; letter-spacing: -.06em; }
+    .coverage-stat span { display: block; margin-top: 6px; color: var(--muted); font: 11px "SF Mono", ui-monospace, monospace; letter-spacing: .08em; text-transform: uppercase; }
+
     main > section {
       background-image: linear-gradient(180deg, color-mix(in oklab, var(--surface), transparent 90%), transparent 48%, color-mix(in oklab, var(--accent), transparent 92%));
     }
@@ -566,7 +697,10 @@
        .workflow { grid-template-columns: 1fr; gap: 40px; }
        .calculator-layout { grid-template-columns: 1fr; gap: 36px; }
        .sectors-layout { grid-template-columns: 1fr; gap: 36px; }
-      }
+       .coverage-layout { grid-template-columns: 1fr; gap: 36px; }
+         .coverage-map { width: min(100%, 720px); justify-self: center; }
+            .brazil-map-svg, .brazil-map-fallback { width: 170%; height: 170%; transform: translate(calc(-50% + 40px), -50%); }
+       }
 
     @media (max-width: 1024px) {
       .section-sidebar { display: none; }
@@ -584,6 +718,10 @@
        .cost-calculator { padding: 74px 0; }
        .sectors-section { padding: 74px 0; }
        .sector-grid { grid-template-columns: 1fr; }
+       .coverage-section { padding: 74px 0; }
+          .coverage-map { width: 100%; height: 450px; min-height: 0; }
+              .brazil-map-svg, .brazil-map-fallback { width: 160%; height: 160%; transform: translate(calc(-50% + 30px), -50%); }
+       .coverage-panel { padding: 22px; }
        .feature { min-height: 190px; }
       .feature-icon { margin-bottom: 30px; }
       .section { padding: 74px 0; }
@@ -623,14 +761,18 @@
     <details class="mobile-menu mobile-menu-left" data-od-id="mobile-navigation-menu">
       <summary aria-label="Abrir navegação"><span aria-hidden="true"></span></summary>
       <nav class="mobile-menu-panel" aria-label="Navegação mobile">
-        <a href="#inicio">Home</a>
-        <a href="#recursos">Serviços</a>
-        <a href="#plataforma">Sobre</a>
+        <a href="#inicio">Início</a>
+       <a href="#recursos">Recursos</a>
+       <a href="#cobertura">Cobertura</a>
+        <a href="#trust-section">Benefícios</a>
+        <a href="#cost-calculator">Calculadora</a>
+        <a href="#setores">Setores</a>
       </nav>
     </details>
     <nav class="nav desktop-nav" aria-label="Navegação principal" style="justify-content: flex-start;">
       <a href="#inicio">Início</a>
-      <a href="#recursos">Recursos</a>
+       <a href="#recursos">Recursos</a>
+       <a href="#cobertura">Cobertura</a>
       <a href="#trust-section">Benefícios</a>
        <a href="#cost-calculator">Calculadora</a>
       <a href="#setores">Setores</a>
@@ -638,7 +780,7 @@
     <a href="#inicio" class="brand" aria-label="NovaSync, início"><img src="logo-star.png" alt="NovaSync" style="display:block;width:42px;height:auto"></a>
     <div class="nav-cta desktop-actions" style="display:flex;gap:8px">
       <a class="btn" href="mailto:contato@novasync.example?subject=Cadastro%20t%C3%A9cnico">Cadastro técnico</a>
-      <a class="btn" href="mailto:contato@novasync.example?subject=Parcerias">Contato</a>
+       <a class="btn" href="https://wa.me/5511993287070">Contato</a>
     </div>
     <details class="mobile-menu mobile-menu-right" data-od-id="mobile-contact-menu">
       <summary aria-label="Abrir contatos"><span aria-hidden="true"></span></summary>
@@ -647,6 +789,17 @@
         <a href="mailto:contato@novasync.example?subject=Parcerias">Parcerias</a>
       </div>
     </details>
+    <script>
+      const topNavigation = document.querySelector('[data-od-id="top-navigation"]');
+      topNavigation.querySelectorAll('details.mobile-menu').forEach((menu) => {
+        menu.addEventListener('toggle', () => {
+          if (!menu.open) return;
+          topNavigation.querySelectorAll('details.mobile-menu').forEach((otherMenu) => {
+            if (otherMenu !== menu) otherMenu.open = false;
+          });
+        });
+      });
+    </script>
   </header>
 
   <main id="content">
@@ -656,7 +809,7 @@
         <h1>Operações em campo.<br><span class="accent-word">Supervisionadas.</span></h1>
         <p class="hero-copy">A NovaSync reúne agenda, equipe técnica e acompanhamento de chamados em uma operação de Field Service de TI mais visível e coordenada.</p>
         <div class="hero-actions" data-od-id="hero-actions">
-          <a class="btn btn-primary" href="mailto:contato@novasync.example?subject=Quero%20entender%20a%20NovaSync">Entre em contato <span aria-hidden="true">→</span></a>
+           <a class="btn btn-primary" href="https://wa.me/5511993287070">Entre em contato <span aria-hidden="true">→</span></a>
           
         </div>
         <div class="signal" data-od-id="platform-summary">
@@ -668,15 +821,155 @@
       </div>
     </section>
 
-    <nav class="section-sidebar" aria-label="Navegação pelas seções" data-od-id="section-sidebar">
-      <a href="#recursos" data-section-link="recursos"><span>Recursos</span></a>
+    <section class="coverage-section" id="cobertura" data-od-id="coverage-section">
+      <div class="shell">
+        <div class="section-head">
+          <p class="eyebrow">Cobertura nacional</p>
+          <h2>Presença técnica em todo o <span class="accent-word">Brasil.</span></h2>
+          <p>Passe o cursor sobre cada estado para consultar a quantidade de técnicos disponíveis na sua região.</p>
+        </div>
+        <div class="coverage-layout">
+          <div class="coverage-map-wrap">
+            <div class="coverage-map" role="group" aria-label="Mapa interativo dos estados do Brasil">
+               <img class="brazil-map-fallback" src="mapa.svg" alt="Mapa cartográfico do Brasil" aria-hidden="true">
+               <svg class="brazil-map-svg" viewBox="0 0 40000 29700" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" role="img" aria-label="Mapa cartográfico do Brasil">
+                   <use href="mapa.svg#BRAC" xlink:href="mapa.svg#BRAC" tabindex="0" data-state="AC" aria-label="Acre, 7 técnicos"></use>
+                   <use href="mapa.svg#BRAL" xlink:href="mapa.svg#BRAL" tabindex="0" data-state="AL" aria-label="Alagoas, 9 técnicos"></use>
+                   <use href="mapa.svg#BRAP" xlink:href="mapa.svg#BRAP" tabindex="0" data-state="AP" aria-label="Amapá, 5 técnicos"></use>
+                   <use href="mapa.svg#BRAM" xlink:href="mapa.svg#BRAM" tabindex="0" data-state="AM" aria-label="Amazonas, 6 técnicos"></use>
+                   <use href="mapa.svg#BRBA" xlink:href="mapa.svg#BRBA" tabindex="0" data-state="BA" aria-label="Bahia, 17 técnicos"></use>
+                   <use href="mapa.svg#BRCE" xlink:href="mapa.svg#BRCE" tabindex="0" data-state="CE" aria-label="Ceará, 15 técnicos"></use>
+                   <use href="mapa.svg#BRDF" xlink:href="mapa.svg#BRDF" tabindex="0" data-state="DF" aria-label="Distrito Federal, 9 técnicos"></use>
+                   <use href="mapa.svg#BRES" xlink:href="mapa.svg#BRES" tabindex="0" data-state="ES" aria-label="Espírito Santo, 8 técnicos"></use>
+                   <use href="mapa.svg#BRGO" xlink:href="mapa.svg#BRGO" tabindex="0" data-state="GO" aria-label="Goiás, 10 técnicos"></use>
+                   <use href="mapa.svg#BRMA" xlink:href="mapa.svg#BRMA" tabindex="0" data-state="MA" aria-label="Maranhão, 12 técnicos"></use>
+                   <use href="mapa.svg#BRMT" xlink:href="mapa.svg#BRMT" tabindex="0" data-state="MT" aria-label="Mato Grosso, 15 técnicos"></use>
+                   <use href="mapa.svg#BRMS" xlink:href="mapa.svg#BRMS" tabindex="0" data-state="MS" aria-label="Mato Grosso do Sul, 9 técnicos"></use>
+                   <use href="mapa.svg#BRMG" xlink:href="mapa.svg#BRMG" tabindex="0" data-state="MG" aria-label="Minas Gerais, 28 técnicos"></use>
+                   <use href="mapa.svg#BRPA" xlink:href="mapa.svg#BRPA" tabindex="0" data-state="PA" aria-label="Pará, 16 técnicos"></use>
+                   <use href="mapa.svg#BRPB" xlink:href="mapa.svg#BRPB" tabindex="0" data-state="PB" aria-label="Paraíba, 13 técnicos"></use>
+                   <use href="mapa.svg#BRPR" xlink:href="mapa.svg#BRPR" tabindex="0" data-state="PR" aria-label="Paraná, 13 técnicos"></use>
+                   <use href="mapa.svg#BRPE" xlink:href="mapa.svg#BRPE" tabindex="0" data-state="PE" aria-label="Pernambuco, 18 técnicos"></use>
+                   <use href="mapa.svg#BRPI" xlink:href="mapa.svg#BRPI" tabindex="0" data-state="PI" aria-label="Piauí, 7 técnicos"></use>
+                   <use href="mapa.svg#BRRJ" xlink:href="mapa.svg#BRRJ" tabindex="0" data-state="RJ" aria-label="Rio de Janeiro, 13 técnicos"></use>
+                   <use href="mapa.svg#BRRN" xlink:href="mapa.svg#BRRN" tabindex="0" data-state="RN" aria-label="Rio Grande do Norte, 7 técnicos"></use>
+                   <use href="mapa.svg#BRRS" xlink:href="mapa.svg#BRRS" tabindex="0" data-state="RS" aria-label="Rio Grande do Sul, 26 técnicos"></use>
+                   <use href="mapa.svg#BRRO" xlink:href="mapa.svg#BRRO" tabindex="0" data-state="RO" aria-label="Rondônia, 8 técnicos"></use>
+                   <use href="mapa.svg#BRRR" xlink:href="mapa.svg#BRRR" tabindex="0" data-state="RR" aria-label="Roraima, 6 técnicos"></use>
+                   <use href="mapa.svg#BRSC" xlink:href="mapa.svg#BRSC" tabindex="0" data-state="SC" aria-label="Santa Catarina, 14 técnicos"></use>
+                   <use href="mapa.svg#BRSP" xlink:href="mapa.svg#BRSP" tabindex="0" data-state="SP" aria-label="São Paulo, 47 técnicos"></use>
+                   <use href="mapa.svg#BRSE" xlink:href="mapa.svg#BRSE" tabindex="0" data-state="SE" aria-label="Sergipe, 7 técnicos"></use>
+                   <use href="mapa.svg#BRTO" xlink:href="mapa.svg#BRTO" tabindex="0" data-state="TO" aria-label="Tocantins, 5 técnicos"></use>
+              </svg>
+            </div>
+          </div>
+          <aside class="coverage-panel" aria-live="polite" data-od-id="coverage-state-panel">
+            <span class="state-region" id="coverage-region">AC</span>
+            <h3 id="coverage-state-name">Acre</h3>
+            <hr>
+            <span class="coverage-count-label">Técnicos disponíveis</span>
+             <strong class="coverage-count" id="coverage-count">7</strong>
+             <p class="coverage-note">Quantitativo informado na planilha de capilaridade regional.</p>
+            <p class="coverage-data-note">Passe o cursor ou use Tab para consultar outro estado.</p>
+          </aside>
+        </div>
+        <div class="coverage-stats" aria-label="Resumo da cobertura">
+          <div class="coverage-stat"><strong>27</strong><span>Estados mapeados</span></div>
+           <div class="coverage-stat"><strong>350</strong><span>Técnicos cadastrados</span></div>
+          <div class="coverage-stat"><strong>Nacional</strong><span>Área de atuação</span></div>
+        </div>
+      </div>
+      <script>
+        (function () {
+           const states = {
+             AC: "Acre", AL: "Alagoas", AM: "Amazonas", AP: "Amapá", BA: "Bahia", CE: "Ceará", DF: "Distrito Federal", ES: "Espírito Santo", GO: "Goiás", MA: "Maranhão", MG: "Minas Gerais", MS: "Mato Grosso do Sul", MT: "Mato Grosso", PA: "Pará", PB: "Paraíba", PE: "Pernambuco", PI: "Piauí", PR: "Paraná", RJ: "Rio de Janeiro", RN: "Rio Grande do Norte", RO: "Rondônia", RR: "Roraima", RS: "Rio Grande do Sul", SC: "Santa Catarina", SE: "Sergipe", SP: "São Paulo", TO: "Tocantins"
+           };
+           const techniciansByState = {
+              AC: 7, AL: 9, AM: 6, AP: 5, BA: 17, CE: 15, DF: 9, ES: 8, GO: 10, MA: 12, MG: 28, MS: 9, MT: 15, PA: 16, PB: 13, PE: 18, PI: 7, PR: 13, RJ: 13, RN: 7, RO: 8, RR: 6, RS: 26, SC: 14, SE: 7, SP: 47, TO: 5
+           };
+           const idByState = {
+             AC: "BRAC", AL: "BRAL", AM: "BRAM", AP: "BRAP", BA: "BRBA", CE: "BRCE", DF: "BRDF", ES: "BRES", GO: "BRGO", MA: "BRMA", MG: "BRMG", MS: "BRMS", MT: "BRMT", PA: "BRPA", PB: "BRPB", PE: "BRPE", PI: "BRPI", PR: "BRPR", RJ: "BRRJ", RN: "BRRN", RO: "BRRO", RR: "BRRR", RS: "BRRS", SC: "BRSC", SE: "BRSE", SP: "BRSP", TO: "BRTO"
+           };
+           const panel = document.querySelector('[data-od-id="coverage-state-panel"]');
+           const map = document.querySelector(".brazil-map-svg");
+           let buttons = [];
+            const region = document.getElementById("coverage-region");
+            const name = document.getElementById("coverage-state-name");
+            const count = document.getElementById("coverage-count");
+           let countAnimationFrame;
+           function animateCount(target) {
+             if (countAnimationFrame) cancelAnimationFrame(countAnimationFrame);
+             if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+               count.textContent = target.toLocaleString("pt-BR");
+               return;
+             }
+             const start = Number.parseInt(count.textContent.replace(/\D/g, ""), 10) || 0;
+             const startedAt = performance.now();
+             const duration = 650;
+             function frame(now) {
+               const progress = Math.min((now - startedAt) / duration, 1);
+               const eased = 1 - Math.pow(1 - progress, 3);
+               const current = Math.round(start + (target - start) * eased);
+               count.textContent = current.toLocaleString("pt-BR");
+               if (progress < 1) countAnimationFrame = requestAnimationFrame(frame);
+             }
+             countAnimationFrame = requestAnimationFrame(frame);
+           }
+           function selectState(button) {
+            const code = button.dataset.state;
+            buttons.forEach((item) => item.classList.toggle("is-active", item === button));
+            region.textContent = code;
+            name.textContent = states[code];
+             const total = techniciansByState[code] ?? 0;
+              animateCount(total);
+             button.setAttribute("aria-label", `${states[code]}, ${total} ${total === 1 ? "técnico" : "técnicos"}`);
+          }
+           function bindStates() {
+             buttons = Array.from(map.querySelectorAll(".map-state[data-state]"));
+             buttons.forEach((button) => {
+               button.addEventListener("mouseenter", () => selectState(button));
+               button.addEventListener("focus", () => selectState(button));
+               button.addEventListener("mouseleave", () => button.classList.remove("is-active"));
+             });
+             const initialState = buttons.find((button) => button.dataset.state === "AC");
+             if (initialState) selectState(initialState);
+           }
+           fetch("mapa.svg")
+             .then((response) => response.text())
+             .then((source) => {
+               const sourceSvg = new DOMParser().parseFromString(source, "image/svg+xml");
+               Object.entries(idByState).forEach(([code, sourceId]) => {
+                 const sourceState = sourceSvg.getElementById(sourceId);
+                 if (!sourceState) return;
+                 const state = document.importNode(sourceState, true);
+                 state.removeAttribute("class");
+                 state.classList.add("map-state");
+                 state.dataset.state = code;
+                 state.setAttribute("tabindex", "0");
+                  const total = techniciansByState[code] ?? 0;
+                  state.setAttribute("aria-label", `${states[code]}, ${total} ${total === 1 ? "técnico" : "técnicos"}`);
+                 map.appendChild(state);
+               });
+               bindStates();
+             })
+             .catch(() => {
+               bindStates();
+             });
+           if (panel) panel.setAttribute("aria-label", "Detalhes de cobertura do estado selecionado");
+        }());
+      </script>
+    </section>
+
+    <nav class="section-sidebar" aria-label="Navegação pelas seções" data-od-id="section-sidebar" style="gap: 16px;">
+        <a href="#cobertura" data-section-link="cobertura"><span>Cobertura</span></a>
+        <a href="#recursos" data-section-link="recursos"><span>Recursos</span></a>
       <a href="#trust-section" data-section-link="trust-section"><span>Benefícios</span></a>
       <a href="#cost-calculator" data-section-link="cost-calculator"><span>Calculadora</span></a>
       <a href="#setores" data-section-link="setores"><span>Setores</span></a>
       <a href="#final-cta" data-section-link="final-cta"><span>Contato</span></a>
     </nav>
 
-    <section class="section" id="recursos" data-od-id="features-section">
+    <section class="section" id="recursos" data-od-id="features-section" style="border-top: 1px solid var(--border);">
       <style>
         [data-od-id="features-section"] .feature,
         [data-od-id="features-section"] .feature.feature-focus {
@@ -1031,7 +1324,7 @@
             <span class="mono" style="color:var(--muted);font-size:12px;">E-mail comercial</span>
             <span>comercial@nova-sync.net</span>
           </a>
-          <a href="tel:+5511993287070" style="display:flex;flex-direction:column;gap:4px;color:var(--fg);line-height:1.4;overflow-wrap:anywhere;">
+          <a href="https://wa.me/5511993287070" style="display:flex;flex-direction:column;gap:4px;color:var(--fg);line-height:1.4;overflow-wrap:anywhere;">
             <span class="mono" style="color:var(--muted);font-size:12px;">Contato comercial</span>
             <span>(11) 99328-7070</span>
           </a>
@@ -1049,8 +1342,8 @@
     (function () {
       const sidebar = document.querySelector(".section-sidebar");
       const hero = document.getElementById("inicio");
-      const links = Array.from(document.querySelectorAll("[data-section-link]"));
-      const sections = links.map(function (link) { return document.getElementById(link.dataset.sectionLink); }).filter(Boolean);
+       const links = Array.from(sidebar.querySelectorAll("[data-section-link]"));
+       const sections = links.map(function (link) { return document.getElementById(link.dataset.sectionLink); }).filter(Boolean);
 
       if (!sidebar || !hero || !sections.length) return;
 
@@ -1085,6 +1378,8 @@
        <span>CNPJ: 62.718.285/0001-58</span>
      </div>
   </footer>
+
+
 
 
 
