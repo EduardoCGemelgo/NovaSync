@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
   "fileName": "politica-de-privacidade.html",
-  "currentVersionId": "e090b98c-d630-4826-be8a-dd4ccf729196",
+  "currentVersionId": "4775ce04-cbd9-487f-a78d-cffc22ddb15f",
   "entries": [
     {
       "id": "d8cc8518-c605-48f5-917a-21eb8091a55c",
@@ -87,7 +87,22 @@
       "mime": "text/html; charset=utf-8",
       "kind": "html",
       "contentPath": "0006-e090b98c-d630-4826-be8a-dd4ccf729196.html",
-      "contentDigest": "7054c8260c127aa751e69f34c5c0b2162e2d76016e944bb1b8abbedcb21da960",
+      "promptSource": "message",
+      "contentDigest": "7054c8260c127aa751e69f34c5c0b2162e2d76016e944bb1b8abbedcb21da960"
+    },
+    {
+      "id": "4775ce04-cbd9-487f-a78d-cffc22ddb15f",
+      "fileName": "politica-de-privacidade.html",
+      "version": 7,
+      "label": "Version 7",
+      "createdAt": 1786208682373,
+      "source": "ai",
+      "prompt": "Corrigir navegação quebrada em todas as subpáginas do site nova-sync.net\nContexto\nO site nova-sync.net tem uma homepage (index.html) e 8 subpáginas:\n- field-service-bancos.html\n- field-service-varejo.html\n- field-service-transporte.html\n- field-service-telecom.html\n- field-service-industria.html\n- field-service-eventos.html\n- field-service-saude.html\n- politica-de-privacidade.html\nProblema\nO header de navegação de todas as subpáginas usa âncoras relativas (#recursos, #cobertura, #trust-section, #cost-calculator, #setores, #faq, #cadastro-tecnico) que funcionam apenas na homepage. Quando o visitante está em qualquer subpágina e clica nesses links, nada acontece — a navegação está completamente quebrada fora da homepage.\nO que precisa ser feito\nEm TODAS as 8 subpáginas, alterar os links do header de navegação para usar caminhos absolutos com âncora (apontando para a homepage):\nLink atual (quebrado)\nhref=\"#inicio\"\nhref=\"#recursos\"\nhref=\"#cobertura\"\nhref=\"#trust-section\"\nhref=\"#cost-calculator\"\nhref=\"#setores\"\nhref=\"#faq\"\nhref=\"#cadastro-tecnico\"\nImportante: Essas alterações devem ser feitas apenas nas subpáginas. Na homepage (index.html), os links devem permanecer como estão (com # sem /), pois funcionam corretamente com scroll suave na mesma página.\nRegra adicional\nTambém nos links do sidebar de seções (quando existir nas subpáginas), aplicar a mesma correção — todos devem apontar para /#nome-da-âncora.\nNão alterar\n- Os links para WhatsApp (https://wa.me/5511993287070) — estão corretos\n- Os links para email (mailto:...) — estão corretos\n- O link \"Política de Privacidade\" no footer — está correto\n- O link \"Página inicial\" no footer — está correto (/)\n- O conteúdo visual e de texto — não alterar nada\nVerificação\nApós as modificações, verifique que:\n1. Na homepage, a navegação continua fazendo scroll suave para cada seção\n2. Em qualquer subpágina, clicar em um link do header redireciona à homepage e faz scroll para a seção correspondente\n3. O botão \"Contato\" (WhatsApp) continua funcionando em todas as páginas\n4. O link \"Página inicial\" no footer continua levando à homepage\n\n<active-workspace-context>\nOpen Design selected or inferred these workspace contexts for this turn. Treat absolute paths as reference context unless the user explicitly asks to edit them.\n1. design-files: Arquivos de design | absolute: C:\\Users\\edwar\\AppData\\Roaming\\Open Design\\namespaces\\release-stable-win\\data\\projects\\3083b058-69a1-477b-9ac0-1a1a54f2b907 | tab: __design_files__\n</active-workspace-context>",
+      "size": 8267,
+      "mime": "text/html; charset=utf-8",
+      "kind": "html",
+      "contentPath": "0007-4775ce04-cbd9-487f-a78d-cffc22ddb15f.html",
+      "contentDigest": "4898973f3e6e219805e3deca677e5b33e33a01be5863d3b148a0cd00309e32af",
       "promptSource": "message"
     }
   ]
