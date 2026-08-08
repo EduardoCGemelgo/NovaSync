@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
   "fileName": "field-service-bancos.html",
-  "currentVersionId": "71e0bbe8-4830-4a77-a605-3fa61afc5c84",
+  "currentVersionId": "56d4ba84-e4fb-45f4-9240-63537ed2acc6",
   "entries": [
     {
       "id": "17b5cfa6-a325-478d-8c78-0ca9ee3d8e0f",
@@ -103,7 +103,22 @@
       "mime": "text/html; charset=utf-8",
       "kind": "html",
       "contentPath": "0007-71e0bbe8-4830-4a77-a605-3fa61afc5c84.html",
-      "contentDigest": "e4b383948b9a0a16e68453900ad999f0a02f53c4aa952b420d7941c6ad387dcc",
+      "promptSource": "message",
+      "contentDigest": "e4b383948b9a0a16e68453900ad999f0a02f53c4aa952b420d7941c6ad387dcc"
+    },
+    {
+      "id": "56d4ba84-e4fb-45f4-9240-63537ed2acc6",
+      "fileName": "field-service-bancos.html",
+      "version": 8,
+      "label": "Version 8",
+      "createdAt": 1786209679791,
+      "source": "ai",
+      "prompt": "Atualize o estilo do footer de todas as páginas dos setores para deixar igual ao do index.html\n\n<active-workspace-context>\nOpen Design selected or inferred these workspace contexts for this turn. Treat absolute paths as reference context unless the user explicitly asks to edit them.\n1. design-files: Arquivos de design | absolute: C:\\Users\\edwar\\AppData\\Roaming\\Open Design\\namespaces\\release-stable-win\\data\\projects\\3083b058-69a1-477b-9ac0-1a1a54f2b907 | tab: __design_files__\n</active-workspace-context>",
+      "size": 9718,
+      "mime": "text/html; charset=utf-8",
+      "kind": "html",
+      "contentPath": "0008-56d4ba84-e4fb-45f4-9240-63537ed2acc6.html",
+      "contentDigest": "6166cb8cb7b4dd7e88030ff78ea3db893116f0e8cabf3e89fe3a1b8970f89910",
       "promptSource": "message"
     }
   ]
