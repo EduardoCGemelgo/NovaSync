@@ -9,9 +9,8 @@
   <meta property="og:description" content="Conecte agenda, equipe técnica e execução em campo com mais visibilidade e controle.">
   <meta property="og:url" content="https://nova-sync.net/">
   <meta property="og:site_name" content="NovaSync">
-  <meta property="og:image" content="logo-transparent.png">
+  <meta property="og:image" content="https://nova-sync.net/logo-transparent.png">
   <meta property="og:image:alt" content="Logo da NovaSync">
-  <link rel="canonical" href="https://nova-sync.net/">
   <title>Field Service de TI | NovaSync</title>
   <link rel="icon" type="image/png" href="logo-star.png">
   <style>
@@ -63,7 +62,6 @@
     a { color: inherit; text-decoration: none; }
     button { font: inherit; }
     a:focus-visible, button:focus-visible, summary:focus-visible, input:focus-visible, select:focus-visible { outline: 3px solid var(--accent-readable); outline-offset: 4px; }
-    button:disabled, input:disabled, select:disabled { cursor: not-allowed; opacity: .62; }
     .skip-link { position: absolute; left: 16px; top: 12px; z-index: 10; padding: 10px 14px; border-radius: 8px; background: var(--fg); color: var(--bg); transform: translateY(-160%); }
     .skip-link:focus { transform: translateY(0); }
     .shell { width: min(1120px, calc(100% - 48px)); margin: 0 auto; }
@@ -693,12 +691,10 @@
     .technical-form-field { display: grid; gap: 8px; }
     .technical-form-field.is-wide { grid-column: 1 / -1; }
     .technical-form label { color: var(--fg); font-size: 13px; line-height: 1.35; }
-    .technical-form input, .technical-form select { width: 100%; min-height: 48px; padding: 0 14px; border: 1px solid var(--border); border-radius: 8px; background: color-mix(in oklab, var(--bg), var(--surface) 50%); color: var(--fg); font: inherit; transition: border-color .2s ease, background .2s ease; }
+    .technical-form input { width: 100%; min-height: 48px; padding: 0 14px; border: 1px solid var(--border); border-radius: 8px; background: color-mix(in oklab, var(--bg), var(--surface) 50%); color: var(--fg); font: inherit; transition: border-color .2s ease, background .2s ease; }
      .technical-form input::placeholder { color: var(--muted); }
-     .technical-form input:focus, .technical-form select:focus { border-color: var(--accent-readable); background: var(--bg); outline: none; }
-     .technical-form input[aria-invalid="true"], .technical-form select[aria-invalid="true"] { border-color: var(--accent-readable); background: color-mix(in oklab, var(--accent), var(--bg) 82%); }
-     .technical-form select:disabled { color: var(--muted); }
-     .technical-form .btn:disabled { border-color: var(--border); background: var(--surface); color: var(--muted); box-shadow: none; transform: none; }
+     .technical-form input:focus { border-color: var(--accent-readable); background: var(--bg); outline: none; }
+     .technical-form input[aria-invalid="true"] { border-color: var(--accent-readable); }
      .technical-form .btn { grid-column: 1 / -1; justify-self: start; margin-top: 4px; }
     .technical-form-status { grid-column: 1 / -1; min-height: 20px; color: var(--accent-readable); font-size: 14px; line-height: 1.45; }
     .technical-form-status.is-error { color: var(--fg); }
@@ -719,13 +715,13 @@
      .testimonial { display: flex; flex-direction: column; }
      .testimonial blockquote { margin: 28px 0 0; color: var(--fg); font-size: 16px; line-height: 1.6; }
      .testimonial cite { display: block; margin-top: auto; padding-top: 22px; color: var(--muted); font: 12px "SF Mono", ui-monospace, monospace; font-style: normal; letter-spacing: .06em; text-transform: uppercase; }
-     .social-proof-bottom { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; margin-top: 14px; }
+    .social-proof-bottom { display: grid; grid-template-columns: 1.05fr .95fr; gap: 14px; margin-top: 14px; }
      .case-placeholder h3, .logo-placeholder h3 { margin-top: 36px; font-size: 22px; letter-spacing: -.05em; }
      .case-placeholder p, .logo-placeholder p { margin-top: 12px; color: var(--muted); line-height: 1.55; }
-      .client-logo-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin-top: 28px; }
-      .client-logo { min-height: 136px; display: grid; place-items: center; padding: 18px; border: 1px solid var(--border); border-radius: 8px; background: var(--bg); }
-         .client-logo img { display: block; width: min(100%, 190px); height: auto; max-height: 96px; object-fit: contain; filter: none; }
-      .metric-strip { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); width: min(100%, 420px); margin: 32px auto 0; gap: 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+     .client-logo-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin-top: 28px; }
+     .client-logo { min-height: 136px; display: grid; place-items: center; padding: 18px; border: 1px solid var(--border); border-radius: 8px; background: var(--bg); }
+       .client-logo img { display: block; width: min(100%, 190px); max-height: 96px; object-fit: contain; }
+     .metric-strip { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; margin-top: 32px; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
     .metric { padding: 18px 14px; text-align: center; border-right: 1px solid var(--border); }
     .metric:last-child { border-right: 0; }
     .metric strong { display: block; color: var(--accent-readable); font-size: 28px; }
@@ -834,13 +830,10 @@
        .foot { flex-direction: column; }
      }
 
-      @media (max-width: 600px) {
-        .coverage-map { display: none; }
-        .coverage-mobile-select { display: block; }
-        .client-logo-grid { grid-template-columns: 1fr; gap: 10px; }
-        .client-logo { min-height: 112px; padding: 12px; }
-        .client-logo img { width: min(100%, 156px); max-height: 72px; }
-        .metric-strip { grid-template-columns: 1fr; }
+     @media (max-width: 600px) {
+       .coverage-map { display: none; }
+       .coverage-mobile-select { display: block; }
+       .metric-strip { grid-template-columns: 1fr; }
        .metric { border-right: 0; border-bottom: 1px solid var(--border); }
        .metric:last-child { border-bottom: 0; }
      }
@@ -893,8 +886,8 @@
     </style>
     <button class="sidebar-toggle" type="button" aria-label="Abrir menu lateral" aria-expanded="false" aria-controls="section-sidebar" data-od-id="sidebar-toggle"><span aria-hidden="true"></span></button>
      <a href="#inicio" class="brand" aria-label="NovaSync, início"><img src="logo-star.png" alt="NovaSync" width="42" height="42" style="display:block;width:42px;height:42px"></a>
-     <nav class="nav desktop-nav" aria-label="Navegação principal" style="justify-content: flex-start; margin-right: 0px; margin-left: 13px;">
-       
+     <nav class="nav desktop-nav" aria-label="Navegação principal" style="justify-content: flex-start;">
+       <a href="#inicio">Início</a>
         <a href="#recursos">Recursos</a>
         <a href="#cobertura">Cobertura</a>
        <a href="#trust-section">Benefícios</a>
@@ -962,7 +955,7 @@
                 <option value="AC">AC - Acre</option><option value="AL">AL - Alagoas</option><option value="AP">AP - Amapá</option><option value="AM">AM - Amazonas</option><option value="BA">BA - Bahia</option><option value="CE">CE - Ceará</option><option value="DF">DF - Distrito Federal</option><option value="ES">ES - Espírito Santo</option><option value="GO">GO - Goiás</option><option value="MA">MA - Maranhão</option><option value="MT">MT - Mato Grosso</option><option value="MS">MS - Mato Grosso do Sul</option><option value="MG">MG - Minas Gerais</option><option value="PA">PA - Pará</option><option value="PB">PB - Paraíba</option><option value="PR">PR - Paraná</option><option value="PE">PE - Pernambuco</option><option value="PI">PI - Piauí</option><option value="RJ">RJ - Rio de Janeiro</option><option value="RN">RN - Rio Grande do Norte</option><option value="RS">RS - Rio Grande do Sul</option><option value="RO">RO - Rondônia</option><option value="RR">RR - Roraima</option><option value="SC">SC - Santa Catarina</option><option value="SP">SP - São Paulo</option><option value="SE">SE - Sergipe</option><option value="TO">TO - Tocantins</option>
               </select>
              <div class="coverage-map" role="group" aria-label="Mapa interativo dos estados do Brasil">
-                 <img class="brazil-map-fallback" src="mapa.svg" alt="Mapa cartográfico do Brasil" width="800" height="594" aria-hidden="true">
+                <img class="brazil-map-fallback" src="mapa.svg" alt="Mapa cartográfico do Brasil" width="800" height="594" aria-hidden="true">
                <svg class="brazil-map-svg" viewBox="0 0 40000 29700" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" role="img" aria-label="Mapa cartográfico do Brasil">
                    <use href="mapa.svg#BRAC" xlink:href="mapa.svg#BRAC" tabindex="0" data-state="AC" aria-label="Acre, 7 técnicos"></use>
                    <use href="mapa.svg#BRAL" xlink:href="mapa.svg#BRAL" tabindex="0" data-state="AL" aria-label="Alagoas, 9 técnicos"></use>
@@ -1476,7 +1469,7 @@
         </div>
         <div class="social-proof-bottom">
           <article class="case-placeholder" data-od-id="case-placeholder"><p class="eyebrow">Cases</p><h3>Cases de operação em preparação</h3><p>Adicione aqui os desafios, soluções e resultados autorizados por cada cliente.</p><div class="metric-strip" aria-label="Métricas de desempenho"><div class="metric"><strong>Até 2 dias úteis</strong><span>SLA</span></div><div class="metric"><strong>1 dia útil</strong><span>Tempo médio</span></div></div></article>
-            <article class="logo-placeholder" data-od-id="client-logos"><p class="eyebrow">Clientes</p><h3>Parceiros que confiam na operação</h3><p>Marcas atendidas pela NovaSync em uma apresentação alinhada ao nosso sistema visual.</p><div class="client-logo-grid" aria-label="Logos de clientes"><figure class="client-logo"><img src="melhoretec-logo-white-dark.png" alt="Logo da Melhoretec" width="1080" height="1080" loading="lazy"></figure><figure class="client-logo"><img src="novalogi-logo-white-dark.png" alt="Logo da Novalogi" width="640" height="640" loading="lazy"></figure></div></article>
+             <article class="logo-placeholder" data-od-id="client-logos"><p class="eyebrow">Clientes</p><h3>Parceiros que confiam na operação</h3><p>Marcas atendidas pela NovaSync em uma apresentação alinhada ao nosso sistema visual.</p><div class="client-logo-grid" aria-label="Logos de clientes"><figure class="client-logo"><img src="WhatsApp-Image-2026-08-07-at-15.09.41-1.jpeg" alt="Logo da Melhoretec" width="1080" height="1080" loading="lazy"></figure><figure class="client-logo"><img src="image-10.png" alt="Logo da Novalogi" width="640" height="640" loading="lazy"></figure></div></article>
         </div>
       </div>
     </section>
@@ -1495,16 +1488,16 @@
 
     <section class="section" id="faq" data-od-id="faq-section">
       <div class="shell">
-        <div class="section-head"><p class="eyebrow">Antes de contratar</p><h2>Tenha clareza para colocar sua operação em <span class="accent-word">campo.</span></h2><p>Respostas objetivas para avaliar prazo, escopo, acompanhamento e o próximo passo com a NovaSync.</p></div>
+        <div class="section-head"><p class="eyebrow">Dúvidas frequentes</p><h2>Respostas para planejar seu <span class="accent-word">Field Service.</span></h2><p>Reunimos as dúvidas mais comuns sobre cobertura, escopo e acompanhamento da operação em campo.</p></div>
         <div class="faq-grid">
-          <details><summary>Em quanto tempo posso acionar um técnico?</summary><p>O SLA informado é de até 2 dias úteis, considerando o escopo, a região e as condições combinadas para o atendimento.</p></details>
-          <details><summary>O que preciso informar para solicitar um atendimento?</summary><p>Compartilhe o local, o prazo, os ativos envolvidos e o escopo a ser solucionado. Com esse briefing, a NovaSync avalia o escopo e indica o próximo passo.</p></details>
-          <details><summary>Como acompanho o atendimento e comprovo a execução?</summary><p>Você recebe o acompanhamento do status da demanda e, no fechamento, o registro da visita, as evidências da execução junto às RATs</p></details>
-          <details><summary>Quais equipamentos podem entrar no escopo?</summary><p>O atendimento pode incluir microinformática, redes, telecom, infraestrutura, terminais, periféricos, quiosques, equipamentos industriais e outros ativos definidos no briefing.</p></details>
-          <details><summary>A NovaSync atende demandas pontuais e operações temporárias?</summary><p>Sim. A operação pode contemplar chamados pontuais, eventos, ativações, suporte durante uma janela definida, desativação e desmobilização de ativos.</p></details>
-          <details><summary>É possível planejar o atendimento fora do horário de pico?</summary><p>Sim. A janela operacional pode ser considerada no briefing para reduzir o impacto na circulação, no atendimento ao público ou na produção.</p></details>
-          <details><summary>A NovaSync atende diferentes regiões do Brasil?</summary><p>Sim. A NovaSync coordena atendimentos conforme a localidade, o escopo da demanda e a disponibilidade técnica da operação.</p></details>
-          <details><summary>Quais setores podem contratar a NovaSync?</summary><p>A NovaSync atende bancos e fintechs, varejo, saúde, telecom, indústria, transporte e eventos, com soluções adaptadas a cada contexto operacional.</p></details>
+          <details><summary>Quais regiões a NovaSync atende?</summary><p>A NovaSync coordena atendimentos em diferentes regiões do Brasil, conforme o escopo, a localidade e a disponibilidade técnica da demanda.</p></details>
+          <details><summary>Quais tipos de ativos e equipamentos podem entrar no escopo?</summary><p>O escopo pode incluir microinformática, redes, telecom, infraestrutura, terminais, periféricos, quiosques, equipamentos industriais e outros ativos definidos no briefing.</p></details>
+          <details><summary>O atendimento inclui relatório e evidências?</summary><p>Sim. O fechamento prevê registro do atendimento, evidências da execução, status da demanda e próximos encaminhamentos.</p></details>
+          <details><summary>Como funciona o processo de atendimento?</summary><p>O fluxo passa por briefing da demanda, designação de técnico, execução em campo e relatório com fechamento da visita.</p></details>
+          <details><summary>Qual é o SLA informado?</summary><p>O SLA informado é de até 2 dias úteis, considerando o escopo, a região e as condições combinadas para o atendimento.</p></details>
+          <details><summary>A NovaSync atende operações temporárias?</summary><p>Sim. A operação pode contemplar eventos, ativações, suporte durante a janela definida, desativação e desmobilização dos ativos.</p></details>
+          <details><summary>É possível planejar atendimentos fora do horário de pico?</summary><p>Sim. A janela operacional pode ser considerada no briefing para reduzir o impacto na circulação, no atendimento ao público ou na produção.</p></details>
+          <details><summary>Quais setores podem contratar a NovaSync?</summary><p>A NovaSync atende bancos e fintechs, varejo, saúde, telecom, indústria, transporte e eventos, com páginas dedicadas para cada contexto operacional.</p></details>
         </div>
       </div>
     </section>
@@ -1731,11 +1724,10 @@
        const sidebar = document.querySelector(".section-sidebar");
        const sidebarToggle = document.querySelector('[data-od-id="sidebar-toggle"]');
        const hero = document.getElementById("inicio");
-       if (!sidebar || !hero) return;
        const links = Array.from(sidebar.querySelectorAll("[data-section-link]"));
        const sections = links.map(function (link) { return document.getElementById(link.dataset.sectionLink); }).filter(Boolean);
 
-       if (!sections.length) return;
+      if (!sidebar || !hero || !sections.length) return;
 
       const setActive = function (id) {
         links.forEach(function (link) {
@@ -1769,22 +1761,6 @@
 
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Quais regiões a NovaSync atende?","acceptedAnswer":{"@type":"Answer","text":"A NovaSync coordena atendimentos em diferentes regiões do Brasil, conforme o escopo, a localidade e a disponibilidade técnica da demanda."}},{"@type":"Question","name":"Quais tipos de ativos e equipamentos podem entrar no escopo?","acceptedAnswer":{"@type":"Answer","text":"O escopo pode incluir microinformática, redes, telecom, infraestrutura, terminais, periféricos, quiosques, equipamentos industriais e outros ativos definidos no briefing."}},{"@type":"Question","name":"O atendimento inclui relatório e evidências?","acceptedAnswer":{"@type":"Answer","text":"Sim. O fechamento prevê registro do atendimento, evidências da execução, status da demanda e próximos encaminhamentos."}},{"@type":"Question","name":"Como funciona o processo de atendimento?","acceptedAnswer":{"@type":"Answer","text":"O fluxo passa por briefing da demanda, designação de técnico, execução em campo e relatório com fechamento da visita."}},{"@type":"Question","name":"Qual é o SLA informado?","acceptedAnswer":{"@type":"Answer","text":"O SLA informado é de até 2 dias úteis, considerando o escopo, a região e as condições combinadas para o atendimento."}},{"@type":"Question","name":"A NovaSync atende operações temporárias?","acceptedAnswer":{"@type":"Answer","text":"Sim. A operação pode contemplar eventos, ativações, suporte durante a janela definida, desativação e desmobilização dos ativos."}},{"@type":"Question","name":"É possível planejar atendimentos fora do horário de pico?","acceptedAnswer":{"@type":"Answer","text":"Sim. A janela operacional pode ser considerada no briefing para reduzir o impacto na circulação, no atendimento ao público ou na produção."}},{"@type":"Question","name":"Quais setores podem contratar a NovaSync?","acceptedAnswer":{"@type":"Answer","text":"A NovaSync atende bancos e fintechs, varejo, saúde, telecom, indústria, transporte e eventos, com páginas dedicadas para cada contexto operacional."}}]}</script>
 
-  <script>
-    (function () {
-      var faq = document.querySelector('[data-od-id="faq-section"] .faq-grid');
-      var schema = document.querySelector('script[type="application/ld+json"]');
-      if (!faq || !schema) return;
-      var items = Array.prototype.map.call(faq.querySelectorAll('details'), function (item) {
-        return {
-          '@type': 'Question',
-          name: item.querySelector('summary').textContent.trim(),
-          acceptedAnswer: { '@type': 'Answer', text: item.querySelector('p').textContent.trim() }
-        };
-      });
-      schema.textContent = JSON.stringify({ '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: items });
-    }());
-  </script>
-
   <footer>
     <div class="shell foot">
       <span>© 2026 NovaSync</span>
@@ -1792,9 +1768,6 @@
        <a href="politica-de-privacidade.html">Política de Privacidade</a>
      </div>
   </footer>
-
-
-
 
 
 

@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "kind": "html",
+  "title": "NovaSync — Field Service de TI",
+  "entry": "index.html",
+  "renderer": "html",
+  "status": "complete",
+  "exports": [
+    "html",
+    "pdf",
+    "zip"
+  ],
+  "primary": true,
+  "createdAt": "2026-07-30T19:13:24.111Z",
+  "updatedAt": "2026-08-08T16:01:54.568Z",
+  "sourceSkillId": "agent-browser",
+  "designSystemId": "bugatti",
+  "metadata": {
+    "identifier": "novasync-field-service",
+    "artifactType": "text/html",
+    "inferred": false
+  }
+}

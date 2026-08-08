@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "kind": "markdown-document",
+  "title": "brand-spec.md",
+  "entry": "brand-spec.md",
+  "renderer": "markdown",
+  "status": "complete",
+  "exports": [
+    "md",
+    "html",
+    "pdf",
+    "zip"
+  ],
+  "createdAt": "2026-07-31T19:04:21.438Z",
+  "updatedAt": "2026-07-31T19:04:21.438Z",
+  "metadata": {
+    "inferred": true
+  }
+}
