@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "kind": "html",
+  "title": "field-service-bancos.html",
+  "entry": "field-service-bancos.html",
+  "renderer": "html",
+  "status": "complete",
+  "exports": [
+    "html",
+    "pdf",
+    "zip"
+  ],
+  "createdAt": "2026-08-08T01:52:22.614Z",
+  "updatedAt": "2026-08-08T01:52:22.614Z",
+  "metadata": {
+    "inferred": true,
+    "reconciled": true
+  }
+}

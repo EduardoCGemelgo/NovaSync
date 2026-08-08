@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "kind": "html",
+  "title": "novasync-field-service.html",
+  "entry": "novasync-field-service.html",
+  "renderer": "html",
+  "status": "complete",
+  "exports": [
+    "html",
+    "pdf",
+    "zip"
+  ],
+  "createdAt": "2026-07-30T19:11:09.732Z",
+  "updatedAt": "2026-07-31T19:04:21.418Z",
+  "metadata": {
+    "inferred": true,
+    "reconciled": true
+  }
+}

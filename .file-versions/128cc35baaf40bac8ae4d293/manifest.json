@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 2,
+  "fileName": "404.html",
+  "currentVersionId": "ebefeec9-83b8-45a0-83b2-f5f93de5b86a",
+  "entries": [
+    {
+      "id": "ebefeec9-83b8-45a0-83b2-f5f93de5b86a",
+      "fileName": "404.html",
+      "version": 1,
+      "label": "Version 1",
+      "createdAt": 1786205569256,
+      "source": "ai",
+      "prompt": "Continue the remaining unfinished tasks from the previous run. Do not redo completed work. Focus only on these unfinished todos:\n\n1. [in_progress] Inspecionar arquivos e referências atuais\n2. [pending] Renomear home e corrigir links\n3. [pending] Criar CSS compartilhado se necessário\n4. [pending] Adicionar robots, sitemap e 404\n5. [pending] Adicionar canonical e validar publicação\n\nBefore making changes, inspect the current project files as needed. Update TodoWrite as you complete each remaining task.",
+      "size": 1832,
+      "mime": "text/html; charset=utf-8",
+      "kind": "html",
+      "contentPath": "0001-ebefeec9-83b8-45a0-83b2-f5f93de5b86a.html",
+      "contentDigest": "0ab692f085dd38052069277733cdf78e7d42ec2c5a5f1f2a9c13676412d674a0",
+      "promptSource": "message"
+    }
+  ]
+}

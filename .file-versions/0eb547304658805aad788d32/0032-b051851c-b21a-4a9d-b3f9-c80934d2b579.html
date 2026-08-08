@@ -1,0 +1,1720 @@
+<!doctype html>
+<html lang="pt-BR"><head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="NovaSync — gestão inteligente para operações de Field Service de TI.">
+  <title>NovaSync — Field Service de TI</title>
+  <link rel="icon" type="image/png" href="logo-star.png">
+  <style>
+    :root {
+      --bg: oklch(0.10 0.025 300);
+      --surface: oklch(0.14 0.030 300);
+      --fg: oklch(0.97 0.012 300);
+       --muted: oklch(0.75 0.030 300);
+      --border: oklch(0.36 0.045 300);
+      --accent: #2a2a46;
+      --accent-gradient: #2f2f39;
+      --accent-readable: oklch(0.82 0.08 260);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; background: var(--bg); }
+    body { position: relative; isolation: isolate; margin: 0; background: transparent; color: var(--fg); font-family: Manrope, ui-sans-serif, system-ui, sans-serif; font-size: 16px; }
+    body::before {
+      content: "";
+      position: fixed;
+      z-index: -1;
+      inset: -18%;
+      pointer-events: none;
+      background:
+        radial-gradient(ellipse 42% 30% at 12% 18%, color-mix(in oklab, var(--accent-gradient), transparent 34%), transparent 72%),
+        radial-gradient(ellipse 36% 27% at 84% 42%, color-mix(in oklab, var(--accent), transparent 46%), transparent 72%),
+        radial-gradient(ellipse 48% 31% at 52% 88%, color-mix(in oklab, var(--accent-readable), transparent 89%), transparent 76%);
+      background-size: 138% 138%, 132% 132%, 145% 145%;
+      background-position: 0% 48%, 100% 42%, 50% 100%;
+      filter: blur(30px);
+      opacity: .72;
+      animation: site-wave-drift 19s ease-in-out infinite alternate;
+    }
+
+    @keyframes site-wave-drift {
+      0% {
+        background-position: 0% 48%, 100% 42%, 50% 100%;
+        transform: scale(1);
+      }
+      50% {
+        background-position: 34% 28%, 68% 64%, 26% 76%;
+        transform: scale(1.055);
+      }
+      100% {
+        background-position: 100% 56%, 8% 34%, 74% 18%;
+        transform: scale(1.02);
+      }
+    }
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; }
+    a:focus-visible, button:focus-visible, summary:focus-visible, input:focus-visible, select:focus-visible { outline: 3px solid var(--accent-readable); outline-offset: 4px; }
+    .skip-link { position: absolute; left: 16px; top: 12px; z-index: 10; padding: 10px 14px; border-radius: 8px; background: var(--fg); color: var(--bg); transform: translateY(-160%); }
+    .skip-link:focus { transform: translateY(0); }
+    .shell { width: min(1120px, calc(100% - 48px)); margin: 0 auto; }
+    .eyebrow, .mono { font-family: "SF Mono", ui-monospace, monospace; letter-spacing: .12em; text-transform: uppercase; }
+    .eyebrow { color: var(--accent-readable); font-size: 13px; line-height: 1.4; }
+
+    .topbar {
+      width: 100%;
+      max-width: none;
+      margin: 0;
+      padding-inline: max(24px, calc((100% - 1120px) / 2));
+      min-height: 88px;
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      gap: 20px;
+      background: linear-gradient(to bottom, #11111F 0%, rgba(17, 17, 31, .72) 38%, rgba(17, 17, 31, .24) 72%, transparent 100%);
+    }
+
+    .brand { font-size: 22px; font-weight: 800; letter-spacing: -.07em; }
+    .brand span { color: var(--accent); }
+
+    .nav {
+      display: flex;
+      justify-content: center;
+      gap: 28px;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .nav a:hover { color: var(--fg); }
+    .nav-cta { justify-self: end; }
+
+    .btn {
+      display: inline-flex;
+      min-height: 44px;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 0 18px;
+      background: transparent;
+      color: var(--fg);
+      font-size: 14px;
+      line-height: 1.4;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform .2s ease, background .2s ease, border .2s ease;
+    }
+
+    .btn:hover { transform: translateY(-2px); border-color: var(--fg); }
+
+    .btn-primary {
+      border-color: var(--accent);
+      background: var(--accent);
+      box-shadow: 0 14px 30px color-mix(in oklab, var(--accent), transparent 72%);
+    }
+
+    .btn-primary:hover {
+      background: color-mix(in oklab, var(--accent), white 10%);
+      border-color: transparent;
+    }
+
+    .topbar .desktop-actions .btn {
+      min-height: 48px;
+      padding-inline: 20px;
+      border-color: color-mix(in oklab, var(--border), var(--fg) 18%);
+      background: color-mix(in oklab, var(--surface), var(--accent) 24%);
+      box-shadow: 0 8px 22px color-mix(in oklab, var(--accent), transparent 72%);
+    }
+
+    .topbar .desktop-actions .btn:hover {
+      border-color: color-mix(in oklab, var(--border), var(--fg) 34%);
+      background: color-mix(in oklab, var(--surface), var(--accent) 34%);
+      box-shadow: 0 10px 26px color-mix(in oklab, var(--accent), transparent 62%);
+    }
+
+    .hero {
+      position: relative;
+      min-height: 680px;
+      overflow: hidden;
+      border-top: 1px solid var(--border);
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      width: min(1180px, 104vw);
+      height: 520px;
+      left: 50%;
+      top: 70px;
+      transform: translateX(-50%);
+      border-radius: 50% 50% 0 0;
+      background: radial-gradient(ellipse at 50% 90%, color-mix(in oklab, var(--accent-gradient), transparent 8%) 0 20%, color-mix(in oklab, var(--accent), transparent 52%) 38%, transparent 70%);
+      filter: blur(8px);
+      opacity: .98;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, transparent 35%, var(--bg) 88%);
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 1;
+      padding: 122px 0 56px;
+      text-align: center;
+    }
+
+    h1, h2, h3, p { margin: 0; }
+
+    h1 {
+      max-width: 830px;
+      margin: 18px auto;
+      font-size: clamp(45px, 6.4vw, 82px);
+      letter-spacing: -.065em;
+      line-height: .98;
+    }
+
+    .hero-copy {
+      max-width: 590px;
+      margin: 0 auto;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.55;
+    }
+
+    .hero-actions {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 30px;
+    }
+
+    .signal {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: 1.1fr .8fr .8fr .8fr;
+      gap: 0;
+      max-width: 880px;
+      margin: 80px auto 0;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: color-mix(in oklab, var(--bg), transparent 10%);
+      backdrop-filter: blur(10px);
+      overflow: hidden;
+      text-align: left;
+    }
+
+    .signal-item {
+      min-height: 82px;
+      padding: 18px 22px;
+      display: grid;
+      align-content: center;
+      border-left: 1px solid var(--border);
+    }
+
+    .signal-item:first-child { border-left: 0; }
+    .signal small { color: var(--muted); font-size: 13px; line-height: 1.4; }
+    .signal strong { font-size: 18px; letter-spacing: -.04em; }
+
+    .section { padding: 104px 0; }
+
+    .section-head {
+      max-width: 660px;
+      margin: 0 auto 46px;
+      text-align: center;
+    }
+
+    .section-head h2 {
+      margin-top: 14px;
+      font-size: clamp(32px, 4vw, 52px);
+      letter-spacing: -.06em;
+      line-height: 1.04;
+    }
+
+    .section-head p {
+      margin-top: 16px;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    .accent-word { color: var(--accent-readable); }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+
+    .feature {
+      min-height: 235px;
+      padding: 24px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: var(--surface);
+      transition: transform .25s ease, border-color .25s ease;
+    }
+
+    .feature:hover {
+      transform: translateY(-5px);
+      border-color: var(--accent);
+    }
+
+    .feature.feature-focus {
+      border-color: var(--accent);
+      background: linear-gradient(150deg, var(--accent-gradient), var(--surface) 65%);
+    }
+
+    .feature-icon {
+      width: 38px;
+      height: 38px;
+      display: grid;
+      place-items: center;
+      margin-bottom: 50px;
+      border: 1px solid color-mix(in oklab, var(--accent), transparent 35%);
+      border-radius: 7px;
+      color: var(--accent-readable);
+      font-family: "SF Mono", ui-monospace, monospace;
+    }
+
+    .feature h3 { font-size: 17px; letter-spacing: -.045em; }
+
+    .feature p {
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.65;
+    }
+
+    .proof {
+      background: linear-gradient(135deg, var(--accent), var(--accent-gradient));
+      border-top: 1px solid color-mix(in oklab, var(--accent), white 16%);
+      border-bottom: 1px solid color-mix(in oklab, var(--accent), white 16%);
+    }
+
+    .proof .section { padding: 88px 0; }
+    .proof .section-head p { color: var(--fg); }
+
+    .proof-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+    }
+
+    .proof-card {
+      min-height: 170px;
+      padding: 22px;
+      border: 1px solid color-mix(in oklab, var(--fg), transparent 60%);
+      border-radius: 9px;
+    }
+
+    .proof-card b {
+      display: block;
+      font-family: "SF Mono", ui-monospace, monospace;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--fg);
+    }
+
+    .proof-card h3 {
+      margin-top: 44px;
+      font-size: 22px;
+      line-height: 1.03;
+      letter-spacing: -.06em;
+    }
+
+    .workflow {
+      display: grid;
+      grid-template-columns: .9fr 1.1fr;
+      align-items: center;
+      gap: 72px;
+    }
+
+    .workflow-copy h2 {
+      margin: 14px 0 16px;
+      font-size: clamp(35px, 4vw, 56px);
+      letter-spacing: -.06em;
+      line-height: 1;
+    }
+
+    .workflow-copy p { color: var(--muted); line-height: 1.65; }
+
+    .workflow-list {
+      list-style: none;
+      padding: 0;
+      margin: 30px 0 0;
+      display: grid;
+      gap: 14px;
+    }
+
+    .workflow-list li {
+      display: flex;
+      gap: 14px;
+      align-items: center;
+      color: var(--fg);
+      font-size: 15px;
+      line-height: 1.5;
+    }
+
+    .workflow-list i {
+      display: grid;
+      min-width: 30px;
+      height: 30px;
+      place-items: center;
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      color: var(--accent-readable);
+      font: 13px "SF Mono", ui-monospace, monospace;
+    }
+
+    .product-panel {
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 18px;
+      background: var(--surface);
+      box-shadow: 26px 30px 0 color-mix(in oklab, var(--accent), transparent 86%);
+    }
+
+    .panel-bar {
+      display: flex;
+      justify-content: space-between;
+      color: var(--muted);
+      font: 13px "SF Mono", ui-monospace, monospace;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .panel-map {
+      position: relative;
+      height: 280px;
+      margin-top: 18px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: color-mix(in oklab, var(--bg), var(--surface) 42%);
+    }
+
+    .panel-map::before, .panel-map::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px);
+      background-size: 40px 40px;
+      opacity: .35;
+    }
+
+    .route {
+      position: absolute;
+      left: 16%;
+      top: 26%;
+      z-index: 1;
+      width: 62%;
+      height: 46%;
+      border: 2px solid var(--accent);
+      border-left: 0;
+      border-bottom: 0;
+      border-radius: 0 100% 0 0;
+      transform: rotate(7deg);
+    }
+
+    .pin {
+      position: absolute;
+      z-index: 2;
+      width: 13px;
+      height: 13px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 0 7px color-mix(in oklab, var(--accent), transparent 80%);
+    }
+
+    .pin-a { top: 39%; left: 24%; }
+    .pin-b { top: 64%; left: 68%; }
+    .pin-c { top: 25%; left: 75%; }
+
+    .cta {
+      padding: 110px 0 130px;
+      text-align: center;
+      border-top: 1px solid var(--border);
+    }
+
+    .cta h2 {
+      max-width: 750px;
+      margin: 16px auto;
+      font-size: clamp(42px, 6vw, 72px);
+      letter-spacing: -.07em;
+      line-height: .98;
+    }
+
+    .cta p {
+      max-width: 530px;
+      margin: 0 auto 28px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 28px 0;
+      color: var(--muted);
+      font: 13px "SF Mono", ui-monospace, monospace;
+    }
+
+    .foot {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .cost-calculator { padding: 104px 0; border-top: 1px solid var(--border); }
+    .calculator-layout { display: grid; grid-template-columns: .84fr 1.16fr; gap: 54px; align-items: start; }
+    .calculator-copy h2 { max-width: 500px; margin: 14px 0 16px; font-size: clamp(36px, 4vw, 56px); letter-spacing: -.06em; line-height: 1; }
+    .calculator-copy p { max-width: 470px; color: var(--muted); line-height: 1.65; }
+    .calculator-note { margin-top: 28px; font: 13px "SF Mono", ui-monospace, monospace; color: var(--muted); line-height: 1.6; }
+    .calculator-panel { padding: 24px; border: 1px solid var(--border); border-radius: 12px; background: var(--surface); }
+    .calculator-fields { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .calculator-field { display: grid; gap: 8px; }
+    .calculator-field label { color: var(--fg); font: 13px "SF Mono", ui-monospace, monospace; letter-spacing: .04em; line-height: 1.4; text-transform: uppercase; }
+    .calculator-field input { width: 100%; min-height: 48px; padding: 0 13px; border: 1px solid var(--border); border-radius: 8px; outline: none; background: var(--bg); color: var(--fg); font: 16px Manrope, ui-sans-serif, system-ui, sans-serif; }
+    .calculator-field input:focus { border-color: var(--accent-readable); }
+    .calculator-results { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; margin-top: 24px; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; background: var(--border); }
+    .calculator-result { min-height: 112px; padding: 17px; background: var(--bg); }
+    .calculator-result span { display: block; color: var(--muted); font: 13px "SF Mono", ui-monospace, monospace; letter-spacing: .04em; line-height: 1.4; text-transform: uppercase; }
+    .calculator-result strong { display: block; margin-top: 14px; font-size: clamp(24px, 3vw, 34px); letter-spacing: -.06em; line-height: 1; }
+    .calculator-result.highlight { background: var(--accent); }
+    .calculator-result.highlight span,
+    .calculator-result.highlight strong { color: var(--fg); }
+    .calculator-caption { margin: 16px 0 0; color: var(--muted); font-size: 14px; line-height: 1.6; }
+    .calculator-help { margin-top: 18px; color: var(--fg); font-size: 14px; line-height: 1.5; }
+    .calculator-help summary { width: fit-content; cursor: pointer; color: var(--accent-readable); font: 13px "SF Mono", ui-monospace, monospace; letter-spacing: .03em; }
+    .calculator-help p { max-width: 58ch; margin: 10px 0 0; color: var(--muted); }
+
+    .sectors-section { padding: 104px 0; border-top: 1px solid var(--border); }
+    .sectors-layout { display: grid; grid-template-columns: .78fr 1.22fr; gap: 54px; align-items: start; }
+    .sectors-copy h2 { max-width: 470px; margin: 14px 0 16px; font-size: clamp(36px, 4vw, 56px); letter-spacing: -.06em; line-height: 1; }
+    .sectors-copy p { max-width: 430px; color: var(--muted); line-height: 1.65; }
+    .sectors-note { margin-top: 28px; font: 13px "SF Mono", ui-monospace, monospace; color: var(--muted); line-height: 1.6; }
+    .sector-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+    .sector-card { min-height: 164px; padding: 20px; border: 1px solid var(--border); border-radius: 10px; background: var(--surface); transition: transform .25s ease, border-color .25s ease; }
+    .sector-card:hover { transform: translateY(-4px); border-color: var(--accent); }
+    .sector-card b { display: block; color: var(--accent-readable); font: 12px "SF Mono", ui-monospace, monospace; letter-spacing: .12em; text-transform: uppercase; }
+    .sector-card h3 { margin-top: 32px; font-size: 20px; letter-spacing: -.05em; line-height: 1.1; }
+    .service-list { display: flex; flex-wrap: wrap; gap: 6px; margin: 14px 0 0; padding: 0; list-style: none; }
+    .service-list li { padding: 5px 8px; border: 1px solid #11111F; border-radius: 6px; color: var(--muted); font: 12px "SF Mono", ui-monospace, monospace; line-height: 1.3; }
+
+    .section-sidebar {
+      position: fixed;
+      z-index: 8;
+      top: 50%;
+      right: 12px;
+      display: grid;
+      gap: 16px;
+      opacity: 0;
+      pointer-events: none;
+      transform: translate(10px, -50%);
+      transition: opacity .25s ease, transform .25s ease;
+    }
+
+    .section-sidebar.is-visible {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translate(0, -50%);
+    }
+
+    .section-sidebar a {
+      display: flex;
+      flex-direction: row-reverse;
+      align-items: center;
+      gap: 10px;
+      min-height: 18px;
+      color: var(--muted);
+      font: 11px "SF Mono", ui-monospace, monospace;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .section-sidebar a::before {
+      content: "";
+      width: 9px;
+      height: 9px;
+      flex: 0 0 9px;
+      border: 1px solid var(--muted);
+      border-radius: 50%;
+      transition: background .2s ease, border-color .2s ease, transform .2s ease;
+    }
+
+    .section-sidebar a span {
+      max-width: 0;
+      overflow: hidden;
+      white-space: nowrap;
+      opacity: 0;
+      transform: translateX(4px);
+      transition: max-width .2s ease, opacity .2s ease, transform .2s ease;
+    }
+
+    .section-sidebar a:hover,
+    .section-sidebar a.is-active { color: var(--fg); }
+
+    .section-sidebar a:hover::before,
+    .section-sidebar a.is-active::before {
+      border-color: var(--accent-readable);
+      background: var(--accent-readable);
+      transform: scale(1.15);
+    }
+
+    .section-sidebar a.is-active span,
+    .section-sidebar a:focus-visible span {
+      max-width: 110px;
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .coverage-section { padding: 104px 0; border-top: 1px solid var(--border); }
+    .coverage-layout { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(300px, .8fr); gap: 44px; align-items: center; }
+    .coverage-map-wrap { min-width: 0; }
+    .coverage-map {
+      position: relative;
+      width: min(100%, 680px);
+      aspect-ratio: 1 / 1;
+      min-height: 0;
+      margin: 0 auto;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: color-mix(in oklab, var(--bg), var(--surface) 42%);
+      overflow: hidden;
+    }
+    .coverage-map::before, .coverage-map::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px);
+      background-size: 44px 44px;
+      opacity: .22;
+      pointer-events: none;
+    }
+    .coverage-map::after { background: radial-gradient(circle at 50% 48%, color-mix(in oklab, var(--accent), transparent 84%), transparent 54%); }
+    .brazil-map-svg {
+      position: absolute;
+      z-index: 1;
+      left: 50%;
+      top: 50%;
+      width: 180%;
+      height: 180%;
+      overflow: visible;
+      transform: translate(calc(-50% + 43px), -50%);
+    }
+    .brazil-map-fallback {
+      position: absolute;
+      z-index: 0;
+      left: 50%;
+      top: 50%;
+      width: 180%;
+      height: 180%;
+      opacity: .34;
+      pointer-events: none;
+      object-fit: contain;
+      transform: translate(calc(-50% + 43px), -50%);
+    }
+    .brazil-map-svg use {
+      display: none;
+    }
+    .brazil-map-svg .map-state {
+      fill: color-mix(in oklab, var(--surface), var(--accent) 12%);
+      stroke: var(--border);
+      stroke-width: 55;
+      stroke-linejoin: round;
+      cursor: pointer;
+      outline: none;
+      transition: fill .18s ease, stroke .18s ease, stroke-width .18s ease, filter .18s ease;
+    }
+    .brazil-map-svg .map-state:hover,
+    .brazil-map-svg .map-state:focus-visible,
+    .brazil-map-svg .map-state.is-active {
+      fill: var(--accent-readable);
+      stroke: var(--fg);
+      stroke-width: 90;
+      filter: drop-shadow(0 0 9px color-mix(in oklab, var(--accent-readable), transparent 38%));
+    }
+    .brazil-map-svg .map-state:focus-visible { outline: 2px solid var(--fg); outline-offset: 3px; }
+    .brazil-map-svg use {
+      fill: color-mix(in oklab, var(--surface), var(--accent) 12%) !important;
+      stroke: var(--border) !important;
+      stroke-width: 1.2;
+      stroke-linejoin: round;
+      cursor: pointer;
+      outline: none;
+      transition: fill .18s ease, stroke .18s ease, stroke-width .18s ease, filter .18s ease;
+    }
+    .brazil-map-svg use:hover,
+    .brazil-map-svg use:focus-visible,
+    .brazil-map-svg use.is-active {
+      fill: var(--accent-readable) !important;
+      stroke: var(--fg) !important;
+      stroke-width: 2.2;
+      filter: drop-shadow(0 0 9px color-mix(in oklab, var(--accent-readable), transparent 38%));
+    }
+    .brazil-map-svg use:focus-visible { outline: 2px solid var(--fg); outline-offset: 3px; }
+    .coverage-panel { padding: 28px; border: 1px solid var(--border); border-radius: 10px; background: var(--surface); }
+    .coverage-panel .state-region { color: var(--accent-readable); font: 12px "SF Mono", ui-monospace, monospace; letter-spacing: .12em; text-transform: uppercase; }
+    .coverage-panel h3 { margin-top: 10px; font-size: clamp(28px, 3vw, 42px); letter-spacing: -.06em; line-height: 1; }
+    .coverage-panel hr { margin: 20px 0; border: 0; border-top: 1px solid var(--border); }
+    .coverage-count-label { color: var(--muted); font: 13px "SF Mono", ui-monospace, monospace; letter-spacing: .04em; text-transform: uppercase; }
+    .coverage-count { display: block; margin-top: 12px; color: var(--accent-readable); font-size: clamp(42px, 5vw, 68px); letter-spacing: -.08em; line-height: .95; }
+    .coverage-note { margin-top: 18px; padding: 14px; border-radius: 8px; background: color-mix(in oklab, var(--bg), var(--surface) 50%); color: var(--muted); font-size: 14px; line-height: 1.5; }
+    .coverage-note::before { content: ""; display: inline-block; width: 7px; height: 7px; margin: 0 9px 1px 0; border-radius: 50%; background: var(--accent-readable); }
+    .coverage-data-note { margin-top: 16px; color: var(--muted); font-size: 13px; line-height: 1.5; }
+    .coverage-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; margin-top: 46px; border-top: 1px solid var(--border); }
+    .coverage-stat { padding: 20px 16px 0; text-align: center; border-right: 1px solid var(--border); }
+    .coverage-stat:last-child { border-right: 0; }
+    .coverage-stat strong { display: block; color: var(--accent-readable); font-size: 28px; letter-spacing: -.06em; }
+    .coverage-stat span { display: block; margin-top: 6px; color: var(--muted); font: 11px "SF Mono", ui-monospace, monospace; letter-spacing: .08em; text-transform: uppercase; }
+
+    .technical-registration { padding: 104px 0; border-top: 1px solid var(--border); }
+    .technical-registration-layout { display: grid; grid-template-columns: .72fr 1.28fr; gap: 72px; align-items: start; }
+    .technical-registration-copy h2 { margin-top: 14px; font-size: clamp(35px, 4vw, 56px); letter-spacing: -.06em; line-height: 1; }
+    .technical-registration-copy p { max-width: 420px; margin-top: 18px; color: var(--muted); line-height: 1.65; }
+    .technical-registration-note { margin-top: 34px; padding-top: 18px; border-top: 1px solid var(--border); color: var(--muted); font-size: 13px; line-height: 1.55; }
+    .technical-form { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px 14px; padding: 28px; border: 1px solid var(--border); border-radius: 10px; background: var(--surface); }
+    .technical-form-field { display: grid; gap: 8px; }
+    .technical-form-field.is-wide { grid-column: 1 / -1; }
+    .technical-form label { color: var(--fg); font-size: 13px; line-height: 1.35; }
+    .technical-form input { width: 100%; min-height: 48px; padding: 0 14px; border: 1px solid var(--border); border-radius: 8px; background: color-mix(in oklab, var(--bg), var(--surface) 50%); color: var(--fg); font: inherit; transition: border-color .2s ease, background .2s ease; }
+     .technical-form input::placeholder { color: var(--muted); }
+     .technical-form input:focus { border-color: var(--accent-readable); background: var(--bg); outline: none; }
+     .technical-form input[aria-invalid="true"] { border-color: var(--accent-readable); }
+     .technical-form .btn { grid-column: 1 / -1; justify-self: start; margin-top: 4px; }
+    .technical-form-status { grid-column: 1 / -1; min-height: 20px; color: var(--accent-readable); font-size: 14px; line-height: 1.45; }
+    .technical-form-status.is-error { color: var(--fg); }
+    .technical-form-privacy { grid-column: 1 / -1; margin: -6px 0 0; color: var(--muted); font-size: 13px; line-height: 1.45; }
+    .technical-form-privacy a { color: var(--fg); text-underline-offset: 3px; }
+    .form-spinner { display: inline-block; width: 14px; height: 14px; margin-right: 8px; border: 2px solid currentColor; border-right-color: transparent; border-radius: 50%; vertical-align: -2px; animation: form-spin .7s linear infinite; }
+    @keyframes form-spin { to { transform: rotate(360deg); } }
+    .coverage-mobile-hint { display: none; margin: 16px 0 0; color: var(--muted); font: 13px "SF Mono", ui-monospace, monospace; letter-spacing: .03em; }
+    .coverage-mobile-select { display: none; width: 100%; min-height: 48px; margin-top: 12px; padding: 0 14px; border: 1px solid var(--border); border-radius: 8px; background: var(--surface); color: var(--fg); font: inherit; }
+
+    .social-proof { padding: 104px 0; border-top: 1px solid var(--border); }
+    .social-proof-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    .testimonial, .case-placeholder, .logo-placeholder { min-height: 210px; padding: 24px; border: 1px solid var(--border); border-radius: 10px; background: var(--surface); }
+    .testimonial blockquote { margin: 42px 0 0; color: var(--fg); font-size: 18px; line-height: 1.45; }
+    .testimonial cite { display: block; margin-top: 18px; color: var(--muted); font: 12px "SF Mono", ui-monospace, monospace; font-style: normal; letter-spacing: .06em; text-transform: uppercase; }
+    .social-proof-bottom { display: grid; grid-template-columns: 1.05fr .95fr; gap: 14px; margin-top: 14px; }
+    .case-placeholder h3, .logo-placeholder h3 { margin-top: 36px; font-size: 22px; letter-spacing: -.05em; }
+    .case-placeholder p, .logo-placeholder p { margin-top: 12px; color: var(--muted); line-height: 1.55; }
+    .metric-strip { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; margin-top: 32px; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .metric { padding: 18px 14px; text-align: center; border-right: 1px solid var(--border); }
+    .metric:last-child { border-right: 0; }
+    .metric strong { display: block; color: var(--accent-readable); font-size: 28px; }
+    .metric span { display: block; margin-top: 6px; color: var(--muted); font: 11px "SF Mono", ui-monospace, monospace; letter-spacing: .08em; text-transform: uppercase; }
+
+    .how-it-works { padding: 104px 0; border-top: 1px solid var(--border); }
+    .workflow-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; counter-reset: workflow; }
+    .workflow-step { min-height: 190px; padding: 22px; border: 1px solid var(--border); border-radius: 10px; background: var(--surface); counter-increment: workflow; }
+    .workflow-step::before { content: counter(workflow, decimal-leading-zero); display: block; color: var(--accent-readable); font: 13px "SF Mono", ui-monospace, monospace; letter-spacing: .1em; }
+    .workflow-step h3 { margin-top: 42px; font-size: 20px; letter-spacing: -.05em; }
+    .workflow-step p { margin-top: 10px; color: var(--muted); line-height: 1.55; }
+
+    main > section {
+      background-image: linear-gradient(180deg, color-mix(in oklab, var(--surface), transparent 90%), transparent 48%, color-mix(in oklab, var(--accent), transparent 92%));
+    }
+
+    main > section.proof {
+      background-image: linear-gradient(135deg, color-mix(in oklab, var(--accent), transparent 8%), color-mix(in oklab, var(--accent-gradient), transparent 8%));
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+      .btn:hover, .feature:hover, .sector-card:hover { transform: none; }
+    }
+
+    @media (max-width: 820px) {
+      .nav { display: none; }
+      .topbar { grid-template-columns: 1fr auto; }
+      .brand { justify-self: end; }
+      .nav-cta { display: none; }
+       .coverage-mobile-hint { display: block; }
+      .hero { min-height: 650px; }
+      .signal { grid-template-columns: 1fr 1fr; }
+      .signal-item:nth-child(3) { border-left: 0; border-top: 1px solid var(--border); }
+      .signal-item:nth-child(4) { border-top: 1px solid var(--border); }
+       .feature-grid, .proof-grid, .social-proof-grid { grid-template-columns: 1fr 1fr; }
+       .workflow-steps { grid-template-columns: 1fr 1fr; }
+       .social-proof-bottom { grid-template-columns: 1fr; }
+       .workflow { grid-template-columns: 1fr; gap: 40px; }
+       .calculator-layout { grid-template-columns: 1fr; gap: 36px; }
+       .sectors-layout { grid-template-columns: 1fr; gap: 36px; }
+       .coverage-layout { grid-template-columns: 1fr; gap: 36px; }
+       .technical-registration-layout { grid-template-columns: 1fr; gap: 36px; }
+         .coverage-map { width: min(100%, 720px); justify-self: center; }
+            .brazil-map-svg, .brazil-map-fallback { width: 170%; height: 170%; transform: translate(calc(-50% + 40px), -50%); }
+       }
+
+    @media (max-width: 1024px) {
+      .section-sidebar {
+        top: 88px;
+        right: auto;
+        left: 16px;
+        display: grid;
+        width: min(260px, calc(100vw - 32px));
+        padding: 10px;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        background: var(--surface);
+        transform: translateX(calc(-100% - 24px));
+      }
+
+      .section-sidebar.is-open {
+        opacity: 1;
+        pointer-events: auto;
+        transform: translateX(0);
+      }
+
+      .section-sidebar:not(.is-open) {
+        opacity: 0;
+        pointer-events: none;
+        transform: translateX(calc(-100% - 24px));
+      }
+
+      .section-sidebar a,
+      .section-sidebar a.is-active { flex-direction: row; min-height: 44px; padding: 0 10px; color: var(--muted); }
+      .section-sidebar a span { max-width: 220px; opacity: 1; transform: none; }
+      .section-sidebar a:hover,
+      .section-sidebar a.is-active { color: var(--fg); }
+    }
+
+    @media (max-width: 540px) {
+      .shell { width: min(100% - 32px, 1120px); }
+      .hero-inner { padding-top: 84px; }
+      h1 { font-size: 46px; }
+      .signal { grid-template-columns: 1fr; }
+      .signal-item, .signal-item:nth-child(3), .signal-item:nth-child(4) { border: 0; border-top: 1px solid var(--border); }
+      .signal-item:first-child { border-top: 0; }
+       .feature-grid, .proof-grid, .social-proof-grid { grid-template-columns: 1fr; }
+       .workflow-steps { grid-template-columns: 1fr; }
+       .calculator-fields, .calculator-results { grid-template-columns: 1fr; }
+       .cost-calculator { padding: 74px 0; }
+       .sectors-section { padding: 74px 0; }
+       .sector-grid { grid-template-columns: 1fr; }
+       .coverage-section { padding: 74px 0; }
+       .coverage-map { width: 100%; height: 450px; min-height: 0; }
+              .brazil-map-svg, .brazil-map-fallback { width: 160%; height: 160%; transform: translate(calc(-50% + 30px), -50%); }
+       .coverage-panel { padding: 22px; }
+       .technical-form { grid-template-columns: 1fr; padding: 22px; }
+       .technical-form-field.is-wide, .technical-form .btn, .technical-form-status { grid-column: auto; }
+       .feature { min-height: 190px; }
+      .feature-icon { margin-bottom: 30px; }
+      .section { padding: 74px 0; }
+      .cta { padding: 84px 0; }
+       .foot { flex-direction: column; }
+     }
+
+     @media (max-width: 600px) {
+       .coverage-map { display: none; }
+       .coverage-mobile-select { display: block; }
+       .metric-strip { grid-template-columns: 1fr; }
+       .metric { border-right: 0; border-bottom: 1px solid var(--border); }
+       .metric:last-child { border-bottom: 0; }
+     }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#content">Pular para o conteúdo principal</a>
+  <header class="shell topbar" data-od-id="top-navigation">
+    <style>
+      .sidebar-toggle { display: none; }
+      @media (max-width: 1024px) {
+        [data-od-id="top-navigation"] { position: relative; display: grid; grid-template-columns: 44px 1fr 44px; gap: 0; }
+        [data-od-id="top-navigation"] > .desktop-nav, [data-od-id="top-navigation"] > .desktop-actions { display: none !important; }
+        [data-od-id="top-navigation"] > .brand { grid-column: 2; justify-self: center; }
+        .sidebar-toggle { width: 44px; height: 44px; display: grid; grid-column: 1; grid-row: 1; place-items: center; border: 1px solid var(--border); border-radius: 8px; background: transparent; color: var(--fg); cursor: pointer; }
+        .sidebar-toggle span, .sidebar-toggle span::before, .sidebar-toggle span::after { width: 17px; height: 1px; display: block; background: currentColor; content: ""; }
+        .sidebar-toggle span { position: relative; }
+        .sidebar-toggle span::before { position: absolute; top: -6px; }
+        .sidebar-toggle span::after { position: absolute; top: 6px; }
+        @media (max-width: 540px) {
+          [data-od-id="top-navigation"] { width: 100%; margin-inline: 0; padding-inline: 16px; }
+        }
+      }
+    </style>
+    <button class="sidebar-toggle" type="button" aria-label="Abrir menu lateral" aria-expanded="false" aria-controls="section-sidebar" data-od-id="sidebar-toggle"><span aria-hidden="true"></span></button>
+    <nav class="nav desktop-nav" aria-label="Navegação principal" style="justify-content: flex-start;">
+      <a href="#inicio">Início</a>
+       <a href="#recursos">Recursos</a>
+       <a href="#cobertura">Cobertura</a>
+      <a href="#trust-section">Benefícios</a>
+       <a href="#cost-calculator">Calculadora</a>
+      <a href="#setores">Setores</a>
+    </nav>
+    <a href="#inicio" class="brand" aria-label="NovaSync, início"><img src="logo-star.png" alt="NovaSync" style="display:block;width:42px;height:auto"></a>
+    <div class="nav-cta desktop-actions" style="display:flex;gap:8px">
+       <a class="btn" href="#cadastro-tecnico">Cadastro técnico</a>
+       <a class="btn" href="https://wa.me/5511993287070">Contato</a>
+    </div>
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        const sidebarToggle = document.querySelector('[data-od-id="sidebar-toggle"]');
+        const sectionSidebar = document.querySelector('[data-od-id="section-sidebar"]');
+        if (sidebarToggle && sectionSidebar) {
+          sidebarToggle.addEventListener('click', function () {
+            const isOpen = sectionSidebar.classList.toggle('is-open');
+            sidebarToggle.setAttribute('aria-expanded', String(isOpen));
+            sidebarToggle.setAttribute('aria-label', isOpen ? 'Fechar menu lateral' : 'Abrir menu lateral');
+          });
+          sectionSidebar.querySelectorAll('a').forEach(function (link) {
+            link.addEventListener('click', function () {
+              sectionSidebar.classList.remove('is-open');
+              sidebarToggle.setAttribute('aria-expanded', 'false');
+              sidebarToggle.setAttribute('aria-label', 'Abrir menu lateral');
+            });
+          });
+        }
+      });
+    </script>
+  </header>
+
+  <main id="content">
+    <section class="hero" id="inicio" data-od-id="hero-novasync">
+      <div class="shell hero-inner">
+        <p class="eyebrow">Field service conectado</p>
+        <h1>Operações em campo.<br><span class="accent-word">Supervisionadas.</span></h1>
+        <p class="hero-copy">A NovaSync reúne agenda, equipe técnica e acompanhamento de chamados em uma operação de Field Service de TI mais visível e coordenada.</p>
+        <div class="hero-actions" data-od-id="hero-actions">
+           <a class="btn btn-primary" href="https://wa.me/5511993287070">Entre em contato <span aria-hidden="true">→</span></a>
+          
+        </div>
+        <div class="signal" data-od-id="platform-summary">
+          <div class="signal-item"><small class="mono">Visibilidade de ponta a ponta</small><strong>Uma única operação</strong></div>
+          <div class="signal-item"><small class="mono">Planejamento</small><strong>Agenda técnica</strong></div>
+          <div class="signal-item"><small class="mono">Execução</small><strong>Em campo</strong></div>
+          <div class="signal-item"><small class="mono">Acompanhamento</small><strong>Em tempo real</strong></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="coverage-section" id="cobertura" data-od-id="coverage-section">
+      <div class="shell">
+        <div class="section-head">
+          
+          <h2>Presença técnica em todo o <span class="accent-word">Brasil.</span></h2>
+          <p>Passe o cursor sobre cada estado para consultar a quantidade de técnicos disponíveis na sua região.</p>
+        </div>
+        <div class="coverage-layout">
+         <div class="coverage-map-wrap">
+              <p class="coverage-mobile-hint">Toque em um estado para consultar a cobertura.</p>
+              <label for="coverage-state-select" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;">Selecione um estado</label>
+              <select class="coverage-mobile-select" id="coverage-state-select" aria-label="Selecione um estado para consultar a cobertura">
+                <option value="AC">AC - Acre</option><option value="AL">AL - Alagoas</option><option value="AP">AP - Amapá</option><option value="AM">AM - Amazonas</option><option value="BA">BA - Bahia</option><option value="CE">CE - Ceará</option><option value="DF">DF - Distrito Federal</option><option value="ES">ES - Espírito Santo</option><option value="GO">GO - Goiás</option><option value="MA">MA - Maranhão</option><option value="MT">MT - Mato Grosso</option><option value="MS">MS - Mato Grosso do Sul</option><option value="MG">MG - Minas Gerais</option><option value="PA">PA - Pará</option><option value="PB">PB - Paraíba</option><option value="PR">PR - Paraná</option><option value="PE">PE - Pernambuco</option><option value="PI">PI - Piauí</option><option value="RJ">RJ - Rio de Janeiro</option><option value="RN">RN - Rio Grande do Norte</option><option value="RS">RS - Rio Grande do Sul</option><option value="RO">RO - Rondônia</option><option value="RR">RR - Roraima</option><option value="SC">SC - Santa Catarina</option><option value="SP">SP - São Paulo</option><option value="SE">SE - Sergipe</option><option value="TO">TO - Tocantins</option>
+              </select>
+             <div class="coverage-map" role="group" aria-label="Mapa interativo dos estados do Brasil">
+               <img class="brazil-map-fallback" src="mapa.svg" alt="Mapa cartográfico do Brasil" aria-hidden="true">
+               <svg class="brazil-map-svg" viewBox="0 0 40000 29700" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" role="img" aria-label="Mapa cartográfico do Brasil">
+                   <use href="mapa.svg#BRAC" xlink:href="mapa.svg#BRAC" tabindex="0" data-state="AC" aria-label="Acre, 7 técnicos"></use>
+                   <use href="mapa.svg#BRAL" xlink:href="mapa.svg#BRAL" tabindex="0" data-state="AL" aria-label="Alagoas, 9 técnicos"></use>
+                   <use href="mapa.svg#BRAP" xlink:href="mapa.svg#BRAP" tabindex="0" data-state="AP" aria-label="Amapá, 5 técnicos"></use>
+                   <use href="mapa.svg#BRAM" xlink:href="mapa.svg#BRAM" tabindex="0" data-state="AM" aria-label="Amazonas, 6 técnicos"></use>
+                   <use href="mapa.svg#BRBA" xlink:href="mapa.svg#BRBA" tabindex="0" data-state="BA" aria-label="Bahia, 17 técnicos"></use>
+                   <use href="mapa.svg#BRCE" xlink:href="mapa.svg#BRCE" tabindex="0" data-state="CE" aria-label="Ceará, 15 técnicos"></use>
+                   <use href="mapa.svg#BRDF" xlink:href="mapa.svg#BRDF" tabindex="0" data-state="DF" aria-label="Distrito Federal, 9 técnicos"></use>
+                   <use href="mapa.svg#BRES" xlink:href="mapa.svg#BRES" tabindex="0" data-state="ES" aria-label="Espírito Santo, 8 técnicos"></use>
+                   <use href="mapa.svg#BRGO" xlink:href="mapa.svg#BRGO" tabindex="0" data-state="GO" aria-label="Goiás, 10 técnicos"></use>
+                   <use href="mapa.svg#BRMA" xlink:href="mapa.svg#BRMA" tabindex="0" data-state="MA" aria-label="Maranhão, 12 técnicos"></use>
+                   <use href="mapa.svg#BRMT" xlink:href="mapa.svg#BRMT" tabindex="0" data-state="MT" aria-label="Mato Grosso, 15 técnicos"></use>
+                   <use href="mapa.svg#BRMS" xlink:href="mapa.svg#BRMS" tabindex="0" data-state="MS" aria-label="Mato Grosso do Sul, 9 técnicos"></use>
+                   <use href="mapa.svg#BRMG" xlink:href="mapa.svg#BRMG" tabindex="0" data-state="MG" aria-label="Minas Gerais, 28 técnicos"></use>
+                   <use href="mapa.svg#BRPA" xlink:href="mapa.svg#BRPA" tabindex="0" data-state="PA" aria-label="Pará, 16 técnicos"></use>
+                   <use href="mapa.svg#BRPB" xlink:href="mapa.svg#BRPB" tabindex="0" data-state="PB" aria-label="Paraíba, 13 técnicos"></use>
+                   <use href="mapa.svg#BRPR" xlink:href="mapa.svg#BRPR" tabindex="0" data-state="PR" aria-label="Paraná, 13 técnicos"></use>
+                   <use href="mapa.svg#BRPE" xlink:href="mapa.svg#BRPE" tabindex="0" data-state="PE" aria-label="Pernambuco, 18 técnicos"></use>
+                   <use href="mapa.svg#BRPI" xlink:href="mapa.svg#BRPI" tabindex="0" data-state="PI" aria-label="Piauí, 7 técnicos"></use>
+                   <use href="mapa.svg#BRRJ" xlink:href="mapa.svg#BRRJ" tabindex="0" data-state="RJ" aria-label="Rio de Janeiro, 13 técnicos"></use>
+                   <use href="mapa.svg#BRRN" xlink:href="mapa.svg#BRRN" tabindex="0" data-state="RN" aria-label="Rio Grande do Norte, 7 técnicos"></use>
+                   <use href="mapa.svg#BRRS" xlink:href="mapa.svg#BRRS" tabindex="0" data-state="RS" aria-label="Rio Grande do Sul, 26 técnicos"></use>
+                   <use href="mapa.svg#BRRO" xlink:href="mapa.svg#BRRO" tabindex="0" data-state="RO" aria-label="Rondônia, 8 técnicos"></use>
+                   <use href="mapa.svg#BRRR" xlink:href="mapa.svg#BRRR" tabindex="0" data-state="RR" aria-label="Roraima, 6 técnicos"></use>
+                   <use href="mapa.svg#BRSC" xlink:href="mapa.svg#BRSC" tabindex="0" data-state="SC" aria-label="Santa Catarina, 14 técnicos"></use>
+                   <use href="mapa.svg#BRSP" xlink:href="mapa.svg#BRSP" tabindex="0" data-state="SP" aria-label="São Paulo, 47 técnicos"></use>
+                   <use href="mapa.svg#BRSE" xlink:href="mapa.svg#BRSE" tabindex="0" data-state="SE" aria-label="Sergipe, 7 técnicos"></use>
+                   <use href="mapa.svg#BRTO" xlink:href="mapa.svg#BRTO" tabindex="0" data-state="TO" aria-label="Tocantins, 5 técnicos"></use>
+              </svg>
+            </div>
+          </div>
+          <aside class="coverage-panel" aria-live="polite" data-od-id="coverage-state-panel">
+            <span class="state-region" id="coverage-region">AC</span>
+            <h3 id="coverage-state-name">Acre</h3>
+            <hr>
+            <span class="coverage-count-label">Técnicos disponíveis</span>
+             <strong class="coverage-count" id="coverage-count">7</strong>
+             <p class="coverage-note">Quantitativo informado na planilha de capilaridade regional.</p>
+            <p class="coverage-data-note">Passe o cursor ou use Tab para consultar outro estado.</p>
+          </aside>
+        </div>
+        <div class="coverage-stats" aria-label="Resumo da cobertura">
+          <div class="coverage-stat"><strong>27</strong><span>Estados mapeados</span></div>
+           <div class="coverage-stat"><strong>350</strong><span>Técnicos cadastrados</span></div>
+          <div class="coverage-stat"><strong>Nacional</strong><span>Área de atuação</span></div>
+        </div>
+      </div>
+      <script>
+        (function () {
+           const states = {
+             AC: "Acre", AL: "Alagoas", AM: "Amazonas", AP: "Amapá", BA: "Bahia", CE: "Ceará", DF: "Distrito Federal", ES: "Espírito Santo", GO: "Goiás", MA: "Maranhão", MG: "Minas Gerais", MS: "Mato Grosso do Sul", MT: "Mato Grosso", PA: "Pará", PB: "Paraíba", PE: "Pernambuco", PI: "Piauí", PR: "Paraná", RJ: "Rio de Janeiro", RN: "Rio Grande do Norte", RO: "Rondônia", RR: "Roraima", RS: "Rio Grande do Sul", SC: "Santa Catarina", SE: "Sergipe", SP: "São Paulo", TO: "Tocantins"
+           };
+           const techniciansByState = {
+              AC: 7, AL: 9, AM: 6, AP: 5, BA: 17, CE: 15, DF: 9, ES: 8, GO: 10, MA: 12, MG: 28, MS: 9, MT: 15, PA: 16, PB: 13, PE: 18, PI: 7, PR: 13, RJ: 13, RN: 7, RO: 8, RR: 6, RS: 26, SC: 14, SE: 7, SP: 47, TO: 5
+           };
+           const idByState = {
+             AC: "BRAC", AL: "BRAL", AM: "BRAM", AP: "BRAP", BA: "BRBA", CE: "BRCE", DF: "BRDF", ES: "BRES", GO: "BRGO", MA: "BRMA", MG: "BRMG", MS: "BRMS", MT: "BRMT", PA: "BRPA", PB: "BRPB", PE: "BRPE", PI: "BRPI", PR: "BRPR", RJ: "BRRJ", RN: "BRRN", RO: "BRRO", RR: "BRRR", RS: "BRRS", SC: "BRSC", SE: "BRSE", SP: "BRSP", TO: "BRTO"
+           };
+           const panel = document.querySelector('[data-od-id="coverage-state-panel"]');
+           const map = document.querySelector(".brazil-map-svg");
+           let buttons = [];
+            const region = document.getElementById("coverage-region");
+            const name = document.getElementById("coverage-state-name");
+            const count = document.getElementById("coverage-count");
+           let countAnimationFrame;
+           function animateCount(target) {
+             if (countAnimationFrame) cancelAnimationFrame(countAnimationFrame);
+             if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+               count.textContent = target.toLocaleString("pt-BR");
+               return;
+             }
+             const start = Number.parseInt(count.textContent.replace(/\D/g, ""), 10) || 0;
+             const startedAt = performance.now();
+             const duration = 650;
+             function frame(now) {
+               const progress = Math.min((now - startedAt) / duration, 1);
+               const eased = 1 - Math.pow(1 - progress, 3);
+               const current = Math.round(start + (target - start) * eased);
+               count.textContent = current.toLocaleString("pt-BR");
+               if (progress < 1) countAnimationFrame = requestAnimationFrame(frame);
+             }
+             countAnimationFrame = requestAnimationFrame(frame);
+           }
+            function selectState(button) {
+             const code = button.dataset.state;
+             buttons.forEach((item) => item.classList.toggle("is-active", item === button));
+             const stateSelect = document.getElementById("coverage-state-select");
+             if (stateSelect) stateSelect.value = code;
+             region.textContent = code;
+            name.textContent = states[code];
+             const total = techniciansByState[code] ?? 0;
+              animateCount(total);
+             button.setAttribute("aria-label", `${states[code]}, ${total} ${total === 1 ? "técnico" : "técnicos"}`);
+          }
+           function bindStates() {
+             buttons = Array.from(map.querySelectorAll(".map-state[data-state]"));
+             buttons.forEach((button) => {
+               button.addEventListener("mouseenter", () => selectState(button));
+               button.addEventListener("focus", () => selectState(button));
+               button.addEventListener("mouseleave", () => button.classList.remove("is-active"));
+             });
+             const initialState = buttons.find((button) => button.dataset.state === "AC");
+             if (initialState) selectState(initialState);
+           }
+           fetch("mapa.svg")
+             .then((response) => response.text())
+             .then((source) => {
+               const sourceSvg = new DOMParser().parseFromString(source, "image/svg+xml");
+               Object.entries(idByState).forEach(([code, sourceId]) => {
+                 const sourceState = sourceSvg.getElementById(sourceId);
+                 if (!sourceState) return;
+                 const state = document.importNode(sourceState, true);
+                 state.removeAttribute("class");
+                 state.classList.add("map-state");
+                 state.dataset.state = code;
+                 state.setAttribute("tabindex", "0");
+                  const total = techniciansByState[code] ?? 0;
+                  state.setAttribute("aria-label", `${states[code]}, ${total} ${total === 1 ? "técnico" : "técnicos"}`);
+                 map.appendChild(state);
+               });
+               bindStates();
+             })
+             .catch(() => {
+               bindStates();
+             });
+            if (panel) panel.setAttribute("aria-label", "Detalhes de cobertura do estado selecionado");
+            const stateSelect = document.getElementById("coverage-state-select");
+            if (stateSelect) {
+              stateSelect.addEventListener("change", function () {
+                const button = buttons.find(function (item) { return item.dataset.state === stateSelect.value; });
+                if (button) selectState(button);
+                else {
+                  region.textContent = stateSelect.value;
+                  name.textContent = states[stateSelect.value];
+                  animateCount(techniciansByState[stateSelect.value] ?? 0);
+                }
+              });
+            }
+        }());
+      </script>
+    </section>
+
+    <nav class="section-sidebar" aria-label="Navegação pelas seções" data-od-id="section-sidebar" style="gap: 16px;">
+        <a href="#cobertura" data-section-link="cobertura"><span>Cobertura</span></a>
+        <a href="#recursos" data-section-link="recursos"><span>Recursos</span></a>
+      <a href="#trust-section" data-section-link="trust-section"><span>Benefícios</span></a>
+      <a href="#cost-calculator" data-section-link="cost-calculator"><span>Calculadora</span></a>
+       <a href="#setores" data-section-link="setores"><span>Setores</span></a>
+       <a href="#prova-social" data-section-link="prova-social"><span>Prova social</span></a>
+       <a href="#como-funciona" data-section-link="como-funciona"><span>Como funciona</span></a>
+       <a href="#cadastro-tecnico" data-section-link="cadastro-tecnico"><span>Cadastro técnico</span></a>
+      <a href="#final-cta" data-section-link="final-cta"><span>Contato</span></a>
+    </nav>
+
+    <section class="section" id="recursos" data-od-id="features-section" style="border-top: 1px solid var(--border);">
+      <style>
+        [data-od-id="features-section"] .feature,
+        [data-od-id="features-section"] .feature.feature-focus {
+          position: relative;
+          isolation: isolate;
+          overflow: hidden;
+          background: color-mix(in oklab, var(--surface), black 20%);
+          transition: transform .25s ease, border-color .25s ease;
+        }
+
+        [data-od-id="features-section"] .feature::before {
+          content: "";
+          position: absolute;
+          inset: 0;
+          z-index: -1;
+          pointer-events: none;
+          opacity: 0;
+          background: linear-gradient(
+            to right,
+            color-mix(in oklab, var(--accent), transparent 70%),
+            color-mix(in oklab, var(--accent), transparent 80%)
+          );
+          transition: opacity .25s ease;
+        }
+
+        [data-od-id="features-section"] .feature:nth-child(3n + 2)::before {
+          background: linear-gradient(
+            to right,
+            color-mix(in oklab, var(--accent), transparent 80%),
+            color-mix(in oklab, var(--accent), transparent 90%)
+          );
+        }
+
+        [data-od-id="features-section"] .feature:nth-child(3n)::before {
+          background: linear-gradient(
+            to right,
+            color-mix(in oklab, var(--accent), transparent 90%),
+            transparent
+          );
+        }
+
+        @media (max-width: 820px) {
+          [data-od-id="features-section"] .feature:nth-child(odd)::before {
+            background: linear-gradient(
+              to right,
+              color-mix(in oklab, var(--accent), transparent 70%),
+              color-mix(in oklab, var(--accent), transparent 80%)
+            );
+          }
+
+          [data-od-id="features-section"] .feature:nth-child(even)::before {
+            background: linear-gradient(
+              to right,
+              color-mix(in oklab, var(--accent), transparent 80%),
+              color-mix(in oklab, var(--accent), transparent 90%)
+            );
+          }
+        }
+
+        [data-od-id="features-section"] .feature:hover {
+          border-color: var(--accent);
+        }
+
+        [data-od-id="features-section"] .feature:hover::before {
+          opacity: 1;
+        }
+
+        [data-od-id="features-section"] .feature > * {
+          position: relative;
+          z-index: 1;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          [data-od-id="features-section"] .feature,
+          [data-od-id="features-section"] .feature::before {
+            transition: none;
+          }
+        }
+      </style>
+      <div class="shell">
+        <div class="section-head">
+          
+          <h2>Uma operação mais <span class="accent-word">previsível.</span></h2>
+          <p>Recursos e cobertura para conectar empresas a profissionais especializados em Field Service de TI.</p>
+        </div>
+
+        <div class="feature-grid">
+          <article class="feature" data-od-id="feature-agenda">
+             <div class="feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18M12 3c2.4 2.5 3.6 5.5 3.6 9s-1.2 6.5-3.6 9c-2.4-2.5-3.6-5.5-3.6-9S9.6 5.5 12 3Z"></path></svg></div>
+             <h3>Cobertura em todo o Brasil</h3>
+             <p>Atuação nacional para apoiar operações que precisam de presença técnica em diferentes regiões.</p>
+          </article>
+          <article class="feature feature-focus" data-od-id="feature-routes">
+             <div class="feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="5" cy="12" r="2.2"></circle><circle cx="19" cy="6" r="2.2"></circle><circle cx="19" cy="18" r="2.2"></circle><path d="m7 11 9.8-4M7 13l9.8 4"></path></svg></div>
+             <h3>Rede de técnicos especializados</h3>
+             <p>Conecte sua demanda a uma rede ampla de profissionais preparados para diferentes contextos de atendimento.</p>
+          </article>
+          <article class="feature" data-od-id="feature-tickets">
+             <div class="feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m13.5 2.8-8 10.1h5.8l-.8 8.3 8-10.1h-5.8l.8-8.3Z"></path></svg></div>
+             <h3>Atendimento rápido e eficiente</h3>
+             <p>Reduza o tempo entre a necessidade da operação e o suporte técnico no local.</p>
+          </article>
+          <article class="feature" data-od-id="feature-mobile">
+             <div class="feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M4 7h16M4 17h16"></path><circle cx="9" cy="7" r="2"></circle><circle cx="15" cy="17" r="2"></circle></svg></div>
+             <h3>Contratos sob medida</h3>
+             <p>Escolha entre atendimentos pontuais ou recorrentes, de acordo com a realidade da sua operação.</p>
+          </article>
+          <article class="feature" data-od-id="feature-status">
+             <div class="feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 12s3.5-6 9.5-6 9.5 6 9.5 6-3.5 6-9.5 6-9.5-6-9.5-6Z"></path><circle cx="12" cy="12" r="2.5"></circle></svg></div>
+             <h3>Transparência no processo</h3>
+             <p>Tenha mais clareza sobre cada etapa do atendimento, do acionamento à conclusão.</p>
+          </article>
+          <article class="feature" data-od-id="feature-history">
+             <div class="feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 19 6v5.5c0 4.4-2.8 7.6-7 9.5-4.2-1.9-7-5.1-7-9.5V6l7-3Z"></path><path d="m8.5 12 2.2 2.2 4.8-4.8"></path></svg></div>
+             <h3>Suporte para operações críticas</h3>
+             <p>Conte com uma estrutura nacional para demandas que não podem parar.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="proof" id="trust-section" data-od-id="trust-section">
+      <style>
+        [data-od-id="trust-section"] .proof-card {
+          text-align: center;
+          padding: 30px 24px;
+          background: #202029;
+          border-color: color-mix(in oklab, var(--fg), transparent 72%);
+        }
+
+        [data-od-id="trust-section"] .proof-card b {
+          display: grid;
+          place-items: center;
+          min-height: 52px;
+        }
+
+        [data-od-id="trust-section"] .proof-card b svg {
+          width: 42px;
+          height: 42px;
+        }
+
+        [data-od-id="trust-section"] .proof-card h3 {
+          margin-top: 24px;
+          font-size: clamp(20px, 1.7vw, 26px);
+          line-height: 1.08;
+        }
+      </style>
+      <div class="shell section">
+        <div class="section-head">
+           
+           <h2>Mais agilidade.<br>Menos dependência.</h2>
+           <p>Uma alternativa flexível para encontrar suporte técnico qualificado sem criar um vínculo fixo desnecessário.</p>
+        </div>
+        <div class="proof-grid">
+           <article class="proof-card" data-od-id="proof-visibility"><b aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="10.8" cy="10.8" r="6.5"></circle><path d="m16 16 4.5 4.5M10.8 7.8v3.4l2.2 1.4"></path></svg></b><h3>Redução do tempo de busca</h3></article>
+           <article class="proof-card" data-od-id="proof-process"><b aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3"></circle><path d="M3.5 20c.6-3.2 2.4-5 5.5-5s4.9 1.8 5.5 5M16 12.5l2 2 3.5-4"></path></svg></b><h3>Técnicos confiáveis e qualificados</h3></article>
+           <article class="proof-card" data-od-id="proof-team"><b aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="14" rx="2"></rect><path d="M3.5 9h17M8 14h3"></path></svg></b><h3>Custo sob demanda</h3></article>
+           <article class="proof-card" data-od-id="proof-support"><b aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s6-5.2 6-11a6 6 0 1 0-12 0c0 5.8 6 11 6 11Z"></path><circle cx="12" cy="10" r="2"></circle><path d="M18.5 18.5h2"></path></svg></b><h3>Suporte nacional</h3></article>
+        </div>
+      </div>
+    </section>
+
+    
+
+    <section class="cost-calculator" id="cost-calculator" data-od-id="hidden-cost-calculator">
+      <style>
+        @media (min-width: 641px) and (max-width: 820px) {
+          [data-od-id="hidden-cost-calculator"] .calculator-layout,
+          [data-od-id="hidden-cost-calculator"] .calculator-panel {
+            text-align: center;
+          }
+          [data-od-id="hidden-cost-calculator"] .calculator-copy h2,
+          [data-od-id="hidden-cost-calculator"] .calculator-copy p {
+            margin-left: auto;
+            margin-right: auto;
+          }
+          [data-od-id="hidden-cost-calculator"] .calculator-field label,
+          [data-od-id="hidden-cost-calculator"] .calculator-field input,
+          [data-od-id="hidden-cost-calculator"] .calculator-caption {
+            text-align: center;
+          }
+          [data-od-id="hidden-cost-calculator"] .calculator-fields {
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+          }
+        }
+        @media (min-width: 821px) {
+          [data-od-id="hidden-cost-calculator"] .calculator-fields {
+            grid-template-columns: repeat(3, 1fr);
+          }
+        }
+      </style>
+      <div class="shell calculator-layout">
+        <div class="calculator-copy">
+          
+          <h2 style="text-align: start;">Quanto custa procurar o técnico certo?</h2>
+          <p>Transforme o tempo da liderança gasto buscando profissionais em uma estimativa financeira e compare com o investimento para a NovaSync conduzir sua operação de Field Service.</p>
+          <p class="calculator-note">Simulação editável: ajuste as premissas para refletir a realidade da sua operação. Os valores são ilustrativos e não representam uma proposta comercial.</p>
+        </div>
+        <div class="calculator-panel" data-od-id="calculator-controls">
+          <div class="calculator-fields">
+            <div class="calculator-field">
+              <label for="search-hours">Horas semanais de busca</label>
+              <input id="search-hours" type="number" min="0" step="0.5" value="8" inputmode="decimal">
+            </div>
+            <div class="calculator-field">
+              <label for="hour-cost">Custo médio por hora</label>
+              <input id="hour-cost" type="number" min="0" step="1" value="75" inputmode="decimal">
+            </div>
+            <div class="calculator-field">
+              <label for="search-weeks">Semanas até contratar</label>
+              <input id="search-weeks" type="number" min="0" step="1" value="4" inputmode="numeric">
+            </div>
+          </div>
+           <div class="calculator-results" aria-live="polite">
+            <div class="calculator-result">
+              <span>Custo oculto estimado</span>
+              <strong id="hidden-cost-output">R$ 2.400,00</strong>
+            </div>
+            <div class="calculator-result highlight">
+              <span id="comparison-label">Investimento NovaSync estimado</span>
+              <strong id="savings-output">R$ 1.200,00</strong>
+            </div>
+           </div>
+           <details class="calculator-help">
+             <summary>Como calculamos?</summary>
+             <p>A estimativa multiplica as horas semanais de busca pelo custo médio por hora e pelo número de semanas até a contratação. O valor NovaSync usa uma referência de 50% desse custo para comparação.</p>
+           </details>
+           <p class="calculator-caption" id="calculator-caption">Considera apenas o tempo da liderança na busca. Custos de atraso, retrabalho e perda de SLA não estão incluídos.</p>
+        </div>
+      </div>
+    </section>
+    <script>
+      (function () {
+        const ids = ["search-hours", "hour-cost", "search-weeks"];
+        const money = new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" });
+        function value(id) { return Math.max(0, Number(document.getElementById(id).value) || 0); }
+        function updateCalculator() {
+          const hidden = value("search-hours") * value("hour-cost") * value("search-weeks");
+          const novasync = hidden * 0.5;
+          const difference = hidden - novasync;
+          document.getElementById("hidden-cost-output").textContent = money.format(hidden);
+          document.getElementById("comparison-label").textContent = "Investimento NovaSync estimado";
+          document.getElementById("savings-output").textContent = money.format(Math.abs(difference));
+          document.getElementById("calculator-caption").textContent = difference >= 0
+            ? "Esta é uma simulação média de mercado, baseada em uma pesquisa realizada com nossos parceiros."
+            : "Esta é uma simulação média de mercado, baseada em uma pesquisa realizada com nossos parceiros. Considere também atrasos, retrabalho e perda de SLA na sua avaliação.";
+        }
+        ids.forEach(function (id) { document.getElementById(id).addEventListener("input", updateCalculator); });
+        updateCalculator();
+      }());
+    </script>
+
+    <section class="sectors-section" id="setores" data-od-id="sectors-and-services">
+      <style>
+        [data-od-id="sectors-and-services"] .sector-grid .service-list li {
+          background: #000;
+          color: var(--fg);
+          border-color: var(--fg);
+        }
+
+        @media (min-width: 921px) {
+          [data-od-id="sectors-and-services"] .sectors-layout {
+            grid-template-columns: 1.22fr .78fr;
+          }
+          [data-od-id="sectors-and-services"] .sector-grid {
+            grid-column: 1;
+            grid-row: 1;
+          }
+          [data-od-id="sectors-and-services"] .sectors-copy {
+            grid-column: 2;
+            grid-row: 1;
+          }
+        }
+
+        @media (min-width: 641px) and (max-width: 820px) {
+          [data-od-id="sectors-and-services"] { text-align: center; }
+          [data-od-id="sectors-and-services"] .sectors-copy h2,
+          [data-od-id="sectors-and-services"] .sectors-copy p { margin-left: auto; margin-right: auto; }
+          [data-od-id="sectors-and-services"] .sector-card { text-align: center; }
+          [data-od-id="sectors-and-services"] .service-list { justify-content: center; }
+        }
+      </style>
+      <div class="shell sectors-layout">
+        <div class="sectors-copy">
+          
+          <h2>Estrutura técnica para diferentes <span class="accent-word">realidades.</span></h2>
+          <p>A NovaSync apoia operações que precisam ativar, manter, sustentar ou desmobilizar ambientes de tecnologia em campo, com serviços ajustados ao contexto de cada setor.</p>
+          <p class="sectors-note">Da primeira ativação à desmobilização, conectamos equipes e execução técnica em uma mesma operação.</p>
+        </div>
+
+        <div class="sector-grid" aria-label="Setores e serviços atendidos">
+          <article class="sector-card" data-od-id="sector-bancos">
+            <b>01 · Financeiro</b>
+            <h3>Bancos</h3>
+            <ul class="service-list" aria-label="Serviços para bancos">
+              <li>Micro informática</li><li>Redes</li><li>Infraestrutura</li><li>Manutenção</li><li>Sustentação</li>
+            </ul>
+          </article>
+          <article class="sector-card" data-od-id="sector-varejo">
+            <b>02 · Operação distribuída</b>
+            <h3>Varejo</h3>
+            <ul class="service-list" aria-label="Serviços para varejo">
+              <li>Rollouts</li><li>Ativação</li><li>Micro informática</li><li>Manutenção</li><li>Desativação</li>
+            </ul>
+          </article>
+          <article class="sector-card" data-od-id="sector-transporte">
+            <b>03 · Mobilidade</b>
+            <h3>Transporte</h3>
+            <ul class="service-list" aria-label="Serviços para transporte">
+              <li>Telecom</li><li>Redes</li><li>Ativação</li><li>Manutenção</li><li>Desmobilização</li>
+            </ul>
+          </article>
+          <article class="sector-card" data-od-id="sector-telecom">
+            <b>04 · Conectividade</b>
+            <h3>Telecom</h3>
+            <ul class="service-list" aria-label="Serviços para telecom">
+              <li>Telecom</li><li>Redes</li><li>Ativação</li><li>Sustentação</li><li>Desativação</li>
+            </ul>
+          </article>
+          <article class="sector-card" data-od-id="sector-industria">
+            <b>05 · Ambientes críticos</b>
+            <h3>Indústria</h3>
+            <ul class="service-list" aria-label="Serviços para indústria">
+              <li>Infraestrutura</li><li>Redes</li><li>Manutenção</li><li>Sustentação</li><li>Desmobilização</li>
+            </ul>
+          </article>
+          <article class="sector-card" data-od-id="sector-eventos">
+            <b>06 · Operação temporária</b>
+            <h3>Eventos</h3>
+            <ul class="service-list" aria-label="Serviços para eventos">
+              <li>Ativação</li><li>Telecom</li><li>Redes</li><li>Desativação</li><li>Desmobilização</li>
+            </ul>
+          </article>
+          <article class="sector-card" data-od-id="sector-saude">
+            <b>07 · Continuidade assistencial</b>
+            <h3>Saúde</h3>
+            <ul class="service-list" aria-label="Serviços para saúde">
+              <li>Micro informática</li><li>Telecom</li><li>Infraestrutura</li><li>Manutenção</li><li>Sustentação</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="social-proof" id="prova-social" data-od-id="social-proof-section">
+      <div class="shell">
+        <div class="section-head">
+          
+          <h2>Operação que deixa <span class="accent-word">rastro.</span></h2>
+          <p>Este espaço reúne a experiência de clientes, resultados comprovados e marcas atendidas pela NovaSync.</p>
+        </div>
+        <div class="social-proof-grid">
+          <article class="testimonial" data-od-id="testimonial-placeholder-1"><p class="eyebrow">Depoimento 01</p><blockquote>Depoimento de cliente será inserido aqui após a aprovação do uso do relato.</blockquote><cite>Cliente a confirmar · Segmento</cite></article>
+          <article class="testimonial" data-od-id="testimonial-placeholder-2"><p class="eyebrow">Depoimento 02</p><blockquote>Relato sobre agilidade, cobertura e previsibilidade da operação em campo.</blockquote><cite>Cliente a confirmar · Segmento</cite></article>
+          <article class="testimonial" data-od-id="testimonial-placeholder-3"><p class="eyebrow">Depoimento 03</p><blockquote>Relato sobre acompanhamento de chamados, execução técnica e fechamento.</blockquote><cite>Cliente a confirmar · Segmento</cite></article>
+        </div>
+        <div class="social-proof-bottom">
+          <article class="case-placeholder" data-od-id="case-placeholder"><p class="eyebrow">Cases</p><h3>Cases de operação em preparação</h3><p>Adicione aqui os desafios, soluções e resultados autorizados por cada cliente.</p><div class="metric-strip" aria-label="Métricas de desempenho a preencher"><div class="metric"><strong>—</strong><span>SLA</span></div><div class="metric"><strong>—</strong><span>NPS</span></div><div class="metric"><strong>—</strong><span>Tempo médio</span></div></div></article>
+          <article class="logo-placeholder" data-od-id="client-logos-placeholder"><p class="eyebrow">Clientes</p><h3>Logos dos clientes</h3><p>Área reservada para os nomes e logos aprovados para publicação.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="how-it-works" id="como-funciona" data-od-id="how-it-works-section">
+      <div class="shell">
+        <div class="section-head"><h2>Do briefing ao <span class="accent-word">fechamento.</span></h2><p>Um fluxo simples para reduzir atrito, dar visibilidade e manter a execução técnica sob controle.</p></div>
+        <div class="workflow-steps">
+          <article class="workflow-step" data-od-id="workflow-briefing"><h3>Briefing da demanda</h3><p>Você compartilha escopo, local, prazo e critérios de atendimento.</p></article>
+          <article class="workflow-step" data-od-id="workflow-assignment"><h3>Designação de técnico</h3><p>Indicamos um profissional compatível com a necessidade e a região.</p></article>
+          <article class="workflow-step" data-od-id="workflow-execution"><h3>Execução em campo</h3><p>O atendimento acontece com acompanhamento do status e dos marcos da operação.</p></article>
+          <article class="workflow-step" data-od-id="workflow-close"><h3>Relatório e fechamento</h3><p>Consolidamos evidências, resultado da visita e próximos encaminhamentos.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="technical-registration" id="cadastro-tecnico" data-od-id="technical-registration">
+      <div class="shell technical-registration-layout">
+        <div class="technical-registration-copy">
+          
+          <h2>Faça parte da nossa rede de <span class="accent-word">técnicos.</span></h2>
+          <p>Preencha seus dados para que nossa equipe avalie seu perfil e entre em contato sobre oportunidades de atendimento em campo.</p>
+          <p class="technical-registration-note">Seus dados serão usados exclusivamente para contato sobre o cadastro técnico.</p>
+        </div>
+        <form class="technical-form" id="technical-registration-form" action="https://api.sheetmonkey.io/form/4KXW8HY77CP5Mt4ySXYqVt" method="post" data-od-id="technical-registration-form">
+          <div class="technical-form-field is-wide">
+             <label for="technical-full-name">Nome completo *</label>
+            <input id="technical-full-name" name="nome" type="text" autocomplete="name" placeholder="Digite seu nome completo" required="">
+          </div>
+          <div class="technical-form-field">
+             <label for="technical-rg">RG *</label>
+            <input id="technical-rg" name="rg" type="text" inputmode="numeric" autocomplete="off" placeholder="00.000.000-0" maxlength="12" data-mask="rg" required="">
+          </div>
+          <div class="technical-form-field">
+             <label for="technical-cpf">CPF *</label>
+            <input id="technical-cpf" name="cpf" type="text" inputmode="numeric" autocomplete="off" placeholder="000.000.000-00" maxlength="14" data-mask="cpf" required="">
+          </div>
+          <div class="technical-form-field">
+             <label for="technical-phone">Telefone *</label>
+            <input id="technical-phone" name="telefone" type="tel" inputmode="numeric" autocomplete="tel" placeholder="(00) 00000-0000" maxlength="15" data-mask="phone" required="">
+          </div>
+          <div class="technical-form-field">
+             <label for="technical-email">E-mail *</label>
+            <input id="technical-email" name="email" type="email" autocomplete="email" placeholder="voce@exemplo.com" pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}" title="Informe um e-mail válido no formato nome@dominio.com" required="">
+          </div>
+          <div class="technical-form-field is-wide">
+             <label for="technical-address">Endereço *</label>
+            <input id="technical-address" name="endereco" type="text" autocomplete="street-address" placeholder="Rua, avenida ou rodovia" required="">
+          </div>
+          <div class="technical-form-field">
+            <label for="technical-complement">Complemento</label>
+            <input id="technical-complement" name="complemento" type="text" autocomplete="address-line2" placeholder="Apto, sala ou referência">
+          </div>
+          <div class="technical-form-field">
+             <label for="technical-state">Estado *</label>
+            <select id="technical-state" name="estado" autocomplete="address-level1" required="" style="width: 100%; min-height: 48px; padding: 0 14px; border: 1px solid var(--border); border-radius: 8px; background: color-mix(in oklab, var(--bg), var(--surface) 50%); color: var(--fg); font: inherit; transition: border-color .2s ease, background .2s ease;">
+              <option value="" selected="" disabled="">Selecione a UF</option>
+              <option value="AC">AC - Acre</option>
+              <option value="AL">AL - Alagoas</option>
+              <option value="AP">AP - Amapá</option>
+              <option value="AM">AM - Amazonas</option>
+              <option value="BA">BA - Bahia</option>
+              <option value="CE">CE - Ceará</option>
+              <option value="DF">DF - Distrito Federal</option>
+              <option value="ES">ES - Espírito Santo</option>
+              <option value="GO">GO - Goiás</option>
+              <option value="MA">MA - Maranhão</option>
+              <option value="MT">MT - Mato Grosso</option>
+              <option value="MS">MS - Mato Grosso do Sul</option>
+              <option value="MG">MG - Minas Gerais</option>
+              <option value="PA">PA - Pará</option>
+              <option value="PB">PB - Paraíba</option>
+              <option value="PR">PR - Paraná</option>
+              <option value="PE">PE - Pernambuco</option>
+              <option value="PI">PI - Piauí</option>
+              <option value="RJ">RJ - Rio de Janeiro</option>
+              <option value="RN">RN - Rio Grande do Norte</option>
+              <option value="RS">RS - Rio Grande do Sul</option>
+              <option value="RO">RO - Rondônia</option>
+              <option value="RR">RR - Roraima</option>
+              <option value="SC">SC - Santa Catarina</option>
+              <option value="SP">SP - São Paulo</option>
+              <option value="SE">SE - Sergipe</option>
+               <option value="TO">TO - Tocantins</option>
+             </select>
+           </div>
+          <div class="technical-form-field">
+             <label for="technical-city">Cidade *</label>
+            <select id="technical-city" name="cidade" autocomplete="address-level2" required="" disabled="" style="width: 100%; min-height: 48px; padding: 0 14px; border: 1px solid var(--border); border-radius: 8px; background: color-mix(in oklab, var(--bg), var(--surface) 50%); color: var(--fg); font: inherit; transition: border-color .2s ease, background .2s ease;">
+              <option value="" selected="">Selecione primeiro o estado</option>
+            </select>
+          </div>
+          <div class="technical-form-field">
+             <label for="technical-zip">CEP *</label>
+            <input id="technical-zip" name="cep" type="text" inputmode="numeric" autocomplete="postal-code" placeholder="00000-000" maxlength="9" data-mask="cep" required="">
+          </div>
+           <input type="hidden" name="x-sheetmonkey-redirect" value="https://nova-sync.net">
+           <input type="hidden" name="Criado em" value="x-sheetmonkey-current-date-time">
+           <button class="btn btn-primary" type="submit" data-od-id="technical-registration-submit">Enviar cadastro <span aria-hidden="true">→</span></button>
+            <p class="technical-form-privacy">Ao enviar, você concorda com a <a href="politica-de-privacidade.html" target="_blank" rel="noopener">Política de Privacidade</a>.</p>
+            <p class="technical-form-status" id="technical-form-status" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
+
+    <section class="cta" id="final-cta" data-od-id="final-cta">
+      <div class="shell">
+        
+        <h2>Faça sua operação trabalhar em <span class="accent-word">sincronia.</span></h2>
+        <p>Converse com a NovaSync sobre a cobertura e o modelo de atendimento mais adequado para sua operação.</p>
+        <address aria-label="Canais de contato" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px 32px;max-width:720px;margin:0 auto 32px;text-align:left;border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:24px 0;font-style:normal;">
+          <a href="mailto:contato@nova-sync.net" style="display:flex;flex-direction:column;gap:4px;color:var(--fg);line-height:1.4;overflow-wrap:anywhere;">
+            <span class="mono" style="color:var(--muted);font-size:12px;">E-mail de contato</span>
+            <span>contato@nova-sync.net</span>
+          </a>
+          <a href="mailto:comercial@nova-sync.net" style="display:flex;flex-direction:column;gap:4px;color:var(--fg);line-height:1.4;overflow-wrap:anywhere;">
+            <span class="mono" style="color:var(--muted);font-size:12px;">E-mail comercial</span>
+            <span>comercial@nova-sync.net</span>
+          </a>
+          <a href="https://wa.me/5511993287070" style="display:flex;flex-direction:column;gap:4px;color:var(--fg);line-height:1.4;overflow-wrap:anywhere;">
+            <span class="mono" style="color:var(--muted);font-size:12px;">Contato comercial</span>
+            <span>(11) 99328-7070</span>
+          </a>
+        </address>
+        <a class="btn btn-primary" href="mailto:contato@nova-sync.net">Entre em contato <span aria-hidden="true">→</span></a>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    (function () {
+      const form = document.getElementById("technical-registration-form");
+      const status = document.getElementById("technical-form-status");
+      if (!form || !status) return;
+
+       const requiredFields = Array.from(form.querySelectorAll("[required]"));
+        const stateField = document.getElementById("technical-state");
+        const cityField = document.getElementById("technical-city");
+        const loadCities = function (uf) {
+          cityField.innerHTML = "<option value=\"\">Carregando cidades...</option>";
+          cityField.disabled = true;
+          if (!uf) {
+            cityField.innerHTML = "<option value=\"\">Selecione primeiro o estado</option>";
+            return;
+          }
+          fetch("https://servicodados.ibge.gov.br/api/v1/localidades/estados/" + encodeURIComponent(uf) + "/municipios")
+            .then(function (response) {
+              if (!response.ok) throw new Error("Falha ao carregar cidades");
+              return response.json();
+            })
+            .then(function (cities) {
+              cityField.innerHTML = "<option value=\"\">Selecione a cidade</option>";
+              cities.forEach(function (city) {
+                const option = document.createElement("option");
+                option.value = city.nome;
+                option.textContent = city.nome;
+                cityField.appendChild(option);
+              });
+              cityField.disabled = false;
+            })
+            .catch(function () {
+              cityField.innerHTML = "<option value=\"\">Não foi possível carregar as cidades</option>";
+              cityField.disabled = false;
+              cityField.setCustomValidity("Selecione uma cidade após carregar a lista.");
+            });
+        };
+        if (stateField && cityField) {
+          stateField.addEventListener("change", function () {
+            cityField.setCustomValidity("");
+            loadCities(stateField.value);
+          });
+        }
+        const maskValue = function (field) {
+         const digits = field.value.replace(/\D/g, "");
+         if (field.dataset.mask === "rg") {
+           field.value = digits.slice(0, 9).replace(/^(\d{2})(\d)/, "$1.$2").replace(/^(\d{2})\.(\d{3})(\d)/, "$1.$2.$3").replace(/^(\d{2})\.(\d{3})\.(\d{3})(\d)/, "$1.$2.$3-$4");
+         } else if (field.dataset.mask === "cpf") {
+           field.value = digits.slice(0, 11).replace(/^(\d{3})(\d)/, "$1.$2").replace(/^(\d{3})\.(\d{3})(\d)/, "$1.$2.$3").replace(/^(\d{3})\.(\d{3})\.(\d{3})(\d)/, "$1.$2.$3-$4");
+         } else if (field.dataset.mask === "phone") {
+           field.value = digits.slice(0, 11).replace(/^(\d{2})(\d)/, "($1) $2").replace(/^(\(\d{2}\) \d{5})(\d)/, "$1-$2");
+         } else if (field.dataset.mask === "cep") {
+           field.value = digits.slice(0, 8).replace(/^(\d{5})(\d)/, "$1-$2");
+         }
+       };
+       form.querySelectorAll("[data-mask]").forEach(function (field) {
+         field.addEventListener("input", function () { maskValue(field); });
+         maskValue(field);
+       });
+       const validateField = function (field) {
+         let message = "";
+         if (field.validity.valueMissing) message = "Este campo é obrigatório.";
+         else if (field.validity.typeMismatch) message = "Informe um e-mail válido.";
+         field.setCustomValidity(message);
+         field.setAttribute("aria-invalid", message ? "true" : "false");
+         return !message;
+       };
+
+       requiredFields.forEach(function (field) {
+         field.addEventListener("input", function () {
+           validateField(field);
+           if (form.checkValidity()) {
+             status.textContent = "";
+             status.classList.remove("is-error");
+           }
+         });
+       });
+
+       form.addEventListener("invalid", function (event) {
+         validateField(event.target);
+         status.textContent = "Preencha todos os campos obrigatórios para enviar o formulário.";
+         status.classList.add("is-error");
+       }, true);
+
+       form.addEventListener("submit", function (event) {
+         const valid = requiredFields.map(validateField).every(Boolean);
+         if (!valid) {
+           event.preventDefault();
+           status.textContent = "Preencha todos os campos obrigatórios para enviar o formulário.";
+           status.classList.add("is-error");
+           const firstInvalid = requiredFields.find(function (field) { return !field.checkValidity(); });
+           if (firstInvalid) {
+             firstInvalid.focus();
+             firstInvalid.reportValidity();
+           }
+           return;
+         }
+          form.setAttribute("aria-busy", "true");
+          const submitButton = form.querySelector("button[type=submit]");
+          if (submitButton) submitButton.disabled = true;
+          status.innerHTML = '<span class="form-spinner" aria-hidden="true"></span>Enviando...';
+          status.classList.remove("is-error");
+       });
+    }());
+
+     (function () {
+       const sidebar = document.querySelector(".section-sidebar");
+       const sidebarToggle = document.querySelector('[data-od-id="sidebar-toggle"]');
+       const hero = document.getElementById("inicio");
+       const links = Array.from(sidebar.querySelectorAll("[data-section-link]"));
+       const sections = links.map(function (link) { return document.getElementById(link.dataset.sectionLink); }).filter(Boolean);
+
+      if (!sidebar || !hero || !sections.length) return;
+
+      const setActive = function (id) {
+        links.forEach(function (link) {
+          const active = link.dataset.sectionLink === id;
+          link.classList.toggle("is-active", active);
+          if (active) link.setAttribute("aria-current", "location");
+          else link.removeAttribute("aria-current");
+        });
+      };
+
+       const heroObserver = new IntersectionObserver(function (entries) {
+         const heroIsVisible = entries[0].isIntersecting;
+         sidebar.classList.toggle("is-visible", !heroIsVisible);
+         if (!heroIsVisible && sidebarToggle) {
+           sidebar.classList.remove("is-open");
+           sidebarToggle.setAttribute("aria-expanded", "false");
+           sidebarToggle.setAttribute("aria-label", "Abrir menu lateral");
+         }
+       }, { threshold: 0.05 });
+
+      const sectionObserver = new IntersectionObserver(function (entries) {
+        const visible = entries.filter(function (entry) { return entry.isIntersecting; });
+        if (visible.length) setActive(visible[visible.length - 1].target.id);
+      }, { rootMargin: "-38% 0px -48% 0px", threshold: 0 });
+
+      heroObserver.observe(hero);
+      sections.forEach(function (section) { sectionObserver.observe(section); });
+      links[0].classList.add("is-active");
+    }());
+  </script>
+
+  <footer>
+    <div class="shell foot">
+      <span>© 2026 NovaSync</span>
+       <span>CNPJ: 62.718.285/0001-58</span>
+       <a href="politica-de-privacidade.html">Política de Privacidade</a>
+     </div>
+  </footer>
+
+
+
+
+
+
+
+
+
+
+
+</body></html>

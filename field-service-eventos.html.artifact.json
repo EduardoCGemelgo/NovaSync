@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "kind": "html",
+  "title": "field-service-eventos.html",
+  "entry": "field-service-eventos.html",
+  "renderer": "html",
+  "status": "complete",
+  "exports": [
+    "html",
+    "pdf",
+    "zip"
+  ],
+  "createdAt": "2026-08-08T02:53:28.744Z",
+  "updatedAt": "2026-08-08T02:53:28.744Z",
+  "metadata": {
+    "inferred": true,
+    "reconciled": true
+  }
+}
