@@ -3,6 +3,9 @@
   var sidebar = document.querySelector('[data-section-sidebar]');
   if (!toggle || !sidebar) return;
 
+  var isSubPage = !document.querySelector('.hero');
+  var baseHref = isSubPage ? 'https://nova-sync.net/' : '';
+
   var navigation = [
     ['Cobertura', 'cobertura'],
     ['Recursos', 'recursos'],
@@ -18,7 +21,7 @@
 
   navigation.forEach(function (item) {
     var link = document.createElement('a');
-    link.href = 'https://nova-sync.net/#' + item[1];
+    link.href = baseHref + '#' + item[1];
     link.textContent = item[0];
     sidebar.appendChild(link);
   });
@@ -53,5 +56,7 @@
     new IntersectionObserver(function (entries) {
       sidebar.classList.toggle('is-visible', !entries[0].isIntersecting);
     }).observe(hero);
+  } else if (isSubPage) {
+    sidebar.classList.add('is-visible');
   }
 }());
