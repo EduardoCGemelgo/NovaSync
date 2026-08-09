@@ -23,7 +23,9 @@
   navigation.forEach(function (item) {
     var link = document.createElement('a');
     link.href = baseHref + '#' + item[1];
-    link.textContent = item[0];
+    var label = document.createElement('span');
+    label.textContent = item[0];
+    link.appendChild(label);
     sidebar.appendChild(link);
   });
 

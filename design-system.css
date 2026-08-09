@@ -56,10 +56,14 @@ cite { display: block; margin-top: 16px; color: var(--muted); font-size: 14px; f
 .metric strong { font-size: 20px; }
 .metric span { color: var(--muted); font-size: 14px; }
 
-.section-sidebar { position: fixed; z-index: 10; top: 50%; left: 20px; display: grid; gap: 10px; transform: translateY(-50%); opacity: 0; pointer-events: none; transition: opacity 160ms ease; }
-.section-sidebar.is-visible { opacity: 1; pointer-events: auto; }
-.section-sidebar a { color: var(--muted); font: 12px "SF Mono", ui-monospace, monospace; }
-.section-sidebar a:hover { color: var(--fg); }
+.section-sidebar { position: fixed; z-index: 8; top: 50%; right: 12px; display: grid; gap: 12px; opacity: 0; pointer-events: none; transform: translate(10px, -50%); transition: opacity .25s ease, transform .25s ease; }
+.section-sidebar.is-visible { opacity: 1; pointer-events: auto; transform: translate(0, -50%); }
+.section-sidebar a { display: flex; flex-direction: row-reverse; align-items: center; gap: 10px; min-height: 18px; color: var(--muted); font: 11px "SF Mono", ui-monospace, monospace; letter-spacing: .08em; text-transform: uppercase; }
+.section-sidebar a::before { content: ""; width: 9px; height: 9px; flex: 0 0 9px; border: 1px solid var(--muted); border-radius: 50%; transition: background .2s ease, border-color .2s ease, transform .2s ease; }
+.section-sidebar a span { max-width: 0; overflow: hidden; white-space: nowrap; opacity: 0; transform: translateX(4px); transition: max-width .2s ease, opacity .2s ease, transform .2s ease; }
+.section-sidebar a:hover, .section-sidebar a.is-active { color: var(--fg); }
+.section-sidebar a:hover::before, .section-sidebar a.is-active::before { border-color: var(--accent-readable); background: var(--accent-readable); transform: scale(1.15); }
+.section-sidebar a.is-active span, .section-sidebar a:focus-visible span { max-width: 110px; opacity: 1; transform: translateX(0); }
 .sidebar-toggle { display: none; min-width: 44px; min-height: 44px; border: 1px solid var(--border); border-radius: var(--radius); background: transparent; color: var(--fg); cursor: pointer; }
 .sidebar-toggle span, .sidebar-toggle span::before, .sidebar-toggle span::after { display: block; width: 17px; height: 1px; background: currentColor; content: ""; }
 .sidebar-toggle span { position: relative; margin: auto; }
@@ -77,9 +81,6 @@ footer { border-top: 1px solid var(--border); color: var(--muted); font: 13px "S
   .topbar nav { justify-content: center; flex-wrap: wrap; gap: 12px; font-size: 12px; }
   .desktop-actions { justify-content: center; flex-wrap: wrap; }
   .sidebar-toggle { position: absolute; top: 50%; left: 0; display: inline-grid; place-items: center; transform: translateY(-50%); }
-  .section-sidebar { top: 72px; right: 16px; left: 16px; padding: 12px; transform: none; border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); }
-  .section-sidebar:not(.is-open) { display: none; }
-  .section-sidebar.is-open { display: grid; opacity: 1; pointer-events: auto; }
   .hero, .section { padding: 64px 0; }
   .hero h1 { font-size: clamp(42px, 12vw, 64px); }
   .grid { grid-template-columns: 1fr; }
@@ -105,6 +106,34 @@ footer { border-top: 1px solid var(--border); color: var(--muted); font: 13px "S
     justify-self: start;
     place-items: center;
   }
+  .section-sidebar {
+    top: 88px;
+    right: auto;
+    left: 16px;
+    display: grid;
+    gap: 8px;
+    width: min(260px, calc(100vw - 32px));
+    padding: 10px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--surface);
+    transform: translateX(calc(-100% - 24px));
+  }
+  .section-sidebar.is-open {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateX(0);
+  }
+  .section-sidebar:not(.is-open) {
+    opacity: 0;
+    pointer-events: none;
+    transform: translateX(calc(-100% - 24px));
+  }
+  .section-sidebar a,
+  .section-sidebar a.is-active { flex-direction: row; min-height: 44px; padding: 0 10px; color: var(--muted); }
+  .section-sidebar a span { max-width: 220px; opacity: 1; transform: none; }
+  .section-sidebar a:hover,
+  .section-sidebar a.is-active { color: var(--fg); }
 }
 
 @media (max-width: 540px) {
