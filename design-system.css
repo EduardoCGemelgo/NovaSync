@@ -79,7 +79,7 @@ footer { border-top: 1px solid var(--border); color: var(--muted); font: 13px "S
   .sidebar-toggle { position: absolute; top: 50%; left: 0; display: inline-grid; place-items: center; transform: translateY(-50%); }
   .section-sidebar { top: 72px; right: 16px; left: 16px; padding: 12px; transform: none; border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); }
   .section-sidebar:not(.is-open) { display: none; }
-  .section-sidebar.is-open { display: grid; }
+  .section-sidebar.is-open { display: grid; opacity: 1; pointer-events: auto; }
   .hero, .section { padding: 64px 0; }
   .hero h1 { font-size: clamp(42px, 12vw, 64px); }
   .grid { grid-template-columns: 1fr; }
