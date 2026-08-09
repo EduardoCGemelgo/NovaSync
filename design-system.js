@@ -57,7 +57,9 @@
   var hero = document.querySelector('.hero');
   if (hero && 'IntersectionObserver' in window) {
     new IntersectionObserver(function (entries) {
-      sidebar.classList.toggle('is-visible', !entries[0].isIntersecting);
+      var heroVisible = entries[0].isIntersecting;
+      sidebar.classList.toggle('is-visible', !heroVisible);
+      if (heroVisible) setOpen(false);
     }).observe(hero);
   } else if (!isHomePage) {
     sidebar.classList.add('is-visible');
