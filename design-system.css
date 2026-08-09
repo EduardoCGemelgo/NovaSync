@@ -71,8 +71,9 @@ footer { border-top: 1px solid var(--border); color: var(--muted); font: 13px "S
 
 @media (max-width: 800px) {
   .shell { width: min(100% - 32px, 640px); }
-  .topbar { position: relative; min-height: 72px; grid-template-columns: 1fr; justify-items: center; gap: 10px; padding: 12px 0; }
-  .topbar > .brand, .topbar nav, .topbar .desktop-actions { grid-column: 1; justify-self: center; }
+  .topbar { position: relative; min-height: 72px; grid-template-columns: 44px 1fr; gap: 10px; padding: 12px 0; }
+  .topbar > .brand { grid-column: 2; justify-self: center; }
+  .topbar nav, .topbar .desktop-actions { grid-column: 2; justify-self: center; }
   .topbar nav { justify-content: center; flex-wrap: wrap; gap: 12px; font-size: 12px; }
   .desktop-actions { justify-content: center; flex-wrap: wrap; }
   .sidebar-toggle { position: absolute; top: 50%; left: 0; display: inline-grid; place-items: center; transform: translateY(-50%); }
