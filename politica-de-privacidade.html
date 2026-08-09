@@ -4,22 +4,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Política de Privacidade da NovaSync conforme a LGPD.">
   <title>Política de Privacidade | NovaSync</title>
+  <link rel="stylesheet" href="design-system.css">
   <style>
-    :root { --bg: oklch(0.10 0.025 300); --surface: oklch(0.14 0.030 300); --fg: oklch(0.97 0.012 300); --muted: oklch(0.75 0.030 300); --border: oklch(0.36 0.045 300); --accent: #2a2a46; --accent-readable: oklch(0.82 0.08 260); }
-    * { box-sizing: border-box; }
-    html { background: var(--bg); scroll-behavior: smooth; }
-    body { margin: 0; background: var(--bg); color: var(--fg); font-family: Manrope, ui-sans-serif, system-ui, sans-serif; line-height: 1.6; }
-    a { color: inherit; text-underline-offset: 4px; }
-     .shell { width: min(1120px, calc(100% - 48px)); margin: 0 auto; }
-     .topbar { min-height: 88px; display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: 20px; border-bottom: 1px solid var(--border); }
-     .brand { display: inline-flex; align-items: center; font-weight: 800; letter-spacing: -.06em; text-decoration: none; }
-     .brand img { display: block; width: 42px; height: 42px; }
-     .policy-nav { display: flex; align-items: center; justify-content: flex-start; gap: clamp(12px, 1.7vw, 24px); color: var(--muted); font-size: 14px; }
-     .policy-nav a:hover { color: var(--fg); }
-     .desktop-actions { display: flex; justify-content: flex-end; gap: 8px; white-space: nowrap; }
-     .btn { display: inline-flex; min-height: 44px; align-items: center; justify-content: center; padding: 0 14px; border: 1px solid var(--border); border-radius: 8px; color: var(--fg); font-size: 13px; text-decoration: none; }
-     .btn:hover { border-color: var(--fg); }
-     .back { color: var(--muted); font: 12px "SF Mono", ui-monospace, monospace; letter-spacing: .08em; text-transform: uppercase; }
+    .policy-nav { display: flex; align-items: center; justify-content: flex-start; gap: clamp(12px, 1.7vw, 24px); color: var(--muted); font-size: 14px; }
+    .policy-nav a:hover { color: var(--fg); }
+    .back { color: var(--muted); font: 12px "SF Mono", ui-monospace, monospace; letter-spacing: .08em; text-transform: uppercase; }
     main { padding: 88px 0 110px; }
     .eyebrow { color: var(--accent-readable); font: 13px "SF Mono", ui-monospace, monospace; letter-spacing: .12em; text-transform: uppercase; }
     h1 { max-width: 780px; margin: 16px 0 20px; font-size: clamp(42px, 7vw, 78px); letter-spacing: -.07em; line-height: .98; }
@@ -35,26 +24,27 @@
     li + li { margin-top: 8px; }
     .contact { color: var(--fg); }
     footer { padding: 24px 0; border-top: 1px solid var(--border); color: var(--muted); font: 12px "SF Mono", ui-monospace, monospace; }
-     @media (max-width: 800px) { .shell { width: min(100% - 32px, 640px); } .topbar { min-height: 72px; grid-template-columns: 1fr; justify-items: center; gap: 10px; padding: 12px 0; } .topbar > .brand, .topbar > .policy-nav, .topbar > .desktop-actions { grid-column: 1; justify-self: center; } .topbar > .brand { order: 1; } .policy-nav { order: 2; justify-content: center; flex-wrap: wrap; gap: 12px; font-size: 12px; } .desktop-actions { order: 3; justify-content: center; flex-wrap: wrap; } main { padding: 62px 0 76px; } .policy-grid { grid-template-columns: 1fr; margin-top: 42px; } section:last-child { grid-column: auto; } }
-     @media (max-width: 540px) { .topbar > .policy-nav, .topbar > .desktop-actions { display: none; } .topbar { grid-template-columns: 1fr; } }
+    @media (max-width: 800px) { main { padding: 62px 0 76px; } .policy-grid { grid-template-columns: 1fr; margin-top: 42px; } section:last-child { grid-column: auto; } }
   </style>
 </head>
 <body>
    <header class="shell topbar" data-od-id="top-navigation">
-      <a class="brand" href="/#inicio" aria-label="NovaSync, início"><img src="logo-star.png" alt="NovaSync" width="42" height="42"></a>
-     <nav class="policy-nav" aria-label="Navegação principal">
-         <a href="/#recursos">Recursos</a>
-         <a href="/#cobertura">Cobertura</a>
-         <a href="/#trust-section">Benefícios</a>
-         <a href="/#cost-calculator">Calculadora</a>
-         <a href="/#setores">Setores</a>
-         <a href="/#faq">FAQ</a>
-     </nav>
-     <div class="desktop-actions">
-         <a class="btn" href="/#cadastro-tecnico">Cadastro técnico</a>
-       <a class="btn" href="https://wa.me/5511993287070">Contato</a>
-     </div>
-   </header>
+      <button class="sidebar-toggle" type="button" aria-label="Abrir navegação da página" aria-expanded="false" aria-controls="section-sidebar" data-sidebar-toggle><span aria-hidden="true"></span></button>
+       <a class="brand" href="/#inicio" aria-label="NovaSync, início"><img src="logo-star.png" alt="NovaSync" width="42" height="42"></a>
+      <nav class="policy-nav desktop-nav" aria-label="Navegação principal">
+          <a href="/#recursos">Recursos</a>
+          <a href="/#cobertura">Cobertura</a>
+          <a href="/#trust-section">Benefícios</a>
+          <a href="/#cost-calculator">Calculadora</a>
+          <a href="/#setores">Setores</a>
+          <a href="/#faq">FAQ</a>
+      </nav>
+      <div class="desktop-actions">
+          <a class="btn" href="/#cadastro-tecnico">Cadastro técnico</a>
+        <a class="btn" href="https://wa.me/5511993287070">Contato</a>
+      </div>
+    </header>
+  <nav class="section-sidebar" id="section-sidebar" aria-label="Navegação pela página" data-section-sidebar></nav>
   <main class="shell">
     <p class="eyebrow">Privacidade e transparência</p>
     <h1>Política de Privacidade</h1>
@@ -72,6 +62,7 @@
     </div>
   </main>
   <footer><div class="shell">© 2026 NovaSync · Política de Privacidade</div></footer>
+  <script src="design-system.js" defer></script>
 
 
 </body></html>

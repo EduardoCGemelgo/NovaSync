@@ -1,7 +1,6 @@
 (function () {
   var toggle = document.querySelector('[data-sidebar-toggle]');
-  var sidebar = document.querySelector('[data-section-sidebar]');
-  if (!toggle || !sidebar) return;
+  if (!toggle) return;
 
   var path = window.location.pathname;
   var isHomePage = path === '/' || path === '/index.html' || path === '' || path.endsWith('/index.html');
@@ -19,6 +18,16 @@
     ['Cadastro técnico', 'cadastro-tecnico'],
     ['Contato', 'final-cta']
   ];
+
+  var sidebar = document.querySelector('[data-section-sidebar]');
+  if (!sidebar) {
+    sidebar = document.createElement('nav');
+    sidebar.className = 'section-sidebar';
+    sidebar.id = 'section-sidebar';
+    sidebar.setAttribute('aria-label', 'Navegação pelas seções');
+    sidebar.setAttribute('data-section-sidebar', '');
+    document.body.appendChild(sidebar);
+  }
 
   navigation.forEach(function (item) {
     var link = document.createElement('a');
@@ -45,6 +54,14 @@
     if (event.key === 'Escape') setOpen(false);
   });
 
+  var scrollTimer = null;
+  window.addEventListener('scroll', function () {
+    if (sidebar.classList.contains('is-open')) {
+      clearTimeout(scrollTimer);
+      scrollTimer = setTimeout(function () { setOpen(false); }, 80);
+    }
+  }, { passive: true });
+
   var footer = document.querySelector('footer .foot');
   var footerLinks = footer ? footer.querySelectorAll('a') : [];
   if (footer && footerLinks.length > 1) {
@@ -54,14 +71,14 @@
     footer.removeChild(footerLinks[footerLinks.length - 1]);
   }
 
-  var hero = document.querySelector('.hero');
-  if (hero && 'IntersectionObserver' in window) {
-    new IntersectionObserver(function (entries) {
-      var heroVisible = entries[0].isIntersecting;
-      sidebar.classList.toggle('is-visible', !heroVisible);
-      if (heroVisible) setOpen(false);
-    }).observe(hero);
-  } else if (!isHomePage) {
-    sidebar.classList.add('is-visible');
+  if (isHomePage) {
+    var hero = document.querySelector('.hero');
+    if (hero && 'IntersectionObserver' in window) {
+      new IntersectionObserver(function (entries) {
+        var heroVisible = entries[0].isIntersecting;
+        sidebar.classList.toggle('is-visible', !heroVisible);
+        if (heroVisible) setOpen(false);
+      }).observe(hero);
+    }
   }
 }());
