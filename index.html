@@ -1026,6 +1026,47 @@
       font-size: 12px;
     }
 
+    /* ━━━ FOOTER (from design-system.css) ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+    footer { border-top: 1px solid var(--border); color: var(--muted); font: 13px "SF Mono", ui-monospace, monospace; }
+
+    .site-footer-trust { padding: 24px 0; border-bottom: 1px solid var(--border); background: var(--surface); }
+    .site-footer-trust-inner { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; }
+    .site-footer-trust-text { color: var(--muted); font: 14px/1.5 Manrope, ui-sans-serif, system-ui, sans-serif; max-width: 520px; }
+    .site-footer-trust-text strong { color: var(--fg); }
+    .site-footer-trust-badges { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+    .site-footer-badge { display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px; border: 1px solid var(--border); border-radius: 6px; background: var(--surface-raised); color: var(--muted); font: 12px "SF Mono", ui-monospace, monospace; letter-spacing: .04em; }
+
+    .site-footer { padding: 48px 0 0; background: var(--bg); }
+    .site-footer-grid { display: grid; grid-template-columns: 1.6fr 1fr 1fr; gap: 48px; }
+    .site-footer-brand { display: flex; flex-direction: column; gap: 16px; }
+    .site-footer-brand .brand { font-size: 22px; font-weight: 800; letter-spacing: -0.07em; }
+    .site-footer-brand .brand img { width: 36px; height: 36px; }
+    .site-footer-desc { max-width: 320px; color: var(--muted); font: 14px/1.6 Manrope, ui-sans-serif, system-ui, sans-serif; letter-spacing: 0; text-transform: none; }
+    .site-footer-cnpj { color: var(--muted); font-size: 12px; opacity: .7; }
+    .site-footer-col h4 { margin: 0 0 16px; color: var(--fg); font: 700 13px Manrope, ui-sans-serif, system-ui, sans-serif; letter-spacing: 0; text-transform: uppercase; }
+    .site-footer-col ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+    .site-footer-col a { color: var(--muted); font: 14px/1.4 Manrope, ui-sans-serif, system-ui, sans-serif; letter-spacing: 0; text-transform: none; transition: color .2s; }
+    .site-footer-col a:hover { color: var(--fg); }
+    .site-footer-contact { display: flex; flex-direction: column; gap: 10px; }
+    .site-footer-contact a { display: flex; align-items: center; gap: 8px; color: var(--muted); font: 14px/1.4 Manrope, ui-sans-serif, system-ui, sans-serif; }
+    .site-footer-contact a:hover { color: var(--fg); }
+    .site-footer-contact .label { color: var(--accent-readable); font: 11px "SF Mono", ui-monospace, monospace; letter-spacing: .08em; text-transform: uppercase; }
+
+    .site-footer-copyright { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; margin-top: 48px; padding: 20px 0 28px; border-top: 1px solid var(--border); color: var(--muted); font-size: 12px; }
+    .site-footer-copyright-links { display: flex; flex-wrap: wrap; gap: 16px; }
+    .site-footer-copyright-links a { color: var(--muted); transition: color .2s; }
+    .site-footer-copyright-links a:hover { color: var(--fg); }
+
+    @media (max-width: 800px) {
+      .site-footer-trust-inner { flex-direction: column; align-items: flex-start; }
+      .site-footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+      .site-footer-brand { grid-column: 1 / -1; }
+    }
+    @media (max-width: 540px) {
+      .site-footer-grid { grid-template-columns: 1fr; gap: 28px; }
+      .site-footer-copyright { flex-direction: column; align-items: flex-start; }
+    }
+
     @media (prefers-reduced-motion: reduce) {
       [data-od-id="features-section"] .feature,
       [data-od-id="features-section"] .feature::before {
@@ -1080,7 +1121,7 @@
       }
     </style>
     <button class="sidebar-toggle" type="button" aria-label="Abrir menu lateral" aria-expanded="false" aria-controls="section-sidebar" data-od-id="sidebar-toggle"><span aria-hidden="true"></span></button>
-     <a href="#inicio" class="brand" aria-label="NovaSync, início"><img src="/api/projects/3083b058-69a1-477b-9ac0-1a1a54f2b907/raw/logo-star.png?workspaceId=o3yonu43xejbb2gen2bc2it8&amp;workspaceMemberId=p30tvs29wviz32a9tp62glhm" alt="NovaSync" width="42" height="42" style="display:block;width:42px;height:42px"></a>
+     <a href="#inicio" class="brand" aria-label="NovaSync, início"><img src="/api/projects/3083b058-69a1-477b-9ac0-1a1a54f2b907/raw/logo-star.png?workspaceId=o3yonu43xejbb2gen2bc2it8&amp;workspaceMemberId=p30tvs29wviz32a9tp62glhm" alt="NovaSync" width="42" height="42"></a>
      <nav class="nav desktop-nav" aria-label="Navegação principal">
        
         <a href="#recursos">Recursos</a>
@@ -1910,7 +1951,7 @@
     <div class="site-footer">
       <div class="shell site-footer-grid">
         <div class="site-footer-brand">
-          <a class="brand" href="#inicio" aria-label="NovaSync, início"><img src="/api/projects/3083b058-69a1-477b-9ac0-1a1a54f2b907/raw/logo-star.png?workspaceId=o3yonu43xejbb2gen2bc2it8&amp;workspaceMemberId=p30tvs29wviz32a9tp62glhm" alt="NovaSync" width="36" height="36" style="display:block;width:36px;height:36px"></a>
+          <a class="brand" href="#inicio" aria-label="NovaSync, início"><img src="/api/projects/3083b058-69a1-477b-9ac0-1a1a54f2b907/raw/logo-star.png?workspaceId=o3yonu43xejbb2gen2bc2it8&amp;workspaceMemberId=p30tvs29wviz32a9tp62glhm" alt="NovaSync" width="36" height="36"></a>
           <p class="site-footer-desc">Field Service de TI com técnicos, cobertura nacional e acompanhamento de chamados em uma operação coordenada.</p>
           <p class="site-footer-cnpj">CNPJ: 62.718.285/0001-58</p>
         </div>
