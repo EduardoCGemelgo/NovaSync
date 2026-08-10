@@ -86,7 +86,7 @@
     .skip-link:focus { transform: translateY(0); }
     .shell { width: min(1120px, calc(100% - 48px)); margin: 0 auto; }
     .eyebrow, .mono { font-family: "SF Mono", ui-monospace, monospace; letter-spacing: .12em; text-transform: uppercase; }
-    .eyebrow { color: var(--accent-readable); font-size: 13px; line-height: 1.4; text-align: center; letter-spacing: .02em; }
+    .eyebrow { color: var(--accent-readable); font-size: 13px; line-height: 1.4; }
 
     .topbar {
       width: 100%;
@@ -202,17 +202,16 @@
       max-width: 830px;
       margin: 18px auto;
       font-size: clamp(45px, 6.4vw, 82px);
-      letter-spacing: -.03em;
-      line-height: 1.05;
+      letter-spacing: -.065em;
+      line-height: .98;
     }
 
     .hero-copy {
       max-width: 590px;
       margin: 0 auto;
       color: var(--muted);
-      font-size: 17px;
-      line-height: 1.6;
-      text-align: center;
+      font-size: 16px;
+      line-height: 1.55;
     }
 
     .hero-actions {
@@ -500,61 +499,6 @@
       gap: 20px;
     }
 
-    /* Keep the homepage footer aligned with the shared footer composition. */
-    footer[data-od-id="path-6"] {
-      padding: 0;
-      background: var(--bg);
-    }
-
-    footer[data-od-id="path-6"] .site-footer-trust-inner,
-    footer[data-od-id="path-6"] .site-footer-grid,
-    footer[data-od-id="path-6"] .site-footer-copyright {
-      width: min(100% - 24px, 1160px);
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    footer[data-od-id="path-6"] .site-footer-trust-inner {
-      min-height: 54px;
-    }
-
-    footer[data-od-id="path-6"] .site-footer-grid {
-      align-items: start;
-    }
-
-    footer[data-od-id="path-6"] .site-footer-copyright {
-      box-sizing: border-box;
-    }
-
-        @media (max-width: 540px) {
-      .shell { width: min(100% - 32px, 1120px); }
-      .hero-inner { padding: 72px 0 40px; }
-      .hero-inner h1 { font-size: clamp(38px, 10vw, 52px); line-height: 1.05; }
-      .hero-copy { font-size: 14px; line-height: 1.6; }
-      .hero-actions { flex-direction: column; align-items: center; gap: 10px; }
-      .hero-actions .btn { width: 100%; max-width: 320px; justify-content: center; }
-      .signal { grid-template-columns: 1fr; }
-      .signal-item, .signal-item:nth-child(3), .signal-item:nth-child(4) { border: 0; border-top: 1px solid var(--border); }
-      .signal-item:first-child { border-top: 0; }
-       .feature-grid, .proof-grid, .social-proof-grid { grid-template-columns: 1fr; }
-       .workflow-steps { grid-template-columns: 1fr; }
-       .calculator-fields, .calculator-results { grid-template-columns: 1fr; }
-       .cost-calculator { padding: 74px 0; }
-       .sectors-section { padding: 74px 0; }
-       .sector-grid { grid-template-columns: 1fr; }
-       .coverage-section { padding: 74px 0; }
-       .coverage-map { width: 100%; height: 450px; min-height: 0; }
-              .brazil-map-svg, .brazil-map-fallback { width: 160%; height: 160%; transform: translate(calc(-50% + 30px), -50%); }
-       .coverage-panel { padding: 22px; }
-       .technical-form { grid-template-columns: 1fr; padding: 22px; }
-       .technical-form-field.is-wide, .technical-form .btn, .technical-form-status { grid-column: auto; }
-       .feature { min-height: 190px; }
-      .feature-icon { margin-bottom: 30px; }
-      .section { padding: 74px 0; }
-      .cta { padding: 84px 0; }
-       .foot { flex-direction: column; }
-    }
-
     .cost-calculator { padding: 104px 0; border-top: 1px solid var(--border); }
     .calculator-layout { display: grid; grid-template-columns: .84fr 1.16fr; gap: 54px; align-items: start; }
     .calculator-copy h2 { max-width: 500px; margin: 14px 0 16px; font-size: clamp(36px, 4vw, 56px); letter-spacing: -.06em; line-height: 1; }
@@ -833,10 +777,6 @@
       .nav-cta { display: none; }
        .coverage-mobile-hint { display: block; }
       .hero { min-height: 650px; }
-      .hero-inner { padding: 100px 0 48px; text-align: center; }
-      .hero-inner h1 { font-size: clamp(42px, 7vw, 68px); letter-spacing: -.02em; line-height: 1.05; max-width: 100%; }
-      .hero-copy { max-width: 100%; font-size: 15px; line-height: 1.6; text-align: center; }
-      .hero-actions { justify-content: center; }
       .signal { grid-template-columns: 1fr 1fr; }
       .signal-item:nth-child(3) { border-left: 0; border-top: 1px solid var(--border); }
       .signal-item:nth-child(4) { border-top: 1px solid var(--border); }
@@ -886,13 +826,10 @@
       .section-sidebar a.is-active { color: var(--fg); }
     }
 
-        @media (max-width: 540px) {
+    @media (max-width: 540px) {
       .shell { width: min(100% - 32px, 1120px); }
-      .hero-inner { padding: 72px 0 40px; }
-      .hero-inner h1 { font-size: clamp(38px, 10vw, 52px); line-height: 1.05; }
-      .hero-copy { font-size: 14px; line-height: 1.6; }
-      .hero-actions { flex-direction: column; align-items: center; gap: 10px; }
-      .hero-actions .btn { width: 100%; max-width: 320px; justify-content: center; }
+      .hero-inner { padding-top: 84px; }
+      h1 { font-size: 46px; }
       .signal { grid-template-columns: 1fr; }
       .signal-item, .signal-item:nth-child(3), .signal-item:nth-child(4) { border: 0; border-top: 1px solid var(--border); }
       .signal-item:first-child { border-top: 0; }
@@ -913,7 +850,7 @@
       .section { padding: 74px 0; }
       .cta { padding: 84px 0; }
        .foot { flex-direction: column; }
-    }
+     }
 
       @media (max-width: 600px) {
         .coverage-map { display: none; }
@@ -1012,8 +949,8 @@
   <main id="content">
     <section class="hero" id="inicio" data-od-id="hero-novasync">
       <div class="shell hero-inner">
-        <p class="eyebrow" style="width: fit-content; margin-inline: auto; text-align: center;">Field service conectado</p>
-        <h1 style="letter-spacing: -5.33px; width: min(100%, 850px); height: auto; margin: 16px auto 18px; text-align: center; padding-top: 0px; padding-right: 0px;">Operações em campo.<br><span class="accent-word">Supervisionadas.</span></h1>
+        <p class="eyebrow" style="transform: translate(200px, 10px);">Field service conectado</p>
+        <h1 style="transform: translate(110px, 2px);">Operações em campo.<br><span class="accent-word">Supervisionadas.</span></h1>
         <p class="hero-copy">A NovaSync reúne agenda, equipe técnica e acompanhamento de chamados em uma operação de Field Service de TI mais visível e coordenada.</p>
         <div class="hero-actions" data-od-id="hero-actions">
            <a class="btn btn-primary" href="https://wa.me/5511993287070">Fale com um especialista <span aria-hidden="true">→</span></a>
@@ -1868,13 +1805,14 @@
     }());
   </script>
 
-<footer data-od-id="path-6">
+<footer>
     <div class="site-footer-trust">
       <div class="shell site-footer-trust-inner">
         <p class="site-footer-trust-text">Field Service de TI com técnicos, cobertura nacional e acompanhamento de chamados em uma operação coordenada. <strong>Em conformidade com a LGPD.</strong></p>
         <div class="site-footer-trust-badges">
           <span class="site-footer-badge">LGPD</span>
           <span class="site-footer-badge">Servidores no Brasil</span>
+          <span class="site-footer-badge">Criptografia em trânsito e em repouso</span>
         </div>
       </div>
     </div>
@@ -1895,8 +1833,8 @@
             <li><a href="#cost-calculator">Calculadora</a></li>
             <li><a href="#faq">FAQ</a></li>
             <li><a href="politica-de-privacidade.html">Política de Privacidade</a></li>
-            
-            <li><a href="https://linkedin.com/in/novasync-%C2%AE-602033418" target="_blank" rel="noopener">LinkedIn</a></li>
+            <li><a href="termos-de-uso.html">Termos de Uso</a></li>
+            <li><a href="https://linkedin.com/company/novasync" target="_blank" rel="noopener">LinkedIn</a></li>
             <li><a href="#cadastro-tecnico">Seja um Parceiro</a></li>
           </ul>
         </div>
@@ -1918,7 +1856,7 @@
         <span>© 2026 NovaSync</span>
         <div class="site-footer-copyright-links">
           <a href="politica-de-privacidade.html">Política de Privacidade</a>
-          
+          <a href="termos-de-uso.html">Termos de Uso</a>
           <a href="#">Servidores no Brasil</a>
           
         </div>
@@ -1943,5 +1881,4 @@
 
 
 <script src="/api/projects/3083b058-69a1-477b-9ac0-1a1a54f2b907/raw/design-system.js?workspaceId=o3yonu43xejbb2gen2bc2it8&amp;workspaceMemberId=p30tvs29wviz32a9tp62glhm" defer=""></script>
-
 </body></html>

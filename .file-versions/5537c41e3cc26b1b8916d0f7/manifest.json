@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
   "fileName": "field-service-saude.html",
-  "currentVersionId": "e326dd06-92cb-4cad-b571-4725df71cc79",
+  "currentVersionId": "7826bf72-0b4e-4088-a93e-6ad4267f9c85",
   "entries": [
     {
       "id": "277450b7-fe35-4501-a268-9027c6a6e5fc",
@@ -103,7 +103,37 @@
       "mime": "text/html; charset=utf-8",
       "kind": "html",
       "contentPath": "0007-e326dd06-92cb-4cad-b571-4725df71cc79.html",
-      "contentDigest": "4ee4db6fc4c867ed1ce94ce6ac45b97bba92cfc6b37b7db82bf73386ce8068a9",
+      "promptSource": "message",
+      "contentDigest": "4ee4db6fc4c867ed1ce94ce6ac45b97bba92cfc6b37b7db82bf73386ce8068a9"
+    },
+    {
+      "id": "8f17e30b-14fc-4896-a2e9-b5614e6e6683",
+      "fileName": "field-service-saude.html",
+      "version": 8,
+      "label": "Version 8",
+      "createdAt": 1786317514544,
+      "source": "ai",
+      "prompt": "Pode excluir integralmente de todos os setores, deixar somente na homepage\n\n<active-workspace-context>\nOpen Design selected or inferred these workspace contexts for this turn. Treat absolute paths as reference context unless the user explicitly asks to edit them.\n1. design-files: Arquivos de design | absolute: C:\\Users\\edwar\\AppData\\Roaming\\Open Design\\namespaces\\release-stable-win\\data\\projects\\3083b058-69a1-477b-9ac0-1a1a54f2b907 | tab: __design_files__\n</active-workspace-context>",
+      "size": 4680,
+      "mime": "text/html; charset=utf-8",
+      "kind": "html",
+      "contentPath": "0008-8f17e30b-14fc-4896-a2e9-b5614e6e6683.html",
+      "promptSource": "message",
+      "contentDigest": "a4518b1acfd9a006067be7f3575c141c1f676adef15ac79aa29ce25c94d05a52"
+    },
+    {
+      "id": "7826bf72-0b4e-4088-a93e-6ad4267f9c85",
+      "fileName": "field-service-saude.html",
+      "version": 9,
+      "label": "Version 9",
+      "createdAt": 1786318516053,
+      "source": "ai",
+      "prompt": "Entenda por que nenhuma das alterações foram feitas nas páginas e revise até que elas funcione\n\n<active-workspace-context>\nOpen Design selected or inferred these workspace contexts for this turn. Treat absolute paths as reference context unless the user explicitly asks to edit them.\n1. design-files: Arquivos de design | absolute: C:\\Users\\edwar\\AppData\\Roaming\\Open Design\\namespaces\\release-stable-win\\data\\projects\\3083b058-69a1-477b-9ac0-1a1a54f2b907 | tab: __design_files__\n</active-workspace-context>",
+      "size": 4727,
+      "mime": "text/html; charset=utf-8",
+      "kind": "html",
+      "contentPath": "0009-7826bf72-0b4e-4088-a93e-6ad4267f9c85.html",
+      "contentDigest": "8d588d3fd025aad5d41226e8922fbb7f63435855a66c8231bb6a06142f8aea57",
       "promptSource": "message"
     }
   ]

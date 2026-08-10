@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
   "fileName": "field-service-transporte.html",
-  "currentVersionId": "1b86419c-e776-4810-a281-720de0ba4bd9",
+  "currentVersionId": "f6a2fc56-de1c-42db-ae81-4de1a8246b20",
   "entries": [
     {
       "id": "13e557f5-72ab-489c-a27b-6cc7b7f57c7a",
@@ -103,7 +103,22 @@
       "mime": "text/html; charset=utf-8",
       "kind": "html",
       "contentPath": "0007-1b86419c-e776-4810-a281-720de0ba4bd9.html",
-      "contentDigest": "d054e70b491b9e3b469b08bcfd852d65441dce453f37b9a946851204d5c1cd82",
+      "promptSource": "message",
+      "contentDigest": "d054e70b491b9e3b469b08bcfd852d65441dce453f37b9a946851204d5c1cd82"
+    },
+    {
+      "id": "f6a2fc56-de1c-42db-ae81-4de1a8246b20",
+      "fileName": "field-service-transporte.html",
+      "version": 8,
+      "label": "Version 8",
+      "createdAt": 1786317514530,
+      "source": "ai",
+      "prompt": "Pode excluir integralmente de todos os setores, deixar somente na homepage\n\n<active-workspace-context>\nOpen Design selected or inferred these workspace contexts for this turn. Treat absolute paths as reference context unless the user explicitly asks to edit them.\n1. design-files: Arquivos de design | absolute: C:\\Users\\edwar\\AppData\\Roaming\\Open Design\\namespaces\\release-stable-win\\data\\projects\\3083b058-69a1-477b-9ac0-1a1a54f2b907 | tab: __design_files__\n</active-workspace-context>",
+      "size": 5798,
+      "mime": "text/html; charset=utf-8",
+      "kind": "html",
+      "contentPath": "0008-f6a2fc56-de1c-42db-ae81-4de1a8246b20.html",
+      "contentDigest": "a0e6579605ddfb005633fc111b811cfce7af3db5116ccb4429d34b9b17e4b9d0",
       "promptSource": "message"
     }
   ]

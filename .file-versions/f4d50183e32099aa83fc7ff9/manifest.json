@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
   "fileName": "field-service-eventos.html",
-  "currentVersionId": "5377d055-46ad-404d-a1fd-939d91b40168",
+  "currentVersionId": "f44f1f16-1e9d-40f9-9cda-b0706d43f941",
   "entries": [
     {
       "id": "ffc7db24-7f65-45bc-8a7f-39b59093db81",
@@ -103,7 +103,22 @@
       "mime": "text/html; charset=utf-8",
       "kind": "html",
       "contentPath": "0007-5377d055-46ad-404d-a1fd-939d91b40168.html",
-      "contentDigest": "2ad1a42709f40bbc78f84a5ad67e42b9099f71fd33513d71532e22a05e2b75b8",
+      "promptSource": "message",
+      "contentDigest": "2ad1a42709f40bbc78f84a5ad67e42b9099f71fd33513d71532e22a05e2b75b8"
+    },
+    {
+      "id": "f44f1f16-1e9d-40f9-9cda-b0706d43f941",
+      "fileName": "field-service-eventos.html",
+      "version": 8,
+      "label": "Version 8",
+      "createdAt": 1786317514529,
+      "source": "ai",
+      "prompt": "Pode excluir integralmente de todos os setores, deixar somente na homepage\n\n<active-workspace-context>\nOpen Design selected or inferred these workspace contexts for this turn. Treat absolute paths as reference context unless the user explicitly asks to edit them.\n1. design-files: Arquivos de design | absolute: C:\\Users\\edwar\\AppData\\Roaming\\Open Design\\namespaces\\release-stable-win\\data\\projects\\3083b058-69a1-477b-9ac0-1a1a54f2b907 | tab: __design_files__\n</active-workspace-context>",
+      "size": 5745,
+      "mime": "text/html; charset=utf-8",
+      "kind": "html",
+      "contentPath": "0008-f44f1f16-1e9d-40f9-9cda-b0706d43f941.html",
+      "contentDigest": "7420ec1165a33a8eaefc16efebf43b841de8ecfdec8245879276b680748e7314",
       "promptSource": "message"
     }
   ]

@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
   "fileName": "field-service-bancos.html",
-  "currentVersionId": "dc5d79ad-a27c-40b1-ba01-2665787af364",
+  "currentVersionId": "1ec7b2df-02a5-40f1-aad0-6ea8026f072d",
   "entries": [
     {
       "id": "17b5cfa6-a325-478d-8c78-0ca9ee3d8e0f",
@@ -133,7 +133,22 @@
       "mime": "text/html; charset=utf-8",
       "kind": "html",
       "contentPath": "0009-dc5d79ad-a27c-40b1-ba01-2665787af364.html",
-      "contentDigest": "87357942a26773b2ea0a9b41d362ae30cf8f05cc8e6cfcc714adc050d22f5fb7",
+      "promptSource": "message",
+      "contentDigest": "87357942a26773b2ea0a9b41d362ae30cf8f05cc8e6cfcc714adc050d22f5fb7"
+    },
+    {
+      "id": "1ec7b2df-02a5-40f1-aad0-6ea8026f072d",
+      "fileName": "field-service-bancos.html",
+      "version": 10,
+      "label": "Version 10",
+      "createdAt": 1786317514530,
+      "source": "ai",
+      "prompt": "Pode excluir integralmente de todos os setores, deixar somente na homepage\n\n<active-workspace-context>\nOpen Design selected or inferred these workspace contexts for this turn. Treat absolute paths as reference context unless the user explicitly asks to edit them.\n1. design-files: Arquivos de design | absolute: C:\\Users\\edwar\\AppData\\Roaming\\Open Design\\namespaces\\release-stable-win\\data\\projects\\3083b058-69a1-477b-9ac0-1a1a54f2b907 | tab: __design_files__\n</active-workspace-context>",
+      "size": 5849,
+      "mime": "text/html; charset=utf-8",
+      "kind": "html",
+      "contentPath": "0010-1ec7b2df-02a5-40f1-aad0-6ea8026f072d.html",
+      "contentDigest": "a5c22b46b593ed8b9345c7c1e0ebadb58d19574e8b7941270c96b9cb46b43fa5",
       "promptSource": "message"
     }
   ]
