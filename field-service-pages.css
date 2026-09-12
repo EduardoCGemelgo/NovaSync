@@ -1,6 +1,0 @@
-/* field-service-pages.css — sub-page overrides only. Base styles come from design-system.css */
-.section details{margin-top:10px}
-.section summary{cursor:pointer;font-weight:700}
-.section details p{margin-top:12px}
-.grid strong,.grid small{display:block}
-.grid small{margin-top:8px;color:var(--muted)}

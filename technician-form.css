@@ -1,0 +1,28 @@
+.technical-form-field small { display: block; line-height: 1.5; font-size: 12px; margin-top: 6px; color: #afb8cc; }
+.technical-form-field .technical-field-error { color: #ffb4b4; }
+.technical-field-error:empty { display: none; }
+.technical-form [aria-invalid="true"] { border-color: #ff9999; }
+.technical-zip-controls { display: flex; flex-wrap: wrap; align-items: start; gap: 12px; }
+.technical-zip-controls > div { flex: 1; min-width: 160px; }
+.technical-zip-controls .button { font-size: 13px; }
+.technical-form .address-lookup-status { margin: 8px 0 0; font-size: 13px; color: #bbc8df; }
+
+/* Cadastro: grupos legíveis, teclado mobile sem zoom e fechamento acessível. */
+body:has(#technician-dialog[open]) { overflow: hidden; }
+#technician-dialog { padding: 24px; overscroll-behavior: contain; scroll-padding-block: 96px 24px; }
+#technician-dialog > header { position: sticky; top: -24px; z-index: 2; background: #0e0e1a; padding-block: 16px; margin-top: -16px; }
+#technician-dialog .close { flex-shrink: 0; }
+#technician-form .technical-group { grid-column: 1 / -1; margin: 0; padding: 16px 0 0; border: 0; border-top: 1px solid #303044; min-width: 0; }
+#technician-form legend { padding: 0 12px 0 0; color: #dbe6ff; font-size: 16px; font-weight: 600; }
+.technical-group-fields { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+#technician-form input, #technician-form select { min-height: 48px; font-size: 16px; scroll-margin-block: 96px 24px; }
+.technical-form-field small { margin-bottom: 0; }
+@media (max-width: 560px) {
+  #technician-dialog { width: calc(100% - 16px); max-height: calc(100dvh - 16px); padding: 20px; border-radius: 16px; }
+  #technician-dialog > header { top: -20px; gap: 12px; }
+  #technician-title { font-size: 25px; }
+  .technical-group-fields { grid-template-columns: minmax(0, 1fr); }
+  .technical-zip-controls { display: grid; grid-template-columns: minmax(0, 1fr); }
+  .technical-zip-controls .button { width: 100%; min-height: 44px; }
+  #technician-form > button { width: 100%; min-height: 48px; }
+}
