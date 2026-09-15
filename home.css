@@ -1,0 +1,205 @@
+/* Home: cenas guiadas pela trava de rolagem (home.js). Carrega depois de novasync.css, landing-art.css e horus.css.
+   html.still = movimento reduzido ou pausado. */
+html { scroll-padding-top:0; } /* links do menu caem no início da seção, que já é uma parada da trava (home.js) */
+#cadastro-tecnico { scroll-margin-top:100px; } /* faixa curta: no topo ficaria sob o menu; a trava lê este valor */
+body.hm { overflow-x:clip; }
+.motion-sr { position:absolute!important; width:1px!important; height:1px!important; overflow:hidden!important; clip-path:inset(50%); white-space:nowrap; }
+
+/* 1. Hero: texto em fundo limpo; depois o trailer. A seção tem 100vh de rolagem por cena, mas a imagem não é
+   arrastada pela rolagem: o home.js escolhe a cena (.is-on), toca o corte com tempo próprio e acomoda a rolagem
+   na cena. O corte entra por style.animation: hm-<corte>-out na cena que sai, hm-<corte>-in na que entra
+   (de trás para frente quando a rolagem sobe). */
+.hm-hero { background:#07080e; }
+.hm-hero .hero-centered { min-height:0; background:none; border:0; }
+.hm-hero-copy { padding-block:clamp(140px,19svh,200px) clamp(56px,9svh,96px)!important; }
+.hm-story { height:500vh; background:#000; }
+.hm-story-stick { position:sticky; top:0; height:100svh; overflow:hidden; background:#000; }
+.hm-beat { position:absolute; inset:0; isolation:isolate; display:flex; flex-direction:column; justify-content:center; align-items:flex-start; padding:110px max(var(--art-gutter),calc((100vw - 1200px) / 2)) 72px; opacity:0; transform-origin:var(--ox,50%) var(--oy,50%); }
+.hm-beat.is-on { opacity:1; }
+.hm-beat:not(.is-on) { pointer-events:none; }
+.hm-beat img { position:absolute; inset:0; z-index:-2; width:100%; height:100%; object-fit:cover; object-position:var(--fx,50%) 50%; transform:scale(1.08); }
+.hm-beat:is(.is-on,.is-out) img { animation:hm-drift 10s cubic-bezier(.2,.6,.3,1) both; } /* a câmera segue deslizando */
+@keyframes hm-drift { from { transform:translateX(var(--dx,0)) scale(1.14); } to { transform:translateX(0) scale(1.05); } }
+.hm-beat::before { content:''; position:absolute; inset:0; z-index:-1; background:linear-gradient(90deg,#000e,#0009 40%,#0000 72%),linear-gradient(0deg,#000c,#0000 45%); }
+.hm-beat p em { font-style:normal; color:#ff8f88; }
+.hm-beat p { max-width:11ch; margin:0; color:#f5f6fb; font-size:clamp(40px,5.8vw,96px); font-weight:500; letter-spacing:-.055em; line-height:1.02; text-wrap:balance; }
+.hm-beat.is-on:not(.hm-need) :is(p,small,.button) { animation:hm-rise .9s cubic-bezier(.2,.7,.2,1) var(--d,.5s) both; }
+.hm-beat.is-on small { --d:.9s; } .hm-beat.is-on .button { --d:1.05s; }
+@keyframes hm-rise { from { opacity:0; transform:translateY(34px); filter:blur(8px); } }
+.hm-when { display:flex; align-items:center; gap:12px; margin-bottom:24px; color:#ff7a72; font:500 13px ui-monospace,monospace; letter-spacing:.12em; }
+.hm-when i { position:relative; width:9px; height:9px; border-radius:50%; background:currentColor; }
+.hm-when i::after { content:''; position:absolute; inset:-6px; border:1px solid currentColor; border-radius:50%; animation:hm-pulse 1.4s ease-out infinite; }
+@keyframes hm-pulse { from { transform:scale(.4); opacity:1; } to { transform:scale(1.5); opacity:0; } }
+.hm-term { --ox:63%; --oy:44%; } /* o zoom mergulha na tela "Offline" */
+.hm-need { align-items:center; text-align:center; }
+.hm-need::before { background:radial-gradient(circle at 50% 50%,#12162a,#000 70%); }
+.hm-need p { max-width:none; font-size:clamp(54px,8.4vw,140px); }
+.hm-need span { opacity:.12; }
+.hm-need.is-on p { animation:none; }
+.hm-need.is-on span { animation:hm-word .6s calc(.75s + var(--w) * .34s) both; }
+.hm-need.is-out span { opacity:1; }
+@keyframes hm-word { to { opacity:1; } }
+/* A resposta: título no alto, prova e botão embaixo, a mão do técnico no meio */
+.hm-here { justify-content:space-between; align-items:center; text-align:center; }
+.hm-here::before { background:linear-gradient(#000d,#0000 42%,#0000 58%,#000e); }
+.hm-here p { max-width:none; font-size:clamp(56px,9vw,150px); color:#dfe8ff; }
+.hm-here .hm-when { justify-content:center; color:#7ee0a6; }
+.hm-here small { display:block; max-width:46ch; margin:auto 0 26px; color:#d2d9ea; font-size:clamp(16px,1.3vw,19px); line-height:1.5; }
+/* Cortes. parede: a câmera desliza e passa por trás de um pilar (a troca acontece com a tela coberta).
+   chicote: giro rápido, as duas cenas correm juntas com borrão. zoom: mergulho na tela vermelha até o preto.
+   volta: a câmera recua e a cena final abre como luz acendendo. */
+.hm-wall { position:absolute; inset:0 auto 0 0; z-index:5; width:160vw; transform:translateX(100vw); pointer-events:none; background:linear-gradient(90deg,#0000,#05070c 14%,#171d2c 19%,#020305 25%,#000 50%,#020305 75%,#171d2c 81%,#05070c 86%,#0000); }
+@keyframes hm-wall { from { transform:translateX(100vw); } to { transform:translateX(-160vw); } }
+@keyframes hm-wall-out { 0%,50% { opacity:1; } 50.1%,100% { opacity:0; } 0% { transform:none; } 100% { transform:translateX(-16%); } }
+@keyframes hm-wall-in { 0%,49.9% { opacity:0; } 50%,100% { opacity:1; } 0% { transform:translateX(16%); } 100% { transform:none; } }
+@keyframes hm-whip-out { from { transform:none; filter:none; opacity:1; } to { transform:translateX(-100%) skewX(-5deg); filter:blur(28px) brightness(1.3); opacity:1; } }
+@keyframes hm-whip-in { from { transform:translateX(100%) skewX(-5deg); filter:blur(28px) brightness(1.3); opacity:1; } to { transform:none; filter:none; opacity:1; } }
+@keyframes hm-zoom-out { 0% { transform:none; filter:none; opacity:1; } 70% { opacity:1; } 100% { transform:scale(4); filter:blur(12px) brightness(1.4); opacity:0; } }
+@keyframes hm-zoom-in { 0%,45% { transform:scale(1.5); filter:blur(16px); opacity:0; } 100% { transform:none; filter:none; opacity:1; } }
+@keyframes hm-volta-out { 0% { transform:none; opacity:1; } 55%,100% { transform:scale(.82); opacity:0; } }
+@keyframes hm-volta-in { from { clip-path:circle(0% at 50% 56%); transform:scale(1.6); opacity:1; } to { clip-path:circle(125% at 50% 56%); transform:none; opacity:1; } }
+
+/* 2. Cobertura: uma tela, uma parada. No desktop o mapa ocupa a altura toda à esquerda e o texto fica à direita. */
+.hm-cov .coverage-copy>.eyebrow { margin-bottom:12px; }
+.hm-cov .coverage-copy { scroll-margin-top:90px; } /* no celular o cartão tem parada própria (data-stop), abaixo do menu */
+.map-3d { position:relative; }
+.map-3d>:is(svg,canvas) { display:block; width:100%; height:100%; }
+.map-3d path { stroke:#0e0e1a; stroke-width:24; fill-rule:evenodd; cursor:pointer; transition:fill .3s; }
+.map-3d canvas { touch-action:pan-y; }
+@media (hover:hover) and (pointer:fine) { /* com mouse o mapa aproxima e passa da moldura (mapa-3d.js): some aos poucos em vez de cortar reto */
+  html:not(.still) .map-3d canvas { mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent),linear-gradient(transparent,#000 6%,#000 94%,transparent); mask-composite:intersect; }
+}
+.map-tip { position:absolute; z-index:1; padding:6px 11px; border:1px solid #3d4058; border-radius:10px; background:#10131fe8; color:#eef1ff; font-size:12px; white-space:nowrap; pointer-events:none; transform:translate(-50%,calc(-100% - 14px)); }
+@media (min-width:1000px) and (min-height:700px) {
+  .hm-cov .coverage-lead { box-sizing:border-box; width:min(1440px,calc(100% - 96px)); min-height:100svh; grid-template-columns:1.7fr 1fr; grid-template-rows:auto auto; align-content:center; align-items:start; column-gap:56px; padding-block:100px 28px; }
+  .hm-cov .coverage-heading { grid-area:1 / 2; align-self:end; margin:0; text-align:left; }
+  .hm-cov .coverage-heading .eyebrow { justify-content:flex-start; }
+  .hm-cov .coverage-heading h2 { font-size:clamp(36px,3vw,48px); }
+  .hm-cov .coverage-heading p { margin-top:14px; }
+  .hm-cov .map-stage { grid-area:1 / 1 / 3; align-self:center; padding:0; }
+  /* inclinado, o mapa é mais largo que alto: moldura deitada, para ele crescer em vez de sobrar dos lados */
+  .hm-cov .coverage-lead #coverage-map { height:auto; aspect-ratio:6/5; max-height:calc(100svh - 170px); }
+  .hm-cov .coverage-copy { grid-area:2 / 2; padding-block:24px 0; }
+  .hm-cov .coverage-capacity { margin-block:10px; }
+  .hm-cov .coverage-capacity strong { font-size:clamp(64px,10vh,104px); }
+  .hm-cov .coverage-copy .coverage-data-note { margin-block:6px 16px; }
+}
+@media (min-width:1000px) and (min-height:700px) and (max-height:820px) {
+  .hm-cov .coverage-form small { display:none; } /* repete o botão; em telas baixas cede o espaço */
+  .hm-cov .coverage-heading h2 { font-size:40px; }
+}
+
+/* 3. O que fazemos: foto grande e texto curto, alternando os lados */
+.hm-services { display:grid; gap:clamp(56px,7vw,110px); }
+.hm-service { display:grid; grid-template-columns:1.2fr .8fr; gap:clamp(32px,5vw,80px); align-items:center; }
+.hm-service:nth-child(even) { grid-template-columns:.8fr 1.2fr; }
+.hm-service:nth-child(even) .hm-photo { order:1; }
+.hm-photo { margin:0; overflow:hidden; border:1px solid #232838; border-radius:28px; aspect-ratio:4/3; }
+.hm-photo img { width:100%; height:100%; object-fit:cover; }
+.hm-service .number { display:block; margin-bottom:18px; color:#b2c8ef; font:12px ui-monospace,monospace; letter-spacing:.08em; }
+.hm-service h3 { margin:0 0 18px; font-size:clamp(30px,3.2vw,46px); font-weight:500; letter-spacing:-.045em; line-height:1.1; }
+.hm-service p { max-width:36ch; color:var(--muted); font-size:16px; }
+.hm-service ul { display:flex; flex-wrap:wrap; gap:8px; margin:26px 0 0; padding:0; list-style:none; }
+.hm-service li { padding:7px 14px; border:1px solid #30364a; border-radius:999px; color:#c9d3e6; font-size:13px; }
+@supports (animation-timeline:view()) {
+  @media (prefers-reduced-motion:no-preference) {
+    html:not(.still) .hm-photo img { animation:hm-zoom linear both; animation-timeline:view(); animation-range:entry 0% exit 100%; }
+    @keyframes hm-zoom { from { transform:scale(1.2); } to { transform:scale(1); } }
+  }
+}
+
+/* 4. Como funciona: etapas à esquerda, painel preso à direita */
+.hm-flow-head { max-width:720px; margin-bottom:24px; }
+.hm-flow-head p { margin-top:22px; }
+.hm-flow-grid { display:grid; grid-template-columns:.85fr 1.15fr; gap:clamp(40px,6vw,90px); align-items:start; }
+.hm-steps { margin:0; padding:0; list-style:none; }
+.hm-step { display:flex; flex-direction:column; justify-content:center; min-height:72vh; opacity:.25; transition:opacity .45s; }
+.hm-step.is-on { opacity:1; }
+.hm-step span { color:#9fb3dc; font:12px ui-monospace,monospace; letter-spacing:.08em; text-transform:uppercase; }
+.hm-step h3 { margin:14px 0; font-size:clamp(28px,3vw,44px); font-weight:500; letter-spacing:-.045em; line-height:1.1; }
+.hm-step p { max-width:36ch; color:var(--muted); font-size:16px; }
+.hm-flow-device { position:sticky; top:max(110px,calc(50svh - 250px)); margin:0; }
+.hm-console { max-width:none; }
+.hm-line { display:grid; grid-template-columns:repeat(4,1fr); gap:8px; margin:0; padding:18px 0 0; list-style:none; color:#667089; font-size:11px; }
+.hm-line li::before { content:''; display:block; height:3px; margin-bottom:9px; border-radius:3px; background:#262b3c; transition:background .45s; }
+.hm-line li.done { color:#dfe7fb; }
+.hm-line li.done::before { background:#c0d1f5; }
+.hm-panels { position:relative; height:232px; }
+.hm-panel { position:absolute; inset:0; opacity:0; transform:translateY(14px); transition:opacity .45s,transform .45s; }
+.hm-panel.is-on { opacity:1; transform:none; }
+.hm-panel h4 { margin:22px 0 0; font-size:clamp(22px,2vw,28px); font-weight:500; letter-spacing:-.035em; line-height:1.2; }
+.hm-panel .console-facts { grid-template-columns:1fr 1fr; gap:16px 12px; }
+.hm-panel .console-facts strong { font-size:13px; }
+.hm-next { margin:18px 0 0; color:#9ebaea; font-size:12px; }
+.hm-flow-cta { margin-top:24px; }
+
+/* 5. Horus: chamada curta com o celular do técnico */
+.hm-horus-fig { margin:0; justify-self:center; width:min(440px,100%); }
+.hm-horus-fig .hx-phone { --q:1; width:100%; transform:none; }
+.hm-horus-fig figcaption { margin-top:4px; color:#6c7690; font-size:12px; text-align:center; }
+
+/* 6. Setores: galeria horizontal (scroll-snap), alinhada à grade do site */
+.hm-rail-nav { display:flex; justify-content:flex-end; gap:10px; margin:-28px 0 22px; }
+.hm-rail-nav button { width:46px; height:46px; border:1px solid #3d4058; border-radius:50%; background:#10131f; color:#eef1ff; font-size:18px; cursor:pointer; }
+.hm-rail-nav button:hover:not(:disabled) { background:#1c2238; }
+.hm-rail-nav button:disabled { opacity:.35; cursor:default; }
+.hm-rail { --edge:max(var(--art-gutter),calc((100% - 1200px) / 2)); display:flex; gap:18px; margin:0; padding:0 var(--edge) 8px; overflow-x:auto; list-style:none; scroll-snap-type:x mandatory; scroll-padding-inline:var(--edge); scrollbar-width:none; }
+.hm-rail::-webkit-scrollbar { display:none; }
+.hm-rail li { flex:0 0 clamp(250px,27vw,340px); scroll-snap-align:start; }
+.hm-card { position:relative; isolation:isolate; display:flex; flex-direction:column; justify-content:flex-end; aspect-ratio:3/4; padding:26px; overflow:hidden; border:1px solid #232838; border-radius:26px; background:#10131f; color:#eef1ff; }
+.hm-card img { position:absolute; inset:0; z-index:-2; width:100%; height:100%; object-fit:cover; transition:transform .6s; }
+.hm-card::before { content:''; position:absolute; inset:0; z-index:-1; background:linear-gradient(#07080e00 35%,#07080ef0 100%); }
+.hm-card:hover img { transform:scale(1.05); }
+.hm-card:focus-visible { outline:2px solid #c0d1f5; outline-offset:-4px; }
+.hm-card span { color:#b2c8ef; font:11px ui-monospace,monospace; letter-spacing:.08em; }
+.hm-card strong { margin:10px 0 6px; font-size:26px; font-weight:500; letter-spacing:-.04em; line-height:1.15; }
+.hm-card small { color:#b9c1d3; font-size:14px; }
+.hm-card.is-cta { background:radial-gradient(circle at 70% 20%,#2a3a63,#10131f 70%); }
+@media (hover:none) { .hm-rail-nav { display:none; } }
+
+@media (max-width:900px) {
+  .hm-service, .hm-service:nth-child(even) { grid-template-columns:1fr; gap:28px; }
+  .hm-service:nth-child(even) .hm-photo { order:0; }
+  .hm-flow-grid { grid-template-columns:1fr; gap:0; }
+  .hm-flow-device { top:84px; z-index:2; order:-1; }
+  .hm-step { min-height:62vh; }
+  .hm-flow-cta { margin-top:0; }
+  .landing-art .hm-cov .coverage-lead { padding-top:96px; } /* o selo da cobertura sai de baixo do menu */
+}
+@media (max-width:560px) {
+  .hm-hero-copy { padding-block:120px 48px!important; }
+  /* no celular a foto fica em pé: texto embaixo, sobre o degradê */
+  .hm-beat:not(.hm-need,.hm-here) { justify-content:flex-end; padding-bottom:13svh; }
+  .hm-beat:not(.hm-need,.hm-here)::before { background:linear-gradient(0deg,#000f,#000a 38%,#0000 70%); }
+  .hm-when { font-size:11px; margin-bottom:16px; }
+  .hm-term { --ox:43%; --oy:46%; } /* a foto em pé desloca a tela da maquininha */
+  .hm-photo { border-radius:22px; }
+  /* painel compacto: fica preso no topo e precisa deixar espaço para o texto da etapa */
+  .landing-art .hm-console { padding:16px 18px; border-radius:24px; }
+  .hm-console :is(.console-heading,.console-bottom) { display:none; }
+  .hm-line { padding-top:0; }
+  .hm-console .console-ticket { margin:12px 0 0; padding:16px; }
+  .hm-panels { height:224px; }
+  .hm-panel h4 { font-size:19px; margin-top:12px; }
+  .hm-panel .console-facts { margin-top:14px; padding-top:14px; }
+  .hm-next { margin-top:12px; }
+  .hm-step p { font-size:15px; }
+  .hm-panel .console-facts { gap:12px 10px; }
+  .hm-step h3 { font-size:26px; }
+  .hm-card strong { font-size:23px; }
+  .hm-rail li { flex-basis:78vw; }
+  /* cobertura: mapa quase de ponta a ponta, na moldura do mapa inclinado */
+  .hm-cov .map-stage { margin-inline:-32px; }
+  .landing-art .hm-cov .coverage-lead #coverage-map { height:auto; aspect-ratio:3/2; }
+  .landing-art .hm-cov .map-caption { padding-inline:32px; }
+}
+
+/* Sem movimento: as cenas da história viram blocos empilhados, tudo visível */
+.still .hm-story { height:auto; }
+.still .hm-story-stick { position:static; height:auto; overflow:visible; }
+.still .hm-beat { position:relative; min-height:90svh; opacity:1; pointer-events:auto; animation:none!important; }
+.still .hm-beat *, .still .hm-beat *::after { animation:none!important; }
+.still .hm-need span { opacity:1; }
+.still .hm-wall { display:none; }
+.still .hm-step { opacity:1; }
+.still :is(.hm-step,.hm-panel), .still .hm-line li::before { transition:none; }
