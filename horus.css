@@ -7,7 +7,7 @@ body.hx { background:#050609; overflow-x:clip; }
 .hx em { font-style:normal; }
 .hx-grad { background:linear-gradient(100deg,#eef2ff 8%,#a9c0f0 55%,#6d85c8 100%); -webkit-background-clip:text; background-clip:text; color:transparent; }
 .hx-dim { color:#5d6680; }
-.hx-mark { display:block; width:min(62vw,520px); aspect-ratio:606/66; margin:0 auto 40px; color:#eef1ff; }
+.hx-brand { display:block; width:auto; height:15px; aspect-ratio:606/66; color:#eef1ff; }
 .hx-actions { display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:14px 28px; margin-top:36px; }
 .hx-link { display:inline-flex; align-items:center; gap:8px; min-height:46px; color:#c0d1f5; font-size:15px; }
 .hx-link:hover { color:#e3ebff; }
