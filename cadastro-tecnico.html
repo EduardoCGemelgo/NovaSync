@@ -32,7 +32,7 @@
     .eyebrow { font-family: "SF Mono", ui-monospace, monospace; letter-spacing: .12em; text-transform: uppercase; color: var(--accent-readable); font-size: 13px; line-height: 1.4; }
     .topbar { display: flex; align-items: center; justify-content: space-between; min-height: 88px; gap: 16px; }
     .topbar a { text-decoration: none; }
-    .btn { display: inline-flex; min-height: 44px; align-items: center; justify-content: center; gap: 10px; border: 1px solid var(--border); border-radius: 8px; padding: 0 18px; background: transparent; color: var(--fg); font-size: 14px; font-weight: 700; cursor: pointer; transition: transform .2s ease, background .2s ease; }
+    .btn { text-decoration: none; display: inline-flex; min-height: 44px; align-items: center; justify-content: center; gap: 10px; border: 1px solid var(--border); border-radius: 8px; padding: 0 18px; background: transparent; color: var(--fg); font-size: 14px; font-weight: 700; cursor: pointer; transition: transform .2s ease, background .2s ease; }
     .btn:hover { transform: translateY(-2px); border-color: var(--fg); }
     .btn-primary { border-color: var(--accent); background: var(--accent); box-shadow: 0 14px 30px color-mix(in oklab, var(--accent), transparent 72%); }
     .btn-primary:hover { background: color-mix(in oklab, var(--accent), white 10%); }
@@ -62,6 +62,10 @@
     .sucesso { padding: 32px 24px; border: 1px solid var(--border); border-radius: 12px; background: var(--surface); text-align: center; }
     .sucesso h2 { margin: 0 0 12px; letter-spacing: -.04em; }
     .sucesso p { color: var(--muted); line-height: 1.6; margin: 0 0 20px; }
+    .passos { text-align: left; max-width: 520px; margin: 0 auto 16px; padding-left: 22px; line-height: 1.6; }
+    .passos li + li { margin-top: 8px; }
+    .passos a { color: var(--accent-readable); }
+    .sucesso .dica { font-size: 14px; }
     footer { color: var(--muted); font-size: 13px; padding: 40px 0; }
     @media (max-width: 640px) {
       .half, .third, .wide { grid-column: span 6; }
@@ -78,7 +82,7 @@
   <main class="shell" id="content">
     <p class="eyebrow">Técnicos parceiros</p>
     <h1>Faça parte da nossa <span class="accent-word">rede técnica.</span></h1>
-    <p class="intro">Preencha seus dados. Nossa equipe analisa o cadastro e, se aprovado, você recebe por e-mail o acesso ao sistema de atendimentos.</p>
+    <p class="intro">Preencha seus dados. Nossa equipe analisa o cadastro e, se aprovado, você recebe por e-mail o código de primeiro acesso ao sistema de atendimentos.</p>
 
     <form id="inscricao" novalidate>
       <div class="grid">
@@ -158,6 +162,12 @@
     <div class="sucesso" id="sucesso" hidden>
       <h2>Cadastro enviado!</h2>
       <p id="sucesso-texto"></p>
+      <ol class="passos">
+        <li>Nossa equipe analisa seu cadastro.</li>
+        <li>Se aprovado, você recebe no e-mail informado a mensagem <strong>"Seu primeiro acesso à NovaSync"</strong>, com o código de primeiro acesso.</li>
+        <li>Acesse <a href="https://app.nova-sync.net/login">app.nova-sync.net</a>, escolha <strong>Primeiro acesso</strong>, informe seu e-mail e o código e crie sua senha.</li>
+      </ol>
+      <p class="dica">Não achou o e-mail? Confira a caixa de spam ou lixo eletrônico.</p>
       <a class="btn" href="index.html">Voltar ao site</a>
     </div>
   </main>
@@ -250,7 +260,7 @@
           .then(function (json) {
             if (json.ok) {
               form.hidden = true;
-              document.getElementById("sucesso-texto").textContent = json.message;
+              document.getElementById("sucesso-texto").textContent = "Recebemos seus dados.";
               document.getElementById("sucesso").hidden = false;
               window.scrollTo({ top: 0, behavior: "smooth" });
               return;
