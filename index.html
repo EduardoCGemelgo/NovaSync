@@ -577,7 +577,7 @@
         Preencha seus dados para cadastrar seu perfil na rede NovaSync.
         Os campos com * são obrigatórios.
       </p>
-      <form class="technical-form" id="technician-form" action="https://api.sheetmonkey.io/form/4KXW8HY77CP5Mt4ySXYqVt" method="post" data-od-id="technical-registration-form">
+      <form class="technical-form" id="technician-form" action="https://app.nova-sync.net/api/inscricoes" method="post" data-od-id="technical-registration-form">
           <fieldset class="technical-group"><legend>1. Seus dados</legend><div class="technical-group-fields">
 <div class="technical-form-field is-wide">
              <label for="technical-full-name">Nome completo *</label>
@@ -656,8 +656,7 @@
           </div>
 
            </div></fieldset>
-<input type="hidden" name="x-sheetmonkey-redirect" value="https://nova-sync.net/cadastro-enviado.html">
-           <input type="hidden" name="Criado em" value="x-sheetmonkey-current-date-time">
+<div class="technical-honeypot" aria-hidden="true"><label for="technical-website">Deixe este campo em branco</label><input id="technical-website" name="website" type="text" tabindex="-1" autocomplete="off"></div>
            <button class="button primary" type="submit" data-od-id="technical-registration-submit">Enviar cadastro</button>
             <p class="technical-form-privacy">Ao enviar, você concorda com a <a href="politica-de-privacidade.html" target="_blank" rel="noopener">Política de Privacidade</a>.</p>
             <p class="technical-form-status" id="technical-form-status" role="status" aria-live="polite"></p>

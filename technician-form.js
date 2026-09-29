@@ -3,7 +3,12 @@
   if (!form) return;
   const rules = window.NovaSyncValidation;
   const status = document.getElementById('technical-form-status');
-  const fields = [...form.querySelectorAll('input:not([type="hidden"]), select')];
+  // O campo-armadilha "website" fica fora da validação: gente não preenche, robô preenche.
+  const fields = [...form.querySelectorAll('input:not([type="hidden"]):not([name="website"]), select')];
+  // Nome do campo no formulário -> nome esperado pelo sistema (app.nova-sync.net/api/inscricoes).
+  const API = form.action;
+  const PARA_API = {nome: 'full_name', rg: 'rg', cpf: 'cpf', telefone: 'phone', email: 'email', endereco: 'address', complemento: 'complement', estado: 'state', cidade: 'city', cep: 'cep'};
+  const DA_API = Object.fromEntries(Object.entries(PARA_API).map(([pt, en]) => [en, pt]));
   const statusMessage = text => { status.textContent = text; status.classList.toggle('is-error', !!text); };
   function showError(field, message) {
     field.setCustomValidity(message);
@@ -55,7 +60,6 @@
       field.dispatchEvent(new Event('input', {bubbles: true}));
     });
   });
-  if (/^https?:$/.test(location.protocol)) form.elements.namedItem('x-sheetmonkey-redirect').value = new URL('cadastro-enviado.html', location.href).href;
   // JS controla as mensagens; required/pattern continuam ativos sem JavaScript.
   form.noValidate = true;
   form.addEventListener('submit', event => {
@@ -65,9 +69,30 @@
       event.preventDefault(); statusMessage('Revise os campos destacados antes de enviar.');
       form.querySelector(':invalid')?.focus(); form.reportValidity(); return;
     }
-    form.setAttribute('aria-busy', 'true'); form.querySelector('[type="submit"]').disabled = true;
+    event.preventDefault();
+    const submit = form.querySelector('[type="submit"]');
+    form.setAttribute('aria-busy', 'true'); submit.disabled = true;
     status.classList.remove('is-error'); status.textContent = 'Enviando cadastro…';
-    // POST nativo com os mesmos nomes e valores formatados, preservando zeros na planilha.
+    const body = {consentimento: true, website: form.elements.namedItem('website')?.value || ''};
+    for (const [pt, en] of Object.entries(PARA_API)) body[en] = form.elements.namedItem(pt).value;
+    const turnstile = form.elements.namedItem('cf-turnstile-response');
+    if (turnstile) body['cf-turnstile-response'] = turnstile.value;
+    const liberar = () => { form.removeAttribute('aria-busy'); submit.disabled = false; };
+    fetch(API, {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(body), credentials: 'omit'})
+      .then(response => response.json().catch(() => ({ok: false, message: 'Não foi possível enviar agora. Tente novamente em instantes.'})))
+      .then(result => {
+        if (result.ok) { location.href = new URL('cadastro-enviado.html', location.href).href; return; }
+        liberar();
+        let primeiro = null;
+        for (const [en, message] of Object.entries(result.errors || {})) {
+          const field = form.elements.namedItem(DA_API[en] || en);
+          if (field && fields.includes(field)) { showError(field, message); primeiro = primeiro || field; }
+        }
+        statusMessage(result.message || 'Não foi possível enviar agora. Tente novamente em instantes.');
+        primeiro?.focus();
+        window.turnstile?.reset();
+      })
+      .catch(() => { liberar(); statusMessage('Sem conexão com o servidor. Confira sua internet e tente novamente.'); });
   });
   window.addEventListener('pageshow', () => { form.removeAttribute('aria-busy'); form.querySelector('[type="submit"]').disabled = false; statusMessage(''); });
 })();
