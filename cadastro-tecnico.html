@@ -1,0 +1,275 @@
+<!doctype html>
+<html lang="pt-BR"><head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Cadastre-se como técnico parceiro da NovaSync.">
+  <title>Cadastro de técnico — NovaSync</title>
+  <!--
+    Formulário de técnico. Envia para o sistema (https://app.nova-sync.net/api/inscricoes), onde a
+    inscrição espera aprovação em Técnicos → Inscrições. Contrato em docs/inscricoes-formulario-site.md
+    do repositório novasync-app.
+    Captcha: preencha TURNSTILE_SITE_KEY (lá embaixo) com a Site Key do Cloudflare Turnstile. Vazio = sem captcha.
+  -->
+  <style>
+    :root {
+      --bg: oklch(0.10 0.025 300);
+      --surface: oklch(0.14 0.030 300);
+      --fg: oklch(0.97 0.012 300);
+      --muted: oklch(0.68 0.035 300);
+      --border: oklch(0.36 0.045 300);
+      --accent: #2a2a46;
+      --accent-readable: oklch(0.82 0.08 260);
+      --danger: oklch(0.72 0.16 25);
+      --ok: oklch(0.80 0.14 150);
+    }
+    * { box-sizing: border-box; }
+    html { background: var(--bg); }
+    body { margin: 0; background: var(--bg); color: var(--fg); font-family: Manrope, ui-sans-serif, system-ui, sans-serif; font-size: 16px; }
+    a { color: inherit; }
+    button, input, select { font: inherit; }
+    a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible { outline: 3px solid var(--accent-readable); outline-offset: 3px; }
+    .shell { width: min(760px, calc(100% - 32px)); margin: 0 auto; }
+    .eyebrow { font-family: "SF Mono", ui-monospace, monospace; letter-spacing: .12em; text-transform: uppercase; color: var(--accent-readable); font-size: 13px; line-height: 1.4; }
+    .topbar { display: flex; align-items: center; justify-content: space-between; min-height: 88px; gap: 16px; }
+    .topbar a { text-decoration: none; }
+    .btn { display: inline-flex; min-height: 44px; align-items: center; justify-content: center; gap: 10px; border: 1px solid var(--border); border-radius: 8px; padding: 0 18px; background: transparent; color: var(--fg); font-size: 14px; font-weight: 700; cursor: pointer; transition: transform .2s ease, background .2s ease; }
+    .btn:hover { transform: translateY(-2px); border-color: var(--fg); }
+    .btn-primary { border-color: var(--accent); background: var(--accent); box-shadow: 0 14px 30px color-mix(in oklab, var(--accent), transparent 72%); }
+    .btn-primary:hover { background: color-mix(in oklab, var(--accent), white 10%); }
+    .btn[disabled] { opacity: .6; cursor: wait; transform: none; }
+    h1 { margin: 14px 0 12px; font-size: clamp(34px, 5vw, 52px); letter-spacing: -.06em; line-height: 1.04; }
+    .intro { color: var(--muted); line-height: 1.6; margin: 0 0 32px; }
+    .accent-word { color: var(--accent-readable); }
+    form { padding: 24px; border: 1px solid var(--border); border-radius: 12px; background: var(--surface); }
+    .grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 16px; }
+    .field { grid-column: span 6; display: flex; flex-direction: column; gap: 6px; }
+    .half { grid-column: span 3; }
+    .third { grid-column: span 2; }
+    .wide { grid-column: span 4; }
+    label { font-size: 14px; font-weight: 600; }
+    label small { color: var(--muted); font-weight: 400; }
+    input, select { min-height: 44px; padding: 0 12px; border: 1px solid var(--border); border-radius: 8px; background: var(--bg); color: var(--fg); }
+    input[aria-invalid="true"], select[aria-invalid="true"] { border-color: var(--danger); }
+    .erro { color: var(--danger); font-size: 13px; min-height: 0; }
+    .erro:empty { display: none; }
+    .aceite { display: flex; gap: 10px; align-items: flex-start; margin-top: 20px; font-size: 14px; font-weight: 400; line-height: 1.5; }
+    .aceite input { min-height: 0; width: 18px; height: 18px; margin-top: 2px; flex: none; }
+    .armadilha { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+    .acoes { display: flex; flex-wrap: wrap; align-items: center; gap: 16px; margin-top: 24px; }
+    #mensagem { margin: 0; font-size: 15px; line-height: 1.5; }
+    #mensagem.ok { color: var(--ok); }
+    #mensagem.falha { color: var(--danger); }
+    .sucesso { padding: 32px 24px; border: 1px solid var(--border); border-radius: 12px; background: var(--surface); text-align: center; }
+    .sucesso h2 { margin: 0 0 12px; letter-spacing: -.04em; }
+    .sucesso p { color: var(--muted); line-height: 1.6; margin: 0 0 20px; }
+    footer { color: var(--muted); font-size: 13px; padding: 40px 0; }
+    @media (max-width: 640px) {
+      .half, .third, .wide { grid-column: span 6; }
+      form { padding: 18px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="shell topbar">
+    <a href="index.html" aria-label="NovaSync, início"><img src="logo-star.png" alt="NovaSync" style="display:block;width:42px;height:auto"></a>
+    <a class="btn" href="index.html">Voltar ao site</a>
+  </header>
+
+  <main class="shell" id="content">
+    <p class="eyebrow">Técnicos parceiros</p>
+    <h1>Faça parte da nossa <span class="accent-word">rede técnica.</span></h1>
+    <p class="intro">Preencha seus dados. Nossa equipe analisa o cadastro e, se aprovado, você recebe por e-mail o acesso ao sistema de atendimentos.</p>
+
+    <form id="inscricao" novalidate>
+      <div class="grid">
+        <div class="field">
+          <label for="full_name">Nome completo</label>
+          <input id="full_name" name="full_name" autocomplete="name" required maxlength="200">
+          <span class="erro" id="erro-full_name"></span>
+        </div>
+        <div class="field half">
+          <label for="cpf">CPF</label>
+          <input id="cpf" name="cpf" inputmode="numeric" placeholder="000.000.000-00" required maxlength="14">
+          <span class="erro" id="erro-cpf"></span>
+        </div>
+        <div class="field half">
+          <label for="rg">RG</label>
+          <input id="rg" name="rg" required maxlength="20">
+          <span class="erro" id="erro-rg"></span>
+        </div>
+        <div class="field half">
+          <label for="phone">Telefone (WhatsApp)</label>
+          <input id="phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="(11) 99999-9999" required maxlength="15">
+          <span class="erro" id="erro-phone"></span>
+        </div>
+        <div class="field half">
+          <label for="email">E-mail</label>
+          <input id="email" name="email" type="email" autocomplete="email" required maxlength="200">
+          <span class="erro" id="erro-email"></span>
+        </div>
+        <div class="field third">
+          <label for="cep">CEP</label>
+          <input id="cep" name="cep" inputmode="numeric" autocomplete="postal-code" placeholder="00000-000" required maxlength="9">
+          <span class="erro" id="erro-cep"></span>
+        </div>
+        <div class="field wide">
+          <label for="address">Endereço <small>(rua e número)</small></label>
+          <input id="address" name="address" autocomplete="street-address" required maxlength="200">
+          <span class="erro" id="erro-address"></span>
+        </div>
+        <div class="field third">
+          <label for="complement">Complemento <small>(opcional)</small></label>
+          <input id="complement" name="complement" maxlength="200">
+          <span class="erro" id="erro-complement"></span>
+        </div>
+        <div class="field third">
+          <label for="city">Cidade</label>
+          <input id="city" name="city" autocomplete="address-level2" required maxlength="200">
+          <span class="erro" id="erro-city"></span>
+        </div>
+        <div class="field third">
+          <label for="state">Estado</label>
+          <select id="state" name="state" autocomplete="address-level1" required>
+            <option value="">Selecione</option>
+          </select>
+          <span class="erro" id="erro-state"></span>
+        </div>
+      </div>
+
+      <div class="armadilha" aria-hidden="true">
+        <label for="website">Deixe em branco</label>
+        <input id="website" name="website" tabindex="-1" autocomplete="off">
+      </div>
+
+      <label class="aceite">
+        <input type="checkbox" id="consentimento" name="consentimento" required>
+        <span>Li e aceito a <a href="https://app.nova-sync.net/privacidade" target="_blank" rel="noopener">política de privacidade</a> e autorizo o uso dos meus dados para a análise do cadastro.</span>
+      </label>
+      <span class="erro" id="erro-consentimento"></span>
+
+      <div id="captcha" style="margin-top: 20px;"></div>
+
+      <div class="acoes">
+        <button type="submit" class="btn btn-primary" id="enviar">Enviar cadastro <span aria-hidden="true">→</span></button>
+        <p id="mensagem" role="status" aria-live="polite"></p>
+      </div>
+    </form>
+
+    <div class="sucesso" id="sucesso" hidden>
+      <h2>Cadastro enviado!</h2>
+      <p id="sucesso-texto"></p>
+      <a class="btn" href="index.html">Voltar ao site</a>
+    </div>
+  </main>
+
+  <footer class="shell">NovaSync · <a href="mailto:contato@nova-sync.net">contato@nova-sync.net</a></footer>
+
+  <script>
+    (function () {
+      var API = "https://app.nova-sync.net/api/inscricoes";
+      // Site Key pública do Cloudflare Turnstile. Vazio = formulário sem captcha.
+      var TURNSTILE_SITE_KEY = "";
+
+      var UFS = ["AC","AL","AP","AM","BA","CE","DF","ES","GO","MA","MT","MS","MG","PA","PB","PR","PE","PI","RJ","RN","RS","RO","RR","SC","SP","SE","TO"];
+      var CAMPOS = ["full_name","rg","cpf","phone","email","address","complement","state","city","cep","consentimento"];
+      var form = document.getElementById("inscricao");
+      var botao = document.getElementById("enviar");
+      var msg = document.getElementById("mensagem");
+      var select = document.getElementById("state");
+
+      UFS.forEach(function (uf) { var o = document.createElement("option"); o.value = uf; o.textContent = uf; select.appendChild(o); });
+
+      if (TURNSTILE_SITE_KEY) {
+        document.getElementById("captcha").innerHTML = '<div class="cf-turnstile" data-sitekey="' + TURNSTILE_SITE_KEY + '" data-theme="dark"></div>';
+        var s = document.createElement("script");
+        s.src = "https://challenges.cloudflare.com/turnstile/v0/api.js";
+        s.async = true; s.defer = true;
+        document.head.appendChild(s);
+      }
+
+      function digitos(v) { return v.replace(/\D/g, ""); }
+      function mascara(id, fn) {
+        var el = document.getElementById(id);
+        el.addEventListener("input", function () { el.value = fn(digitos(el.value)); });
+      }
+      mascara("cpf", function (d) {
+        d = d.slice(0, 11);
+        return d.replace(/^(\d{3})(\d)/, "$1.$2").replace(/^(\d{3})\.(\d{3})(\d)/, "$1.$2.$3").replace(/\.(\d{3})(\d)/, ".$1-$2");
+      });
+      mascara("cep", function (d) { d = d.slice(0, 8); return d.length > 5 ? d.slice(0, 5) + "-" + d.slice(5) : d; });
+      mascara("phone", function (d) {
+        d = d.slice(0, 11);
+        if (d.length <= 2) return d.length ? "(" + d : "";
+        if (d.length <= 6) return "(" + d.slice(0, 2) + ") " + d.slice(2);
+        if (d.length <= 10) return "(" + d.slice(0, 2) + ") " + d.slice(2, 6) + "-" + d.slice(6);
+        return "(" + d.slice(0, 2) + ") " + d.slice(2, 7) + "-" + d.slice(7);
+      });
+
+      function limparErros() {
+        CAMPOS.forEach(function (c) {
+          var e = document.getElementById("erro-" + c); if (e) e.textContent = "";
+          var el = form.elements[c]; if (el) el.removeAttribute("aria-invalid");
+        });
+      }
+      function mostrarErros(errors) {
+        var primeiro = null;
+        Object.keys(errors || {}).forEach(function (c) {
+          var e = document.getElementById("erro-" + c); if (e) e.textContent = errors[c];
+          var el = form.elements[c];
+          if (el) { el.setAttribute("aria-invalid", "true"); if (!primeiro) primeiro = el; }
+        });
+        if (primeiro) primeiro.focus();
+      }
+
+      form.addEventListener("submit", function (ev) {
+        ev.preventDefault();
+        limparErros();
+        msg.textContent = ""; msg.className = "";
+
+        var dados = {};
+        new FormData(form).forEach(function (v, k) { dados[k] = typeof v === "string" ? v.trim() : v; });
+        dados.consentimento = document.getElementById("consentimento").checked;
+
+        var faltando = {};
+        CAMPOS.forEach(function (c) {
+          if (c === "complement") return;
+          if (c === "consentimento" ? !dados.consentimento : !dados[c]) {
+            faltando[c] = c === "consentimento" ? "Para se inscrever, aceite a política de privacidade." : "Preencha este campo.";
+          }
+        });
+        if (Object.keys(faltando).length) {
+          mostrarErros(faltando);
+          msg.textContent = "Confira os campos destacados."; msg.className = "falha";
+          return;
+        }
+
+        botao.disabled = true;
+        botao.textContent = "Enviando...";
+        fetch(API, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(dados) })
+          .then(function (res) { return res.json().catch(function () { return { ok: false, message: "Não foi possível enviar agora. Tente de novo em instantes." }; }); })
+          .then(function (json) {
+            if (json.ok) {
+              form.hidden = true;
+              document.getElementById("sucesso-texto").textContent = json.message;
+              document.getElementById("sucesso").hidden = false;
+              window.scrollTo({ top: 0, behavior: "smooth" });
+              return;
+            }
+            mostrarErros(json.errors);
+            msg.textContent = json.message || "Não foi possível enviar agora. Tente de novo em instantes.";
+            msg.className = "falha";
+            if (window.turnstile) window.turnstile.reset();
+          })
+          .catch(function () {
+            msg.textContent = "Sem conexão com o servidor. Confira sua internet e tente de novo.";
+            msg.className = "falha";
+          })
+          .finally(function () {
+            botao.disabled = false;
+            botao.innerHTML = 'Enviar cadastro <span aria-hidden="true">→</span>';
+          });
+      });
+    })();
+  </script>
+</body>
+</html>
