@@ -25,7 +25,29 @@
     }
     return value;
   }
-  function error(name, raw) {
+  // Mesma regra de senha da plataforma (app: lib/validations/password.ts).
+  const passwordRules = {
+    length: v => v.length >= 8 && v.length <= 128,
+    upper: v => /[A-Z]/.test(v),
+    lower: v => /[a-z]/.test(v),
+    number: v => /[0-9]/.test(v),
+    special: v => /[^A-Za-z0-9]/.test(v),
+  };
+  function passwordChecks(raw) {
+    const v = String(raw);
+    return Object.fromEntries(Object.entries(passwordRules).map(([rule, ok]) => [rule, ok(v)]));
+  }
+  function passwordError(raw) {
+    const v = String(raw);
+    if (!v) return 'Crie uma senha.';
+    if (v.length > 128) return 'Use no máximo 128 caracteres.';
+    return Object.values(passwordChecks(v)).every(Boolean) ? '' : 'A senha precisa ter 8 ou mais caracteres, com maiúscula, minúscula, número e caractere especial.';
+  }
+  // other: valor do campo relacionado (a senha, para conferir a confirmação).
+  function error(name, raw, other) {
+    // Senha não passa por trim: espaço também é caractere.
+    if (name === 'senha') return passwordError(raw);
+    if (name === 'confirmar_senha') return !String(raw) ? 'Repita a senha.' : String(raw) === String(other ?? '') ? '' : 'As senhas não coincidem.';
     const value = String(raw).trim();
     if (!value) return name === 'complemento' ? '' : 'Preencha este campo.';
     switch (name) {
@@ -37,7 +59,8 @@
         return /^[\d()\- ]+$/.test(value) && ddds.has(n.slice(0, 2)) && (/^\d{2}9\d{8}$/.test(n) || /^\d{2}[2-5]\d{7}$/.test(n)) ? '' : 'Informe DDD e telefone: 10 dígitos para fixo ou 11 para celular, sem +55.';
       }
       case 'email': return value.length <= 254 && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value) ? '' : 'Informe um e-mail válido, como nome@dominio.com.';
-      case 'endereco': return value.length >= 3 && value.length <= 250 ? '' : 'Informe rua e número, entre 3 e 250 caracteres.';
+      case 'endereco': return value.length >= 3 && value.length <= 200 ? '' : 'Informe a rua, entre 3 e 200 caracteres.';
+      case 'numero': return value.length <= 20 ? '' : 'Use até 20 caracteres. Sem número, escreva S/N.';
       case 'complemento': return value.length <= 150 ? '' : 'Use até 150 caracteres.';
       case 'estado': return ufs.has(value) ? '' : 'Selecione uma UF válida.';
       case 'cidade': return value.length <= 100 ? '' : 'Use até 100 caracteres para a cidade.';
@@ -45,7 +68,7 @@
       default: return '';
     }
   }
-  const api = { digits, validCPF, format, error };
+  const api = { digits, validCPF, format, error, passwordChecks };
   if (typeof module !== 'undefined' && module.exports) module.exports = api;
   else root.NovaSyncValidation = api;
 })(globalThis);

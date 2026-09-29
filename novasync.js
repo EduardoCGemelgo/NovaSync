@@ -87,6 +87,16 @@ document
 document
   .querySelector("[data-close]")
   ?.addEventListener("click", () => dialog.close());
+// nova-sync.net/#cadastro abre o cadastro direto (link do botão "Novo técnico" do app).
+const abrirCadastroPeloLink = () => {
+  if (dialog && location.hash === "#cadastro" && !dialog.open) dialog.showModal();
+};
+abrirCadastroPeloLink();
+window.addEventListener("hashchange", abrirCadastroPeloLink);
+// Ao fechar, tira o #cadastro do endereço: recarregar a página não reabre o formulário.
+dialog?.addEventListener("close", () => {
+  if (location.hash === "#cadastro") history.replaceState(null, "", location.pathname + location.search);
+});
 
 // Reveal progressivo (respeita reduced-motion).
 (() => {

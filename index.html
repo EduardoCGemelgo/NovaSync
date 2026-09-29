@@ -14,11 +14,11 @@
     <link rel="stylesheet" href="landing-art.css" />
 <link rel="stylesheet" href="horus.css" />
 <link rel="stylesheet" href="home.css" />
-    <script src="novasync.js" defer></script>
-    <link rel="stylesheet" href="technician-form.css?v=20260929">
-    <script defer src="technician-validation.js?v=20260929"></script>
-    <script defer src="technician-form.js?v=20260929"></script>
-    <script defer src="technician-address.js?v=20260929"></script>
+    <script src="novasync.js?v=20260929b" defer></script>
+    <link rel="stylesheet" href="technician-form.css?v=20260929b">
+    <script defer src="technician-validation.js?v=20260929b"></script>
+    <script defer src="technician-form.js?v=20260929b"></script>
+    <script defer src="technician-address.js?v=20260929b"></script>
 <script src="trava.js" defer></script>
 <script src="home.js" defer></script>
 <script src="mapa-ufs.js" defer></script>
@@ -574,10 +574,12 @@
         </button>
       </header>
       <p>
-        Preencha seus dados para cadastrar seu perfil na rede NovaSync.
-        Os campos com * são obrigatórios.
+        Em duas etapas: seus dados e a senha de acesso. Depois da aprovação
+        da nossa equipe, você já entra na plataforma. Os campos com * são obrigatórios.
       </p>
       <form class="technical-form" id="technician-form" action="https://app.nova-sync.net/api/inscricoes" method="post" data-od-id="technical-registration-form">
+          <p class="technical-step-label" id="technical-step-label" hidden></p>
+          <div class="technical-step" data-step="1">
           <fieldset class="technical-group"><legend>1. Seus dados</legend><div class="technical-group-fields">
 <div class="technical-form-field is-wide">
              <label for="technical-full-name">Nome completo *</label>
@@ -606,12 +608,18 @@
 <div class="technical-form-field is-wide">
             <label for="technical-zip">CEP *</label>
             <div class="technical-zip-controls"><div><input pattern="[0-9]{5}-?[0-9]{3}" id="technical-zip" name="cep" type="text" inputmode="numeric" autocomplete="postal-code" placeholder="00000-000" maxlength="9" data-mask="cep" required="" aria-required="true"></div><button class="button" type="button" id="technical-zip-search">Buscar endereço</button></div>
-            <small>8 dígitos. A busca preenche rua, cidade e estado quando disponíveis.</small>
+            <small>8 dígitos. A busca preenche rua, cidade e estado; depois é só informar o número.</small>
             <p id="technical-zip-status" class="address-lookup-status" role="status" aria-live="polite"></p>
           </div>
-          <div class="technical-form-field is-wide">
-             <label for="technical-address">Endereço *</label>
-             <input minlength="3" maxlength="250" id="technical-address" name="endereco" type="text" autocomplete="street-address" placeholder="Rua, avenida ou rodovia e número" required="" aria-required="true">
+          <div class="technical-form-field is-wide technical-street-row">
+            <div>
+              <label for="technical-address">Rua *</label>
+              <input minlength="3" maxlength="200" id="technical-address" name="endereco" type="text" autocomplete="address-line1" placeholder="Rua, avenida ou rodovia" required="" aria-required="true">
+            </div>
+            <div>
+              <label for="technical-number">Número *</label>
+              <input id="technical-number" name="numero" type="text" autocomplete="off" maxlength="20" placeholder="123 ou S/N" required="" aria-required="true">
+            </div>
           </div>
           <div class="technical-form-field">
             <label for="technical-complement">Complemento</label>
@@ -656,9 +664,37 @@
           </div>
 
            </div></fieldset>
+          </div>
+          <div class="technical-step" data-step="2">
+          <fieldset class="technical-group"><legend>3. Sua senha</legend><div class="technical-group-fields">
+          <p class="technical-password-intro is-wide">Com ela você entra em <strong>app.nova-sync.net</strong> assim que o cadastro for aprovado, usando o e-mail informado nos seus dados.</p>
+          <div class="technical-form-field">
+             <label for="technical-password">Senha *</label>
+             <input id="technical-password" name="senha" type="password" autocomplete="new-password" minlength="8" maxlength="128" aria-describedby="technical-password-hints" required="" aria-required="true">
+          </div>
+          <div class="technical-form-field">
+             <label for="technical-password-confirm">Confirmar senha *</label>
+             <input id="technical-password-confirm" name="confirmar_senha" type="password" autocomplete="new-password" minlength="8" maxlength="128" required="" aria-required="true">
+          </div>
+          <div class="technical-form-field is-wide">
+            <ul id="technical-password-hints" class="technical-password-hints" aria-label="A senha precisa ter">
+              <li data-rule="length">8 ou mais caracteres</li>
+              <li data-rule="upper">1 letra maiúscula</li>
+              <li data-rule="lower">1 letra minúscula</li>
+              <li data-rule="number">1 número</li>
+              <li data-rule="special">1 caractere especial (!@#$%…)</li>
+            </ul>
+            <label class="technical-show-password"><input type="checkbox" id="technical-show-password"> Mostrar senha</label>
+          </div>
+          </div></fieldset>
+          </div>
 <div class="technical-honeypot" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden"><label for="technical-website">Deixe este campo em branco</label><input id="technical-website" name="website" type="text" tabindex="-1" autocomplete="off"></div>
            <input type="hidden" name="consentimento" value="on">
-           <button class="button primary" type="submit" data-od-id="technical-registration-submit">Enviar cadastro</button>
+           <div class="technical-step-actions">
+             <button class="button" type="button" data-step-back hidden>Voltar</button>
+             <button class="button primary" type="button" data-step-next hidden>Continuar</button>
+             <button class="button primary" type="submit" data-od-id="technical-registration-submit">Enviar cadastro</button>
+           </div>
             <p class="technical-form-privacy">Ao enviar, você concorda com a <a href="politica-de-privacidade.html" target="_blank" rel="noopener">Política de Privacidade</a>.</p>
             <p class="technical-form-status" id="technical-form-status" role="status" aria-live="polite"></p>
         </form>
