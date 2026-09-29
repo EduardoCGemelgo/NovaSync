@@ -17,6 +17,26 @@ body:has(#technician-dialog[open]) { overflow: hidden; }
 .technical-group-fields { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
 #technician-form input, #technician-form select { min-height: 48px; font-size: 16px; scroll-margin-block: 96px 24px; }
 .technical-form-field small { margin-bottom: 0; }
+/* Duas etapas (technician-form.js): dados e endereço, depois a senha. Sem JS aparecem juntas. */
+#technician-form [hidden] { display: none !important; }
+#technician-form .technical-step { grid-column: 1 / -1; display: grid; gap: 16px; min-width: 0; }
+#technician-form > .technical-step-label { margin: 0; color: #dbe6ff; font-size: 13px; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; }
+#technician-form .technical-step-actions { grid-column: 1 / -1; display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 12px; }
+#technician-form .technical-step-actions .button { min-height: 48px; }
+
+/* Rua e número lado a lado: o número vem logo depois da rua. */
+.technical-street-row { display: grid; grid-template-columns: minmax(0, 1fr) minmax(96px, 150px); gap: 20px; }
+.technical-street-row > div { min-width: 0; }
+
+/* Senha. */
+#technician-form .technical-password-intro { grid-column: 1 / -1; margin: 0; font-size: 14px; }
+.technical-password-hints { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px 16px; font-size: 13px; color: #afb8cc; }
+.technical-password-hints li::before { content: "○ "; }
+.technical-password-hints li[data-ok] { color: #8fe3a8; }
+.technical-password-hints li[data-ok]::before { content: "✓ "; }
+#technician-form .technical-show-password { display: inline-flex; align-items: center; gap: 8px; margin-top: 12px; font-weight: 500; cursor: pointer; }
+#technician-form .technical-show-password input { width: 18px; min-width: 18px; height: 18px; min-height: 0; margin: 0; }
+
 @media (max-width: 560px) {
   #technician-dialog { width: calc(100% - 16px); max-height: calc(100dvh - 16px); padding: 20px; border-radius: 16px; }
   #technician-dialog > header { top: -20px; gap: 12px; }
@@ -24,7 +44,8 @@ body:has(#technician-dialog[open]) { overflow: hidden; }
   .technical-group-fields { grid-template-columns: minmax(0, 1fr); }
   .technical-zip-controls { display: grid; grid-template-columns: minmax(0, 1fr); }
   .technical-zip-controls .button { width: 100%; min-height: 44px; }
-  #technician-form > button { width: 100%; min-height: 48px; }
+  .technical-street-row { grid-template-columns: minmax(0, 1fr) 110px; gap: 12px; }
+  #technician-form .technical-step-actions .button { flex: 1 1 100%; }
 }
 
 /* Campo-armadilha do formulário de técnico: fora da tela, invisível para pessoas. */

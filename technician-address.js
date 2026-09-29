@@ -4,6 +4,7 @@
   const button = document.getElementById('technical-zip-search');
   const status = document.getElementById('technical-zip-status');
   const fields = ['address', 'city', 'state'].map(name => document.getElementById('technical-' + name));
+  const number = document.getElementById('technical-number');
   let timer, controller, sequence = 0, lastSuccess = '', generated = ['', '', ''];
   const digits = value => value.replace(/\D/g, '');
   async function lookup() {
@@ -30,7 +31,11 @@
         field.value = values[i]; generated[i] = values[i]; field.dispatchEvent(new Event('change', {bubbles: true}));
       });
       lastSuccess = cep;
-      status.textContent = values[0] ? 'Endereço localizado. Confira os campos e informe o número e o complemento.' : 'Localizamos a cidade e o estado. Complete a rua, o número e o complemento.';
+      status.textContent = values[0] ? 'Endereço localizado. Agora informe o número (e o complemento, se tiver).' : 'Localizamos a cidade e o estado. Complete a rua e o número.';
+      // Com a rua preenchida, o próximo passo é o número: leva o cursor para lá,
+      // desde que a pessoa ainda esteja no CEP (não rouba o foco de outro campo).
+      const next = values[0] ? number : fields[0];
+      if (next && !next.value && (document.activeElement === zip || document.activeElement === button)) next.focus();
     } catch {
       if (request === sequence) status.textContent = 'Não foi possível consultar o CEP agora. Preencha o endereço manualmente ou tente novamente.';
     } finally {
