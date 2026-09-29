@@ -15,10 +15,10 @@
 <link rel="stylesheet" href="horus.css" />
 <link rel="stylesheet" href="home.css" />
     <script src="novasync.js" defer></script>
-    <link rel="stylesheet" href="technician-form.css">
-    <script defer src="technician-validation.js"></script>
-    <script defer src="technician-form.js"></script>
-    <script defer src="technician-address.js"></script>
+    <link rel="stylesheet" href="technician-form.css?v=20260929">
+    <script defer src="technician-validation.js?v=20260929"></script>
+    <script defer src="technician-form.js?v=20260929"></script>
+    <script defer src="technician-address.js?v=20260929"></script>
 <script src="trava.js" defer></script>
 <script src="home.js" defer></script>
 <script src="mapa-ufs.js" defer></script>
@@ -656,7 +656,8 @@
           </div>
 
            </div></fieldset>
-<div class="technical-honeypot" aria-hidden="true"><label for="technical-website">Deixe este campo em branco</label><input id="technical-website" name="website" type="text" tabindex="-1" autocomplete="off"></div>
+<div class="technical-honeypot" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden"><label for="technical-website">Deixe este campo em branco</label><input id="technical-website" name="website" type="text" tabindex="-1" autocomplete="off"></div>
+           <input type="hidden" name="consentimento" value="on">
            <button class="button primary" type="submit" data-od-id="technical-registration-submit">Enviar cadastro</button>
             <p class="technical-form-privacy">Ao enviar, você concorda com a <a href="politica-de-privacidade.html" target="_blank" rel="noopener">Política de Privacidade</a>.</p>
             <p class="technical-form-status" id="technical-form-status" role="status" aria-live="polite"></p>
