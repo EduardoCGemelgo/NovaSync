@@ -26,3 +26,6 @@ body:has(#technician-dialog[open]) { overflow: hidden; }
   .technical-zip-controls .button { width: 100%; min-height: 44px; }
   #technician-form > button { width: 100%; min-height: 48px; }
 }
+
+/* Campo-armadilha do formulário de técnico: fora da tela, invisível para pessoas. */
+.technical-honeypot { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
