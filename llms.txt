@@ -1,0 +1,40 @@
+# NovaSync
+
+> Empresa brasileira de field service de TI: coordena técnicos parceiros em todo o Brasil para atendimentos em campo (instalação, manutenção e troca de equipamentos de TI) e desenvolve o Horus, plataforma web de gestão de chamados usada pelas empresas clientes, pelos técnicos e pela própria NovaSync.
+
+Resumo factual do site nova-sync.net para assistentes de IA e mecanismos de busca. Conteúdo em português do Brasil.
+
+## O que a NovaSync faz
+
+- Atendimento técnico em campo (field service de TI) para varejo, bancos e fintechs, saúde, indústria, telecom, transporte e mobilidade, e eventos.
+- Rede de referência de 350 técnicos nas 27 unidades da federação. A equipe confirma cobertura, prazo e condições pelo WhatsApp.
+- Prazo padrão de atendimento: dois dias úteis a partir da abertura, pulando fins de semana e feriados nacionais.
+- Escopo típico: rede e infraestrutura (rack, switches e cabeamento) e manutenção de equipamentos (PDV, impressoras e periféricos).
+
+## Horus, gestão de chamados (app.nova-sync.net)
+
+- Plataforma web. Funciona no navegador, no computador ou no celular, sem instalar nada.
+- Fluxo: a empresa abre o chamado com cliente, endereço e janela de atendimento, e o prazo começa a contar. A NovaSync designa um técnico da região e a visita fica agendada. O técnico registra pelo celular o que encontrou, o que fez e as peças que usou. O relatório de atendimento (RAT) sai em PDF, no modelo exigido pelo fornecedor, com os dados do chamado já preenchidos. Tudo fica no histórico.
+- Recursos: prazo em dias úteis com status à vista (no prazo, vence hoje, excedido); cadastro de clientes com endereço estruturado reaproveitado nos chamados; registro das peças utilizadas; fechamento semanal dos atendimentos para conferência e aprovação; histórico consultável de chamados, relatórios e peças; login individual com verificação em duas etapas e recuperação de senha por e-mail.
+- Para quem: empresas que precisam de execução técnica em campo em vários pontos do país (lojas, agências, unidades, plantas), seus clientes e os técnicos parceiros que executam as visitas.
+- Privacidade: a NovaSync não vende dados. A política de privacidade descreve quais dados são tratados, com quem são compartilhados e por quanto tempo.
+
+## Páginas
+
+- [Início](https://nova-sync.net/): visão geral, setores atendidos e cobertura no Brasil.
+- [Horus](https://nova-sync.net/horus.html): a plataforma de gestão de chamados, com perguntas frequentes.
+- [Field service para varejo](https://nova-sync.net/field-service-varejo.html)
+- [Field service para bancos e fintechs](https://nova-sync.net/field-service-bancos.html)
+- [Field service para saúde](https://nova-sync.net/field-service-saude.html)
+- [Field service para indústria](https://nova-sync.net/field-service-industria.html)
+- [Field service para telecom](https://nova-sync.net/field-service-telecom.html)
+- [Field service para transporte e mobilidade](https://nova-sync.net/field-service-transporte.html)
+- [Field service para eventos e operações temporárias](https://nova-sync.net/field-service-eventos.html)
+- [Política de privacidade](https://nova-sync.net/politica-de-privacidade.html)
+- [Central de ajuda do Horus](https://app.nova-sync.net/ajuda): perguntas frequentes por perfil (empresa, técnico e cliente).
+
+## Contato
+
+- Comercial: comercial@nova-sync.net
+- WhatsApp: +55 11 99328-7070
+- Acesso ao Horus (clientes e técnicos): https://app.nova-sync.net
