@@ -138,3 +138,64 @@ if(coverageMap?.contentDocument?.querySelector('svg'))connectCoverageMap();
 const referenceCapacity={"AC":7,"AL":9,"AM":6,"AP":5,"BA":17,"CE":15,"DF":9,"ES":8,"GO":10,"MA":12,"MG":28,"MS":9,"MT":15,"PA":16,"PB":13,"PE":18,"PI":7,"PR":13,"RJ":13,"RN":7,"RO":8,"RR":6,"RS":26,"SC":14,"SE":7,"SP":47,"TO":5};
 function updateCoverageCard(){if(!state||!state.value)return;/* "Todo o Brasil": o total vem do mapa-3d.js */document.getElementById("coverage-state-name").textContent=state.options[state.selectedIndex].text;const target=referenceCapacity[state.value]??0;const count=document.getElementById("coverage-count");count.dataset.target=String(target);count.textContent=String(target);const readable=document.getElementById("coverage-count-readable");if(readable)readable.textContent=String(target);document.dispatchEvent(new CustomEvent("novasync:coverage",{detail:target}));}
 state?.addEventListener("change",updateCoverageCard);if(document.getElementById("coverage-count"))updateCoverageCard();
+
+// Medição (Google Ads / Analytics). Só carrega depois do aceite no aviso de cookies.
+// Preencher quando a conta existir. Vazio = nada carrega e o aviso não aparece.
+const MEDICAO_IDS = []; // ex.: ["G-XXXXXXXXXX", "AW-XXXXXXXXXX"]
+const MEDICAO_CONVERSAO_CONTATO = ""; // ex.: "AW-XXXXXXXXXX/rotulo-da-conversao"
+(() => {
+  if (!MEDICAO_IDS.length) return;
+  const CHAVE = "ns-cookies";
+  const ler = () => { try { return localStorage.getItem(CHAVE); } catch { return null; } };
+  const gravar = (valor) => { try { localStorage.setItem(CHAVE, valor); } catch {} };
+
+  function ligar() {
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = function () { window.dataLayer.push(arguments); };
+    window.gtag("js", new Date());
+    MEDICAO_IDS.forEach((id) => window.gtag("config", id));
+    const tag = document.createElement("script");
+    tag.async = true;
+    tag.src = "https://www.googletagmanager.com/gtag/js?id=" + encodeURIComponent(MEDICAO_IDS[0]);
+    document.head.append(tag);
+    // Contato comercial = clique no WhatsApp ou no e-mail comercial. Cadastro de técnico não conta.
+    document.addEventListener("click", (e) => {
+      const link = e.target.closest?.('a[href*="wa.me"], a[href^="mailto:comercial"]');
+      if (!link) return;
+      window.gtag("event", "contato_comercial", { canal: link.href.startsWith("mailto:") ? "email" : "whatsapp" });
+      if (MEDICAO_CONVERSAO_CONTATO) window.gtag("event", "conversion", { send_to: MEDICAO_CONVERSAO_CONTATO });
+    });
+  }
+
+  function avisar() {
+    const aviso = document.createElement("div");
+    aviso.className = "cookie-aviso";
+    aviso.setAttribute("role", "region");
+    aviso.setAttribute("aria-label", "Aviso de cookies");
+    aviso.innerHTML =
+      '<p>Usamos cookies do Google para medir visitas e o resultado dos nossos anúncios. <a href="/politica-de-privacidade.html#cookies-tecnologias">Saiba mais</a></p>' +
+      '<div><button type="button" class="button" data-cookie="nao">Recusar</button><button type="button" class="button primary" data-cookie="sim">Aceitar</button></div>';
+    aviso.addEventListener("click", (e) => {
+      const escolha = e.target.closest("[data-cookie]")?.dataset.cookie;
+      if (!escolha) return;
+      gravar(escolha);
+      aviso.remove();
+      if (escolha === "sim") ligar();
+    });
+    document.body.append(aviso);
+  }
+
+  // Botão "Rever minha escolha" da política de privacidade.
+  const rever = document.querySelector("[data-cookie-rever]");
+  if (rever) {
+    rever.hidden = false;
+    rever.addEventListener("click", () => {
+      try { localStorage.removeItem(CHAVE); } catch {}
+      location.reload();
+    });
+  }
+
+  const escolha = ler();
+  if (escolha === "sim") ligar();
+  else if (escolha !== "nao") avisar();
+})();
