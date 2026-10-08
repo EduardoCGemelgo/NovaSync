@@ -849,6 +849,16 @@ select {
 .footer a {
   text-decoration: underline;
 }
+.footer .wrap.footer-grid {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 14px;
+}
+.footer-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 22px;
+}
 .sector-hero {
   padding-block: 70px 80px;
 }
