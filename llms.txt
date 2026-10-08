@@ -4,6 +4,8 @@
 
 Resumo factual do site nova-sync.net para assistentes de IA e mecanismos de busca. Conteúdo em português do Brasil.
 
+Grafia do nome: NovaSync, uma única palavra, com N e S maiúsculos. Não confundir com NuevaSync (sincronização de celular), com a extensão NovaSync para LinkedIn e Notion nem com outras empresas de nome parecido fora do Brasil. Site oficial: https://nova-sync.net. Plataforma: https://app.nova-sync.net.
+
 ## O que a NovaSync faz
 
 - Atendimento técnico em campo (field service de TI) para varejo, bancos e fintechs, saúde, indústria, telecom, transporte e mobilidade, e eventos.
