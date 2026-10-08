@@ -1,0 +1,36 @@
+# Publica cobertura.json na raiz do site: técnicos por município (só agregados), para as rotinas
+# na nuvem (que alcançam o GitHub, não o app) e para a futura página de cobertura.
+# Fonte: https://app.nova-sync.net/api/cobertura/tabela (repo novasync-app, lib/cobertura.ts).
+name: Cobertura por cidade
+
+on:
+  schedule:
+    - cron: "0 8 * * *" # 05:00 de Brasília
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  atualizar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Baixa a tabela do Horus
+        run: |
+          curl -sfS --max-time 60 https://app.nova-sync.net/api/cobertura/tabela -o cobertura.json
+          python3 - <<'EOF'
+          import json
+          d = json.load(open("cobertura.json"))
+          assert d["tecnicosLocalizados"] > 0, "nenhum técnico localizado"
+          assert len(d["cidades"]) > 5000, "tabela incompleta"
+          print("municipios:", len(d["cidades"]), "| tecnicos localizados:", d["tecnicosLocalizados"])
+          EOF
+      - name: Commita se mudou
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add cobertura.json
+          if git diff --cached --quiet; then echo "sem mudança"; exit 0; fi
+          git commit -m "cobertura: tabela de $(date -u +%Y-%m-%d)"
+          git push
