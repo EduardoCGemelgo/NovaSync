@@ -3,6 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
     <title>NovaSync | Field service de TI em todo o Brasil</title>
     <meta
       name="description"
@@ -65,13 +66,21 @@
         ],
         "email": "comercial@nova-sync.net",
         "telephone": "+55-11-99328-7070",
-        "contactPoint": {
-          "@type": "ContactPoint",
-          "contactType": "sales",
-          "email": "comercial@nova-sync.net",
-          "telephone": "+55-11-99328-7070",
-          "availableLanguage": "pt-BR"
-        },
+        "contactPoint": [
+          {
+            "@type": "ContactPoint",
+            "contactType": "sales",
+            "email": "comercial@nova-sync.net",
+            "telephone": "+55-11-99328-7070",
+            "availableLanguage": "pt-BR"
+          },
+          {
+            "@type": "ContactPoint",
+            "contactType": "customer support",
+            "email": "contato@nova-sync.net",
+            "availableLanguage": "pt-BR"
+          }
+        ],
         "owns": {
           "@id": "https://nova-sync.net/horus.html#app"
         }
@@ -81,11 +90,30 @@
         "@id": "https://nova-sync.net/#site",
         "url": "https://nova-sync.net/",
         "name": "NovaSync",
-        "alternateName": "Nova Sync",
         "inLanguage": "pt-BR",
         "publisher": {
           "@id": "https://nova-sync.net/#org"
         }
+      },
+      {
+        "@type": "WebPage",
+        "@id": "https://nova-sync.net/#webpage",
+        "url": "https://nova-sync.net/",
+        "name": "NovaSync | Field service de TI em todo o Brasil",
+        "inLanguage": "pt-BR",
+        "isPartOf": { "@id": "https://nova-sync.net/#site" },
+        "about": { "@id": "https://nova-sync.net/#org" },
+        "primaryImageOfPage": "https://nova-sync.net/midia/og-home.jpg"
+      },
+      {
+        "@type": "Service",
+        "@id": "https://nova-sync.net/#servico",
+        "name": "Field service de TI",
+        "serviceType": "Field service de TI",
+        "provider": { "@id": "https://nova-sync.net/#org" },
+        "areaServed": { "@type": "Country", "name": "Brasil" },
+        "description": "Instalação, manutenção e troca de equipamentos de TI em campo (PDV, impressoras, totens, rede e infraestrutura) por técnicos parceiros em todo o Brasil, com atendimento em até 2 dias úteis e relatório do atendimento em PDF.",
+        "availableChannel": { "@type": "ServiceChannel", "serviceUrl": "https://nova-sync.net/#contato", "availableLanguage": "pt-BR" }
       },
       {
         "@type": "FAQPage",
@@ -609,6 +637,17 @@
           <button type="button" class="button" data-technician>
             Quero ser técnico parceiro
           </button>
+        </div>
+      </section>
+      <section id="sobre" class="section wrap reveal" aria-labelledby="sobre-title">
+        <div class="section-head">
+          <div>
+            <div class="eyebrow">07 / Sobre a NovaSync</div>
+            <h2 id="sobre-title">NovaSync.<br />Field service de TI em todo o Brasil.</h2>
+          </div>
+          <p>
+            A NovaSync é uma empresa brasileira de field service de TI. Coordena 350 técnicos parceiros nas 27 unidades da federação para instalar, manter e trocar equipamentos de TI em campo, com atendimento em até 2 dias úteis e relatório do atendimento em PDF. Desenvolve o Horus, plataforma própria de gestão de chamados.
+          </p>
         </div>
       </section>
       <section id="contato" class="contact night">
