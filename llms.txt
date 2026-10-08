@@ -24,6 +24,7 @@ Grafia do nome: NovaSync, uma única palavra, com N e S maiúsculos. Não confun
 ## Páginas
 
 - [Início](https://nova-sync.net/): visão geral, setores atendidos e cobertura no Brasil.
+- [Quem somos](https://nova-sync.net/sobre.html): o que a NovaSync faz, cobertura e prazo, Horus, setores, técnicos parceiros e contato.
 - [Horus](https://nova-sync.net/horus.html): a plataforma de gestão de chamados, com perguntas frequentes.
 - [Field service para varejo](https://nova-sync.net/field-service-varejo.html)
 - [Field service para bancos e fintechs](https://nova-sync.net/field-service-bancos.html)
