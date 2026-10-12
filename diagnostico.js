@@ -215,6 +215,11 @@
     evento("spin_avanco_escolhido", { avanco: um("avanco"), ramo: um("ramo"), unidades: um("unidades"), custo_informado: !!custo });
   }));
 
+  // Vindo da calculadora da home: os três números já entram no passo do custo.
+  const q = new URLSearchParams(location.search);
+  [["c", "#d-calls"], ["d", "#d-down"], ["r", "#d-rate"]].forEach(([k, id]) => { if (q.has(k) && q.get(k) !== "") $(id).value = q.get(k); });
+  mostrarCusto();
+
   document.getElementById("d-nojs")?.remove();
   form.hidden = false;
   ir(0, false);

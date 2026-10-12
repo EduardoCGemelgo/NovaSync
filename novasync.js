@@ -75,12 +75,8 @@ function calculate() {
     monthCents = Math.round(hours * Math.round(rate * 100));
   output.textContent = brl(monthCents);
   caption.textContent = `${hours} horas paradas por mês, ${brl(monthCents * 12)} por ano.`;
-  // Avanço: a conta que o visitante fez segue na mensagem, para o comercial já falar do número dele.
-  cta.href =
-    "https://wa.me/5511993287070?text=" +
-    encodeURIComponent(
-      `Olá! Fiz a conta no site da NovaSync: ${calls} chamados por mês, ${down} h paradas por chamado, ${brl(Math.round(rate * 100))} por hora parada, ou seja ${brl(monthCents)} por mês. Quero ver o Horus com os chamados da minha operação.`,
-    );
+  // O botão único leva a conta para o diagnóstico, que já abre o passo do custo preenchido.
+  cta.href = `diagnostico.html?c=${calls}&d=${down}&r=${rate}`;
 }
 calc?.addEventListener("input", calculate);
 if (calc) calculate();
