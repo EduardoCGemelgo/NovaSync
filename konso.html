@@ -150,10 +150,33 @@
         </div>
       </section>
 
+
+      <!-- S.02 A noite inteira: o relógio anda com a rolagem; um trecho de vídeo por turno (paradas: uma por evento) -->
+      <section id="noite" class="kx-night" data-scene data-stops=".0625 .1875 .3125 .4375 .5625 .6875 .8125 .9375" aria-labelledby="noite-title">
+        <div class="kx-stick">
+          <div class="kx-layers" aria-hidden="true"><video data-src="midia/noite-18h.mp4" muted loop playsinline preload="none"></video><video data-src="midia/noite-20h.mp4" muted loop playsinline preload="none"></video><video data-src="midia/noite-22h.mp4" muted loop playsinline preload="none"></video><video data-src="midia/noite-00h.mp4" muted loop playsinline preload="none"></video><video data-src="midia/noite-02h.mp4" muted loop playsinline preload="none"></video><video data-src="midia/noite-04h.mp4" muted loop playsinline preload="none"></video><video data-src="midia/noite-06h.mp4" muted loop playsinline preload="none"></video><img src="midia/konso-amanhecer.jpg" alt="" loading="lazy" width="2048" height="1146" /></div>
+          <div class="kx-night-ui wrap">
+            <header>
+              <p class="kx-tag">S.02 · A noite inteira</p>
+              <h2 id="noite-title" class="kx-sr">Das 18h às 8h, uma noite no parque.</h2>
+            </header>
+            <output class="kx-clock" id="noite-clock" aria-live="off">18:00</output>
+            <div class="kx-events"><article data-ev="0"><b>18:00</b><h3>O expediente acaba.</h3><p>O Konso assume o parque. Cada equipamento passa a ter alguém olhando.</p></article><article data-ev="1"><b>20:00</b><h3>Três PDVs perdem sinal.</h3><p>Dois voltam sozinhos em menos de 5 min. Nenhum chamado: a tolerância fez o trabalho.</p></article><article data-ev="2"><b>22:00</b><h3>Um switch oscila.</h3><p>Onze eventos repetidos chegam. O dedup guarda um e descarta o resto.</p></article><article data-ev="3"><b>00:00</b><h3>O nobreak da Loja 108 cai.</h3><p>E não volta. A contagem de 5 minutos começa.</p></article><article data-ev="4"><b>02:14</b><h3>Chamado aberto.</h3><p>O CH-2481 nasce com a hora exata da falha. O prazo de 2 dias úteis já está contando.</p></article><article data-ev="5"><b>04:00</b><h3>Quatro horas sem ninguém no escritório.</h3><p>O Konso lê o parque inteiro e registra tudo. Nada a fazer até o dia clarear.</p></article><article data-ev="6"><b>06:48</b><h3>O sinal volta.</h3><p>Falta a segunda prova: a confirmação do responsável no local.</p></article><article data-ev="7"><b>08:00</b><h3>O técnico chega.</h3><p>O dia começa com o chamado aberto, o histórico anexado e o técnico designado.</p></article></div>
+            <dl class="kx-meters">
+              <div><dt>Sinais lidos</dt><dd id="m-sinais">0</dd></div>
+              <div><dt>Ruído descartado</dt><dd id="m-ruido">0</dd></div>
+              <div><dt>Chamados abertos</dt><dd id="m-chamados">0</dd></div>
+            </dl>
+            <ol class="kx-hours" aria-hidden="true"><li>18h</li><li>20h</li><li>22h</li><li>00h</li><li>02h</li><li>04h</li><li>06h</li><li>08h</li></ol>
+            <p class="kx-fig">Ilustração com dados fictícios. Vídeos de banco, licença Pixabay.</p>
+          </div>
+        </div>
+      </section>
+
       <!-- S.02 Problema e implicação: cartas que abrem -->
       <section id="falha" class="kx-block wrap" aria-labelledby="falha-title">
         <header class="kx-head">
-          <p class="kx-tag">S.02 · Problema</p>
+          <p class="kx-tag">S.03 · Problema</p>
           <h2 id="falha-title">A falha silenciosa<br /><span class="kx-dim">não fica só no equipamento.</span></h2>
         </header>
         <div class="kx-cards">
@@ -179,7 +202,7 @@
       <!-- S.03 Implicação com o seu caso: a hora da falha -->
       <section id="hora" class="kx-block kx-hora wrap" aria-labelledby="hora-title">
         <header class="kx-head">
-          <p class="kx-tag">S.03 · Implicação</p>
+          <p class="kx-tag">S.04 · Implicação</p>
           <h2 id="hora-title">Escolha a hora da falha.<br /><span class="kx-dim">Veja quem estava olhando.</span></h2>
         </header>
         <div class="kx-sim">
@@ -211,7 +234,7 @@
       <section id="circuito" class="kx-circuit" data-scene data-stops=".1 .3 .5 .7 .9" aria-labelledby="circuito-title">
         <div class="kx-stick wrap">
           <header class="kx-head kx-head-left">
-            <p class="kx-tag">S.04 · Necessidade de solução</p>
+            <p class="kx-tag">S.05 · Necessidade de solução</p>
             <h2 id="circuito-title">O circuito do vigia.<br /><span class="kx-dim">Da falha à prova de que passou.</span></h2>
           </header>
           <ol class="kx-nodes" aria-label="Etapas do circuito">
@@ -275,7 +298,7 @@ CH-2481  finalizado</pre>
       <!-- S.05 Ao vivo: painel simulado -->
       <section id="ao-vivo" class="kx-block kx-live wrap" aria-labelledby="live-title">
         <header class="kx-head">
-          <p class="kx-tag">S.05 · Ao vivo</p>
+          <p class="kx-tag">S.06 · Ao vivo</p>
           <h2 id="live-title">O painel de uma noite<br /><span class="kx-dim">sem ninguém no escritório.</span></h2>
         </header>
         <div class="kx-board">
@@ -289,7 +312,7 @@ CH-2481  finalizado</pre>
       <!-- S.06 Sinais que o Konso lê -->
       <section id="sinais" class="kx-block wrap" aria-labelledby="sinais-title">
         <header class="kx-head">
-          <p class="kx-tag">S.06 · O que ele lê</p>
+          <p class="kx-tag">S.07 · O que ele lê</p>
           <h2 id="sinais-title">Entra no que você já tem.<br /><span class="kx-dim">Sem trocar equipamento.</span></h2>
         </header>
         <ul class="kx-elements">
@@ -307,7 +330,7 @@ CH-2481  finalizado</pre>
       <!-- S.07 Preço da visita -->
       <section id="preco" class="kx-block kx-preco wrap" aria-labelledby="preco-title">
         <header class="kx-head">
-          <p class="kx-tag">S.07 · Quando vira visita</p>
+          <p class="kx-tag">S.08 · Quando vira visita</p>
           <h2 id="preco-title">O vigia avisa.<br /><span class="kx-dim">A visita tem tarifa clara.</span></h2>
         </header>
         <div class="kx-calc">

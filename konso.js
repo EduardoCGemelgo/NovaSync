@@ -5,6 +5,8 @@
   const $ = s => document.querySelector(s);
   const scenes = [...document.querySelectorAll('[data-scene]')];
 
+  const hm = m => `${String(Math.floor(m / 60) % 24).padStart(2, '0')}:${String(m % 60).padStart(2, '0')}`;
+
   // Frase palavra por palavra: cada palavra ganha seu índice --i.
   const words = $('.kx-words');
   const list = words.textContent.trim().split(/\s+/);
@@ -39,6 +41,31 @@
     details.forEach((d, i) => d.classList.toggle('is-on', i === n - 1));
   }
 
+  // A noite inteira: o relógio anda entre os horários dos eventos; cada evento tem seu trecho de vídeo (carrega ao chegar perto).
+  const night = $('.kx-night');
+  const layers = [...night.querySelectorAll('.kx-layers>*')];
+  const evs = [...night.querySelectorAll('[data-ev]')];
+  const T = [18 * 60, 20 * 60, 22 * 60, 24 * 60, 26 * 60 + 14, 28 * 60, 30 * 60 + 48, 32 * 60];
+  const RUIDO = [0, 2, 13, 13, 13, 13, 13, 13], CHAM = [0, 0, 0, 0, 1, 1, 1, 1];
+  const fmt = n => n.toLocaleString('pt-BR');
+  let nStage = -1;
+  function setNight(p) {
+    const f = Math.min(7, Math.max(0, p * 8 - .5)), i = Math.min(6, Math.floor(f));
+    $('#noite-clock').textContent = hm(Math.round(T[i] + (T[i + 1] - T[i]) * (f - i)));
+    $('#m-sinais').textContent = fmt(Math.round(p * 41280));
+    const n = Math.min(7, Math.max(0, Math.floor(p * 8)));
+    if (n === nStage) return;
+    nStage = n;
+    $('#m-ruido').textContent = RUIDO[n]; $('#m-chamados').textContent = CHAM[n];
+    evs.forEach((e, k) => e.classList.toggle('is-on', k === n));
+    layers.forEach((el, k) => {
+      el.classList.toggle('is-on', k === n);
+      if (el.tagName !== 'VIDEO') return;
+      if (Math.abs(k - n) <= 1 && !el.src && el.dataset.src) el.src = el.dataset.src; // só o atual e o vizinho
+      if (k === n) el.play().catch(() => {}); else el.pause();
+    });
+  }
+
   let queued = false;
   function frame() {
     queued = false;
@@ -50,6 +77,7 @@
     }
     const cp = Number(circuit.style.getPropertyValue('--p'));
     setStage(reduce.matches ? 5 : Math.min(5, Math.max(1, Math.floor(cp * 5) + 1)));
+    setNight(reduce.matches ? 0 : Number(night.style.getPropertyValue('--p')));
     scrub();
   }
   const schedule = () => { if (!queued) { queued = true; requestAnimationFrame(frame); } };
@@ -91,7 +119,6 @@
   // S.03: quanto tempo o equipamento fica parado sem ninguém ver, comparado ao Konso (tolerância 5 min + varredura 2 min).
   const DIAS = ['segunda', 'terça', 'quarta', 'quinta', 'sexta', 'sábado', 'domingo'];
   const KONSO_MIN = 7, ABRE = 8, FECHA = 18;
-  const hm = m => `${String(Math.floor(m / 60) % 24).padStart(2, '0')}:${String(m % 60).padStart(2, '0')}`;
   const dur = m => m >= 60 ? `${Math.floor(m / 60)}h ${String(Math.round(m % 60)).padStart(2, '0')}min` : `${Math.round(m)} min`;
   const slider = $('#hora-slider');
   function hora() {
