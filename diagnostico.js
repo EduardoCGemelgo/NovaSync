@@ -31,7 +31,16 @@
 
   const $ = (s) => form.querySelector(s);
   const steps = [...form.querySelectorAll("fieldset[data-step]")];
-  const bars = [...form.querySelectorAll(".diag-progress i")];
+  const trail = [...document.querySelectorAll("#diag-trail li")];
+  // Coluna da esquerda: o que se pergunta em cada passo e por quê, no tom da home.
+  const META = [
+    { rotulo: "01 — Operação", titulo: "Como é a sua operação?", texto: "Três cliques para entendermos o porte. Nenhum dado seu é guardado.", img: "midia/home-campo.jpg" },
+    { rotulo: "02 — O problema", titulo: "O que mais acontece hoje?", texto: "Marque o que você reconhece. É por aqui que o problema aparece.", img: "midia/drama-loja.jpg" },
+    { rotulo: "03 — O custo", titulo: "Quanto custa isso por mês?", texto: "Parado não custa só o conserto: custa a venda, a equipe e o cliente. Ponha o seu número e veja o tamanho.", img: "midia/rack.jpg" },
+    { rotulo: "04 — A mudança", titulo: "Se isso fosse resolvido, o que mudaria?", texto: "Diga o que mais pesa para você. É isso que orienta a conversa.", img: "midia/mao-celular.jpg" },
+    { rotulo: "05 — O próximo passo", titulo: "Por onde começamos?", texto: "Escolha um passo concreto. A mensagem segue com tudo o que você respondeu.", img: "midia/servico-ativar.jpg" },
+  ];
+  const FOTO_RAMO = { Varejo: "drama-loja", "Bancos e fintechs": "drama-banco", Saúde: "drama-hospital", Indústria: "setor-industria", Telecom: "setor-telecom", Transporte: "setor-transporte", Eventos: "setor-eventos" };
   const el = {
     count: $("#diag-count"), err: $("#d-err"), back: $("#d-back"), next: $("#d-next"), skip: $("#d-skip"),
     wa: $("#d-wa"), mail: $("#d-mail"), cost: $("#d-cost"), month: $("#d-month"), year: $("#d-year"), summary: $("#d-summary"),
@@ -142,10 +151,29 @@
     () => (um("avanco") ? "" : "Escolha o próximo passo."),
   ];
 
+  // "Quadro" do que já foi respondido: o problema vai ficando visível a cada passo.
+  function montarQuadro(i) {
+    const itens = [];
+    if (i > 0) itens.push(`${um("ramo")} · ${um("unidades")} unidades · ${um("estados").toLowerCase()}`);
+    if (i > 1) itens.push(`${marcados("problemas").length} ${marcados("problemas").length === 1 ? "problema marcado" : "problemas marcados"}`);
+    if (i > 2) itens.push(custo ? `Parada: ${brl(custo.mes)} por mês` : "Custo: não informado");
+    if (i > 3) itens.push("Mudança: " + marcados("necessidades").join("; ").toLowerCase());
+    const ul = $("#s-recap");
+    ul.textContent = "";
+    itens.forEach((t) => { const li = document.createElement("li"); li.textContent = t; ul.append(li); });
+  }
+
   function ir(i, foco) {
     atual = i;
     steps.forEach((s, k) => { s.hidden = k !== i; });
-    bars.forEach((b, k) => b.classList.toggle("on", k <= i));
+    trail.forEach((t, k) => t.classList.toggle("on", k <= i));
+    const m = META[i];
+    $("#s-label").textContent = m.rotulo;
+    $("#s-title").textContent = m.titulo;
+    $("#s-text").textContent = m.texto;
+    // Passo 2: a foto acompanha o ramo escolhido no passo 1.
+    $("#s-img").src = i === 1 && FOTO_RAMO[um("ramo")] ? "midia/" + FOTO_RAMO[um("ramo")] + ".jpg" : m.img;
+    montarQuadro(i);
     el.count.textContent = `Passo ${i + 1} de ${steps.length}`;
     el.err.textContent = "";
     el.back.hidden = i === 0;
@@ -159,7 +187,8 @@
     if (foco !== false) {
       const alvo = steps[i].querySelector("legend");
       alvo.tabIndex = -1;
-      alvo.focus({ preventScroll: false });
+      alvo.focus({ preventScroll: true });
+      form.scrollIntoView({ block: "start" });
     }
   }
 

@@ -12,8 +12,8 @@
 <link rel="stylesheet" href="novasync.css">
 <link rel="stylesheet" href="landing-art.css">
 <link rel="stylesheet" href="utility-pages.css?v=20260929">
-<link rel="stylesheet" href="diagnostico.css?v=20261012">
-<script src="diagnostico.js" defer></script>
+<link rel="stylesheet" href="diagnostico.css?v=20261013">
+<script src="diagnostico.js?v=20261013" defer></script>
 <script src="novasync.js" defer></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -75,66 +75,75 @@
       </nav>
     </header>
 <main id="conteudo" class="wrap diag">
-  <p class="eyebrow">Diagnóstico · 5 passos</p>
-  <h1>Veja o tamanho do problema antes de falar com a gente.</h1>
-  <p class="intro">Cinco perguntas sobre a sua operação. No fim, você vê quanto custa o equipamento parado e escolhe o próximo passo. Nada é guardado em servidor: o resultado só segue na mensagem que você decidir enviar.</p>
-  <form id="diag" novalidate onsubmit="return false;" hidden>
-    <div class="diag-progress" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
-    <p class="diag-count" id="diag-count" aria-live="polite"></p>
+  <div class="eyebrow">Diagnóstico / 5 passos</div>
+  <h1>Veja o tamanho do problema.<br><em>Antes de falar com a gente.</em></h1>
+  <ol class="diag-trail" id="diag-trail" aria-hidden="true">
+    <li>Operação</li><li>Problema</li><li>Custo</li><li>Mudança</li><li>Próximo passo</li>
+  </ol>
+  <form id="diag" class="diag-grid" novalidate onsubmit="return false;" hidden>
+    <aside class="diag-copy">
+      <span class="diag-label" id="s-label"></span>
+      <h2 id="s-title"></h2>
+      <p id="s-text"></p>
+      <ul class="diag-recap" id="s-recap" aria-label="O que você já respondeu"></ul>
+      <figure class="diag-photo"><img id="s-img" src="midia/home-campo.jpg" alt="" width="924" height="768"></figure>
+    </aside>
 
-    <fieldset data-step="1" hidden>
-      <legend>Como é a sua operação?</legend>
-      <p class="hint">Três cliques, sem digitar.</p>
-      <div class="diag-group"><b>Ramo</b><div class="chips" data-name="ramo"></div></div>
-      <div class="diag-group"><b>Quantas unidades atendidas (lojas, agências, clínicas, bases)</b><div class="chips" data-name="unidades"></div></div>
-      <div class="diag-group"><b>Em quantos estados</b><div class="chips" data-name="estados"></div></div>
-    </fieldset>
+    <div class="diag-panel">
+      <p class="diag-count" id="diag-count" aria-live="polite"></p>
 
-    <fieldset data-step="2" hidden>
-      <legend>O que mais acontece hoje?</legend>
-      <p class="hint">Marque tudo o que se aplica.</p>
-      <div class="chips" data-name="problemas" data-multi="1"></div>
-    </fieldset>
+      <fieldset data-step="1" hidden>
+        <legend class="sr">Passo 1: como é a sua operação</legend>
+        <div class="diag-group"><b>Ramo</b><div class="chips" data-name="ramo"></div></div>
+        <div class="diag-group"><b>Quantas unidades atendidas (lojas, agências, clínicas, bases)</b><div class="chips" data-name="unidades"></div></div>
+        <div class="diag-group"><b>Em quantos estados</b><div class="chips" data-name="estados"></div></div>
+      </fieldset>
 
-    <fieldset data-step="3" hidden>
-      <legend>Quanto custa isso por mês?</legend>
-      <p class="hint">Use os seus números. A conta é feita aqui, no seu navegador. Pode pular se preferir.</p>
-      <div class="diag-nums">
-        <label for="d-calls">Chamados por mês<input id="d-calls" type="number" inputmode="decimal" min="0" max="100000" step="1" placeholder="ex.: 20"></label>
-        <label for="d-down">Horas paradas por chamado<input id="d-down" type="number" inputmode="decimal" min="0" max="720" step="0.5" placeholder="ex.: 16"></label>
-        <label for="d-rate">Custo de uma hora parada (R$)<input id="d-rate" type="number" inputmode="decimal" min="0" max="1000000" step="0.01" placeholder="ex.: 150"></label>
+      <fieldset data-step="2" hidden>
+        <legend class="sr">Passo 2: o que mais acontece hoje</legend>
+        <p class="hint">Marque tudo o que se aplica.</p>
+        <div class="chips" data-name="problemas" data-multi="1"></div>
+      </fieldset>
+
+      <fieldset data-step="3" hidden>
+        <legend class="sr">Passo 3: quanto custa isso por mês</legend>
+        <div class="diag-nums">
+          <label for="d-calls">Chamados por mês<input id="d-calls" type="number" inputmode="decimal" min="0" max="100000" step="1" placeholder="ex.: 20"></label>
+          <label for="d-down">Horas paradas por chamado<input id="d-down" type="number" inputmode="decimal" min="0" max="720" step="0.5" placeholder="ex.: 16"></label>
+          <label for="d-rate">Custo de uma hora parada (R$)<input id="d-rate" type="number" inputmode="decimal" min="0" max="1000000" step="0.01" placeholder="ex.: 150"></label>
+        </div>
+        <div class="diag-cost" role="status" id="d-cost" hidden>
+          <p>Custo estimado de parada por mês</p>
+          <output id="d-month"></output>
+          <p id="d-year"></p>
+        </div>
+        <p class="hint">Inclua venda perdida, equipe ociosa e retrabalho no custo da hora. É uma estimativa sua, calculada aqui no seu navegador, não uma promessa de economia. Pode pular se preferir.</p>
+      </fieldset>
+
+      <fieldset data-step="4" hidden>
+        <legend class="sr">Passo 4: o que mudaria se isso fosse resolvido</legend>
+        <p class="hint">Marque o que mais importa.</p>
+        <div class="chips" data-name="necessidades" data-multi="1"></div>
+      </fieldset>
+
+      <fieldset data-step="5" hidden>
+        <legend class="sr">Passo 5: o próximo passo</legend>
+        <div class="chips stack" data-name="avanco"></div>
+        <pre class="diag-summary" id="d-summary" hidden></pre>
+      </fieldset>
+
+      <p class="diag-err" id="d-err" role="alert"></p>
+      <div class="diag-actions">
+        <button type="button" class="button" id="d-back" hidden>Voltar</button>
+        <button type="button" class="button primary" id="d-next">Continuar</button>
+        <button type="button" class="linklike" id="d-skip" hidden>Pular este passo</button>
+        <a class="button primary" id="d-wa" href="https://wa.me/5511993287070" hidden>Enviar pelo WhatsApp</a>
+        <a class="linklike" id="d-mail" href="mailto:comercial@nova-sync.net" hidden>Prefiro enviar por e-mail</a>
       </div>
-      <div class="diag-cost" role="status" id="d-cost" hidden>
-        <p>Custo estimado de parada por mês</p>
-        <output id="d-month"></output>
-        <p id="d-year"></p>
-      </div>
-      <p class="hint" style="margin-top:14px">Inclua venda perdida, equipe ociosa e retrabalho no custo da hora. É uma estimativa sua, não uma promessa de economia.</p>
-    </fieldset>
-
-    <fieldset data-step="4" hidden>
-      <legend>Se isso fosse resolvido, o que mudaria para você?</legend>
-      <p class="hint">Marque o que mais importa.</p>
-      <div class="chips" data-name="necessidades" data-multi="1"></div>
-    </fieldset>
-
-    <fieldset data-step="5" hidden>
-      <legend>Qual seria o próximo passo?</legend>
-      <p class="hint">Escolha um. A mensagem segue com o que você respondeu.</p>
-      <div class="chips stack" data-name="avanco"></div>
-      <pre class="diag-summary" id="d-summary" hidden></pre>
-    </fieldset>
-
-    <p class="diag-err" id="d-err" role="alert"></p>
-    <div class="diag-actions">
-      <button type="button" class="button" id="d-back" hidden>Voltar</button>
-      <button type="button" class="button primary" id="d-next">Continuar</button>
-      <button type="button" class="linklike" id="d-skip" hidden>Pular este passo</button>
-      <a class="button primary" id="d-wa" href="https://wa.me/5511993287070" hidden>Enviar pelo WhatsApp</a>
-      <a class="linklike" id="d-mail" href="mailto:comercial@nova-sync.net" hidden>Prefiro enviar por e-mail</a>
     </div>
   </form>
   <p class="diag-fallback" id="d-nojs">Para fazer o diagnóstico, ative o JavaScript. Se preferir, fale direto pelo <a href="https://wa.me/5511993287070">WhatsApp</a> ou por <a href="mailto:comercial@nova-sync.net">comercial@nova-sync.net</a>.</p>
+  <p class="diag-note">Nada é guardado em servidor: o que você responde só segue na mensagem que você decidir enviar.</p>
 </main>
 <footer class="footer">
       <div class="wrap">
