@@ -57,24 +57,26 @@ state?.addEventListener("change", () => {
 });
 const calc = document.querySelector("#calculator");
 function calculate() {
-  const hours = Number(document.querySelector("#hours").value),
-    cost = Number(document.querySelector("#cost").value),
-    weeks = Number(document.querySelector("#weeks").value);
+  const calls = Number(document.querySelector("#calls").value),
+    down = Number(document.querySelector("#down").value),
+    rate = Number(document.querySelector("#rate").value);
   const output = document.querySelector("#estimate"),
-    caption = document.querySelector("#estimate-caption");
+    caption = document.querySelector("#estimate-caption"),
+    cta = document.querySelector("#calc-cta");
   if (!calc.checkValidity()) {
     output.textContent = "Revise os valores";
     caption.textContent =
       "Use números dentro dos limites indicados nos campos.";
     return;
   }
-  const cents = Math.round(cost * 100),
-    totalCents = Math.round(hours * weeks * cents);
-  output.textContent = new Intl.NumberFormat("pt-BR", {
-    style: "currency",
-    currency: "BRL",
-  }).format(totalCents / 100);
-  caption.textContent = `${hours * weeks} horas de busca no período. Estimativa do tempo da sua equipe.`;
+  const brl = (cents) =>
+    new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" }).format(cents / 100);
+  const hours = calls * down,
+    monthCents = Math.round(hours * Math.round(rate * 100));
+  output.textContent = brl(monthCents);
+  caption.textContent = `${hours} horas paradas por mês, ${brl(monthCents * 12)} por ano.`;
+  // O botão único leva a conta para o diagnóstico, que já abre o passo do custo preenchido.
+  cta.href = `diagnostico.html?c=${calls}&d=${down}&r=${rate}`;
 }
 calc?.addEventListener("input", calculate);
 if (calc) calculate();
