@@ -147,17 +147,47 @@
   slider.addEventListener('input', hora);
   hora();
 
-  // S.07: tarifa da visita (R$ 300 cobre 2 h; adicional de R$ 90 por equipamento ou hora, vale o maior; R$ 1,80/km).
-  const brl = n => n.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
-  const num = (id, lo, hi) => Math.min(hi, Math.max(lo, Math.floor(Number($(id).value)) || lo));
-  function preco() {
-    const h = num('#p-h', 1, 12), e = num('#p-e', 1, 20), k = num('#p-k', 0, 500);
-    const ad = Math.max(0, h - 2), eq = e - 1, n = Math.max(ad, eq);
-    $('#p-total').textContent = brl(300 + 90 * n + 1.8 * k);
-    $('#p-det').textContent = `R$ 300 + ${n} × R$ 90 (${n === 0 ? 'sem adicional' : ad >= eq ? 'horas adicionais' : 'equipamentos adicionais'}) + ${k} km × R$ 1,80`;
+  // S.03: painéis. Um aberto por vez; a lanterna segue o ponteiro; troca sozinho enquanto ninguém mexe.
+  const panels = [...document.querySelectorAll('.kx-panel')];
+  let auto = true, cur = 0;
+  function openPanel(i) {
+    cur = i;
+    panels.forEach((el, k) => { el.classList.toggle('is-on', k === i); el.querySelector('.kx-panel-tab').setAttribute('aria-expanded', String(k === i)); });
   }
-  document.querySelectorAll('.kx-form input').forEach(i => i.addEventListener('input', preco));
-  preco();
+  panels.forEach((el, k) => {
+    el.addEventListener('click', () => { auto = false; openPanel(k); });
+    el.addEventListener('pointermove', e => {
+      const r = el.getBoundingClientRect();
+      el.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+      el.style.setProperty('--my', (e.clientY - r.top) + 'px');
+    });
+  });
+  let panelsSeen = false;
+  new IntersectionObserver(([e]) => { panelsSeen = e.isIntersecting; }, { threshold: .5 }).observe($('#panels'));
+  if (!reduce.matches) setInterval(() => { if (auto && panelsSeen && !document.hidden) openPanel((cur + 1) % panels.length); }, 5500);
+
+  // Números do vigia contam ao entrar na tela.
+  const countIO = new IntersectionObserver((es, o) => es.forEach(e => {
+    if (!e.isIntersecting) return;
+    o.unobserve(e.target);
+    const to = Number(e.target.dataset.count);
+    if (reduce.matches) return;
+    const t0 = performance.now();
+    requestAnimationFrame(function step(now) {
+      const t = Math.min(1, (now - t0) / 1400);
+      e.target.textContent = Math.round(to * (1 - (1 - t) ** 3));
+      if (t < 1) requestAnimationFrame(step);
+    });
+  }), { threshold: .6 });
+  document.querySelectorAll('[data-count]').forEach(c => { if (!reduce.matches) c.textContent = '0'; countIO.observe(c); });
+
+  // Vídeos de fundo (painel, amanhecer): carregam e tocam só perto da tela.
+  document.querySelectorAll('video[data-src]').forEach(v => {
+    if (v.closest('.kx-layers')) return;
+    new IntersectionObserver(([e]) => {
+      if (e.isIntersecting) { if (!v.src) v.src = v.dataset.src; if (!reduce.matches) v.play().catch(() => {}); } else v.pause();
+    }, { rootMargin: '200px' }).observe(v);
+  });
 
   // S.05: painel simulado. Estados: ok, tol (tolerância), bad (chamado aberto), tec (técnico designado), val (validando).
   const EQ = [

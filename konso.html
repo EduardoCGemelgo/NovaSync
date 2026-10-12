@@ -179,24 +179,41 @@
           <p class="kx-tag">S.03 · Problema</p>
           <h2 id="falha-title">A falha silenciosa<br /><span class="kx-dim">não fica só no equipamento.</span></h2>
         </header>
-        <div class="kx-cards">
-          <details class="kx-card" name="kx-falha" open>
-            <summary><span>01</span><strong>Você descobre depois</strong><small>MTTD alto</small></summary>
-            <p>O tempo entre a falha e alguém perceber (MTTD) é, na prática, o tempo até o cliente ligar ou a loja abrir. Até lá o equipamento segue parado e ninguém registrou a hora.</p>
-          </details>
-          <details class="kx-card" name="kx-falha">
-            <summary><span>02</span><strong>O prazo corre sem você</strong><small>SLA</small></summary>
-            <p>O SLA com o seu fornecedor ou cliente começa na falha, não no telefonema. Quando o chamado abre tarde, o prazo já nasce consumido e o atraso vira discussão contratual.</p>
-          </details>
-          <details class="kx-card" name="kx-falha">
-            <summary><span>03</span><strong>Uma falha vira várias</strong><small>Efeito dominó</small></summary>
-            <p>Switch que cai derruba PDVs, coletores e impressoras no mesmo ponto. Sem correlação, cada sintoma vira um chamado diferente e a causa raiz continua escondida.</p>
-          </details>
-          <details class="kx-card" name="kx-falha">
-            <summary><span>04</span><strong>A visita volta a ser perdida</strong><small>Reincidência</small></summary>
-            <p>Sem histórico de quando o sinal caiu e voltou, o técnico chega sem contexto, não reproduz o problema e a visita é paga sem resolver. A reabertura custa a segunda viagem.</p>
-          </details>
+        <div class="kx-panels" id="panels">
+          <article class="kx-panel is-on" data-i="0">
+            <img src="midia/konso-painel-1.jpg" alt="Loja às escuras com o terminal de caixa em vermelho e um telefone fixo no balcão." width="1200" height="1600" loading="lazy" />
+            <button type="button" class="kx-panel-tab" aria-expanded="true"><span>01</span><strong>Você descobre depois</strong></button>
+            <div class="kx-panel-body"><small>MTTD alto</small><h3>Você descobre depois.</h3><p>O tempo entre a falha e alguém perceber (MTTD) é, na prática, o tempo até o cliente ligar ou a loja abrir. Até lá o equipamento segue parado e ninguém registrou a hora.</p></div>
+          </article>
+          <article class="kx-panel" data-i="1">
+            <img src="midia/konso-painel-2.jpg" alt="Escritório vazio à noite, com relógio na parede marcando duas e catorze." width="1200" height="1600" loading="lazy" />
+            <button type="button" class="kx-panel-tab" aria-expanded="false"><span>02</span><strong>O prazo corre sem você</strong></button>
+            <div class="kx-panel-body"><small>SLA</small><h3>O prazo corre sem você.</h3><p>O SLA com o seu fornecedor ou cliente começa na falha, não no telefonema. Quando o chamado abre tarde, o prazo já nasce consumido e o atraso vira discussão contratual.</p></div>
+          </article>
+          <article class="kx-panel" data-i="2">
+            <img src="midia/konso-painel-3.jpg" alt="Switch e patch panel com portas vermelhas piscando e, ao fundo, o estoque com PDVs e impressora." width="1200" height="1600" loading="lazy" />
+            <button type="button" class="kx-panel-tab" aria-expanded="false"><span>03</span><strong>Uma falha vira várias</strong></button>
+            <div class="kx-panel-body"><small>Efeito dominó</small><h3>Uma falha vira várias.</h3><p>Switch que cai derruba PDVs, coletores e impressoras no mesmo ponto. Sem correlação, cada sintoma vira um chamado diferente e a causa raiz continua escondida.</p></div>
+          </article>
+          <article class="kx-panel" data-i="3">
+            <img src="midia/konso-painel-4.jpg" alt="Técnico diante da porta de aço fechada de uma loja, de manhã cedo, olhando o celular." width="1200" height="1600" loading="lazy" />
+            <button type="button" class="kx-panel-tab" aria-expanded="false"><span>04</span><strong>A visita volta a ser perdida</strong></button>
+            <div class="kx-panel-body"><small>Reincidência</small><h3>A visita volta a ser perdida.</h3><p>Sem histórico de quando o sinal caiu e voltou, o técnico chega sem contexto, não reproduz o problema e a visita é paga sem resolver. A reabertura custa a segunda viagem.</p></div>
+          </article>
         </div>
+        <p class="kx-note kx-hint">Passe o mouse para iluminar a cena. Toque ou clique para abrir cada uma.</p>
+      </section>
+
+
+      <!-- Os números do vigia -->
+      <section class="kx-stats wrap" aria-label="Os números do vigia">
+        <p class="kx-tag">Os números do vigia</p>
+        <dl>
+          <div><dt>da falha ao chamado</dt><dd><span data-count="7">7</span><small>min</small></dd><p>5 min de tolerância e até 2 min de varredura.</p></div>
+          <div><dt>janela da assinatura</dt><dd><span data-count="300">300</span><small>s</small></dd><p>Evento fora dela é recusado. Nada de repetir mensagem antiga.</p></div>
+          <div><dt>prazo do chamado</dt><dd><span data-count="2">2</span><small>dias úteis</small></dd><p>Conta desde a abertura, pulando fim de semana e feriado nacional.</p></div>
+          <div><dt>quem olha</dt><dd><span>24</span><small>× 7</small></dd><p>Madrugada, domingo e feriado entram na mesma conta.</p></div>
+        </dl>
       </section>
 
       <!-- S.03 Implicação com o seu caso: a hora da falha -->
@@ -297,6 +314,7 @@ CH-2481  finalizado</pre>
 
       <!-- S.05 Ao vivo: painel simulado -->
       <section id="ao-vivo" class="kx-block kx-live wrap" aria-labelledby="live-title">
+        <video class="kx-live-bg" muted loop playsinline preload="none" data-src="midia/painel-fundo.mp4" aria-hidden="true"></video>
         <header class="kx-head">
           <p class="kx-tag">S.06 · Ao vivo</p>
           <h2 id="live-title">O painel de uma noite<br /><span class="kx-dim">sem ninguém no escritório.</span></h2>
@@ -327,26 +345,27 @@ CH-2481  finalizado</pre>
         </ul>
       </section>
 
-      <!-- S.07 Preço da visita -->
-      <section id="preco" class="kx-block kx-preco wrap" aria-labelledby="preco-title">
-        <header class="kx-head">
-          <p class="kx-tag">S.08 · Quando vira visita</p>
-          <h2 id="preco-title">O vigia avisa.<br /><span class="kx-dim">A visita tem tarifa clara.</span></h2>
-        </header>
-        <div class="kx-calc">
+      <!-- S.08 Tarifa: o dia clareou -->
+      <section id="preco" class="kx-preco" aria-labelledby="preco-title">
+        <video class="kx-preco-bg" muted loop playsinline preload="none" data-src="midia/nevoa.mp4" aria-hidden="true"></video>
+        <div class="wrap">
+          <header class="kx-head">
+            <p class="kx-tag">S.08 · Quando vira visita</p>
+            <h2 id="preco-title">O vigia avisa.<br /><span class="kx-grad-dawn">A visita tem tarifa clara.</span></h2>
+          </header>
           <dl class="kx-tariff">
-            <div><dt>Visita</dt><dd>R$ 300<small>base · cobre 2 h no local</small></dd></div>
-            <div><dt>Adicional</dt><dd>R$ 90<small>por equipamento ou hora adicional · vale o maior, não soma</small></dd></div>
-            <div><dt>Deslocamento</dt><dd>R$ 1,80<small>por km rodado, ida e volta</small></dd></div>
+            <div><dt>Visita</dt><dd>R$ 300</dd><small>base, cobre 2 h no local</small></div>
+            <div><dt>Adicional</dt><dd>R$ 90</dd><small>por equipamento ou hora adicional. Vale o maior, não soma.</small></div>
+            <div><dt>Deslocamento</dt><dd>R$ 1,80</dd><small>por km rodado, ida e volta</small></div>
           </dl>
-          <form class="kx-form" onsubmit="return false">
-            <label>Horas no local<input id="p-h" type="number" min="1" max="12" value="2" inputmode="numeric" /></label>
-            <label>Equipamentos<input id="p-e" type="number" min="1" max="20" value="1" inputmode="numeric" /></label>
-            <label>Km, ida e volta<input id="p-k" type="number" min="0" max="500" value="40" inputmode="numeric" /></label>
-            <div class="kx-total"><small>Estimativa de uma visita</small><output id="p-total">R$ 372,00</output><p id="p-det"></p></div>
-          </form>
+          <p class="kx-note">É a tarifa de visita do Horus. O valor do vigia (monitoramento e abertura automática) é combinado no piloto, conforme a quantidade de equipamentos.</p>
         </div>
-        <p class="kx-note">É a tarifa de visita do Horus. O valor do vigia (monitoramento e abertura automática) é combinado no piloto, conforme a quantidade de equipamentos.</p>
+      </section>
+
+      <!-- Fecho visual: a manhã seguinte -->
+      <section class="kx-final" aria-label="A manhã seguinte">
+        <img src="midia/konso-fim.jpg" alt="Amanhecer sobre uma grande cidade brasileira, com uma van de atendimento estacionada e um técnico descarregando a caixa de ferramentas." width="2048" height="1146" loading="lazy" />
+        <p class="kx-final-quote">Quando o dia clareia,<br /><span class="kx-grad-dawn">o técnico já está a caminho.</span></p>
       </section>
 
       <!-- FAQ -->
