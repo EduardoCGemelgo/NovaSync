@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="google-site-verification" content="MnqBIFDmxXtR1ftUqHm-EqZQVk6Md9OFMd__nM3XZEA">
+  <title>Diagnóstico de 5 passos | NovaSync</title>
+<meta name="description" content="Responda 5 perguntas sobre a sua operação, veja o custo de equipamento parado e escolha o próximo passo com a NovaSync.">
+  <link rel="canonical" href="https://nova-sync.net/diagnostico.html">
+<link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="stylesheet" href="novasync.css">
+<link rel="stylesheet" href="landing-art.css">
+<link rel="stylesheet" href="utility-pages.css?v=20260929">
+<link rel="stylesheet" href="diagnostico.css?v=20261012">
+<script src="diagnostico.js" defer></script>
+<script src="novasync.js" defer></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="NovaSync">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:title" content="Diagnóstico de 5 passos | NovaSync">
+<meta property="og:description" content="Responda 5 perguntas sobre a sua operação, veja o custo de equipamento parado e escolha o próximo passo com a NovaSync.">
+<meta property="og:image" content="https://nova-sync.net/midia/og-home.jpg">
+<meta property="og:image:alt" content="NovaSync">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Diagnóstico de 5 passos | NovaSync">
+<meta name="twitter:description" content="Responda 5 perguntas sobre a sua operação, veja o custo de equipamento parado e escolha o próximo passo com a NovaSync.">
+<meta name="twitter:image" content="https://nova-sync.net/midia/og-home.jpg">
+</head>
+<body class="landing-art utility-page">
+<a class="skip" href="#conteudo">Pular para o conteúdo</a>
+<header class="nav">
+      <div class="wrap">
+        <a href="index.html#inicio" class="brand" aria-label="NovaSync — início"
+          ><img src="logo-star.png" alt="" width="36" height="36" />NovaSync</a
+        >
+        <nav class="nav-links" aria-label="Navegação principal">
+          <a href="index.html#cobertura">Cobertura</a
+          ><a href="index.html#servicos">O que fazemos</a
+          ><a href="index.html#como-funciona">Como funciona</a
+          ><details class="nav-sectors"><summary>Setores</summary><ul><li><a href="field-service-varejo.html">Varejo</a></li><li><a href="field-service-bancos.html">Bancos</a></li><li><a href="field-service-saude.html">Saúde</a></li><li><a href="field-service-industria.html">Indústria</a></li><li><a href="field-service-telecom.html">Telecom</a></li><li><a href="field-service-transporte.html">Transporte</a></li><li><a href="field-service-eventos.html">Eventos</a></li></ul></details><a href="index.html#cost-calculator">Calculadora</a
+          ><a href="index.html#faq">FAQ</a
+          ><a href="index.html#cadastro-tecnico">Cadastro técnico</a>
+        </nav>
+        <div class="nav-actions">
+          <a href="https://app.nova-sync.net">Área do cliente </a
+          ><a href="index.html#contato" class="button primary">Vamos conversar </a>
+        </div>
+        <button
+          class="menu-toggle"
+          type="button"
+          aria-label="Abrir menu"
+          aria-expanded="false"
+          aria-controls="mobile-menu"
+        >
+          ☰
+        </button>
+      </div>
+      <nav
+        id="mobile-menu"
+        class="mobile-menu"
+        aria-label="Navegação mobile"
+        hidden
+      >
+        <a href="index.html#cobertura">Cobertura</a><a href="index.html#servicos">O que fazemos</a
+        ><a href="index.html#como-funciona">Como funciona</a
+        ><details class="nav-sectors"><summary>Setores</summary><ul><li><a href="field-service-varejo.html">Varejo</a></li><li><a href="field-service-bancos.html">Bancos</a></li><li><a href="field-service-saude.html">Saúde</a></li><li><a href="field-service-industria.html">Indústria</a></li><li><a href="field-service-telecom.html">Telecom</a></li><li><a href="field-service-transporte.html">Transporte</a></li><li><a href="field-service-eventos.html">Eventos</a></li></ul></details><a href="index.html#cost-calculator">Calculadora</a
+        ><a href="index.html#faq">FAQ</a
+        ><a href="index.html#cadastro-tecnico">Cadastro técnico</a
+        ><a href="https://app.nova-sync.net">Área do cliente </a
+        ><a href="index.html#contato">Vamos conversar </a>
+      </nav>
+    </header>
+<main id="conteudo" class="wrap diag">
+  <p class="eyebrow">Diagnóstico · 5 passos</p>
+  <h1>Veja o tamanho do problema antes de falar com a gente.</h1>
+  <p class="intro">Cinco perguntas sobre a sua operação. No fim, você vê quanto custa o equipamento parado e escolhe o próximo passo. Nada é guardado em servidor: o resultado só segue na mensagem que você decidir enviar.</p>
+  <form id="diag" novalidate onsubmit="return false;" hidden>
+    <div class="diag-progress" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+    <p class="diag-count" id="diag-count" aria-live="polite"></p>
+
+    <fieldset data-step="1" hidden>
+      <legend>Como é a sua operação?</legend>
+      <p class="hint">Três cliques, sem digitar.</p>
+      <div class="diag-group"><b>Ramo</b><div class="chips" data-name="ramo"></div></div>
+      <div class="diag-group"><b>Quantas unidades atendidas (lojas, agências, clínicas, bases)</b><div class="chips" data-name="unidades"></div></div>
+      <div class="diag-group"><b>Em quantos estados</b><div class="chips" data-name="estados"></div></div>
+    </fieldset>
+
+    <fieldset data-step="2" hidden>
+      <legend>O que mais acontece hoje?</legend>
+      <p class="hint">Marque tudo o que se aplica.</p>
+      <div class="chips" data-name="problemas" data-multi="1"></div>
+    </fieldset>
+
+    <fieldset data-step="3" hidden>
+      <legend>Quanto custa isso por mês?</legend>
+      <p class="hint">Use os seus números. A conta é feita aqui, no seu navegador. Pode pular se preferir.</p>
+      <div class="diag-nums">
+        <label for="d-calls">Chamados por mês<input id="d-calls" type="number" inputmode="decimal" min="0" max="100000" step="1" placeholder="ex.: 20"></label>
+        <label for="d-down">Horas paradas por chamado<input id="d-down" type="number" inputmode="decimal" min="0" max="720" step="0.5" placeholder="ex.: 16"></label>
+        <label for="d-rate">Custo de uma hora parada (R$)<input id="d-rate" type="number" inputmode="decimal" min="0" max="1000000" step="0.01" placeholder="ex.: 150"></label>
+      </div>
+      <div class="diag-cost" role="status" id="d-cost" hidden>
+        <p>Custo estimado de parada por mês</p>
+        <output id="d-month"></output>
+        <p id="d-year"></p>
+      </div>
+      <p class="hint" style="margin-top:14px">Inclua venda perdida, equipe ociosa e retrabalho no custo da hora. É uma estimativa sua, não uma promessa de economia.</p>
+    </fieldset>
+
+    <fieldset data-step="4" hidden>
+      <legend>Se isso fosse resolvido, o que mudaria para você?</legend>
+      <p class="hint">Marque o que mais importa.</p>
+      <div class="chips" data-name="necessidades" data-multi="1"></div>
+    </fieldset>
+
+    <fieldset data-step="5" hidden>
+      <legend>Qual seria o próximo passo?</legend>
+      <p class="hint">Escolha um. A mensagem segue com o que você respondeu.</p>
+      <div class="chips stack" data-name="avanco"></div>
+      <pre class="diag-summary" id="d-summary" hidden></pre>
+    </fieldset>
+
+    <p class="diag-err" id="d-err" role="alert"></p>
+    <div class="diag-actions">
+      <button type="button" class="button" id="d-back" hidden>Voltar</button>
+      <button type="button" class="button primary" id="d-next">Continuar</button>
+      <button type="button" class="linklike" id="d-skip" hidden>Pular este passo</button>
+      <a class="button primary" id="d-wa" href="https://wa.me/5511993287070" hidden>Enviar pelo WhatsApp</a>
+      <a class="linklike" id="d-mail" href="mailto:comercial@nova-sync.net" hidden>Prefiro enviar por e-mail</a>
+    </div>
+  </form>
+  <p class="diag-fallback" id="d-nojs">Para fazer o diagnóstico, ative o JavaScript. Se preferir, fale direto pelo <a href="https://wa.me/5511993287070">WhatsApp</a> ou por <a href="mailto:comercial@nova-sync.net">comercial@nova-sync.net</a>.</p>
+</main>
+<footer class="footer">
+      <div class="wrap">
+        <span>© 2026 NovaSync · Operação em campo. Em sincronia.</span
+        ><a href="politica-de-privacidade.html">Política de Privacidade</a
+        ><a href="index.html#inicio">Voltar ao início </a>
+      </div>
+    </footer>
+</body>
+</html>
