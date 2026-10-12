@@ -85,8 +85,8 @@ body.kx { background:#050609; overflow-x:clip; --moon:#d7c5ff; --vio:#9b83ee; --
 .kx-panel-tab span { font:12px ui-monospace,monospace; color:#d7c5ff; }
 .kx-panel-tab strong { writing-mode:vertical-rl; transform:rotate(180deg); font-size:clamp(17px,1.5vw,22px); font-weight:600; letter-spacing:-.02em; white-space:nowrap; }
 .kx-panel.is-on .kx-panel-tab { opacity:0; pointer-events:none; }
-.kx-panel-body { position:absolute; inset:auto 0 0; z-index:2; padding:30px 34px 34px; opacity:0; transform:translateY(18px); transition:opacity .5s .15s,transform .5s .15s; }
-.kx-panel.is-on .kx-panel-body { opacity:1; transform:none; }
+.kx-panel-body { position:absolute; inset:auto auto 0 0; z-index:2; width:clamp(300px,34vw,520px); padding:30px 34px 34px; opacity:0; transform:translateY(12px); pointer-events:none; transition:opacity .2s,transform .2s; }
+.kx-panel.is-on .kx-panel-body { opacity:1; transform:none; pointer-events:auto; transition:opacity .5s .45s,transform .5s .45s; }
 .kx-panel-body small { color:var(--vio); font:11px ui-monospace,monospace; letter-spacing:.14em; text-transform:uppercase; }
 .kx-panel-body h3 { margin:8px 0 10px; font-size:clamp(28px,3.2vw,48px); font-weight:600; letter-spacing:-.045em; line-height:1.05; }
 .kx-panel-body p { max-width:46ch; color:#c3cde0; font-size:16px; line-height:1.6; }
@@ -237,7 +237,7 @@ body.kx { background:#050609; overflow-x:clip; --moon:#d7c5ff; --vio:#9b83ee; --
   .kx-panel.is-on { height:min(560px,72svh); }
   .kx-panel-tab { flex-direction:row; align-items:center; gap:14px; }
   .kx-panel-tab strong { writing-mode:horizontal-tb; transform:none; font-size:16px; }
-  .kx-panel-body { padding:22px 20px 24px; }
+  .kx-panel-body { width:100%; padding:22px 20px 24px; }
   .kx-panel-body p { font-size:15px; }
   .kx-stats dl { grid-template-columns:1fr; }
   .kx-stats dl>div+div { border-left:0; padding-left:0; border-top:1px solid #2a3047; margin-top:18px; }
@@ -266,3 +266,10 @@ body.kx { background:#050609; overflow-x:clip; --moon:#d7c5ff; --vio:#9b83ee; --
   .kx-detail article { position:static; opacity:1; transform:none; }
   .kx-nodes li { opacity:1; }
 }
+
+/* Ícone do Konso: o disco do Hórus (dia) passa na frente do anel (noite) */
+.kx-icon { width:clamp(86px,9vw,128px); height:auto; margin:0 auto 22px; overflow:visible; }
+.kx-icon-night { fill:none; stroke:var(--moon); stroke-width:4; }
+.kx-icon-day { fill:#ffc46b; stroke:#050609; stroke-width:7; paint-order:stroke; animation:kx-eclipse 16s ease-in-out infinite; filter:drop-shadow(0 0 18px #ffc46b66); }
+@keyframes kx-eclipse { 0%,100% { transform:translateX(0); } 50% { transform:translateX(-58px); } }
+@media (prefers-reduced-motion:reduce) { .kx-icon-day { animation:none; } }
