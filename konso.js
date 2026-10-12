@@ -92,7 +92,13 @@
     const top = el => el.getBoundingClientRect().top + scrollY;
     const holds = scenes.map(el => [top(el), top(el) + el.offsetHeight - h]);
     const beats = scenes.flatMap((el, i) => el.dataset.stops.split(' ').map(p => fit(holds[i][0] + p * (holds[i][1] - holds[i][0]))));
-    const pins = new Set([0, end, ...blocks.map(s => fit(top(s) - parseFloat(getComputedStyle(s).scrollMarginTop)))]);
+    // início de cada bloco e, nos blocos mais altos que a tela, também o fim dele (senão o rodapé do bloco nunca aparece);
+    // no celular o menu fixo cobre o topo, então a área útil começa abaixo dele
+    const navH = innerWidth <= 900 ? $('.nav').offsetHeight + 16 : 0;
+    const pins = new Set([0, end, ...blocks.flatMap(s => {
+      const t = top(s) - navH, extra = s.offsetHeight - (h - navH);
+      return extra > h * .3 ? [fit(t), fit(t + extra)] : [fit(navH ? t + extra / 2 : t + Math.max(0, extra) / 2)]; // cabe (ou quase): uma parada só
+    })]);
     const a = [0];
     for (const y of [...pins, ...beats].sort((p, q) => p - q)) {
       if (y - a.at(-1) < h * .3) { // quase iguais: fica a de cima, salvo início de seção e fim
