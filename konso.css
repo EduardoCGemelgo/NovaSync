@@ -253,12 +253,7 @@ body.kx { background:#050609; overflow-x:clip; --moon:#d7c5ff; --vio:#9b83ee; --
   .kx-nodes li { opacity:1; }
 }
 
-/* Ícone do Konso: o disco do Hórus (dia) passa na frente do anel (noite) */
-.kx-icon { width:clamp(86px,9vw,128px); height:auto; margin:0 auto 22px; overflow:visible; }
-.kx-icon-night { fill:none; stroke:var(--moon); stroke-width:4; }
-.kx-icon-day { fill:#ffc46b; stroke:#050609; stroke-width:7; paint-order:stroke; animation:kx-eclipse 16s ease-in-out infinite; filter:drop-shadow(0 0 18px #ffc46b66); }
-@keyframes kx-eclipse { 0%,100% { transform:translateX(0); } 50% { transform:translateX(-58px); } }
-@media (prefers-reduced-motion:reduce) { .kx-icon-day { animation:none; } }
+
 
 /* Celular: nada pode passar da tela */
 @media (max-width:700px) {
@@ -305,3 +300,15 @@ body.kx { background:#050609; overflow-x:clip; --moon:#d7c5ff; --vio:#9b83ee; --
 }
 
 @media (max-width:700px) and (min-height:760px) { .kx-circuit .kx-stick { align-content:center; } }
+
+/* Celular: 4 equipamentos no painel para caber numa tela só */
+@media (max-width:700px) {
+  .kx-tile:nth-child(n+5) { display:none; }
+  .kx-tile { min-height:96px; }
+  .kx-log { height:112px; padding-block:10px 12px; }
+  .kx-live { padding-bottom:20px; }
+  .kx-live .kx-head { margin-bottom:18px; }
+  .kx-board-bar { padding:10px 14px; }
+  .kx-tiles { gap:8px; padding:10px; }
+  .kx-live .kx-note { margin-top:12px; font-size:12px; }
+}

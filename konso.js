@@ -224,7 +224,7 @@
   async function queda() {
     if (running) return;
     running = true; btn.disabled = true;
-    const livres = els.map((_, i) => i).filter(i => els[i].dataset.s === 'ok');
+    const livres = els.map((_, i) => i).filter(i => els[i].dataset.s === 'ok' && els[i].offsetParent); // só os que aparecem (no celular são 4)
     const i = livres[Math.floor(Math.random() * livres.length)];
     const nome = `${EQ[i][0]} · ${EQ[i][1]}`;
     now += 7; tick(); setS(i, 'tol'); say(`${nome} sem sinal. Aguardando a tolerância.`, 'bad');
@@ -239,7 +239,7 @@
     running = false; btn.disabled = false;
   }
   btn.addEventListener('click', queda);
-  say('Konso vigiando 8 equipamentos. Nenhum alerta.', 'ok');
+  say(`Konso vigiando ${els.filter(e => e.offsetParent).length} equipamentos. Nenhum alerta.`, 'ok');
   // sozinho, a cada ~11 s, enquanto o painel estiver na tela (parado se a pessoa prefere menos movimento)
   let visible = false;
   new IntersectionObserver(([e]) => { visible = e.isIntersecting; }, { threshold: .4 }).observe($('.kx-board'));
