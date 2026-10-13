@@ -280,7 +280,7 @@
 
 /* ===== A vida de um chamado: lista das 5 etapas + tela real ===== */
 .hx-duo.hx-cc { height:560vh; }
-.hx-duo.hx-cc .hx-stick { display:grid; grid-template-columns:minmax(300px,.8fr) minmax(0,1.3fr); grid-template-rows:auto auto; grid-template-areas:"t s" "l s"; align-content:center; column-gap:clamp(24px,4vw,64px); align-items:center; position:sticky; top:0; width:auto; margin:0; height:100svh; padding:clamp(92px,13vh,120px) var(--art-gutter,24px) clamp(24px,5vh,48px); background:#06070d; overflow:hidden; box-sizing:border-box; }
+.hx-duo.hx-cc .hx-stick { display:grid; grid-template-columns:minmax(0,1.3fr) minmax(300px,.8fr); grid-template-rows:auto auto; grid-template-areas:"s t" "s l"; align-content:center; column-gap:clamp(24px,4vw,64px); align-items:center; position:sticky; top:0; width:auto; margin:0; height:100svh; padding:clamp(92px,13vh,120px) var(--art-gutter,24px) clamp(24px,5vh,48px); background:#06070d; overflow:hidden; box-sizing:border-box; }
 .st-text { grid-area:t; align-self:end; } .st-list { grid-area:l; align-self:start; } .st-stage { grid-area:s; }
 .st-text h2 { font-size:clamp(26px,min(3vw,5vh),44px); margin:8px 0 clamp(14px,3vh,28px); line-height:1.05; }
 .st-text h2 .hx-dim { display:block; margin-left:0; }
@@ -299,7 +299,7 @@
 .st-shots img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:top; opacity:0; transition:opacity .5s; }
 .st-shots img.is-on { opacity:1; }
 .st-shots img[src*="relatorio"] { height:auto; top:50%; transform:translateY(-50%); }
-.st-phone { position:absolute; right:-2%; bottom:-6%; margin:0; width:min(22%,200px); aspect-ratio:600/1243; border:5px solid #1b2030; border-radius:22px; overflow:hidden; background:#0a0c12; box-shadow:0 30px 70px -10px #000; opacity:0; transform:translateY(20px); transition:opacity .5s,transform .5s; }
+.st-phone { position:absolute; left:-2%; bottom:-6%; margin:0; width:min(22%,200px); aspect-ratio:600/1243; border:5px solid #1b2030; border-radius:22px; overflow:hidden; background:#0a0c12; box-shadow:0 30px 70px -10px #000; opacity:0; transform:translateY(20px); transition:opacity .5s,transform .5s; }
 .hx-cc:not([data-b="0"]):not([data-b="4"]) .st-phone { opacity:1; transform:none; }
 .st-phone img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:top; opacity:0; transition:opacity .4s; }
 .st-phone img.is-on { opacity:1; }
@@ -310,7 +310,7 @@
   .st-text h2 { font-size:22px; margin:6px 0 0; } .st-text h2 .hx-dim { display:none; }
   .st-desk .hx-bar span { display:none; }
   .st-desk { width:min(100%,calc(34svh * 1.6)); margin-inline:auto; }
-  .st-phone { right:4%; width:19%; }
+  .st-phone { left:auto; right:4%; width:19%; }
   .st-list li { padding:6px 10px; grid-template-columns:26px 1fr; gap:8px; } .st-list strong { font-size:15px; } .st-list p { font-size:13px; line-height:1.45; }
 }
 @media (prefers-reduced-motion:reduce) { .hx-duo.hx-cc { height:auto; } .hx-duo.hx-cc .hx-stick { position:relative; height:auto; min-height:100svh; } .st-list li { opacity:1; } .st-list p { max-height:none; margin-top:6px; } }
