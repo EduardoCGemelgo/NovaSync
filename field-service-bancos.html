@@ -12,8 +12,10 @@
     <link rel="stylesheet" href="novasync.css" />
     <link rel="stylesheet" href="landing-art.css" />
     <link rel="stylesheet" href="setor.css" />
+    <link rel="stylesheet" href="wow.css" />
     <script defer src="novasync.js"></script>
     <script defer src="setor.js"></script>
+    <script defer src="wow.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap">
@@ -125,7 +127,8 @@
     <main id="conteudo" class="st-split">
       <aside class="st-photo" aria-hidden="true">
         <img src="midia/setor-bancos-hero.jpg" alt="" style="--fx:70%" width="2048" height="1143" fetchpriority="high" />
-        <div class="st-photo-cap"><small>Equipamento parado</small><b>Bancos</b></div>
+        <img class="st-photo-b" src="midia/setor-bancos-win.jpg" alt="" style="--fx:50%" width="1600" height="2000" loading="lazy" />
+        <div class="st-photo-cap"><small data-a="Equipamento parado" data-b="Chamado resolvido">Equipamento parado</small><b>Bancos</b></div>
       </aside>
 
       <div class="st-flow">
@@ -142,6 +145,13 @@
         <section class="st-cost" aria-labelledby="custo-title">
           <h2 id="custo-title">O que custa um terminal fora do ar.</h2>
           <ol><li><h3>Cliente sem atendimento</h3><p>Terminal ou posto parado transfere a fila para o caixa e o cliente para outro canal.</p></li><li><h3>Visita fora da janela</h3><p>Atendimento sem horário combinado interfere na rotina da agência e gera retrabalho para todo mundo.</p></li><li><h3>Atendimento sem prova</h3><p>Sem evidência e relatório, fica difícil comprovar o que foi feito quando alguém pergunta.</p></li></ol>
+        </section>
+
+        <section class="st-win" aria-labelledby="win-title">
+          <figure class="st-win-fig"><img src="midia/setor-bancos-win.jpg" alt="Técnico fechando o painel de um terminal de autoatendimento em uma agência" width="1600" height="2000" loading="lazy" /></figure>
+          <p class="st-tag">O chamado resolvido</p>
+          <h2 id="win-title">A agência volta a atender.<br /><em>Relatório na sua mão.</em></h2>
+          <p>O técnico da região chega com o escopo em mãos, resolve, testa e registra a visita. Você recebe o relatório em PDF com o que foi feito, as evidências e os próximos passos.</p>
         </section>
 
         <section class="st-sim" id="chamado" aria-labelledby="sim-title">
@@ -185,6 +195,7 @@
           <div><details><summary>Como preparar o acesso à agência?</summary><p>Informe os procedimentos de identificação, as autorizações necessárias, o responsável local e a janela permitida. Esses requisitos precisam ser alinhados antes da designação e da visita.</p></details><details><summary>O atendimento pode ocorrer fora do expediente?</summary><p>Informe a janela desejada ao solicitar o serviço. A equipe verifica a disponibilidade na região e combina as condições antes de confirmar o atendimento.</p></details></div>
         </section>
 
+        <div class="wow-mq st-mq rev" aria-hidden="true"><div class="wow-mq-track"><span>Varejo</span><span>Bancos</span><span>Saúde</span><span>Indústria</span><span>Telecom</span><span>Transporte</span><span>Eventos</span><span>Varejo</span><span>Bancos</span><span>Saúde</span><span>Indústria</span><span>Telecom</span><span>Transporte</span><span>Eventos</span></div></div>
         <section class="st-more" aria-labelledby="more-title">
           <p class="st-tag" id="more-title">Outros setores</p>
           <ul><li><a href="field-service-varejo.html">Varejo</a></li><li><a href="field-service-bancos.html" aria-current="page">Bancos</a></li><li><a href="field-service-saude.html">Saúde</a></li><li><a href="field-service-industria.html">Indústria</a></li><li><a href="field-service-telecom.html">Telecom</a></li><li><a href="field-service-transporte.html">Transporte</a></li><li><a href="field-service-eventos.html">Eventos</a></li></ul>

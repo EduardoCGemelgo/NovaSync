@@ -1,0 +1,116 @@
+/* Camada de movimento da home (depois da mesa de despacho) e das páginas de setor. Carrega depois de home2.css / setor.css.
+   Tudo aqui é aditivo: sem wow.js a página fica como estava. html.still e prefers-reduced-motion desligam o movimento. */
+
+/* ===== Palavras que sobem (títulos) ===== */
+.w { display:inline-block; overflow:hidden; vertical-align:top; padding-bottom:.14em; margin-bottom:-.14em; }
+.w > i { display:inline-block; font-style:inherit; transform:translateY(112%) rotate(3deg); transform-origin:0 100%; transition:transform 1s cubic-bezier(.16,.84,.24,1) calc(var(--i) * 70ms); }
+.is-split.in .w > i { transform:none; }
+.sv-t.is-split .w { padding-right:.04em; }
+
+/* ===== Texto que acende conforme a rolagem ===== */
+.wow-scrub { font-size:clamp(22px,2.5vw,36px)!important; line-height:1.4!important; letter-spacing:-.035em; max-width:none!important; }
+.wow-scrub .sw { color:#4b5470; transition:color .35s; }
+.wow-scrub .sw.on { color:#eef1ff; }
+
+/* ===== Cortina: o capítulo sobe com o cantos arredondados ===== */
+.wow-curtain { --wp:1; --ct:#0a0e1a; box-shadow:0 0 0 100vmax var(--ct); background:var(--ct);
+  clip-path:inset(calc((1 - var(--wp)) * 34vh) -100vmax 0 -100vmax round calc((1 - var(--wp)) * 56px) calc((1 - var(--wp)) * 56px) 0 0); }
+
+/* ===== Linha que se desenha no topo da seção ===== */
+.wow-line { position:relative; }
+.wow-line::before { content:""; position:absolute; z-index:1; left:0; right:0; top:0; height:1px; background:linear-gradient(90deg,#c0d1f500,#c0d1f5aa 30%,#c0d1f5aa 70%,#c0d1f500); transform:scaleX(0); transition:transform 1.4s cubic-bezier(.2,.8,.2,1); }
+.wow-line.in::before { transform:scaleX(1); }
+
+/* ===== Faixa de cena: um cartão de foto que abre até a tela inteira ===== */
+.wow-band { --k:0; position:relative; height:175svh; background:#07080e; }
+.wow-band-in { position:sticky; top:0; height:100svh; overflow:hidden; display:grid; align-items:end; }
+.wow-band-media { position:absolute; inset:0; clip-path:inset(calc((1 - var(--k)) * 13svh) calc((1 - var(--k)) * 9vw) round calc((1 - var(--k)) * 44px)); overflow:hidden; background:#0b0e17; }
+.wow-band-media img { position:absolute; left:0; top:-6%; width:100%; height:112%; object-fit:cover; transform:scale(calc(1.32 - var(--k) * .32)); will-change:transform; }
+.wow-band-media::after { content:""; position:absolute; inset:0; background:linear-gradient(90deg,#07080ee6 0,#07080e66 52%,#07080e1a 100%),linear-gradient(#07080e00 40%,#07080ecc 100%); }
+.wow-band-copy { position:relative; z-index:2; width:min(1200px,calc(100% - var(--art-gutter) * 2)); margin:0 auto; padding-bottom:clamp(40px,10svh,110px); opacity:calc(var(--k) * 1.4 - .4); }
+.wow-band-copy h2 { max-width:15ch; font-size:clamp(38px,min(6.4vw,12.5svh),104px); font-weight:500; letter-spacing:-.07em; line-height:.96; }
+.wow-band-copy h2 em { font-style:normal; color:#b9cdf3; }
+.wow-nums { display:flex; flex-wrap:wrap; gap:14px clamp(28px,5vw,72px); margin:clamp(22px,4svh,40px) 0 0; padding:0; list-style:none; }
+.wow-nums li { display:flex; align-items:baseline; gap:10px; }
+.wow-nums b { font-size:clamp(34px,4vw,60px); font-weight:500; letter-spacing:-.06em; line-height:1; color:#eef1ff; font-variant-numeric:tabular-nums; }
+.wow-nums span { color:#b2bdd3; font-size:14px; }
+
+/* ===== Faixa corrida de ramos ===== */
+.st-flow { min-width:0; }
+.wow-mq { contain:inline-size; max-width:100%; overflow:hidden; padding:clamp(28px,5vw,64px) 0; background:#07080e; border-block:1px solid #1d2233; }
+.wow-mq-track { display:flex; width:max-content; animation:wow-mq 46s linear infinite; }
+.wow-mq-track span { padding-right:clamp(28px,4vw,64px); font-size:clamp(54px,11vw,176px); font-weight:500; letter-spacing:-.07em; line-height:1; color:transparent; -webkit-text-stroke:1.5px #4b5876; white-space:nowrap; }
+.wow-mq-track span:nth-child(3n+2) { color:#16203a; -webkit-text-stroke-color:#7d8db0; }
+.wow-mq-track span::after { content:"✦"; display:inline-block; margin-left:clamp(28px,4vw,64px); font-size:.38em; vertical-align:middle; color:#9fb3dc; -webkit-text-stroke:0; }
+.wow-mq.off .wow-mq-track { animation-play-state:paused; }
+.wow-mq.rev .wow-mq-track { animation-direction:reverse; animation-duration:58s; }
+@keyframes wow-mq { to { transform:translateX(-50%); } }
+
+/* ===== Contato: noite do Brasil atrás da frase ===== */
+.contact { position:relative; overflow:hidden; }
+.contact > .wrap { position:relative; z-index:1; }
+.wow-bg { position:absolute; left:0; top:-8%; width:100%; height:116%; object-fit:cover; opacity:.36; will-change:transform; transform:translate3d(0,var(--py,0px),0); }
+.contact::before { content:""; position:absolute; inset:0; z-index:0; background:linear-gradient(#0c0c16 0,#0c0c1600 30%,#0c0c1600 60%,#0c0c16 100%),linear-gradient(90deg,#0c0c16cc,#0c0c1666); }
+
+/* ===== Parallax e cartões 3D ===== */
+.rm-panel figure, .sv-body figure { overflow:hidden; border-radius:28px; }
+.rm-panel img, .sv-body img { border-radius:0; transform:translate3d(0,var(--py,0px),0) scale(1.16); }
+.sv-body img { border-radius:0; }
+[data-tilt] { --rx:0deg; --ry:0deg; transition:transform .5s cubic-bezier(.2,.8,.2,1); transform:perspective(1000px) rotateX(var(--rx)) rotateY(var(--ry)); transform-style:preserve-3d; }
+[data-tilt].tilting { transition:transform .08s linear; }
+[data-tilt]:not([data-tilt="flat"]) { position:relative; }
+[data-tilt]:not([data-tilt="flat"])::after { content:""; position:absolute; inset:0; z-index:3; border-radius:inherit; pointer-events:none; opacity:0; transition:opacity .4s; background:radial-gradient(420px circle at var(--mx,50%) var(--my,50%),#cfe0ff2e,#cfe0ff00 60%); }
+[data-tilt].tilting::after { opacity:1; }
+
+/* ===== Cursor discreto (só mouse) ===== */
+.wow-cur { position:fixed; z-index:2147483000; left:0; top:0; width:34px; height:34px; margin:-17px 0 0 -17px; border:1.5px solid #fff; border-radius:50%; pointer-events:none; mix-blend-mode:difference; opacity:0; transform:translate3d(-100px,-100px,0); transition:opacity .3s,width .3s,height .3s,margin .3s,background .3s; }
+.wow-cur.on { opacity:.85; }
+.wow-cur.big { width:68px; height:68px; margin:-34px 0 0 -34px; background:#ffffff26; }
+.wow-cur.dot { width:8px; height:8px; margin:-4px 0 0 -4px; background:#fff; }
+
+/* ===== Páginas de setor ===== */
+.st-photo-b { position:absolute; inset:-6% 0; width:100%; height:112%; object-fit:cover; object-position:var(--fx,50%) 50%; opacity:0; transition:opacity 1.2s ease; will-change:transform; }
+.st-photo.is-win .st-photo-b { opacity:1; }
+.st-photo-cap small { transition:color .6s; }
+.st-photo.is-win .st-photo-cap small { color:#a6f0c0; }
+.st-photo.is-win .st-photo-cap small::before { background:var(--ok); animation:none; box-shadow:0 0 14px #4ade80aa; }
+.st-win-fig { display:none; margin:0 0 28px; overflow:hidden; border-radius:26px; }
+.st-win-fig img { display:block; width:100%; aspect-ratio:4/5; object-fit:cover; transform:translate3d(0,var(--py,0px),0) scale(1.14); }
+.st-win p:not(.st-tag) { max-width:50ch; margin-top:22px; color:#c3cde0; font-size:clamp(16px,1.4vw,20px); line-height:1.7; }
+.st-win h2 em { color:#a6f0c0; }
+.st-cost li::after, .st-seq li::after { content:""; position:absolute; left:0; right:0; top:-1px; height:2px; background:linear-gradient(90deg,var(--ac),#c0d1f500); transform:scaleX(0); transform-origin:left; transition:transform 1.3s cubic-bezier(.2,.8,.2,1) .15s; }
+.st-cost li.in::after, .st-seq li.in::after { transform:scaleX(1); }
+.st-seq li { border-top-color:#262b3c; }
+.st-seq li:nth-child(2)::after { transition-delay:.3s; } .st-seq li:nth-child(3)::after { transition-delay:.45s; } .st-seq li:nth-child(4)::after { transition-delay:.6s; }
+.wow-mq.st-mq { margin:clamp(40px,6vw,70px) 0 0; border-radius:28px; border:1px solid #1d2233; padding-block:clamp(18px,3vw,30px); }
+.st-mq .wow-mq-track span { font-size:clamp(40px,6vw,88px); }
+@media (max-width:980px) {
+  .st-split { grid-template-columns:minmax(0,1fr); }
+  .st-photo-b { display:none; }
+  .st-win-fig { display:block; }
+}
+
+/* ===== Estreito e sem movimento ===== */
+@media (max-width:900px) {
+  .wow-band { height:150svh; }
+  .wow-band-media { clip-path:inset(calc((1 - var(--k)) * 9svh) calc((1 - var(--k)) * 6vw) round calc((1 - var(--k)) * 30px)); }
+  .wow-band-media::after { background:linear-gradient(#07080e66,#07080e33 40%,#07080ee6 100%); }
+  .wow-band-copy h2 { max-width:none; }
+  .wow-curtain { clip-path:inset(calc((1 - var(--wp)) * 22vh) -100vmax 0 -100vmax round calc((1 - var(--wp)) * 36px) calc((1 - var(--wp)) * 36px) 0 0); }
+}
+@media (prefers-reduced-motion:reduce) {
+  .w > i { transform:none; transition:none; }
+  .wow-band { height:auto; } .wow-band-in { position:relative; min-height:100svh; }
+  .wow-band-media { clip-path:none; } .wow-band-media img { transform:none; }
+  .wow-curtain { clip-path:none; } .wow-mq-track { animation:none; } .wow-bg, .rm-panel img, .sv-body img, .st-win-fig img { transform:none; }
+  [data-tilt] { transform:none!important; } .wow-cur { display:none; }
+  .wow-line::before, .st-cost li::after, .st-seq li::after { transform:none; transition:none; } .wow-scrub .sw { color:#eef1ff; }
+}
+html.still .w > i { transform:none; transition:none; }
+html.still .wow-band { height:auto; } html.still .wow-band-in { position:relative; min-height:100svh; }
+html.still .wow-band-media { clip-path:none; } html.still .wow-band-media img { transform:none; }
+html.still .wow-curtain { clip-path:none; } html.still .wow-mq-track { animation:none; }
+html.still .wow-bg, html.still .rm-panel img, html.still .sv-body img, html.still .st-win-fig img { transform:none; }
+html.still [data-tilt] { transform:none!important; } html.still .wow-cur { display:none; }
+html.still .wow-line::before, html.still .st-cost li::after, html.still .st-seq li::after { transform:none; transition:none; }
+html.still .wow-scrub .sw { color:#eef1ff; }

@@ -158,6 +158,18 @@
     const [r, u, f] = cm.map(s => s.value);
     wa.href = 'https://wa.me/5511993287070?text=' + encodeURIComponent(`Olá! Eu sou do ramo ${r} e preciso de técnicos em ${u} para ${f}.`);
   };
+  // Cada seleção ganha a largura do texto escolhido (field-sizing ainda não existe em todo navegador).
+  const meter = document.createElement('span');
+  meter.style.cssText = 'position:absolute;visibility:hidden;white-space:pre;font:inherit;letter-spacing:inherit';
+  const fitSel = s => {
+    if (innerWidth <= 700) { s.style.width = ''; return; }
+    const cs = getComputedStyle(s); meter.style.font = cs.font; meter.style.letterSpacing = cs.letterSpacing;
+    meter.textContent = s.selectedOptions[0].text; s.parentNode.append(meter);
+    s.style.width = Math.ceil(meter.getBoundingClientRect().width + parseFloat(cs.paddingLeft) * 2 + 8) + 'px'; meter.remove();
+  };
+  cm.forEach(s => { s.addEventListener('change', () => fitSel(s)); fitSel(s); });
+  addEventListener('resize', () => cm.forEach(fitSel));
+  document.fonts?.ready.then(() => cm.forEach(fitSel));
   cm.forEach(s => s.addEventListener('change', compose));
   compose();
 

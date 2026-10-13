@@ -66,6 +66,14 @@
     k.perto = dots.filter(q => q.uf === k.uf).sort((p, q) => Math.hypot(p.x - x, p.y - y) - Math.hypot(q.x - x, q.y - y)).slice(0, 3);
   }
 
+  // Relevo: cada estado tem uma altura baixa e estável (derivada da sigla); o escolhido e o sob o ponteiro sobem mais.
+  const TILT = .66; // o mapa deita: o eixo vertical encolhe, dando a perspectiva
+  const relief = uf => 9 + ((uf.charCodeAt(0) * 31 + uf.charCodeAt(1) * 17) % 11) / 10 * 7;
+  const lift = {}; ufs.forEach(u => { lift[u] = 0; });
+  const order = [...ufs].sort((p, q) => (bbox[p][1] + bbox[p][3]) - (bbox[q][1] + bbox[q][3])); // do norte ao sul: o sul cobre o norte
+  let up = 0, ty = 1; // entrada do relevo (0..1) e escala vertical atual
+  const hOf = uf => (relief(uf) + lift[uf]) * up;
+
   // Câmera e geometria
   let W = 0, H = 0, dpr = 1, area = { x: 0, y: 0, w: 1, h: 1 }, s0 = 1;
   const cam = { x: (X0 + X1) / 2, y: (Y0 + Y1) / 2, k: 1 };
@@ -93,27 +101,40 @@
 
   function draw(now) {
     const k = cam.k * s0, cx = area.x + area.w / 2, cy = area.y + area.h / 2;
-    const sx = x => (x - cam.x) * k + cx, sy = y => (y - cam.y) * k + cy;
+    up = ease(clamp(pp / .1)); ty = 1 - (1 - TILT) * up;
+    for (const u of ufs) lift[u] += (((u === chosen ? 26 : u === pointer.uf ? 14 : 0)) - lift[u]) * (reduced ? 1 : .18);
+    const sx = x => (x - cam.x) * k + cx, sy = (y, uf) => (y - cam.y) * k * ty + cy - (uf ? hOf(uf) : 0);
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     ctx.clearRect(0, 0, W, H);
     const a1 = ease(clamp((pp - .12) / .16)), a2 = ease(clamp((pp - .34) / .16)), a3 = ease(clamp((pp - .56) / .16)), a4 = ease(clamp((pp - .78) / .18));
-    // estados
-    ctx.save();
-    ctx.setTransform(dpr * k, 0, 0, dpr * k, dpr * (cx - cam.x * k), dpr * (cy - cam.y * k));
-    ctx.lineWidth = 1 / k;
+    // estados: laterais em camadas (a extrusão), depois o topo
     hover = '';
-    for (const uf of ufs) {
-      const on = uf === chosen;
-      ctx.fillStyle = on ? '#1b2a4d' : uf === pointer.uf ? '#161e36' : '#0e1220';
-      ctx.strokeStyle = on ? '#6f89c2' : '#262d44';
+    for (const uf of order) {
+      const on = uf === chosen, h = hOf(uf);
+      ctx.save();
+      ctx.lineJoin = 'round';
+      if (h > 1) { // sombra no chão
+        ctx.setTransform(dpr * k, 0, 0, dpr * k * ty, dpr * (cx - cam.x * k + 6), dpr * (cy - cam.y * k * ty + 4));
+        ctx.fillStyle = 'rgba(0,0,0,.45)'; ctx.fill(paths[uf]);
+      }
+      for (let j = h; j > 0; j -= 1.5) {
+        ctx.setTransform(dpr * k, 0, 0, dpr * k * ty, dpr * (cx - cam.x * k), dpr * (cy - cam.y * k * ty - j));
+        const t = 1 - j / h; // base escura, borda de cima mais clara
+        ctx.fillStyle = on ? `rgb(${24 + t * 40 | 0},${40 + t * 56 | 0},${84 + t * 80 | 0})` : `rgb(${10 + t * 24 | 0},${14 + t * 30 | 0},${30 + t * 52 | 0})`;
+        ctx.fill(paths[uf]);
+      }
+      ctx.setTransform(dpr * k, 0, 0, dpr * k * ty, dpr * (cx - cam.x * k), dpr * (cy - cam.y * k * ty - h));
+      ctx.lineWidth = 1 / k;
+      ctx.fillStyle = on ? '#33559e' : uf === pointer.uf ? '#2d3b6b' : '#1e2745';
+      ctx.strokeStyle = on ? '#9db6ec' : uf === pointer.uf ? '#7d93c9' : '#38435f';
       ctx.fill(paths[uf]); ctx.stroke(paths[uf]);
+      ctx.restore();
     }
-    ctx.restore();
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     // técnicos
     const focus = a2 > .02 && a4 < .5;
     for (const q of dots) {
-      const x = sx(q.x), y = sy(q.y);
+      const x = sx(q.x), y = sy(q.y, q.uf);
       const mine = chosen && q.uf === chosen, lit = CASOS.some(c => c.perto.includes(q)) && a2 > .05 && a4 < .5;
       const pulse = reduced ? 0 : Math.sin(now / 900 + q.ph) * .5 + .5;
       let al = .45 + pulse * .25, r = 1.9, col = '111,137,194';
@@ -126,9 +147,9 @@
     }
     // linhas do técnico mais perto até o chamado
     if (a2 > 0) for (const c of CASOS) {
-      const px = sx(c.x), py = sy(c.y);
+      const px = sx(c.x), py = sy(c.y, c.uf);
       c.perto.forEach((q, i) => {
-        const x = sx(q.x), y = sy(q.y), mx = (x + px) / 2 + (y - py) * .18, my = (y + py) / 2 - (x - px) * .18;
+        const x = sx(q.x), y = sy(q.y, q.uf), mx = (x + px) / 2 + (y - py) * .18, my = (y + py) / 2 - (x - px) * .18;
         ctx.strokeStyle = `rgba(192,209,245,${(.75 - a3 * .45) * (1 - a4)})`;
         ctx.lineWidth = 1.4; ctx.setLineDash([6, 5]); ctx.lineDashOffset = -now / 60;
         ctx.beginPath(); ctx.moveTo(x, y);
@@ -139,7 +160,7 @@
     }
     // os três chamados
     if (a1 > 0 && a4 < 1) for (const c of CASOS) {
-      const x = sx(c.x), y = sy(c.y), fade = 1 - a4, ok = a3, ring = reduced ? .5 : (now % 1500) / 1500;
+      const x = sx(c.x), y = sy(c.y, c.uf), fade = 1 - a4, ok = a3, ring = reduced ? .5 : (now % 1500) / 1500;
       const col = ok > .5 ? '74,222,128' : '255,107,107';
       ctx.globalAlpha = fade * a1;
       ctx.strokeStyle = `rgba(${col},${1 - ring})`; ctx.lineWidth = 1.5;
@@ -183,8 +204,13 @@
   function pick(e) {
     const r = cv.getBoundingClientRect(), x = e.clientX - r.left, y = e.clientY - r.top;
     const k = cam.k * s0, cx = area.x + area.w / 2, cy = area.y + area.h / 2;
-    const mx = (x - cx) / k + cam.x, my = (y - cy) / k + cam.y;
-    return { x, y, uf: ufs.find(u => mx >= bbox[u][0] && mx <= bbox[u][2] && my >= bbox[u][1] && my <= bbox[u][3] && inside(u, mx, my)) || '' };
+    const mx = (x - cx) / k + cam.x;
+    let uf = '';
+    for (let i = order.length - 1; i >= 0 && !uf; i--) { // de cima (sul) para baixo, como foi pintado
+      const u = order[i], my = (y - cy + hOf(u)) / (k * ty) + cam.y; // o estado está erguido: desfaz a altura antes de testar
+      if (mx >= bbox[u][0] && mx <= bbox[u][2] && my >= bbox[u][1] && my <= bbox[u][3] && inside(u, mx, my)) uf = u;
+    }
+    return { x, y, uf };
   }
   cv.addEventListener('pointermove', e => { if (e.pointerType === 'mouse' && target > .85) Object.assign(pointer, pick(e)); else pointer.uf = ''; });
   cv.addEventListener('pointerleave', () => { pointer.uf = ''; });

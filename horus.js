@@ -56,6 +56,29 @@
     if (prev && !reduce.matches) duo.dataset.dir = n === 2 ? 'to' : n > 2 ? 'from' : '';
   }
 
+  // "Telas reais": a parada (0 a 8) acende a tela, a legenda e os destaques; o modo move a câmera entre notebook, celular e relatório.
+  // O mouse inclina o conjunto (--mx, --my) e a rolagem inclina junto (--p).
+  const tour = document.querySelector('.hx-tour');
+  const tourShows = [...tour.querySelectorAll('[data-show]')];
+  const tourDots = [...tour.querySelectorAll('.tr-dots li')];
+  let beat = -1;
+  function setTour() {
+    const n = reduce.matches ? 0 : Math.round(Number(tour.style.getPropertyValue('--p')) * 8);
+    if (n === beat) return;
+    beat = n;
+    tourShows.forEach(el => el.classList.toggle('is-on', el.dataset.show.split(' ').includes(String(n))));
+    tourDots.forEach((el, i) => el.classList.toggle('is-on', i === n));
+    tour.dataset.mode = n >= 2 && n <= 6 ? 'phone' : n === 7 ? 'report' : 'desk';
+  }
+  if (matchMedia('(hover:hover) and (pointer:fine)').matches) {
+    tour.addEventListener('pointermove', e => {
+      if (reduce.matches) return;
+      tour.style.setProperty('--mx', (e.clientX / innerWidth * 2 - 1).toFixed(3));
+      tour.style.setProperty('--my', (e.clientY / innerHeight * 2 - 1).toFixed(3));
+    });
+    tour.addEventListener('pointerleave', () => { tour.style.setProperty('--mx', 0); tour.style.setProperty('--my', 0); });
+  }
+
   let queued = false;
   function frame() {
     queued = false;
@@ -67,6 +90,7 @@
     }
     setChat();
     setDuo();
+    setTour();
     scrub();
   }
   const schedule = () => { if (!queued) { queued = true; requestAnimationFrame(frame); } };

@@ -5,12 +5,12 @@
   const $ = s => document.querySelector(s);
 
   // A foto desliza mais devagar que o texto.
-  const img = $('.st-photo img');
-  if (img && !reduce.matches) {
+  const imgs = [...document.querySelectorAll('.st-photo img')];
+  if (imgs.length && !reduce.matches) {
     let q = false;
     addEventListener('scroll', () => {
       if (q) return; q = true;
-      requestAnimationFrame(() => { q = false; img.style.transform = `translateY(${Math.min(scrollY, 1600) * -.04}px)`; });
+      requestAnimationFrame(() => { q = false; imgs.forEach(img => { img.style.transform = `translateY(${Math.min(scrollY, 1600) * -.04}px)`; }); });
     }, { passive: true });
   }
 
