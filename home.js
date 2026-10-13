@@ -130,24 +130,6 @@
   }
   const pick = trava(stops, show);
 
-  // 4. O custo de esperar: a conta anda em tempo real, na taxa que a pessoa digitou.
-  const tickEl = $('#cx-tick'), rate = $('#rate'), costBox = $('#cost-calculator');
-  const brl = n => n.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
-  let acc = 0, lastT = 0, costSeen = false;
-  new IntersectionObserver(([e]) => { costSeen = e.isIntersecting; lastT = 0; }, { threshold: .3 }).observe(costBox);
-  (function loop(now) {
-    if (costSeen && !still() && !document.hidden) {
-      if (lastT) acc += (Number(rate.value) || 0) / 3600 * (now - lastT) / 1000;
-      lastT = now;
-      tickEl.textContent = brl(acc);
-    }
-    requestAnimationFrame(loop);
-  })(0);
-  costBox.querySelectorAll('.cx-sentence input').forEach(i => {
-    const size = () => { i.style.width = Math.max(2, String(i.value).length + 1) + 'ch'; };
-    i.addEventListener('input', size); size();
-  });
-
   // 5. Serviços: um aberto por vez.
   const svs = [...document.querySelectorAll('.sv')];
   svs.forEach(li => li.querySelector('.sv-row').addEventListener('click', () => {

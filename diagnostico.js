@@ -15,6 +15,13 @@
       "Cada unidade com um fornecedor diferente",
       "Prazo estourado sem aviso",
     ],
+    impactos: [
+      "Venda ou atendimento parado",
+      "Equipe improvisando para contornar",
+      "Cliente final reclamando",
+      "Contrato ou prazo com o meu cliente em risco",
+      "Retrabalho e visita repetida",
+    ],
     necessidades: [
       "Menos tempo de equipamento parado",
       "Relatório para mostrar ao meu cliente",
@@ -36,20 +43,18 @@
   const META = [
     { rotulo: "01 — Operação", titulo: "Como é a sua operação?", texto: "Três cliques para entendermos o porte. Nenhum dado seu é guardado.", img: "midia/home-campo.jpg" },
     { rotulo: "02 — O problema", titulo: "O que mais acontece hoje?", texto: "Marque o que você reconhece. É por aqui que o problema aparece.", img: "midia/drama-loja.jpg" },
-    { rotulo: "03 — O custo", titulo: "Quanto custa isso por mês?", texto: "Parado não custa só o conserto: custa a venda, a equipe e o cliente. Ponha o seu número e veja o tamanho.", img: "midia/rack.jpg" },
+    { rotulo: "03 — O impacto", titulo: "O que acontece quando isso para?", texto: "Equipamento parado não é só um conserto. Marque o que já chegou até você.", img: "midia/rack.jpg" },
     { rotulo: "04 — A mudança", titulo: "Se isso fosse resolvido, o que mudaria?", texto: "Diga o que mais pesa para você. É isso que orienta a conversa.", img: "midia/mao-celular.jpg" },
     { rotulo: "05 — O próximo passo", titulo: "Por onde começamos?", texto: "Escolha um passo concreto. A mensagem segue com tudo o que você respondeu.", img: "midia/servico-ativar.jpg" },
   ];
   const FOTO_RAMO = { Varejo: "drama-loja", "Bancos e fintechs": "drama-banco", Saúde: "drama-hospital", Indústria: "setor-industria", Telecom: "setor-telecom", Transporte: "setor-transporte", Eventos: "setor-eventos" };
   const el = {
-    count: $("#diag-count"), err: $("#d-err"), back: $("#d-back"), next: $("#d-next"), skip: $("#d-skip"),
-    wa: $("#d-wa"), mail: $("#d-mail"), cost: $("#d-cost"), month: $("#d-month"), year: $("#d-year"), summary: $("#d-summary"),
+    count: $("#diag-count"), err: $("#d-err"), back: $("#d-back"), next: $("#d-next"),
+    wa: $("#d-wa"), mail: $("#d-mail"), summary: $("#d-summary"),
   };
-  const brl = (v) => new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" }).format(v).replace(/ /g, " ");
   const evento = (nome, dados) => { if (typeof window.gtag === "function") window.gtag("event", nome, dados || {}); };
 
   let atual = 0;
-  let custo = null; // { calls, down, rate, mes } quando o passo 3 foi preenchido
   let uid = 0;
 
   function chips(box, nomes, multi) {
@@ -108,29 +113,11 @@
     });
   }
 
-  function lerCusto() {
-    const v = (id) => $(id).value.trim();
-    const [c, d, r] = [v("#d-calls"), v("#d-down"), v("#d-rate")];
-    if (c === "" || d === "" || r === "") return null;
-    const calls = Number(c), down = Number(d), rate = Number(r);
-    if (![calls, down, rate].every(Number.isFinite) || !$("#d-calls").checkValidity() || !$("#d-down").checkValidity() || !$("#d-rate").checkValidity()) return null;
-    const horas = calls * down;
-    return { calls, down, rate, horas, mes: Math.round(horas * Math.round(rate * 100)) / 100 };
-  }
-  function mostrarCusto() {
-    custo = lerCusto();
-    el.cost.hidden = !custo;
-    if (!custo) return;
-    el.month.textContent = brl(custo.mes);
-    el.year.textContent = `${custo.horas} horas paradas por mês, ${brl(custo.mes * 12)} por ano.`;
-  }
-  form.querySelectorAll("#d-calls, #d-down, #d-rate").forEach((i) => i.addEventListener("input", mostrarCusto));
-
   function mensagem() {
     const linhas = ["Olá! Fiz o diagnóstico no site da NovaSync."];
     linhas.push(`Operação: ${um("ramo")}, ${um("unidades")} unidades, ${um("estados").toLowerCase()}.`);
     linhas.push("O que mais acontece hoje: " + marcados("problemas").join("; ").toLowerCase() + ".");
-    if (custo) linhas.push(`Custo da parada: ${custo.calls} chamados por mês, ${custo.down} h paradas por chamado e ${brl(custo.rate)} por hora parada, ou seja ${brl(custo.mes)} por mês.`);
+    linhas.push("O que acontece quando para: " + marcados("impactos").join("; ").toLowerCase() + ".");
     linhas.push("O que mudaria se fosse resolvido: " + marcados("necessidades").join("; ").toLowerCase() + ".");
     linhas.push("Próximo passo que eu quero: " + um("avanco") + ".");
     return linhas.join("\n");
@@ -146,7 +133,7 @@
   const REGRAS = [
     () => (um("ramo") && um("unidades") && um("estados") ? "" : "Escolha uma opção em cada uma das três perguntas."),
     () => (marcados("problemas").length ? "" : "Marque pelo menos uma opção."),
-    () => (custo ? "" : "Preencha os três números ou use “Pular este passo”."),
+    () => (marcados("impactos").length ? "" : "Marque pelo menos uma opção."),
     () => (marcados("necessidades").length ? "" : "Marque pelo menos uma opção."),
     () => (um("avanco") ? "" : "Escolha o próximo passo."),
   ];
@@ -156,7 +143,7 @@
     const itens = [];
     if (i > 0) itens.push(`${um("ramo")} · ${um("unidades")} unidades · ${um("estados").toLowerCase()}`);
     if (i > 1) itens.push(`${marcados("problemas").length} ${marcados("problemas").length === 1 ? "problema marcado" : "problemas marcados"}`);
-    if (i > 2) itens.push(custo ? `Parada: ${brl(custo.mes)} por mês` : "Custo: não informado");
+    if (i > 2) itens.push(`${marcados("impactos").length} ${marcados("impactos").length === 1 ? "impacto marcado" : "impactos marcados"}`);
     if (i > 3) itens.push("Mudança: " + marcados("necessidades").join("; ").toLowerCase());
     const ul = $("#s-recap");
     ul.textContent = "";
@@ -179,16 +166,15 @@
     el.back.hidden = i === 0;
     const ultimo = i === steps.length - 1;
     el.next.hidden = ultimo;
-    el.skip.hidden = i !== 2;
     el.wa.hidden = !ultimo;
     el.mail.hidden = !ultimo;
     if (ultimo) { montarAvancos(); el.summary.hidden = true; }
     evento("spin_passo_" + (i + 1), i === 0 ? {} : { ramo: um("ramo"), unidades: um("unidades") });
     if (foco !== false) {
-      const alvo = steps[i].querySelector("legend");
+      const alvo = $("#s-title");
       alvo.tabIndex = -1;
       alvo.focus({ preventScroll: true });
-      form.scrollIntoView({ block: "start" });
+      scrollTo({ top: 0, behavior: "smooth" });
     }
   }
 
@@ -198,11 +184,6 @@
     ir(atual + 1);
   });
   el.back.addEventListener("click", () => ir(atual - 1));
-  el.skip.addEventListener("click", () => {
-    ["#d-calls", "#d-down", "#d-rate"].forEach((s) => { $(s).value = ""; });
-    mostrarCusto();
-    ir(3);
-  });
   // Ao escolher o próximo passo, a mensagem aparece pronta para conferir antes de enviar.
   form.addEventListener("change", (e) => {
     if (atual !== steps.length - 1 || e.target.name !== "avanco") return;
@@ -212,13 +193,8 @@
   [el.wa, el.mail].forEach((a) => a.addEventListener("click", (e) => {
     if (!um("avanco")) { e.preventDefault(); el.err.textContent = "Escolha o próximo passo."; return; }
     montarEnvio();
-    evento("spin_avanco_escolhido", { avanco: um("avanco"), ramo: um("ramo"), unidades: um("unidades"), custo_informado: !!custo });
+    evento("spin_avanco_escolhido", { avanco: um("avanco"), ramo: um("ramo"), unidades: um("unidades") });
   }));
-
-  // Vindo da calculadora da home: os três números já entram no passo do custo.
-  const q = new URLSearchParams(location.search);
-  [["c", "#d-calls"], ["d", "#d-down"], ["r", "#d-rate"]].forEach(([k, id]) => { if (q.has(k) && q.get(k) !== "") $(id).value = q.get(k); });
-  mostrarCusto();
 
   document.getElementById("d-nojs")?.remove();
   form.hidden = false;
