@@ -43,3 +43,15 @@
   .sn { right:8px; bottom:10px; left:auto; opacity:.5; }
   .sn-map { width:30px; height:30px; margin:0; border-color:#ffffff22; background:#0b0e17b3; }
 }
+/* tamanho original, estilo discreto mantido */
+.sn { left:14px; opacity:.55; }
+.sn-map { width:30px; height:30px; margin:0 0 6px; }
+.sn-map svg { width:14px; height:14px; }
+.sn-dot { width:30px; height:20px; justify-content:center; padding-left:0; }
+.sn-dot::before { width:7px; height:7px; }
+.sn-dot.is-on::before { transform:scale(1.7); box-shadow:0 0 0 4px #ffffff1f; }
+.sn-dot span { left:38px; font-size:12px; padding:5px 11px; }
+@media (max-width:1099px), (max-height:559px) {
+  .sn { right:12px; bottom:14px; left:auto; }
+  .sn-map { width:42px; height:42px; margin:0; }
+}
