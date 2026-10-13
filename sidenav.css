@@ -30,3 +30,16 @@
   .sn-dot { display:none; }
   .sn-map { width:42px; height:42px; margin:0; background:#0b0e17e6; -webkit-backdrop-filter:blur(10px); backdrop-filter:blur(10px); }
 }
+/* mais discreto: sem cápsula, pontos mínimos, tudo suave até o mouse chegar */
+.sn { left:8px; padding:0; border:0; background:none; -webkit-backdrop-filter:none; backdrop-filter:none; gap:0; opacity:.45; transition:opacity .3s; }
+.sn:hover, .sn:focus-within { opacity:1; }
+.sn-map { width:22px; height:22px; margin:0 0 4px 4px; border-color:transparent; opacity:.8; }
+.sn-map svg { width:12px; height:12px; }
+.sn-dot { width:30px; height:16px; justify-content:flex-start; padding-left:11px; box-sizing:border-box; }
+.sn-dot::before { width:4px; height:4px; }
+.sn-dot.is-on::before { transform:scale(1.5); box-shadow:none; background:#fff; }
+.sn-dot span { left:30px; font-size:11px; padding:4px 9px; }
+@media (max-width:1099px), (max-height:559px) {
+  .sn { right:8px; bottom:10px; left:auto; opacity:.5; }
+  .sn-map { width:30px; height:30px; margin:0; border-color:#ffffff22; background:#0b0e17b3; }
+}
