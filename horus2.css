@@ -388,3 +388,4 @@ html.still .hx-duo.hx-cc .hx-stick { position:relative; height:auto; min-height:
 .hx-cc[data-b="3"] .cc-phone { --x:36cqw; }
 @media (max-width:900px) { .cc-report { left:4%; right:4%; width:92%; bottom:5%; } .hx-cc[data-b="4"] .cc-phone { --x:18cqw; --s:.9; } }
 @media (max-width:900px) { .cc-stage { top:164px; height:50svh; } .cc-tag { bottom:auto; top:calc(164px + 50svh + 6px); } }
+@media (max-width:900px) { .cc-tag { display:none !important; } }
