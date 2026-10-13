@@ -363,55 +363,60 @@
       </section>
 
       <!-- 4. Dois lados, um chamado (uma parada por etapa) -->
-      <section id="dois-lados" class="hx-duo" data-scene data-stops=".1 .3 .5 .7 .9" aria-labelledby="duo-title">
+      <section id="dois-lados" class="hx-duo hx-cc" data-scene data-stops="0 .25 .5 .75 1" data-beats="5" aria-labelledby="duo-title">
         <div class="hx-stick">
-          <header class="duo-head">
+          <div class="cc-glow" data-at="0" style="--c:#5b6bff" aria-hidden="true"></div>
+          <div class="cc-glow" data-at="1" style="--c:#9267eb" aria-hidden="true"></div>
+          <div class="cc-glow" data-at="2" style="--c:#f0a64a" aria-hidden="true"></div>
+          <div class="cc-glow" data-at="3" style="--c:#2dd4bf" aria-hidden="true"></div>
+          <div class="cc-glow" data-at="4" style="--c:#6fa8ff" aria-hidden="true"></div>
+          <div class="cc-words" aria-hidden="true"><b class="cc-word" data-at="0">ABERTO</b><b class="cc-word" data-at="1">DESIGNADO</b><b class="cc-word" data-at="2">ATENDENDO</b><b class="cc-word" data-at="3">CONCLUÍDO</b><b class="cc-word" data-at="4">FINALIZADO</b></div>
+          <header class="duo-head cc-head">
             <p class="eyebrow">A vida de um chamado</p>
             <h2 id="duo-title">Quem abre vê.<br /><span class="hx-dim">Quem atende registra.</span></h2>
           </header>
-          <div class="duo-stage">
-            <ol class="duo-steps" aria-hidden="true">
-              <li data-show="1 2 3 4 5"><i></i>Aberto</li>
-              <li data-show="2 3 4 5"><i></i>Designado</li>
-              <li data-show="3 4 5"><i></i>Em atendimento</li>
-              <li data-show="4 5"><i></i>Concluído</li>
-              <li data-show="5"><i></i>Finalizado</li>
-            </ol>
-            <figure class="duo-desk hx-browser" aria-label="Tela da empresa no Horus">
+          <div class="cc-meter" aria-hidden="true"><span class="cc-pct">0%</span><span class="cc-idx"><b>01</b>/05</span></div>
+          <div class="cc-stage">
+            <figure class="cc-desk" aria-label="Tela da empresa no Horus">
               <div class="hx-bar"><i></i><i></i><i></i><span>app.nova-sync.net · empresa</span></div>
-              <div class="duo-shots">
-                <img data-show="1" src="midia/horus-tela-lista.jpg" alt="Lista de chamados da empresa, com o chamado novo em aberto" width="1600" height="1000" />
-                <img data-show="2 3" src="midia/horus-tela-chamado.jpg" alt="Página do chamado, com técnico designado e prazo" width="1600" height="1044" />
-                <img data-show="4" src="midia/horus-tela-relatorio.jpg" alt="Relatório do atendimento anexado ao chamado" width="1600" height="367" />
-                <img data-show="5" src="midia/horus-tela-conversa.jpg" alt="Chamado finalizado, com o retorno da visita registrado" width="1600" height="1000" />
-                <span class="duo-badge" data-show="1"><i></i>Chamado aberto · prazo contando</span>
-                <span class="duo-badge" data-show="2"><i></i>Técnico da região designado</span>
-                <span class="duo-badge" data-show="3"><i></i>Visita em andamento</span>
-                <span class="duo-badge" data-show="4"><i></i>RAT em PDF anexado</span>
-                <span class="duo-badge" data-show="5"><i></i>Fica no histórico</span>
+              <div class="cc-shots">
+                <img data-at="0" src="midia/horus-tela-lista.jpg" alt="Lista de chamados da empresa, com o chamado novo em aberto" width="1600" height="1000" loading="lazy" />
+                <img data-at="1" src="midia/horus-tela-chamado.jpg" alt="Página do chamado, com técnico designado e prazo" width="1600" height="1044" loading="lazy" />
+                <img data-at="2" src="midia/horus-tela-chamado.jpg" alt="Página do chamado enquanto o técnico atende" width="1600" height="1044" loading="lazy" />
+                <img data-at="3" src="midia/horus-tela-chamado.jpg" alt="Página do chamado com o relatório anexado" width="1600" height="1044" loading="lazy" />
+                <img data-at="4" src="midia/horus-tela-conversa.jpg" alt="Chamado finalizado, com o retorno da visita registrado" width="1600" height="1000" loading="lazy" />
+              </div>
+            <img class="cc-report" data-at="3" src="midia/horus-tela-relatorio.jpg" alt="Relatório do atendimento anexado ao chamado, para ver ou baixar em PDF" width="1600" height="367" loading="lazy" />
+            </figure>
+            <figure class="cc-phone" aria-label="Celular do técnico com o Horus">
+              <span class="cc-island" aria-hidden="true"></span>
+              <div class="cc-screen">
+                <span class="cc-wait" data-at="0">Aguardando<br />designação</span>
+                <img data-at="1" src="midia/horus-tela-cel-agenda.jpg" alt="Agenda do técnico com o novo atendimento" width="600" height="1243" loading="lazy" />
+                <img data-at="2" src="midia/horus-tela-cel-fotos.jpg" alt="Etapa de fotos do atendimento" width="600" height="1243" loading="lazy" />
+                <img data-at="3" src="midia/horus-tela-cel-assinatura.jpg" alt="Assinaturas do responsável e do técnico" width="600" height="1243" loading="lazy" />
+                <img data-at="4" src="midia/horus-tela-cel-revisao.jpg" alt="Revisão do relatório antes de concluir" width="600" height="1243" loading="lazy" />
               </div>
             </figure>
-            <div class="duo-link" aria-hidden="true"><i></i></div>
-            <figure class="duo-phone hx-phone hx-hand" aria-label="Celular do técnico com o Horus">
-              <img src="midia/mao-celular.jpg" alt="" width="680" height="964" loading="lazy" />
-              <div class="hx-hand-screen">
-                <div class="duo-screens">
-                  <div data-show="1"><span class="duo-wait">Aguardando<br />designação</span></div>
-                  <div data-show="2"><img src="midia/horus-tela-cel-agenda.jpg" alt="Agenda do técnico com o novo atendimento" width="600" height="1243" /></div>
-                  <div data-show="3"><img src="midia/horus-tela-cel-fotos.jpg" alt="Etapa de fotos do atendimento" width="600" height="1243" /></div>
-                  <div data-show="4"><img src="midia/horus-tela-cel-revisao.jpg" alt="Revisão do relatório antes de concluir" width="600" height="1243" /></div>
-                  <div data-show="5"><img src="midia/horus-cel-envios.jpg" alt="Envio do atendimento concluído" width="640" height="830" /></div>
-                </div>
-              </div>
-            </figure>
+            <span class="cc-tag" data-at="0" style="--x:8%;--y:18%"><i></i>Prazo começa a contar</span>
+            <span class="cc-tag" data-at="0" style="--x:4%;--y:52%"><i></i>Cliente e endereço</span>
+            <span class="cc-tag" data-at="1" style="--x:6%;--y:22%"><i></i>Técnico da região</span>
+            <span class="cc-tag" data-at="1" style="--x:70%;--y:14%"><i></i>Aviso no celular</span>
+            <span class="cc-tag" data-at="2" style="--x:66%;--y:24%"><i></i>Fotos e peças na hora</span>
+            <span class="cc-tag" data-at="2" style="--x:4%;--y:40%"><i></i>Sua tela muda junto</span>
+            <span class="cc-tag" data-at="3" style="--x:10%;--y:14%"><i></i>RAT em PDF</span>
+            <span class="cc-tag" data-at="3" style="--x:70%;--y:48%"><i></i>Assinado no local</span>
+            <span class="cc-tag" data-at="4" style="--x:8%;--y:20%"><i></i>Histórico completo</span>
+            <span class="cc-tag" data-at="4" style="--x:62%;--y:70%"><i></i>Retorno ao cliente</span>
           </div>
-          <div class="duo-caption">
-            <div data-show="1"><small>01 · Aberto</small><strong>Sua equipe abre.</strong><span>Cliente, endereço e janela de atendimento entram de uma vez. O prazo começa a contar na hora.</span></div>
-            <div data-show="2"><small>02 · Técnico designado</small><strong>A NovaSync designa.</strong><span>Um técnico da região assume o chamado e o aviso chega ao celular dele. Você vê quem vai e quando.</span></div>
-            <div data-show="3"><small>03 · Em atendimento</small><strong>O técnico executa.</strong><span>Pelo celular, ele registra o que encontrou, o que fez e as peças que usou. A sua tela muda junto.</span></div>
-            <div data-show="4"><small>04 · Atendimento concluído</small><strong>O relatório sai pronto.</strong><span>O RAT é gerado em PDF com os dados do chamado já preenchidos e aparece anexado na sua tela.</span></div>
-            <div data-show="5"><small>05 · Finalizado</small><strong>Fica no histórico.</strong><span>Chamado encerrado, prazo registrado e relatório guardado. Quando precisar, está lá.</span></div>
+          <div class="cc-cap">
+            <div data-at="0"><small>01 · Aberto</small><strong>Sua equipe abre.</strong><span>Cliente, endereço e janela de atendimento entram de uma vez. O prazo começa a contar na hora.</span></div>
+            <div data-at="1"><small>02 · Técnico designado</small><strong>A NovaSync designa.</strong><span>Um técnico da região assume o chamado e o aviso chega ao celular dele. Você vê quem vai e quando.</span></div>
+            <div data-at="2"><small>03 · Em atendimento</small><strong>O técnico executa.</strong><span>Pelo celular, ele registra o que encontrou, o que fez e as peças que usou. A sua tela muda junto.</span></div>
+            <div data-at="3"><small>04 · Atendimento concluído</small><strong>O relatório sai pronto.</strong><span>O RAT é gerado em PDF com os dados do chamado já preenchidos e aparece anexado na sua tela.</span></div>
+            <div data-at="4"><small>05 · Finalizado</small><strong>Fica no histórico.</strong><span>Chamado encerrado, prazo registrado e relatório guardado. Quando precisar, está lá.</span></div>
           </div>
+          <ol class="cc-steps" aria-hidden="true"><li data-from="0"><i></i>Aberto</li><li data-from="1"><i></i>Designado</li><li data-from="2"><i></i>Em atendimento</li><li data-from="3"><i></i>Concluído</li><li data-from="4"><i></i>Finalizado</li></ol>
         </div>
       </section>
 

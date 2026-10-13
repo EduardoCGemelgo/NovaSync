@@ -44,10 +44,14 @@
   const scenes = $$('[data-beats]').map(el => ({
     el, n: +el.dataset.beats, b: -1,
     at: $$('[data-at]', el), from: $$('[data-from]', el),
+    pct: el.querySelector('.cc-pct'), idx: el.querySelector('.cc-idx b'), pv: -1,
   }));
+  // palavras gigantes: cada letra sobe em sequência
+  $$('.cc-word').forEach(w => { w.innerHTML = [...w.textContent].map((c, i) => `<i style="--i:${i}">${c}</i>`).join(''); });
   function beats() {
     for (const s of scenes) {
       const p = Number(s.el.style.getPropertyValue('--p'));
+      if (s.pct) { const v = reduce.matches ? 100 : Math.round(p * 100); if (v !== s.pv) { s.pv = v; s.pct.textContent = v + '%'; s.idx.textContent = String(Math.round(p * (s.n - 1)) + 1).padStart(2, '0'); } }
       const b = reduce.matches ? s.n : Math.round(p * (s.n - 1));
       if (b === s.b) continue;
       s.b = b;
