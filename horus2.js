@@ -45,13 +45,20 @@
     el, n: +el.dataset.beats, b: -1,
     at: $$('[data-at]', el), from: $$('[data-from]', el),
     pct: el.querySelector('.cc-pct'), idx: el.querySelector('.cc-idx b'), pv: -1,
+    fx: $$('.fx-item', el),
   }));
-  // palavras gigantes: cada letra sobe em sequência
-  $$('.cc-word').forEach(w => { w.innerHTML = [...w.textContent].map((c, i) => `<i style="--i:${i}">${c}</i>`).join(''); });
+  // travessia: a câmera anda pelos chamados; cada item some conforme passa (d = distância em etapas)
+  const fade = d => d < 0 ? Math.max(0, 1 + d * 3.2) : Math.max(0, Math.min(1, 1.15 - d * .85));
   function beats() {
     for (const s of scenes) {
       const p = Number(s.el.style.getPropertyValue('--p'));
       if (s.pct) { const v = reduce.matches ? 100 : Math.round(p * 100); if (v !== s.pv) { s.pv = v; s.pct.textContent = v + '%'; s.idx.textContent = String(Math.round(p * (s.n - 1)) + 1).padStart(2, '0'); } }
+      if (s.fx.length) {
+        const pos = reduce.matches ? 0 : p * (s.n - 1), fr = pos - Math.floor(pos);
+        s.el.style.setProperty('--pos', pos.toFixed(3));
+        s.el.style.setProperty('--roll', (reduce.matches ? 0 : Math.sin(fr * Math.PI) * 2.2).toFixed(2) + 'deg');
+        s.fx.forEach(e => { e.style.opacity = reduce.matches ? 1 : fade(+e.style.getPropertyValue('--i') - pos).toFixed(3); });
+      }
       const b = reduce.matches ? s.n : Math.round(p * (s.n - 1));
       if (b === s.b) continue;
       s.b = b;
@@ -102,6 +109,14 @@
         el.style.setProperty('--my', ((e.clientY - r.top) / r.height * 100).toFixed(1) + '%');
       });
     });
+  }
+
+  if (matchMedia('(hover:hover) and (pointer:fine)').matches) {
+    $$('.hx-cc').forEach(el => el.addEventListener('pointermove', e => {
+      if (still()) return;
+      el.style.setProperty('--yaw', ((e.clientX / innerWidth - .5) * 5).toFixed(2) + 'deg');
+      el.style.setProperty('--pit', ((e.clientY / innerHeight - .5) * -3).toFixed(2) + 'deg');
+    }));
   }
 
   let queued = false;
