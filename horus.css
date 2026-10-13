@@ -419,3 +419,11 @@ body.hx { background:#050609; overflow-x:clip; }
 @media (max-height:620px) { .hx-rat-copy h2 { font-size:34px; } .hx-rat-copy .eyebrow { margin-bottom:10px; } .hx-layers { margin-top:0; width:min(170px,50vw,calc((100svh - 330px) * .72)); } }
 @media (max-height:620px) { .hx-layers { margin-top:44px; width:min(135px,44vw); } }
 @media (max-height:700px) and (max-width:900px) { .hx-rat-copy > p { display:none; } .hx-rat .hx-stick { gap:0; } .hx-rat-copy h2 { font-size:36px; } .hx-layers { margin-top:64px; width:min(140px,44vw); } }
+
+/* Celular: a captura perdeu a barra de status (a moldura já tem a ilha); a imagem começa abaixo dela, sem ampliar */
+.tr-phone .tr-screen { background:#0a0c12; overflow:hidden; }
+.tr-phone .tr-shot { top:4.4%; transform:none; }
+.tr-phone .tr-shot img { object-fit:cover; object-position:top; }
+.tr-phone .tr-pin b { left:50%; top:-48px; transform:translateX(-50%); white-space:nowrap; }
+.tr-phone .tr-pin.l b { right:auto; left:50%; }
+.hx-tour[data-mode="phone"] .tr-desk { --o:.1; }
