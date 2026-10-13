@@ -169,24 +169,42 @@ html.still .sv-body img { clip-path:none; }
 @media (max-width:900px) { #setores .rm-panel { grid-template-columns:1fr; } #setores .rm-panel img { height:min(34svh,300px); } #setores .section-head h2 br { display:inline; } }
 @media (max-height:800px) and (min-width:901px) { #setores .rm-chips { display:none; } #setores .section-head p { display:none; } #setores .rm-panel img { height:clamp(240px,calc(100svh - 330px),520px); } }
 
-/* ===== Horus + Konso, compacto no mesmo bloco ===== */
-.hk-pair { display:grid; grid-template-columns:auto 1fr; gap:6px 16px; align-items:center; max-width:520px; margin-top:28px; padding:16px 20px; border:1px solid #2b3250; border-radius:22px; background:linear-gradient(#0f1424,#0b0f1b); color:#b9c1d3; font-size:14px; line-height:1.55; transition:border-color .25s,transform .25s; }
-.hk-pair:hover { border-color:#c0d1f5; transform:translateY(-2px); }
-.hk-pair strong { color:#eef1ff; font-weight:600; letter-spacing:-.02em; }
-.hk-pair em { grid-column:2; font-style:normal; color:#c0d1f5; font-size:13px; font-weight:600; }
-.hk-mark { position:relative; width:52px; height:30px; }
-.hk-mark i { position:absolute; top:50%; width:26px; height:26px; margin-top:-13px; border-radius:50%; }
-.hk-mark i:first-child { left:0; border:4px solid #c0d1f5; }
-.hk-mark i:last-child { left:20px; background:#ffd9a0; box-shadow:0 0 16px #ffc87a88; }
-.hm-horus-fig { position:relative; }
-.hk-card { position:absolute; z-index:3; width:196px; padding:12px 16px; border:1px solid #3a4160; border-radius:18px; background:#0a0e1ae6; backdrop-filter:blur(12px); box-shadow:0 24px 60px -24px #000; }
-.hk-card small { display:flex; align-items:center; gap:8px; color:#9fb3dc; font:10.5px ui-monospace,monospace; letter-spacing:.1em; text-transform:uppercase; }
-.hk-card small b { width:8px; height:8px; border-radius:50%; background:#ff6b6b; box-shadow:0 0 0 0 #ff6b6baa; animation:hk-ping 1.7s infinite; }
-.hk-card strong { display:block; margin-top:7px; font-size:17px; font-weight:500; letter-spacing:-.035em; }
-.hk-card span { display:block; margin-top:2px; color:#afb8cc; font-size:12.5px; }
-.hk-a { left:-26%; top:15%; }
-.hk-b { right:-14%; bottom:21%; }
-.hk-b small b { background:#4ade80; animation:none; }
-@keyframes hk-ping { 70% { box-shadow:0 0 0 10px #ff6b6b00; } 100% { box-shadow:0 0 0 0 #ff6b6b00; } }
-@media (max-width:900px) { .hk-a { left:2%; top:6%; width:172px; } .hk-b { right:2%; bottom:14%; width:172px; } .hk-card { padding:10px 13px; } .hk-card strong { font-size:15px; } }
-@media (prefers-reduced-motion:reduce) { .hk-card small b { animation:none; } }
+/* ===== Horus e Konso, meio a meio ===== */
+.landing-art .hk.section { padding-block:clamp(96px,13vh,120px) clamp(36px,6vh,64px); }
+.hk-grid { position:relative; display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:clamp(12px,1.4vw,20px); }
+.hk-panel { position:relative; overflow:hidden; isolation:isolate; height:clamp(520px,calc(100svh - 190px),700px); padding:clamp(24px,3vw,44px); border:1px solid #2b3250; border-radius:34px; background:linear-gradient(160deg,#10162a,#090c17 70%); }
+.hk-copy { position:relative; z-index:2; width:min(100%,58%); }
+.hk-horus .horus-mark, .hk-wm { display:block; width:min(100%,240px); height:auto; margin-bottom:clamp(18px,3vh,30px); color:#eef1ff; }
+.hk-copy h2 { margin-top:12px; font-size:clamp(30px,min(3.4vw,5.6vh),54px); font-weight:500; letter-spacing:-.06em; line-height:1.03; }
+.hk-copy h2 em { font-style:normal; color:#b9cdf3; }
+.hk-konso .hk-copy h2 em { color:#ffd9a0; }
+.hk-copy > p { margin-top:14px; max-width:38ch; color:#b9c1d3; font-size:clamp(13.5px,1.1vw,15.5px); line-height:1.65; }
+.hk-copy .horus-actions { margin-top:clamp(16px,3vh,28px); }
+.hk-horus .hm-horus-fig { position:absolute; z-index:1; right:-5%; bottom:-11%; width:min(300px,44%); margin:0; }
+.hk-horus .hm-horus-fig figcaption { display:none; }
+.hk-konso { background:#07080e; }
+.hk-bg { position:absolute; inset:0; z-index:-1; width:100%; height:100%; object-fit:cover; object-position:70% 50%; filter:brightness(.78); }
+.hk-konso::after { content:""; position:absolute; inset:0; z-index:0; background:linear-gradient(90deg,#07080ef0 0,#07080e99 45%,#07080e33 100%),linear-gradient(#07080e00 50%,#07080ed9 100%); }
+.hk-log { position:absolute; z-index:2; left:clamp(24px,3vw,44px); right:clamp(24px,3vw,44px); bottom:clamp(24px,3vw,40px); margin:0; padding:16px 20px; list-style:none; border:1px solid #3a4160; border-radius:22px; background:#0a0e1ad9; backdrop-filter:blur(14px); display:grid; gap:9px; }
+.hk-log li { display:grid; grid-template-columns:56px 1fr; gap:10px; align-items:baseline; font-size:14px; color:#cfd6e6; }
+.hk-log time { color:#8e99b3; font:12px ui-monospace,monospace; letter-spacing:.06em; }
+.hk-log .bad span::before, .hk-log .ok span::before, .hk-log li:not(.bad):not(.ok) span::before { content:""; display:inline-block; width:8px; height:8px; margin-right:10px; border-radius:50%; background:#c0d1f5; }
+.hk-log .bad span::before { background:#ff6b6b; box-shadow:0 0 12px #ff6b6bcc; }
+.hk-log .ok span::before { background:#4ade80; }
+.hk-join { position:absolute; z-index:4; left:50%; top:50%; margin:0; transform:translate(-50%,-50%); display:flex; align-items:center; gap:10px; padding:10px 18px; border:1px solid #3a4160; border-radius:999px; background:#0a0e1af2; box-shadow:0 18px 50px -18px #000; font-size:13px; font-weight:600; color:#eef1ff; white-space:nowrap; }
+.hk-join i { font-style:normal; color:#ffd9a0; }
+@media (max-width:900px) {
+  .hk-grid { grid-template-columns:1fr; }
+  .hk-panel { height:auto; min-height:0; }
+  .hk-copy { width:100%; }
+  .hk-horus .hm-horus-fig { position:relative; right:auto; bottom:auto; width:min(280px,76%); margin:22px auto -18% ; }
+  .hk-konso { padding-bottom:0; }
+  .hk-log { position:relative; left:auto; right:auto; bottom:auto; margin:22px 0 24px; }
+  .hk-join { position:relative; left:auto; top:auto; transform:none; justify-self:center; margin:-6px auto -6px; }
+}
+.hk-copy { width:min(100%,66%); }
+.hk-copy h2 { font-size:clamp(28px,min(3vw,5vh),48px); }
+.hk-panel { height:clamp(500px,calc(100svh - 236px),680px); }
+.hk-join { position:relative; left:auto; top:auto; transform:none; grid-column:1 / -1; justify-self:center; order:-1; margin:0 0 2px; background:#0d1220; box-shadow:none; }
+@media (max-width:900px) { .hk-copy { width:100%; } .hk-join { order:0; margin:-6px auto; } }
+@media (max-height:780px) and (min-width:901px) { .hk-horus .horus-mark, .hk-wm { width:min(100%,190px); margin-bottom:14px; } .hk-log { padding:11px 16px; gap:5px; bottom:20px; } .hk-log li { font-size:13px; } .hk-copy > p { margin-top:10px; } .hk-copy .horus-actions { margin-top:14px; } }

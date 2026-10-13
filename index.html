@@ -401,9 +401,22 @@
         </div>
       </section>
 
-      <section id="horus" class="section wrap horus reveal" aria-labelledby="horus-title">
-        <div class="horus-copy">
-          <svg class="horus-mark" viewBox="-3 -3 606 66" role="img" aria-label="Horus">
+      <section id="horus" class="section hk reveal" aria-labelledby="horus-title">
+        <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+          <symbol id="konso-mark" viewBox="-3 -3 418 66">
+            <g fill="none" stroke="currentColor" stroke-width="5">
+              <path d="M2.5 0V60M50 2L4 31M20 22L50 58"/>
+              <circle cx="110" cy="30" r="28.5"/>
+              <path d="M170 60V0L222 60V0"/>
+              <path transform="translate(-276 0)" d="M598 2.5H546Q532.5 2.5 532.5 16Q532.5 29.5 546 29.5H584Q597.5 29.5 597.5 43.5Q597.5 57.5 584 57.5H531"/>
+            </g>
+            <circle cx="380" cy="30" r="31" fill="currentColor"/>
+          </symbol>
+        </svg>
+        <div class="wrap hk-grid">
+          <article class="hk-panel hk-horus">
+            <div class="hk-copy">
+              <svg class="horus-mark" viewBox="-3 -3 606 66" role="img" aria-label="Horus">
             <g fill="none" stroke="currentColor" stroke-width="5">
               <path d="M2.5 0V60M63.5 0V60M2.5 30H63.5"/>
               <path d="M272.5 60V2.5H321A16 16 0 0 1 321 34.5H272.5M310 34.5L339 60"/>
@@ -412,22 +425,12 @@
             </g>
             <circle cx="167" cy="30" r="31" fill="currentColor"/>
           </svg>
-          <div class="eyebrow">Plataforma própria / Gestão de chamados</div>
-          <h2 id="horus-title">Cada chamado.<br /><em>Em um só lugar.</em></h2>
-          <p>A plataforma de chamados da NovaSync. Sua empresa abre e acompanha cada atendimento, e o técnico registra a visita e o relatório pelo celular.</p>
-          <a class="hk-pair" href="konso.html">
-            <span class="hk-mark" aria-hidden="true"><i></i><i></i></span>
-            <span><strong>Com o Konso, o chamado nasce sozinho.</strong> Ele vigia o equipamento de noite, abre o chamado no Horus e o técnico faz o resto. Um vigia, o outro resolve.</span>
-            <em>Conhecer o Konso →</em>
-          </a>
-          <div class="horus-actions">
-            <a class="button primary" href="horus.html">Ver o Horus</a
-            ><a class="button ghost" href="https://app.nova-sync.net">Acessar o Horus</a>
-          </div>
-        </div>
-        <figure class="hm-horus-fig">
-          <div class="hk-card hk-a" aria-hidden="true"><small><b></b>Konso · 02:14</small><strong>PDV 03 · Loja 214</strong><span>sem sinal há 5 min</span></div>
-          <div class="hk-card hk-b" aria-hidden="true"><small><b></b>Konso + Horus · 06:48</small><strong>Sinal voltou</strong><span>RAT anexado ao chamado</span></div>
+              <div class="eyebrow">Plataforma / Gestão de chamados</div>
+              <h2 id="horus-title">Cada chamado.<br /><em>Em um só lugar.</em></h2>
+              <p>Sua empresa abre e acompanha cada atendimento. O técnico registra a visita e o relatório pelo celular.</p>
+              <div class="horus-actions"><a class="button primary" href="horus.html">Ver o Horus</a><a class="button ghost" href="https://app.nova-sync.net">Acessar o Horus</a></div>
+            </div>
+            <figure class="hm-horus-fig">
           <div class="hx-phone hx-hand" aria-label="Tela ilustrativa do Horus no celular do técnico">
             <img src="midia/mao-celular.jpg" alt="" width="680" height="964" loading="lazy" />
             <div class="hx-hand-screen">
@@ -448,6 +451,24 @@
           </div>
           <figcaption>Tela ilustrativa, dados fictícios.</figcaption>
         </figure>
+          </article>
+          <article class="hk-panel hk-konso">
+            <img class="hk-bg" src="midia/konso-noite.jpg" alt="" width="2048" height="1143" loading="lazy" />
+            <div class="hk-copy">
+              <svg class="hk-wm" viewBox="-3 -3 418 66" role="img" aria-label="Konso"><use href="#konso-mark"/></svg>
+              <div class="eyebrow">Vigia de equipamentos / Detecção</div>
+              <h2>Cada falha.<br /><em>Vista antes de ligarem.</em></h2>
+              <p>O Konso lê o sinal do equipamento, descarta o ruído e abre o chamado no Horus com a hora exata da falha.</p>
+              <div class="horus-actions"><a class="button primary" href="konso.html">Conhecer o Konso</a></div>
+            </div>
+            <ol class="hk-log" aria-label="Exemplo de uma noite com o Konso">
+              <li class="bad"><time>02:14</time><span>PDV 03 · Loja 214 sem sinal</span></li>
+              <li><time>02:21</time><span>Chamado CH-2481 aberto no Horus</span></li>
+              <li class="ok"><time>06:48</time><span>Sinal volta, registrado no chamado</span></li>
+            </ol>
+          </article>
+          <p class="hk-join"><span>Konso vigia</span><i aria-hidden="true">→</i><span>Horus resolve</span></p>
+        </div>
       </section>
 
 
