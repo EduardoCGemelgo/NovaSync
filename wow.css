@@ -13,7 +13,6 @@
 .wow-scrub .sw.on { color:#eef1ff; }
 
 /* ===== Cortina: o capítulo sobe com o cantos arredondados ===== */
-.wow-curtain { --wp:1; --ct:#0a0e1a; box-shadow:0 0 0 100vmax var(--ct); background:var(--ct);
   clip-path:inset(calc((1 - var(--wp)) * 34vh) -100vmax 0 -100vmax round calc((1 - var(--wp)) * 56px) calc((1 - var(--wp)) * 56px) 0 0); }
 
 /* ===== Linha que se desenha no topo da seção ===== */
@@ -39,8 +38,8 @@
 .st-flow { min-width:0; }
 .wow-mq { contain:inline-size; max-width:100%; overflow:hidden; padding:clamp(28px,5vw,64px) 0; background:#07080e; border-block:1px solid #1d2233; }
 .wow-mq-track { display:flex; width:max-content; animation:wow-mq 46s linear infinite; }
-.wow-mq-track span { padding-right:clamp(28px,4vw,64px); font-size:clamp(54px,11vw,176px); font-weight:500; letter-spacing:-.07em; line-height:1; color:transparent; -webkit-text-stroke:1.5px #4b5876; white-space:nowrap; }
-.wow-mq-track span:nth-child(3n+2) { color:#16203a; -webkit-text-stroke-color:#7d8db0; }
+.wow-mq-track span { padding-right:clamp(28px,4vw,64px); font-size:clamp(54px,11vw,176px); font-weight:500; letter-spacing:-.07em; line-height:1; color:#2a3350; white-space:nowrap; }
+.wow-mq-track span:nth-child(3n+2) { color:#46557f; }
 .wow-mq-track span::after { content:"✦"; display:inline-block; margin-left:clamp(28px,4vw,64px); font-size:.38em; vertical-align:middle; color:#9fb3dc; -webkit-text-stroke:0; }
 .wow-mq.off .wow-mq-track { animation-play-state:paused; }
 .wow-mq.rev .wow-mq-track { animation-direction:reverse; animation-duration:58s; }
@@ -62,11 +61,6 @@
 [data-tilt]:not([data-tilt="flat"])::after { content:""; position:absolute; inset:0; z-index:3; border-radius:inherit; pointer-events:none; opacity:0; transition:opacity .4s; background:radial-gradient(420px circle at var(--mx,50%) var(--my,50%),#cfe0ff2e,#cfe0ff00 60%); }
 [data-tilt].tilting::after { opacity:1; }
 
-/* ===== Cursor discreto (só mouse) ===== */
-.wow-cur { position:fixed; z-index:2147483000; left:0; top:0; width:34px; height:34px; margin:-17px 0 0 -17px; border:1.5px solid #fff; border-radius:50%; pointer-events:none; mix-blend-mode:difference; opacity:0; transform:translate3d(-100px,-100px,0); transition:opacity .3s,width .3s,height .3s,margin .3s,background .3s; }
-.wow-cur.on { opacity:.85; }
-.wow-cur.big { width:68px; height:68px; margin:-34px 0 0 -34px; background:#ffffff26; }
-.wow-cur.dot { width:8px; height:8px; margin:-4px 0 0 -4px; background:#fff; }
 
 /* ===== Páginas de setor ===== */
 .st-photo-b { position:absolute; inset:-6% 0; width:100%; height:112%; object-fit:cover; object-position:var(--fx,50%) 50%; opacity:0; transition:opacity 1.2s ease; will-change:transform; }
@@ -103,7 +97,7 @@
   .wow-band { height:auto; } .wow-band-in { position:relative; min-height:100svh; }
   .wow-band-media { clip-path:none; } .wow-band-media img { transform:none; }
   .wow-curtain { clip-path:none; } .wow-mq-track { animation:none; } .wow-bg, .rm-panel img, .sv-body img, .st-win-fig img { transform:none; }
-  [data-tilt] { transform:none!important; } .wow-cur { display:none; }
+  [data-tilt] { transform:none!important; }
   .wow-line::before, .st-cost li::after, .st-seq li::after { transform:none; transition:none; } .wow-scrub .sw { color:#eef1ff; }
 }
 html.still .w > i { transform:none; transition:none; }
@@ -111,6 +105,10 @@ html.still .wow-band { height:auto; } html.still .wow-band-in { position:relativ
 html.still .wow-band-media { clip-path:none; } html.still .wow-band-media img { transform:none; }
 html.still .wow-curtain { clip-path:none; } html.still .wow-mq-track { animation:none; }
 html.still .wow-bg, html.still .rm-panel img, html.still .sv-body img, html.still .st-win-fig img { transform:none; }
-html.still [data-tilt] { transform:none!important; } html.still .wow-cur { display:none; }
+html.still [data-tilt] { transform:none!important; } html.still
 html.still .wow-line::before, html.still .st-cost li::after, html.still .st-seq li::after { transform:none; transition:none; }
 html.still .wow-scrub .sw { color:#eef1ff; }
+
+/* Sequência: o número fica acima da linha que se desenha */
+.st-seq li::before { z-index:2; }
+/* A faixa de abertura da virada tem uma parada só: a tela cheia */

@@ -129,25 +129,4 @@
     el.addEventListener('pointerleave', () => { el.classList.remove('tilting'); el.style.setProperty('--rx', '0deg'); el.style.setProperty('--ry', '0deg'); });
   });
 
-  // 6. Cursor: um anel que segue o mouse com atraso e cresce sobre o que se clica. Só em tela com mouse.
-  if (fine.matches) {
-    const cur = document.createElement('div');
-    cur.className = 'wow-cur'; cur.setAttribute('aria-hidden', 'true');
-    document.body.append(cur);
-    let tx = -100, ty = -100, x = -100, y = -100, run = false;
-    const loop = () => {
-      x += (tx - x) * .2; y += (ty - y) * .2;
-      cur.style.transform = `translate3d(${x.toFixed(1)}px,${y.toFixed(1)}px,0)`;
-      if (Math.abs(tx - x) + Math.abs(ty - y) > .4) requestAnimationFrame(loop); else run = false;
-    };
-    addEventListener('pointermove', e => {
-      if (e.pointerType !== 'mouse' || still()) return;
-      tx = e.clientX; ty = e.clientY; cur.classList.add('on');
-      if (!run) { run = true; requestAnimationFrame(loop); }
-      const t = e.target.closest?.('a, button, summary, select, label, input, [data-tilt]');
-      cur.classList.toggle('big', !!t && !t.matches('input, select'));
-      cur.classList.toggle('dot', !!t && t.matches('input, select'));
-    }, { passive: true });
-    document.addEventListener('mouseleave', () => cur.classList.remove('on'));
-  }
 })();

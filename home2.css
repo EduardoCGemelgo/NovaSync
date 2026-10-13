@@ -108,3 +108,26 @@ html.still .sv-body img { clip-path:none; }
 .landing-art .contact .cm-btns { margin-top:0; }
 .cm-sentence select { field-sizing:content; }
 @media (min-width:701px) { .cm-sentence select { width:auto; } }
+
+/* ===== Parceiros em campo, enxuto ===== */
+.landing-art .partners.pt { background:#0a0e1a; border-radius:0; padding-block:clamp(56px,7vw,96px); }
+.pt-head { display:flex; flex-wrap:wrap; align-items:baseline; gap:10px 36px; margin-bottom:clamp(24px,3vw,40px); }
+.pt-head .eyebrow { margin:0; }
+.pt-head h2 { font-size:clamp(30px,3.6vw,56px); font-weight:500; letter-spacing:-.06em; line-height:1.05; }
+.pt-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:clamp(14px,2vw,24px); align-items:start; }
+.pt-card { padding:clamp(20px,2.4vw,32px); border:1px solid #262c40; border-radius:26px; background:linear-gradient(#0f1424,#0b0f1b); }
+.pt-card header { display:flex; align-items:center; gap:16px; margin-bottom:18px; }
+.pt-card header img { width:56px; height:56px; object-fit:contain; border-radius:12px; background:#0b0e17; }
+.pt-card cite { font-style:normal; font-size:16px; font-weight:600; letter-spacing:-.02em; color:#eef1ff; }
+.pt-card cite span { display:block; margin-top:2px; color:#8e99b3; font:11px ui-monospace,monospace; letter-spacing:.1em; text-transform:uppercase; }
+.pt-card blockquote { margin:0; color:#d3dbec; font-size:clamp(15px,1.25vw,18px); line-height:1.65; }
+.pt-card details { margin-top:14px; }
+.pt-card summary { display:inline-flex; align-items:center; min-height:44px; color:#c0d1f5; font-size:14px; cursor:pointer; list-style:none; }
+.pt-card summary::-webkit-details-marker { display:none; }
+.pt-card summary::after { content:"+"; margin-left:10px; }
+.pt-card details[open] summary::after { content:"–"; }
+.pt-card details p { margin:0 0 12px; color:#afb8cc; font-size:15px; line-height:1.65; }
+@media (max-width:760px) { .pt-grid { grid-template-columns:1fr; } }
+/* Serviços: a seção inteira cabe numa tela, para a trava parar uma vez só */
+.sv-t { font-size:clamp(40px,min(7.6vw,10.2vh),116px); }
+.sv-row { padding:clamp(14px,2.2vh,28px) 0; }
