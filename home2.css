@@ -211,7 +211,7 @@ html.still .sv-body img { clip-path:none; }
 
 /* Horus e Konso: mesma estrutura e mesmo tamanho de marca */
 .hk-horus .horus-mark, .hk-wm { width:auto; height:clamp(34px,5.6vh,52px); margin-bottom:clamp(18px,3vh,28px); }
-.hk-horus .horus-mark { aspect-ratio:606/66; }
+.hk-horus .horus-mark { aspect-ratio:489/66; }
 .hk-wm { aspect-ratio:418/66; }
 .hk-horus { background:#07080e; }
 .hk-horus .hk-bg { object-position:70% 50%; filter:brightness(1.12) saturate(1.1); }
