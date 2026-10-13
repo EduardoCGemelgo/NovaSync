@@ -410,3 +410,12 @@ body.hx { background:#050609; overflow-x:clip; }
 .duo-caption { min-height:118px; }
 .duo-desk { width:min(100%,calc((100svh - 500px) * 2)); }
 @media (max-width:900px) { .duo-desk { width:100%; } }
+
+/* RAT em camadas: em telas baixas a pilha inclinada passava da borda */
+@media (max-height:780px) { .hx-layers { width:min(300px,62vw,calc((100svh - 300px) * .72)); } }
+@media (max-height:620px) { .hx-layers { width:min(220px,56vw,calc((100svh - 360px) * .72)); } }
+@media (max-height:620px) { .hx-rat-copy > p { display:none; } .hx-rat .hx-stick { gap:0; padding-top:84px; } .hx-layers { margin-top:-8vh; width:min(200px,54vw,calc((100svh - 300px) * .72)); } }
+@media (max-height:780px) and (min-width:901px) { .hx-layers-legend { margin-top:20px; } .hx-layers-legend li { padding:8px 0; } }
+@media (max-height:620px) { .hx-rat-copy h2 { font-size:34px; } .hx-rat-copy .eyebrow { margin-bottom:10px; } .hx-layers { margin-top:0; width:min(170px,50vw,calc((100svh - 330px) * .72)); } }
+@media (max-height:620px) { .hx-layers { margin-top:44px; width:min(135px,44vw); } }
+@media (max-height:700px) and (max-width:900px) { .hx-rat-copy > p { display:none; } .hx-rat .hx-stick { gap:0; } .hx-rat-copy h2 { font-size:36px; } .hx-layers { margin-top:64px; width:min(140px,44vw); } }
