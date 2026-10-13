@@ -10,7 +10,7 @@
   window.kx = { reduce, clamp, $, $$ };
 
   // Frase palavra por palavra: cada palavra ganha seu índice --i.
-  $$('.kx-words').forEach(words => {
+  $$('.kx-words, .hx-words').forEach(words => {
     const list = words.textContent.trim().split(/\s+/);
     words.replaceChildren(...list.flatMap((w, i) => {
       const s = document.createElement('span');
@@ -26,7 +26,7 @@
   $$('.hx-fit').forEach(el => fit.observe(el));
 
   // Vídeo preso à rolagem (quadro-chave em todo quadro: a busca é instantânea).
-  const video = $('.kx-statement video');
+  const video = $('.kx-statement video, .hx-statement video');
   const vScene = video?.closest('[data-scene]');
   video?.play().then(() => video.pause()).catch(() => {}); // iOS só entrega quadros depois de um play
   function scrub() {
@@ -75,7 +75,8 @@
     const beats = scenes.flatMap((el, i) => el.dataset.stops.split(' ').map(p => fitY(holds[i][0] + p * (holds[i][1] - holds[i][0]))));
     // no celular o menu fixo cobre o topo, então a área útil começa abaixo dele
     const navH = innerWidth <= 900 ? $('.nav').offsetHeight + 16 : 0;
-    const solo = $$('[data-stop]').map(el => fitY(top(el) - navH)); // blocos com parada própria
+    const tall = !(innerWidth >= 1000 && innerHeight >= 700); // layout alto (celular): blocos [data-stop] ganham parada própria
+    const solo = tall ? $$('[data-stop]').map(el => fitY(top(el) - navH)) : [];
     const pins = new Set([0, end, ...solo, ...blocks.flatMap(s => {
       const t = top(s) - navH, extra = s.offsetHeight - (h - navH);
       return extra > h * .3 ? [fitY(t), fitY(t + extra)] : [fitY(navH ? t + extra / 2 : t + Math.max(0, extra) / 2)];

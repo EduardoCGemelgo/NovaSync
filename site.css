@@ -135,3 +135,55 @@
 .kx-big { font-size:clamp(100px,min(19vw,34vh),300px); }
 .kx-detail article>.kx-big:not(pre):not(x) { grid-column:2; }
 @media (max-width:900px) { .kx-fill { padding-block:96px 32px; } }
+
+/* Home */
+.kx-lead { max-width:56ch; margin:22px auto 0; color:#b3bdd2; font-size:clamp(15px,1.3vw,18px); text-align:center; }
+.kx-panel-list { display:flex; flex-wrap:wrap; gap:8px; margin:20px 0 0; padding:0; list-style:none; }
+.kx-panel-list li { padding:7px 14px; border:1px solid #ffffff2e; border-radius:999px; background:#0b0d16a0; color:#d3dbec; font-size:13px; }
+.kx-card-tag { display:block; margin-bottom:16px; color:#8e99b3; font:11px ui-monospace,monospace; letter-spacing:.12em; text-transform:uppercase; }
+.kx-motion { position:absolute; right:var(--art-gutter); bottom:18px; z-index:3; margin:0; }
+.kx-motion button { min-height:40px; padding:6px 10px; border:0; background:transparent; color:#8e99b3; font-size:11px; }
+.kx-motion button:hover { color:#fff; }
+.kx .hm-cov .coverage-lead { background:transparent; }
+.kx #cost-calculator { min-height:100svh; align-content:center; }
+.kx-night-4 .kx-events a { margin-top:14px; }
+@media (max-width:900px) { .kx #cost-calculator { min-height:0; } }
+
+/* Blocos de uma tela só: título e painéis cabem juntos, sem espiar o bloco seguinte */
+.kx-fit { min-height:100svh; display:flex; flex-direction:column; justify-content:center; padding-block:100px 40px; }
+.kx-fit .kx-head { margin-bottom:clamp(18px,3vh,40px); }
+.kx-fit .kx-head h2 { font-size:clamp(32px,min(4.4vw,7.4vh),72px); }
+.kx-fit .kx-panels { height:clamp(320px,calc(100svh - 380px),700px); }
+@media (max-height:820px) { .kx-fit .kx-lead { display:none; } }
+@media (max-width:700px) { .kx-fit { padding-block:92px 32px; } .kx-fit .kx-panels { height:auto; } .kx-fit .kx-lead { display:none; } }
+
+/* Menu: com tantos itens, a barra só cabe em tela larga; abaixo disso vira o menu do celular */
+.landing-art .nav-links a, .landing-art .nav-actions a { white-space:nowrap; }
+@media (min-width:1201px) and (max-width:1380px) {
+  .landing-art .nav-links { display:none; }
+  .landing-art .menu-toggle { display:block; }
+  .landing-art .nav-actions { margin-left:auto; }
+  .landing-art .mobile-menu { width:calc(100% - var(--art-gutter) * 2); margin:10px auto 0; border:1px solid #353747; border-radius:24px; padding:16px 28px; background:#10111b; max-height:calc(100dvh - 120px); overflow:auto; }
+}
+.kx-board .kx-tile[data-s="pe"] { border-color:#fbbf2466; background:#17130a; } .kx-board .kx-tile[data-s="pe"] em { color:var(--am); }
+
+/* Telas baixas: o circuito e o painel precisam caber inteiros */
+.kx-circuit .kx-head h2 { font-size:clamp(28px,min(4.4vw,6.8vh),68px); }
+@media (max-height:800px) and (min-width:701px) {
+  .kx-circuit .kx-stick { padding-top:84px; gap:18px; }
+  .kx-nodes li { padding:12px 16px; }
+  .kx-nodes li small { display:none; }
+  .kx-log { height:112px; }
+  .kx-tile { min-height:96px; }
+  .kx-live { padding-block:100px 30px; }
+}
+@media (max-height:780px) { .hx-layers-legend { margin-top:16px; } .hx-layers-legend li { padding:7px 0; } }
+
+/* Celulares baixos: o cartão de exemplo cede lugar; textos de apoio ficam só no que cabe */
+.kx-statement .kx-words { font-size:clamp(26px,min(4.4vw,6.6vh),64px); }
+@media (max-width:700px) and (max-height:700px) {
+  .kx-card { display:none; }
+  .hx-phone-copy>p:last-child, .hx-rat-copy>p { display:none; }
+  .hx-phone-scene .hx-stick, .hx-rat .hx-stick { padding-top:84px; gap:14px; }
+  .kx-statement .kx-words { font-size:clamp(22px,6.6vw,28px); }
+}

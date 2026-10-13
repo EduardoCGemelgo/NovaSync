@@ -16,8 +16,11 @@
     <link rel="stylesheet" href="novasync.css" />
     <link rel="stylesheet" href="landing-art.css" />
     <link rel="stylesheet" href="horus.css" />
+    <link rel="stylesheet" href="kx.css" />
+    <link rel="stylesheet" href="site.css" />
     <script defer src="novasync.js"></script>
     <script defer src="trava.js"></script>
+    <script defer src="kx.js"></script>
     <script defer src="horus.js"></script>
     <link rel="canonical" href="https://nova-sync.net/horus.html" />
     <meta property="og:type" content="website" />
@@ -169,7 +172,7 @@
 }
 </script>
 </head>
-  <body class="landing-art hx">
+  <body class="landing-art hx kx">
     <svg width="0" height="0" style="position:absolute" aria-hidden="true">
       <symbol id="horus-mark" viewBox="-3 -3 606 66">
         <g fill="none" stroke="currentColor" stroke-width="5">
@@ -230,7 +233,7 @@
     </header>
 
     <main id="conteudo">
-      <!-- 1. Produto como herói: o texto sai, a tela sobe e se endireita (paradas: título; tela em pé) -->
+      <!-- 1. Situação: o produto como herói -->
       <section class="hx-hero" data-scene data-stops="0 1" aria-labelledby="hx-title">
         <div class="hx-stick">
           <div class="hx-hero-copy">
@@ -296,7 +299,7 @@
         </div>
       </section>
 
-      <!-- 2. Uma frase, palavra por palavra (paradas: 1ª frase acesa; tudo aceso) -->
+      <!-- 2. A frase, palavra por palavra -->
       <section class="hx-statement" data-scene data-stops=".49 1">
         <div class="hx-stick">
           <video class="hx-bg" muted playsinline preload="auto" poster="midia/loja-scroll-capa.jpg" aria-hidden="true">
@@ -307,56 +310,82 @@
         </div>
       </section>
 
-      <!-- 3. A vida de um chamado: a tela fica, a história passa -->
-      <section id="vida-do-chamado" class="hx-story" aria-labelledby="story-title">
-        <header class="hx-story-head wrap">
-          <p class="eyebrow">A vida de um chamado</p>
-          <h2 id="story-title">Do pedido ao relatório.<br /><span class="hx-dim">Sem perder nada no caminho.</span></h2>
+      <!-- 3. Problema: o que custa não saber -->
+      <section id="custo" class="kx-block kx-fit wrap" aria-labelledby="custo-title">
+        <header class="kx-head">
+          <h2 id="custo-title">Chamado sem dono<br /><span class="kx-dim">vira equipamento parado.</span></h2>
+          <p class="kx-lead">Quando ninguém vê o status, o prazo vence em silêncio e a operação paga por isso.</p>
         </header>
-        <div class="hx-story-grid wrap">
-          <ol class="hx-steps">
-            <li class="hx-step"><span>01 · Aberto</span><h3>Sua equipe abre.</h3><p>Cliente, endereço e janela de atendimento entram de uma vez. O prazo começa a contar na hora.</p></li>
-            <li class="hx-step"><span>02 · Técnico designado</span><h3>A NovaSync designa.</h3><p>Um técnico da região assume o chamado e a visita fica agendada. Você vê quem vai e quando.</p></li>
-            <li class="hx-step"><span>03 · Em atendimento</span><h3>O técnico executa.</h3><p>Pelo celular, ele registra o que encontrou, o que fez e as peças que usou.</p></li>
-            <li class="hx-step"><span>04 · Atendimento concluído</span><h3>O relatório sai pronto.</h3><p>O RAT é gerado em PDF com os dados do chamado já preenchidos e fica anexado a ele.</p></li>
-            <li class="hx-step"><span>05 · Finalizado</span><h3>Fica no histórico.</h3><p>Chamado encerrado, prazo registrado e relatório guardado. Quando precisar, está lá.</p></li>
-          </ol>
-          <div class="hx-story-device">
-            <div class="hx-browser small">
-              <div class="hx-bar"><i></i><i></i><i></i><span>CH-2481</span></div>
-              <div class="hx-fit" data-w="720" style="aspect-ratio:720/520">
-                <div class="hx-app case" style="width:720px;height:520px">
-                  <div class="case-head">
-                    <div><small>CH-2481 · Varejo Aurora</small><strong>Loja 214 · Pinheiros, SP</strong></div>
-                    <em class="st" data-status></em>
-                  </div>
-                  <ol class="case-line" aria-hidden="true"><li>Aberto</li><li>Designado</li><li>Em atendimento</li><li>Concluído</li><li>Finalizado</li></ol>
-                  <div class="case-panels">
-                    <div class="case-panel" data-panel="1">
-                      <dl><dt>Problema</dt><dd>PDV 03 não liga</dd><dt>Endereço</dt><dd>R. dos Pinheiros, 1000 · São Paulo, SP</dd><dt>Janela</dt><dd>Hoje, 13h às 17h</dd><dt>Prazo</dt><dd><em class="sla ok">2 dias úteis · no prazo</em></dd></dl>
-                    </div>
-                    <div class="case-panel" data-panel="2">
-                      <div class="case-tech"><span>RM</span><div><strong>Rafael M.</strong><small>Técnico parceiro · Zona Oeste</small></div></div>
-                      <dl><dt>Visita</dt><dd>Hoje, 14:00</dd><dt>Prazo</dt><dd><em class="sla ok">No prazo</em></dd></dl>
-                    </div>
-                    <div class="case-panel" data-panel="3">
-                      <ul class="case-log"><li><b>Diagnóstico</b>Fonte do PDV 03 queimada.</li><li><b>Serviço</b>Fonte substituída, PDV testado com o gerente da loja.</li><li><b>Peças</b>1 × fonte 12V 5A</li></ul>
-                    </div>
-                    <div class="case-panel" data-panel="4">
-                      <div class="case-pdf"><span>PDF</span><div><strong>RAT-2481.pdf</strong><small>Gerado com os dados do chamado · anexado</small></div></div>
-                    </div>
-                    <div class="case-panel" data-panel="5">
-                      <p class="case-done"><strong>Finalizado dentro do prazo.</strong>Chamado, relatório e peças guardados no histórico.</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+        <div class="kx-panels" id="panels">
+          <article class="kx-panel is-on" data-i="0">
+            <img src="midia/horus-painel-1.jpg" alt="Mesa de escritório à noite, com um telefone fixo e a mão de alguém discando ao lado de um notebook." width="1200" height="1600" loading="lazy" />
+            <button type="button" class="kx-panel-tab" aria-expanded="true"><span>01</span><strong>A ligação para saber</strong></button>
+            <div class="kx-panel-body"><small>Sem status</small><h3>A ligação para saber.</h3><p>Quem abriu o chamado liga para o técnico, para o fornecedor e para o colega. Cada ligação tira alguém do que estava fazendo.</p></div>
+          </article>
+          <article class="kx-panel" data-i="1">
+            <img src="midia/horus-painel-2.jpg" alt="Relógio e calendário na parede de um escritório escuro, com o dia circulado em vermelho." width="1200" height="1600" loading="lazy" />
+            <button type="button" class="kx-panel-tab" aria-expanded="false"><span>02</span><strong>O prazo que vence sozinho</strong></button>
+            <div class="kx-panel-body"><small>Sem prazo à vista</small><h3>O prazo que vence sozinho.</h3><p>Sem status à vista, a operação só descobre o atraso quando o cliente final reclama.</p></div>
+          </article>
+          <article class="kx-panel" data-i="2">
+            <img src="midia/horus-painel-3.jpg" alt="Mesa cheia de papéis, formulários e post-its ao lado de um notebook, em um escritório à noite." width="1200" height="1600" loading="lazy" />
+            <button type="button" class="kx-panel-tab" aria-expanded="false"><span>03</span><strong>O relatório que ninguém acha</strong></button>
+            <div class="kx-panel-body"><small>Sem registro único</small><h3>O relatório que ninguém acha.</h3><p>Sem registro único, provar o que foi feito vira procura em planilha, print e mensagem.</p></div>
+          </article>
+        </div>
+      </section>
+
+      <!-- 4. Necessidade: a vida de um chamado (uma parada por etapa) -->
+      <section id="vida-do-chamado" class="kx-circuit" data-scene data-stops=".1 .3 .5 .7 .9" style="height:520vh" aria-labelledby="story-title">
+        <div class="kx-stick wrap">
+          <header class="kx-head kx-head-left">
+            <h2 id="story-title">Do pedido ao relatório.<br /><span class="kx-dim">Sem perder nada no caminho.</span></h2>
+          </header>
+          <ol class="kx-nodes" aria-label="Etapas de um chamado"><li data-node="1"><b>Aberto</b><small>sua equipe abre</small></li><li data-node="2"><b>Técnico designado</b><small>NovaSync designa</small></li><li data-node="3"><b>Em atendimento</b><small>técnico executa</small></li><li data-node="4"><b>Concluído</b><small>RAT em PDF</small></li><li data-node="5"><b>Finalizado</b><small>no histórico</small></li></ol>
+          <div class="kx-wire" aria-hidden="true"><i></i></div>
+          <div class="kx-detail">
+            <article data-detail="1">
+              <h3>Sua equipe abre.</h3>
+              <p>Cliente, endereço e janela de atendimento entram de uma vez. O prazo começa a contar na hora.</p>
+              <div class="kx-card"><span class="kx-card-tag">CH-2481 · Varejo Aurora · Loja 214 · Pinheiros, SP · exemplo ilustrativo</span><em class="st ab">Aberto</em><dl><dt>Problema</dt><dd>PDV 03 não liga</dd><dt>Endereço</dt><dd>R. dos Pinheiros, 1000 · São Paulo, SP</dd><dt>Janela</dt><dd>Hoje, 13h às 17h</dd><dt>Prazo</dt><dd><em class="sla ok">2 dias úteis · no prazo</em></dd></dl></div>
+            </article>
+            <article data-detail="2">
+              <h3>A NovaSync designa.</h3>
+              <p>Um técnico da região assume o chamado e a visita fica agendada. Você vê quem vai e quando.</p>
+              <div class="kx-card"><span class="kx-card-tag">CH-2481 · Varejo Aurora · Loja 214 · Pinheiros, SP · exemplo ilustrativo</span><em class="st al">Técnico designado</em><div class="case-tech"><span>RM</span><div><strong>Rafael M.</strong><small>Técnico parceiro · Zona Oeste</small></div></div><dl><dt>Visita</dt><dd>Hoje, 14:00</dd><dt>Prazo</dt><dd><em class="sla ok">No prazo</em></dd></dl></div>
+            </article>
+            <article data-detail="3">
+              <h3>O técnico executa.</h3>
+              <p>Pelo celular, ele registra o que encontrou, o que fez e as peças que usou.</p>
+              <div class="kx-card"><span class="kx-card-tag">CH-2481 · Varejo Aurora · Loja 214 · Pinheiros, SP · exemplo ilustrativo</span><em class="st at">Em atendimento</em><ul class="case-log"><li><b>Diagnóstico</b>Fonte do PDV 03 queimada.</li><li><b>Serviço</b>Fonte substituída, PDV testado com o gerente da loja.</li><li><b>Peças</b>1 × fonte 12V 5A</li></ul></div>
+            </article>
+            <article data-detail="4">
+              <h3>O relatório sai pronto.</h3>
+              <p>O RAT é gerado em PDF com os dados do chamado já preenchidos e fica anexado a ele.</p>
+              <div class="kx-card"><span class="kx-card-tag">CH-2481 · Varejo Aurora · Loja 214 · Pinheiros, SP · exemplo ilustrativo</span><em class="st co">Atendimento concluído</em><div class="case-pdf"><span>PDF</span><div><strong>RAT-2481.pdf</strong><small>Gerado com os dados do chamado · anexado</small></div></div></div>
+            </article>
+            <article data-detail="5">
+              <h3>Fica no histórico.</h3>
+              <p>Chamado encerrado, prazo registrado e relatório guardado. Quando precisar, está lá.</p>
+              <div class="kx-card"><span class="kx-card-tag">CH-2481 · Varejo Aurora · Loja 214 · Pinheiros, SP · exemplo ilustrativo</span><em class="st fi">Finalizado</em><p class="case-done"><strong>Finalizado dentro do prazo.</strong>Chamado, relatório e peças guardados no histórico.</p></div>
+            </article>
           </div>
         </div>
       </section>
 
-      <!-- 4. O técnico no bolso (parada: celular em pé, --q = 1) -->
+      <!-- 5. O painel de um dia de chamados (simulado) -->
+      <section id="ao-vivo" class="kx-block kx-fill kx-live wrap" aria-labelledby="live-title">
+        <header class="kx-head">
+          <h2 id="live-title">O painel de um dia<br /><span class="kx-dim">cheio de chamados.</span></h2>
+        </header>
+        <div class="kx-board">
+          <div class="kx-board-bar"><span><i class="kx-dot"></i>Horus · chamados</span><output id="live-clock">08:00</output><button type="button" id="live-run" class="kx-btn">Abrir um chamado</button></div>
+          <ul class="kx-tiles" id="live-tiles"></ul>
+          <ol class="kx-log" id="live-log" aria-live="off"></ol>
+        </div>
+      </section>
+
+      <!-- 6. O técnico no bolso -->
       <section class="hx-phone-scene" data-scene data-stops=".59" aria-labelledby="phone-title">
         <div class="hx-stick wrap">
           <div class="hx-phone-copy">
@@ -385,7 +414,7 @@
         </div>
       </section>
 
-      <!-- 5. Vista explodida do relatório (paradas: folha inteira; camadas abertas, --e = 1) -->
+      <!-- 7. O relatório se monta sozinho -->
       <section class="hx-rat" data-scene data-stops=".17 .68" aria-labelledby="rat-title">
         <div class="hx-stick wrap">
           <div class="hx-rat-copy">
@@ -405,44 +434,32 @@
         </div>
       </section>
 
-      <!-- 5b. Onde o chamado acontece -->
+      <!-- Os números -->
+      <section class="kx-stats kx-fill wrap" aria-label="O Horus em números">
+        <p class="kx-tag">O Horus em números</p>
+        <dl>
+          <div><dt>prazo do chamado</dt><dd><span data-count="2">2</span><small>dias úteis</small></dd><p>Conta desde a abertura, pulando fim de semana e feriado nacional.</p></div>
+          <div><dt>status à vista</dt><dd><span data-count="5">5</span></dd><p>Aberto, designado, em atendimento, concluído e finalizado.</p></div>
+          <div><dt>login</dt><dd><span data-count="2">2</span><small>etapas</small></dd><p>Senha e um código a mais, para cada pessoa.</p></div>
+          <div><dt>relatório</dt><dd><span data-count="1">1</span><small>PDF</small></dd><p>Gerado com os dados do chamado, no modelo do fornecedor.</p></div>
+        </dl>
+      </section>
+
+      <!-- 8. Detalhes -->
+      <section id="detalhes" class="kx-block kx-fill wrap" aria-labelledby="detalhes-title">
+        <header class="kx-head">
+          <h2 id="detalhes-title">Os detalhes<br /><span class="kx-dim">que a operação sente.</span></h2>
+        </header>
+        <ul class="kx-elements"><li class="is-on"><b>Pz</b><strong>Prazo em dias úteis</strong><small>Dois dias úteis a partir da abertura, pulando fins de semana e feriados nacionais.</small></li><li class="is-on"><b>St</b><strong>Status do prazo à vista</strong><small>No prazo, vence hoje ou excedido, sinalizado em cada chamado.</small></li><li class="is-on"><b>2F</b><strong>Verificação em duas etapas</strong><small>Login protegido por um código além da senha.</small></li><li class="is-on"><b>Cl</b><strong>Cadastro de clientes</strong><small>Endereço estruturado uma vez, reaproveitado em cada chamado novo.</small></li><li class="is-on"><b>Fc</b><strong>Fechamento semanal</strong><small>Os atendimentos da semana reunidos para conferência e aprovação.</small></li><li class="is-on"><b>Hi</b><strong>Histórico consultável</strong><small>Chamados finalizados com relatório e peças, prontos para quando alguém perguntar.</small></li><li class="is-on"><b>Pç</b><strong>Peças utilizadas</strong><small>O técnico registra cada peça usada na visita, e o histórico guarda.</small></li><li class="is-on"><b>RAT</b><strong>Relatório em PDF</strong><small>No modelo do fornecedor, com os dados do chamado já preenchidos.</small></li></ul>
+      </section>
+
+      <!-- 9. Onde tiver TI -->
       <section class="hx-places wrap" aria-labelledby="places-title">
         <h2 id="places-title">Onde tiver TI,<br /><span class="hx-grad">tem chamado.</span></h2>
         <div class="hx-photos">
           <figure class="hx-photo"><img src="midia/rack-2048.jpg" srcset="midia/rack.jpg 1024w, midia/rack-2048.jpg 2048w" sizes="(max-width:900px) 100vw, 50vw" alt="Rack de rede com switches e cabos organizados" width="1024" height="576" loading="lazy" /><figcaption><strong>Rede e infraestrutura</strong>Rack, switches e cabeamento.</figcaption></figure>
           <figure class="hx-photo"><img src="midia/bancada-2048.jpg" srcset="midia/bancada.jpg 1024w, midia/bancada-2048.jpg 2048w" sizes="(max-width:900px) 100vw, 50vw" alt="Bancada de manutenção com PDV aberto, ferramentas e fonte de reposição" width="1024" height="576" loading="lazy" /><figcaption><strong>Manutenção de equipamentos</strong>PDV, impressoras e periféricos.</figcaption></figure>
         </div>
-      </section>
-
-      <!-- 5b. Implicação: o que custa não saber -->
-      <section class="section wrap horus horus-cost" aria-labelledby="custo-title">
-        <div class="horus-copy">
-          <div class="eyebrow">Plataforma / O que custa não saber</div>
-          <h2 id="custo-title">Chamado sem dono<br /><em>vira equipamento parado.</em></h2>
-          <p>Quando ninguém vê o status, o prazo vence em silêncio e a operação paga por isso.</p>
-        </div>
-        <ul class="horus-list">
-          <li><span>01</span><strong>A ligação para saber</strong><small>Quem abriu o chamado liga para o técnico, para o fornecedor e para o colega. Cada ligação tira alguém do que estava fazendo.</small></li>
-          <li><span>02</span><strong>O prazo que vence sozinho</strong><small>Sem status à vista, a operação só descobre o atraso quando o cliente final reclama.</small></li>
-          <li><span>03</span><strong>O relatório que ninguém acha</strong><small>Sem registro único, provar o que foi feito vira procura em planilha, print e mensagem.</small></li>
-        </ul>
-      </section>
-
-      <!-- 6. Detalhes, no padrão de lista numerada do site -->
-      <section class="section wrap horus" aria-labelledby="detalhes-title">
-        <div class="horus-copy">
-          <div class="eyebrow">Plataforma / Detalhes</div>
-          <h2 id="detalhes-title">Os detalhes<br /><em>que a operação sente.</em></h2>
-          <p>O que sustenta o dia a dia de quem abre, acompanha e fecha chamados no Horus.</p>
-        </div>
-        <ul class="horus-list">
-          <li><span>01</span><strong>Prazo em dias úteis</strong><small>Dois dias úteis a partir da abertura, pulando fins de semana e feriados nacionais.</small></li>
-          <li><span>02</span><strong>Status do prazo à vista</strong><small>No prazo, vence hoje ou excedido, sinalizado em cada chamado.</small></li>
-          <li><span>03</span><strong>Verificação em duas etapas</strong><small>Login protegido por um código além da senha.</small></li>
-          <li><span>04</span><strong>Cadastro de clientes</strong><small>Endereço estruturado uma vez, reaproveitado em cada chamado novo.</small></li>
-          <li><span>05</span><strong>Fechamento semanal</strong><small>Os atendimentos da semana reunidos para conferência e aprovação.</small></li>
-          <li><span>06</span><strong>Histórico consultável</strong><small>Chamados finalizados com relatório e peças, prontos para quando alguém perguntar.</small></li>
-        </ul>
       </section>
 
       <section id="faq" class="section wrap faq reveal" style="border-top: 1px solid var(--line)">
@@ -474,7 +491,6 @@
         </div>
       </section>
 
-      <!-- 7. Fechamento, no padrão de contato do site -->
       <section id="contato" class="contact night">
         <div class="wrap">
           <div>
@@ -503,5 +519,6 @@
         ><a href="index.html#inicio">Voltar ao início </a>
       </div>
     </footer>
+  
   </body>
 </html>

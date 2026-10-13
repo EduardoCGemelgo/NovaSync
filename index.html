@@ -17,12 +17,15 @@
     <link rel="stylesheet" href="landing-art.css" />
 <link rel="stylesheet" href="horus.css" />
 <link rel="stylesheet" href="home.css" />
+<link rel="stylesheet" href="kx.css" />
+<link rel="stylesheet" href="site.css" />
     <script src="novasync.js?v=20260929b" defer></script>
     <link rel="stylesheet" href="technician-form.css?v=20260929b">
     <script defer src="technician-validation.js?v=20260929b"></script>
     <script defer src="technician-form.js?v=20260929b"></script>
     <script defer src="technician-address.js?v=20260929b"></script>
 <script src="trava.js" defer></script>
+<script src="kx.js" defer></script>
 <script src="home.js" defer></script>
 <script src="mapa-ufs.js" defer></script>
 <script src="mapa-3d.js" defer></script>
@@ -34,12 +37,12 @@
 <meta property="og:locale" content="pt_BR">
 <meta property="og:title" content="NovaSync | Field service de TI em todo o Brasil">
 <meta property="og:description" content="Field service de TI em todo o Brasil: 350 técnicos nos 27 estados, atendimento em até 2 dias úteis e relatório em PDF. Horus, nossa plataforma de chamados.">
-<meta property="og:image" content="https://nova-sync.net/midia/og-home.jpg">
-<meta property="og:image:alt" content="NovaSync">
+<meta property="og:image" content="https://nova-sync.net/midia/home-hero.jpg">
+<meta property="og:image:alt" content="Técnico de TI a caminho de um atendimento ao amanhecer.">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="NovaSync | Field service de TI em todo o Brasil">
 <meta name="twitter:description" content="Field service de TI em todo o Brasil: 350 técnicos nos 27 estados, atendimento em até 2 dias úteis e relatório em PDF. Horus, nossa plataforma de chamados.">
-<meta name="twitter:image" content="https://nova-sync.net/midia/og-home.jpg">
+<meta name="twitter:image" content="https://nova-sync.net/midia/home-hero.jpg">
 <link rel="canonical" href="https://nova-sync.net/">
 <meta property="og:url" content="https://nova-sync.net/">
   <script type="application/ld+json">
@@ -104,7 +107,7 @@
         "inLanguage": "pt-BR",
         "isPartOf": { "@id": "https://nova-sync.net/#site" },
         "about": { "@id": "https://nova-sync.net/#org" },
-        "primaryImageOfPage": "https://nova-sync.net/midia/og-home.jpg"
+        "primaryImageOfPage": "https://nova-sync.net/midia/home-hero.jpg"
       },
       {
         "@type": "Service",
@@ -166,7 +169,7 @@
   }
   </script>
 </head>
-  <body class="landing-art hm">
+  <body class="landing-art kx hm">
     <a href="#conteudo" class="skip">Pular para o conteúdo</a>
     <header class="nav">
       <div class="wrap">
@@ -215,307 +218,49 @@
       </nav>
     </header>
     <main id="conteudo">
-      <!-- 1. Hero: texto em fundo limpo; abaixo, a história presa na tela conduzida pela rolagem -->
-      <section id="inicio" class="hm-hero" aria-labelledby="hero-title">
-        <div class="hero hero-centered hm-hero-copy">
-          <div class="hero-inner">
-            <div class="eyebrow">Field Service de TI · Cobertura nacional</div>
-            <h1 id="hero-title">Operações em campo.<br /><em>Supervisionadas.</em></h1>
-            <p class="hero-copy">Técnicos de TI em todo o Brasil. Você acompanha cada visita, do agendamento ao relatório.</p>
-            <div class="hero-actions">
+      <!-- 1. Situação: o técnico a caminho; o título sai e a prova entra (paradas: título; os números) -->
+      <section id="inicio" class="kx-hero kx-hero-2" data-scene data-stops="0 1" aria-labelledby="hero-title">
+        <div class="kx-stick">
+          <img class="kx-hero-bg" src="midia/home-hero.jpg" alt="Técnico de TI com mochila e maleta caminhando ao amanhecer em direção a uma loja." width="2048" height="1143" fetchpriority="high" />
+          <div class="kx-hero-copy">
+            <p class="eyebrow">Field service de TI · Cobertura nacional</p>
+            <h1 id="hero-title">Operações em campo.<br /><span class="kx-grad">Supervisionadas.</span></h1>
+            <p class="kx-sub">Técnicos de TI em todo o Brasil. Você acompanha cada visita, do agendamento ao relatório.</p>
+            <div class="kx-actions">
               <a class="button primary" href="diagnostico.html">Fazer o diagnóstico</a
-              ><a class="button ghost" href="#cobertura">Ver cobertura no Brasil</a>
-            </div>
-            <div class="hero-foot">Demandas pontuais. Operações recorrentes.</div><div class="hero-motion"><button type="button" id="motion-toggle" aria-pressed="false">Pausar animações</button></div>
-          </div>
-        </div>
-        <!-- Trailer: cada cena fica travada na tela; um pouco de rolagem dispara o corte para a próxima (home.js).
-             Cortes, na ordem: parede, chicote, zoom, volta com luz. -->
-        <div class="hm-story">
-          <div class="hm-story-stick">
-            <div class="hm-beat is-on" style="--fx:62%; --dx:5%">
-              <img src="midia/drama-banco.jpg" width="2400" height="1340" alt="" />
-              <p><span class="hm-when"><i></i>03:47 · Manaus, AM</span>O caixa eletrônico parou.</p>
-            </div>
-            <div class="hm-beat" style="--fx:64%; --dx:-4%">
-              <img src="midia/drama-hospital.jpg" width="2400" height="1200" alt="" />
-              <p><span class="hm-when"><i></i>22:14 · Recife, PE</span>A rede do hospital caiu.</p>
-            </div>
-            <div class="hm-beat hm-term" style="--fx:70%">
-              <img src="midia/drama-loja.jpg" width="2200" height="1237" alt="" />
-              <p><span class="hm-when"><i></i>07:58 · Curitiba, PR</span>A loja abre em dois minutos.<br /><em>A maquininha, não.</em></p>
-            </div>
-            <div class="hm-beat hm-need">
-              <p><span style="--w:0">Alguém</span> <span style="--w:1">precisa</span> <span style="--w:2">estar</span> <span style="--w:3">lá.</span></p>
-            </div>
-            <div class="hm-beat hm-here" style="--fx:64%">
-              <img src="midia/home-campo.jpg" width="2400" height="1340" alt="" />
-              <p><span class="hm-when"><i></i>Técnico no local · Chamado acompanhado</span>Nós estamos.</p>
-              <small>350 técnicos de referência nas 27 unidades da federação. E você acompanha cada passo, do chamado ao relatório.</small>
-              <a class="button ghost" href="#cobertura">Ver onde estamos</a>
-            </div>
-            <div class="hm-wall" aria-hidden="true"></div>
-          </div>
-        </div>
-      </section>
-      <div class="service-strip">
-        <div class="wrap">
-          <span>Tecnologia onde ela acontece</span><span>Microinformática</span
-          ><b>/</b><span>Redes & telecom</span><b>/</b
-          ><span>Infraestrutura</span><b>/</b
-          ><span>Terminais & periféricos</span>
-        </div>
-      </div>
-
-      <!-- 2. Cobertura: uma tela; ao chegar, os estados acendem a partir de SP e o mapa aproxima -->
-      <section id="cobertura" class="coverage-band hm-cov">
-          <div class="section wrap coverage coverage-lead">
-            <div class="coverage-heading"><div class="eyebrow">Presença local. Coordenação nacional.</div><h2>Presença técnica em todo o <em>Brasil.</em></h2><p>Rede de referência nas 27 unidades da federação. Selecione um estado para ver a sua região.</p></div>
-            <div class="map-stage">
-              <div id="coverage-map" class="map-3d"><noscript><img src="mapa-novasync.svg" alt="Mapa do Brasil" width="500" height="350" /></noscript></div>
-              <div class="map-caption">
-                <span>Presença em campo</span><span>Coordenação nacional </span>
-              </div>
-            </div>
-            <div class="coverage-copy" data-stop>
-              <div class="eyebrow">01 / Cobertura nacional</div>
-              <h3 id="coverage-state-name">Brasil</h3><div class="coverage-capacity"><strong id="coverage-count" aria-hidden="true">350</strong><span class="motion-sr" id="coverage-count-readable">350</span><span>técnicos na rede de referência</span></div><p class="coverage-data-note">Quantidades de referência, sem atualização em tempo real. A disponibilidade atual é confirmada pela equipe.</p>
-              <div class="coverage-form">
-                <label for="state">Onde será o atendimento?</label>
-                <div class="coverage-controls">
-                  <select id="state">
-                    <option value="">Todo o Brasil</option>
-                    <option value="AC">Acre</option>
-                    <option value="AL">Alagoas</option>
-                    <option value="AP">Amapá</option>
-                    <option value="AM">Amazonas</option>
-                    <option value="BA">Bahia</option>
-                    <option value="CE">Ceará</option>
-                    <option value="DF">Distrito Federal</option>
-                    <option value="ES">Espírito Santo</option>
-                    <option value="GO">Goiás</option>
-                    <option value="MA">Maranhão</option>
-                    <option value="MT">Mato Grosso</option>
-                    <option value="MS">Mato Grosso do Sul</option>
-                    <option value="MG">Minas Gerais</option>
-                    <option value="PA">Pará</option>
-                    <option value="PB">Paraíba</option>
-                    <option value="PR">Paraná</option>
-                    <option value="PE">Pernambuco</option>
-                    <option value="PI">Piauí</option>
-                    <option value="RJ">Rio de Janeiro</option>
-                    <option value="RN">Rio Grande do Norte</option>
-                    <option value="RS">Rio Grande do Sul</option>
-                    <option value="RO">Rondônia</option>
-                    <option value="RR">Roraima</option>
-                    <option value="SC">Santa Catarina</option>
-                    <option value="SP">São Paulo</option>
-                    <option value="SE">Sergipe</option>
-                    <option value="TO">Tocantins</option></select
-                  ><a
-                    id="coverage-link"
-                    class="button primary"
-                    href="https://wa.me/5511993287070?text=Ol%C3%A1!%20Gostaria%20de%20consultar%20a%20cobertura%20de%20atendimento."
-                    >Consultar região </a
-                  >
-                </div>
-                <small>A equipe confirma cobertura, prazo e condições pelo WhatsApp.</small>
-              </div>
+              ><a class="kx-link" href="#cobertura">Ver cobertura no Brasil <span aria-hidden="true">↓</span></a>
             </div>
           </div>
-      </section>
-
-      <!-- 3. O que fazemos: uma foto por frente de serviço -->
-      <section id="servicos" class="section wrap reveal">
-        <div class="section-head">
-          <div>
-            <div class="eyebrow">02 / O que fazemos</div>
-            <h2>Apoio técnico.<br />Do plano à ponta.</h2>
+          <div class="kx-proof">
+            <div><b>350</b><span>técnicos de referência</span></div>
+            <div><b>27</b><span>unidades da federação</span></div>
+            <div><b>2</b><span>dias úteis de prazo</span></div>
           </div>
-          <p>
-            Organizamos pessoas, escopo e acompanhamento para que você saiba o
-            que acontece em cada local de atendimento.
-          </p>
-        </div>
-        <div class="hm-services">
-          <article class="hm-service">
-            <figure class="hm-photo"><img src="midia/servico-ativar.jpg" alt="Mãos de técnico conectando cabos de rede em um rack recém-instalado" width="1024" height="768" loading="lazy" /></figure>
-            <div>
-              <span class="number">01 — ATIVAR</span>
-              <h3>Coloque a operação de pé.</h3>
-              <p>Instalação e ativação de ambientes de tecnologia, dentro da sua janela operacional.</p>
-              <ul><li>Instalação de equipamentos</li><li>Ativação de pontos de rede</li><li>Implantações e expansões</li></ul>
-            </div>
-          </article>
-          <article class="hm-service">
-            <figure class="hm-photo"><img src="midia/servico-sustentar.jpg" alt="Mãos de técnico trocando um componente dentro de um terminal de autoatendimento" width="924" height="768" loading="lazy" /></figure>
-            <div>
-              <span class="number">02 — SUSTENTAR</span>
-              <h3>Mantenha tudo em movimento.</h3>
-              <p>Suporte presencial para diagnosticar, corrigir e registrar o resultado de cada visita.</p>
-              <ul><li>Atendimentos corretivos</li><li>Manutenção planejada</li><li>Substituição de componentes</li></ul>
-            </div>
-          </article>
-          <article class="hm-service">
-            <figure class="hm-photo"><img src="midia/servico-transformar.jpg" alt="Escritório em mudança, com computadores embalados em carrinhos e um rack de rede aberto" width="1024" height="768" loading="lazy" /></figure>
-            <div>
-              <span class="number">03 — TRANSFORMAR</span>
-              <h3>Prepare a próxima etapa.</h3>
-              <p>Mudanças, operações temporárias e desmobilização, com escopo e destino definidos.</p>
-              <ul><li>Mudanças de infraestrutura</li><li>Suporte a eventos</li><li>Retirada e logística reversa</li></ul>
-            </div>
-          </article>
+          <div class="hero-motion kx-motion"><button type="button" id="motion-toggle" aria-pressed="false">Pausar animações</button></div>
         </div>
       </section>
 
-      <!-- 4. Como funciona: as etapas rolam à esquerda e o painel acompanha à direita -->
-      <section id="como-funciona" class="section night hm-flow" aria-labelledby="flow-title">
-        <div class="wrap">
-          <div class="hm-flow-head">
-            <div class="eyebrow">03 / Como funciona</div>
-            <h2 id="flow-title">Você acompanha.<br />A gente coordena.</h2>
-            <p>Da solicitação ao relatório, cada etapa fica registrada. Role para acompanhar um atendimento.</p>
+      <!-- 2. Problema: três horários, três lugares onde alguém precisa estar (uma parada por acontecimento) -->
+      <section id="dia" class="kx-night kx-night-4" data-scene data-stops=".125 .375 .625 .875" aria-labelledby="dia-title">
+        <div class="kx-stick">
+          <div class="kx-layers" aria-hidden="true"><img class="is-on" src="midia/drama-banco.jpg" alt="" width="2400" height="1340" /><img src="midia/drama-hospital.jpg" alt="" width="2400" height="1200" loading="lazy" /><img src="midia/drama-loja.jpg" alt="" width="2200" height="1237" loading="lazy" /><img src="midia/home-campo.jpg" alt="" width="2400" height="1340" loading="lazy" /></div>
+          <div class="kx-night-ui wrap">
+            <header>
+              <h2 id="dia-title" class="kx-sr">Um caixa eletrônico, uma rede de hospital e uma loja: em cada um, alguém precisa estar lá.</h2>
+            </header>
+            <output class="kx-clock" id="dia-clock" aria-live="off">03:47</output>
+            <div class="kx-events"><article data-ev="0"><b class="kx-where">03:47 · Manaus, AM</b><h3>O caixa eletrônico parou.</h3><p>A agência está vazia e o cliente só vai descobrir quando chegar. Alguém precisa estar lá.</p></article><article data-ev="1"><b class="kx-where">22:14 · Recife, PE</b><h3>A rede do hospital caiu.</h3><p>Sem rede, o posto de enfermagem volta ao papel. Cada minuto pesa.</p></article><article data-ev="2"><b class="kx-where">07:58 · Curitiba, PR</b><h3>A loja abre em dois minutos. A maquininha, não.</h3><p>Cada minuto sem o terminal é venda que vai embora.</p></article><article data-ev="3"><b class="kx-where">Técnico no local · chamado acompanhado</b><h3>Nós estamos.</h3><p>350 técnicos de referência nas 27 unidades da federação. E você acompanha cada passo, do chamado ao relatório.</p><a class="kx-link" href="#cobertura">Ver onde estamos <span aria-hidden="true">↓</span></a></article></div>
+            <dl class="kx-meters">
+              <div><dt>Equipamentos parados</dt><dd id="m-paradas">1</dd></div>
+              <div><dt>Técnicos no local</dt><dd id="m-tecnicos">0</dd></div>
+            </dl>
+            <ol class="kx-hours" aria-hidden="true"><li>Manaus</li><li>Recife</li><li>Curitiba</li><li>Em campo</li></ol>
           </div>
-          <div class="hm-flow-grid">
-            <ol class="hm-steps">
-              <li class="hm-step is-on"><span>01 · Escopo</span><h3>Primeiro, entendemos a demanda.</h3><p>Alinhamos o escopo, o local, o prazo e os critérios que vão orientar o atendimento.</p></li>
-              <li class="hm-step"><span>02 · Técnico designado</span><h3>Conectamos o técnico à operação.</h3><p>A designação considera a região, a disponibilidade e a necessidade técnica da visita.</p></li>
-              <li class="hm-step"><span>03 · Execução</span><h3>Acompanhamos a execução.</h3><p>O atendimento avança com registro de status, evidências e eventual necessidade de retorno.</p></li>
-              <li class="hm-step"><span>04 · Relatório</span><h3>Fechamos com informação.</h3><p>O relatório do atendimento reúne o que foi feito, o resultado da visita e os próximos encaminhamentos.</p></li>
-            </ol>
-            <figure class="hm-flow-device" aria-label="Exemplo ilustrativo de acompanhamento de um atendimento">
-              <div class="operation-art hero-console demo-console hm-console">
-                <div class="console-heading"><img src="logo-star.png" width="28" height="28" alt="" /><span>NOVASYNC <small>OPERAÇÃO CONECTADA</small></span><span class="console-example">Exemplo ilustrativo</span></div>
-                <ol class="hm-line"><li class="done">Escopo</li><li>Técnico</li><li>Execução</li><li>Relatório</li></ol>
-                <div class="console-ticket">
-                  <div class="console-meta"><span>ATENDIMENTO / NS-02418</span><span data-flow-status>Escopo recebido</span></div>
-                  <div class="hm-panels">
-                    <div class="hm-panel is-on" data-panel>
-                      <h4>A demanda chega completa.</h4>
-                      <div class="console-facts"><div><span>LOCAL</span><strong>Unidade Centro · Campinas</strong></div><div><span>EQUIPAMENTO</span><strong>Terminal de autoatendimento</strong></div><div><span>JANELA</span><strong>Amanhã, 8h às 12h</strong></div><div><span>SERVIÇO</span><strong>Corretiva</strong></div></div>
-                      <p class="hm-next">Próximo passo: designação técnica</p>
-                    </div>
-                    <div class="hm-panel" data-panel>
-                      <h4>O técnico certo, com o escopo em mãos.</h4>
-                      <div class="console-facts"><div><span>TÉCNICO</span><strong>Parceiro da região</strong></div><div><span>CHEGADA PREVISTA</span><strong>9h10</strong></div><div><span>ESCOPO</span><strong>Enviado ao técnico</strong></div><div><span>JANELA</span><strong>Confirmada</strong></div></div>
-                      <p class="hm-next">Próximo passo: execução em campo</p>
-                    </div>
-                    <div class="hm-panel" data-panel>
-                      <h4>Cada passo da visita registrado.</h4>
-                      <div class="console-facts"><div><span>CHECK-IN</span><strong>09:08 no local</strong></div><div><span>DIAGNÓSTICO</span><strong>Fonte com defeito</strong></div><div><span>AÇÃO</span><strong>Troca da fonte</strong></div><div><span>TESTES</span><strong>Concluídos</strong></div></div>
-                      <p class="hm-next">Próximo passo: relatório do atendimento</p>
-                    </div>
-                    <div class="hm-panel" data-panel>
-                      <h4>Relatório pronto para consultar.</h4>
-                      <div class="console-facts"><div><span>RESULTADO</span><strong>Equipamento operando</strong></div><div><span>EVIDÊNCIAS</span><strong>6 fotos anexadas</strong></div><div><span>RETORNO</span><strong>Não necessário</strong></div><div><span>DOCUMENTO</span><strong>Relatório em PDF</strong></div></div>
-                      <p class="hm-next">Histórico salvo no atendimento</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="console-bottom"><span>VISIBILIDADE EM CADA ETAPA</span></div>
-              </div>
-            </figure>
-          </div>
-          <a href="diagnostico.html" class="button hm-flow-cta">Fazer o diagnóstico</a>
         </div>
       </section>
 
-      <!-- 5. Horus: chamada curta; o detalhe fica em horus.html -->
-      <section id="horus" class="section wrap horus reveal" aria-labelledby="horus-title">
-        <div class="horus-copy">
-          <svg class="horus-mark" viewBox="-3 -3 606 66" role="img" aria-label="Horus">
-            <g fill="none" stroke="currentColor" stroke-width="5">
-              <path d="M2.5 0V60M63.5 0V60M2.5 30H63.5"/>
-              <path d="M272.5 60V2.5H321A16 16 0 0 1 321 34.5H272.5M310 34.5L339 60"/>
-              <path d="M402.5 0V42Q402.5 57.5 418 57.5H448Q463.5 57.5 463.5 42V0"/>
-              <path d="M598 2.5H546Q532.5 2.5 532.5 16Q532.5 29.5 546 29.5H584Q597.5 29.5 597.5 43.5Q597.5 57.5 584 57.5H531"/>
-            </g>
-            <circle cx="167" cy="30" r="31" fill="currentColor"/>
-          </svg>
-          <div class="eyebrow">Plataforma própria / Gestão de chamados</div>
-          <h2 id="horus-title">Cada chamado.<br /><em>Em um só lugar.</em></h2>
-          <p>A plataforma de chamados da NovaSync. Sua empresa abre e acompanha cada atendimento, e o técnico registra a visita e o relatório pelo celular.</p>
-          <div class="horus-actions">
-            <a class="button primary" href="horus.html">Ver o Horus</a
-            ><a class="button ghost" href="https://app.nova-sync.net">Acessar o Horus</a>
-          </div>
-        </div>
-        <figure class="hm-horus-fig">
-          <div class="hx-phone hx-hand" aria-label="Tela ilustrativa do Horus no celular do técnico">
-            <img src="midia/mao-celular.jpg" alt="" width="680" height="964" loading="lazy" />
-            <div class="hx-hand-screen">
-            <div class="hx-fit" data-w="300" style="aspect-ratio:277/603">
-              <div class="phone-app" style="width:300px;height:653px">
-                <div class="phone-notch"></div>
-                <div class="phone-head"><small>Terça, 15 set</small><strong>Meus chamados</strong></div>
-                <ul class="phone-list">
-                  <li style="--i:0"><em class="st at">Em atendimento</em><strong>Loja 214 · Pinheiros</strong><small>PDV 03 não liga · 13h às 17h</small></li>
-                  <li style="--i:1"><em class="st al">Próximo</em><strong>Unidade Centro · Campinas</strong><small>Troca de switch · amanhã, 9h</small></li>
-                  <li style="--i:2"><em class="st al">Próximo</em><strong>Loja 108 · Moema</strong><small>Instalação de PDV · amanhã, 14h</small></li>
-                </ul>
-                <div class="phone-cta">Finalizar visita</div>
-                <div class="phone-tabs"><b>Chamados</b><span>Minhas peças</span></div>
-              </div>
-            </div>
-            </div>
-          </div>
-          <figcaption>Tela ilustrativa, dados fictícios.</figcaption>
-        </figure>
-      </section>
-
-      <!-- 6. Setores: galeria horizontal com rolagem nativa -->
-      <section id="setores" class="section sectors reveal" aria-labelledby="setores-title">
-        <div class="wrap">
-          <div class="section-head">
-            <div>
-              <div class="eyebrow">04 / Sua realidade</div>
-              <h2 id="setores-title">Contextos diferentes.<br />O mesmo cuidado.</h2>
-            </div>
-            <p>
-              Da loja ao centro de distribuição, o atendimento precisa respeitar
-              a rotina de cada operação.
-            </p>
-          </div>
-          <div class="hm-rail-nav"><button type="button" data-rail="-1" aria-label="Setores anteriores">←</button><button type="button" data-rail="1" aria-label="Próximos setores">→</button></div>
-        </div>
-        <ul class="hm-rail">
-          <li><a class="hm-card" href="field-service-varejo.html"><img src="midia/setor-varejo.jpg" alt="" width="660" height="880" loading="lazy" /><span>01 / VAREJO</span><strong>Na linha de frente</strong><small>Lojas, PDVs e periféricos</small></a></li>
-          <li><a class="hm-card" href="field-service-bancos.html"><img src="midia/setor-bancos.jpg" alt="" width="660" height="880" loading="lazy" /><span>02 / BANCOS</span><strong>Em cada agência</strong><small>Terminais e infraestrutura</small></a></li>
-          <li><a class="hm-card" href="field-service-saude.html"><img src="midia/setor-saude.jpg" alt="" width="660" height="880" loading="lazy" /><span>03 / SAÚDE</span><strong>Ao lado do cuidado</strong><small>Clínicas, hospitais e laboratórios</small></a></li>
-          <li><a class="hm-card" href="field-service-industria.html"><img src="midia/setor-industria.jpg" alt="" width="660" height="880" loading="lazy" /><span>04 / INDÚSTRIA</span><strong>No ritmo da produção</strong><small>Ambientes e ativos operacionais</small></a></li>
-          <li><a class="hm-card" href="field-service-telecom.html"><img src="midia/setor-telecom.jpg" alt="" width="660" height="880" loading="lazy" /><span>05 / TELECOM</span><strong>Em cada conexão</strong><small>Redes e conectividade local</small></a></li>
-          <li><a class="hm-card" href="field-service-transporte.html"><img src="midia/setor-transporte.jpg" alt="" width="660" height="880" loading="lazy" /><span>06 / TRANSPORTE</span><strong>Ao longo da rota</strong><small>Bases, terminais e centros logísticos</small></a></li>
-          <li><a class="hm-card" href="field-service-eventos.html"><img src="midia/setor-eventos.jpg" alt="" width="660" height="880" loading="lazy" /><span>07 / EVENTOS</span><strong>Na hora de acontecer</strong><small>Montagem, suporte e desmontagem</small></a></li>
-          <li><a class="hm-card is-cta" href="#contato"><span>08 / SUA OPERAÇÃO</span><strong>Vamos entender juntos</strong><small>Conte o que sua empresa precisa</small></a></li>
-        </ul>
-      </section>
-      <section id="parceiros" class="section night partners reveal" aria-labelledby="parceiros-title">
-        <div class="wrap">
-          <div class="section-head">
-            <div>
-              <div class="eyebrow">Quem confia na operação</div>
-              <h2 id="parceiros-title">Parceiros em campo.</h2>
-            </div>
-            <p>
-              Empresas atendidas pela NovaSync em operações de Field Service
-              de TI.
-            </p>
-          </div>
-          <div class="partner-grid">
-            <article class="partner-card">
-              <img src="melhoretec-logo-white-dark.png" alt="Logo da Melhoretec" width="120" height="120" loading="lazy" />
-              <blockquote>Gostaria de destacar a excelência da Novasync no atendimento aos chamados da Melhoretec. Temos tido uma experiência muito positiva, principalmente pelo ótimo tempo de agendamento e pela agilidade no atendimento.<br><br>Os técnicos demonstram conhecimento, são capacitados e, além de resolverem as demandas com eficiência, conduzem o atendimento de forma muito humana e atenciosa.<br><br>A parceria tem sido muito importante para nós, e deixamos aqui nosso reconhecimento pelo excelente trabalho e pela qualidade do suporte prestado.</blockquote>
-              <cite>Gustavo Agostini — Suporte Melhoretec</cite>
-            </article>
-            <article class="partner-card">
-              <img src="novalogi-logo-white-dark.png" alt="Logo da Novalogi" width="120" height="120" loading="lazy" />
-              <blockquote>A Novasync nos ajudou muito a otimizar o tempo de suporte aos nossos clientes. A equipe conta com excelentes profissionais, altamente capacitados e preparados para atender às mais diversas demandas, tanto de hardware quanto de software. Estamos muito satisfeitos com a parceria e com a qualidade do atendimento prestado.</blockquote>
-              <cite>Novalogi</cite>
-            </article>
-          </div>
-        </div>
-      </section>
-      <section id="cost-calculator" class="section wrap calculator reveal">
+      <!-- 3. Implicação: o custo de esperar -->
+      <section id="cost-calculator" class="section wrap calculator reveal kx-calc">
         <div class="calculator-copy">
           <div class="eyebrow">05 / O custo de esperar</div>
           <h2>Quanto custa um chamado parado?</h2>
@@ -575,6 +320,250 @@
             >Continuar no diagnóstico</a
           >
         </form>
+      </section>
+
+      <!-- 4. Necessidade: como um atendimento acontece (uma parada por etapa) -->
+      <section id="como-funciona" class="kx-circuit" data-scene data-stops=".125 .375 .625 .875" style="height:440vh" aria-labelledby="flow-title">
+        <div class="kx-stick wrap">
+          <header class="kx-head kx-head-left">
+            <h2 id="flow-title">Você acompanha.<br /><span class="kx-dim">A gente coordena.</span></h2>
+          </header>
+          <ol class="kx-nodes" aria-label="Etapas do atendimento" style="grid-template-columns:repeat(4,minmax(0,1fr))"><li data-node="1"><b>Escopo</b><small>demanda, local e prazo</small></li><li data-node="2"><b>Técnico designado</b><small>região e disponibilidade</small></li><li data-node="3"><b>Execução</b><small>status e evidências</small></li><li data-node="4"><b>Relatório</b><small>PDF no chamado</small></li></ol>
+          <div class="kx-wire" aria-hidden="true"><i></i></div>
+          <div class="kx-detail">
+            <article data-detail="1">
+              <h3>Primeiro, entendemos a demanda.</h3>
+              <p>Alinhamos o escopo, o local, o prazo e os critérios que vão orientar o atendimento.</p>
+              <div class="kx-card"><span class="kx-card-tag">Exemplo ilustrativo · NS-02418 · Escopo recebido</span><dl><dt>Local</dt><dd>Unidade Centro · Campinas</dd><dt>Equipamento</dt><dd>Terminal de autoatendimento</dd><dt>Janela</dt><dd>Amanhã, 8h às 12h</dd><dt>Serviço</dt><dd>Corretiva</dd></dl></div>
+            </article>
+            <article data-detail="2">
+              <h3>Conectamos o técnico à operação.</h3>
+              <p>A designação considera a região, a disponibilidade e a necessidade técnica da visita.</p>
+              <div class="kx-card"><span class="kx-card-tag">Exemplo ilustrativo · NS-02418 · Técnico designado</span><dl><dt>Técnico</dt><dd>Parceiro da região</dd><dt>Chegada prevista</dt><dd>9h10</dd><dt>Escopo</dt><dd>Enviado ao técnico</dd><dt>Janela</dt><dd>Confirmada</dd></dl></div>
+            </article>
+            <article data-detail="3">
+              <h3>Acompanhamos a execução.</h3>
+              <p>O atendimento avança com registro de status, evidências e eventual necessidade de retorno.</p>
+              <div class="kx-card"><span class="kx-card-tag">Exemplo ilustrativo · NS-02418 · Em execução</span><dl><dt>Check-in</dt><dd>09:08 no local</dd><dt>Diagnóstico</dt><dd>Fonte com defeito</dd><dt>Ação</dt><dd>Troca da fonte</dd><dt>Testes</dt><dd>Concluídos</dd></dl></div>
+            </article>
+            <article data-detail="4">
+              <h3>Fechamos com informação.</h3>
+              <p>O relatório do atendimento reúne o que foi feito, o resultado da visita e os próximos encaminhamentos.</p>
+              <div class="kx-card"><span class="kx-card-tag">Exemplo ilustrativo · NS-02418 · Relatório disponível</span><dl><dt>Resultado</dt><dd>Equipamento operando</dd><dt>Evidências</dt><dd>6 fotos anexadas</dd><dt>Retorno</dt><dd>Não necessário</dd><dt>Documento</dt><dd>Relatório em PDF</dd></dl></div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- 5. Solução: o que fazemos -->
+      <section id="servicos" class="kx-block kx-fit wrap" aria-labelledby="serv-title">
+        <header class="kx-head">
+          <h2 id="serv-title">Apoio técnico.<br /><span class="kx-dim">Do plano à ponta.</span></h2>
+          <p class="kx-lead">Organizamos pessoas, escopo e acompanhamento para que você saiba o que acontece em cada local de atendimento.</p>
+        </header>
+        <div class="kx-panels" id="panels-serv">
+          <article class="kx-panel is-on" data-i="0">
+            <img src="midia/servico-ativar.jpg" alt="Mãos de técnico conectando cabos de rede em um rack recém-instalado" width="1024" height="768" loading="lazy" />
+            <button type="button" class="kx-panel-tab" aria-expanded="true"><span>Ativar</span><strong>Ativar</strong></button>
+            <div class="kx-panel-body"><small>Ativar</small><h3>Coloque a operação de pé.</h3><p>Instalação e ativação de ambientes de tecnologia, dentro da sua janela operacional.</p><ul class="kx-panel-list"><li>Instalação de equipamentos</li><li>Ativação de pontos de rede</li><li>Implantações e expansões</li></ul></div>
+          </article>
+          <article class="kx-panel" data-i="1">
+            <img src="midia/servico-sustentar.jpg" alt="Mãos de técnico trocando um componente dentro de um terminal de autoatendimento" width="924" height="768" loading="lazy" />
+            <button type="button" class="kx-panel-tab" aria-expanded="false"><span>Sustentar</span><strong>Sustentar</strong></button>
+            <div class="kx-panel-body"><small>Sustentar</small><h3>Mantenha tudo em movimento.</h3><p>Suporte presencial para diagnosticar, corrigir e registrar o resultado de cada visita.</p><ul class="kx-panel-list"><li>Atendimentos corretivos</li><li>Manutenção planejada</li><li>Substituição de componentes</li></ul></div>
+          </article>
+          <article class="kx-panel" data-i="2">
+            <img src="midia/servico-transformar.jpg" alt="Escritório em mudança, com computadores embalados em carrinhos e um rack de rede aberto" width="1024" height="768" loading="lazy" />
+            <button type="button" class="kx-panel-tab" aria-expanded="false"><span>Transformar</span><strong>Transformar</strong></button>
+            <div class="kx-panel-body"><small>Transformar</small><h3>Prepare a próxima etapa.</h3><p>Mudanças, operações temporárias e desmobilização, com escopo e destino definidos.</p><ul class="kx-panel-list"><li>Mudanças de infraestrutura</li><li>Suporte a eventos</li><li>Retirada e logística reversa</li></ul></div>
+          </article>
+        </div>
+      </section>
+
+      <!-- 6. Cobertura: o mapa, uma tela -->
+      <section id="cobertura" class="coverage-band hm-cov">
+          <div class="section wrap coverage coverage-lead">
+            <div class="coverage-heading"><div class="eyebrow">Presença local. Coordenação nacional.</div><h2>Presença técnica em todo o <em>Brasil.</em></h2><p>Rede de referência nas 27 unidades da federação. Selecione um estado para ver a sua região.</p></div>
+            <div class="map-stage">
+              <div id="coverage-map" class="map-3d"><noscript><img src="mapa-novasync.svg" alt="Mapa do Brasil" width="500" height="350" /></noscript></div>
+              <div class="map-caption">
+                <span>Presença em campo</span><span>Coordenação nacional </span>
+              </div>
+            </div>
+            <div class="coverage-copy" data-stop>
+              <div class="eyebrow">01 / Cobertura nacional</div>
+              <h3 id="coverage-state-name">Brasil</h3><div class="coverage-capacity"><strong id="coverage-count" aria-hidden="true">350</strong><span class="motion-sr" id="coverage-count-readable">350</span><span>técnicos na rede de referência</span></div><p class="coverage-data-note">Quantidades de referência, sem atualização em tempo real. A disponibilidade atual é confirmada pela equipe.</p>
+              <div class="coverage-form">
+                <label for="state">Onde será o atendimento?</label>
+                <div class="coverage-controls">
+                  <select id="state">
+                    <option value="">Todo o Brasil</option>
+                    <option value="AC">Acre</option>
+                    <option value="AL">Alagoas</option>
+                    <option value="AP">Amapá</option>
+                    <option value="AM">Amazonas</option>
+                    <option value="BA">Bahia</option>
+                    <option value="CE">Ceará</option>
+                    <option value="DF">Distrito Federal</option>
+                    <option value="ES">Espírito Santo</option>
+                    <option value="GO">Goiás</option>
+                    <option value="MA">Maranhão</option>
+                    <option value="MT">Mato Grosso</option>
+                    <option value="MS">Mato Grosso do Sul</option>
+                    <option value="MG">Minas Gerais</option>
+                    <option value="PA">Pará</option>
+                    <option value="PB">Paraíba</option>
+                    <option value="PR">Paraná</option>
+                    <option value="PE">Pernambuco</option>
+                    <option value="PI">Piauí</option>
+                    <option value="RJ">Rio de Janeiro</option>
+                    <option value="RN">Rio Grande do Norte</option>
+                    <option value="RS">Rio Grande do Sul</option>
+                    <option value="RO">Rondônia</option>
+                    <option value="RR">Roraima</option>
+                    <option value="SC">Santa Catarina</option>
+                    <option value="SP">São Paulo</option>
+                    <option value="SE">Sergipe</option>
+                    <option value="TO">Tocantins</option></select
+                  ><a
+                    id="coverage-link"
+                    class="button primary"
+                    href="https://wa.me/5511993287070?text=Ol%C3%A1!%20Gostaria%20de%20consultar%20a%20cobertura%20de%20atendimento."
+                    >Consultar região </a
+                  >
+                </div>
+                <small>A equipe confirma cobertura, prazo e condições pelo WhatsApp.</small>
+              </div>
+            </div>
+          </div>
+      </section>
+
+      <!-- Os números -->
+      <section class="kx-stats kx-fill wrap" aria-label="A operação em números">
+        <p class="kx-tag">A operação em números</p>
+        <dl>
+          <div><dt>técnicos de referência</dt><dd><span data-count="350">350</span></dd><p>Rede de referência, com a disponibilidade confirmada pela equipe.</p></div>
+          <div><dt>unidades da federação</dt><dd><span data-count="27">27</span></dd><p>Do Acre ao Rio Grande do Sul, sem deixar estado de fora.</p></div>
+          <div><dt>prazo padrão</dt><dd><span data-count="2">2</span><small>dias úteis</small></dd><p>A partir da abertura, pulando fim de semana e feriado nacional.</p></div>
+          <div><dt>setores atendidos</dt><dd><span data-count="7">7</span></dd><p>Varejo, bancos, saúde, indústria, telecom, transporte e eventos.</p></div>
+        </dl>
+      </section>
+
+      <!-- 7. Horus -->
+      <section id="horus" class="kx-block kx-fill wrap" aria-labelledby="horus-title">
+        <div class="kx-product">
+          <div>
+            <svg class="horus-mark" viewBox="-3 -3 606 66" role="img" aria-label="Horus">
+            <g fill="none" stroke="currentColor" stroke-width="5">
+              <path d="M2.5 0V60M63.5 0V60M2.5 30H63.5"/>
+              <path d="M272.5 60V2.5H321A16 16 0 0 1 321 34.5H272.5M310 34.5L339 60"/>
+              <path d="M402.5 0V42Q402.5 57.5 418 57.5H448Q463.5 57.5 463.5 42V0"/>
+              <path d="M598 2.5H546Q532.5 2.5 532.5 16Q532.5 29.5 546 29.5H584Q597.5 29.5 597.5 43.5Q597.5 57.5 584 57.5H531"/>
+            </g>
+            <circle cx="167" cy="30" r="31" fill="currentColor"/>
+          </svg>
+            <p class="kx-tag">Plataforma própria · Gestão de chamados</p>
+            <h2 id="horus-title">Cada chamado.<br /><span class="kx-grad">Em um só lugar.</span></h2>
+            <p>A plataforma de chamados da NovaSync. Sua empresa abre e acompanha cada atendimento, e o técnico registra a visita e o relatório pelo celular.</p>
+            <div class="hx-actions">
+              <a class="button primary" href="horus.html">Ver o Horus</a
+              ><a class="kx-link" href="https://app.nova-sync.net">Acessar o Horus <span aria-hidden="true">→</span></a>
+            </div>
+          </div>
+          <figure class="hm-horus-fig">
+          <div class="hx-phone hx-hand" aria-label="Tela ilustrativa do Horus no celular do técnico">
+            <img src="midia/mao-celular.jpg" alt="" width="680" height="964" loading="lazy" />
+            <div class="hx-hand-screen">
+            <div class="hx-fit" data-w="300" style="aspect-ratio:277/603">
+              <div class="phone-app" style="width:300px;height:653px">
+                <div class="phone-notch"></div>
+                <div class="phone-head"><small>Terça, 15 set</small><strong>Meus chamados</strong></div>
+                <ul class="phone-list">
+                  <li style="--i:0"><em class="st at">Em atendimento</em><strong>Loja 214 · Pinheiros</strong><small>PDV 03 não liga · 13h às 17h</small></li>
+                  <li style="--i:1"><em class="st al">Próximo</em><strong>Unidade Centro · Campinas</strong><small>Troca de switch · amanhã, 9h</small></li>
+                  <li style="--i:2"><em class="st al">Próximo</em><strong>Loja 108 · Moema</strong><small>Instalação de PDV · amanhã, 14h</small></li>
+                </ul>
+                <div class="phone-cta">Finalizar visita</div>
+                <div class="phone-tabs"><b>Chamados</b><span>Minhas peças</span></div>
+              </div>
+            </div>
+            </div>
+          </div>
+          <figcaption>Tela ilustrativa, dados fictícios.</figcaption>
+        </figure>
+        </div>
+      </section>
+
+      <!-- 8. Setores -->
+      <section id="setores" class="kx-block kx-fit wrap" aria-labelledby="setores-title">
+        <header class="kx-head">
+          <h2 id="setores-title">Contextos diferentes.<br /><span class="kx-dim">O mesmo cuidado.</span></h2>
+          <p class="kx-lead">Da loja ao centro de distribuição, o atendimento precisa respeitar a rotina de cada operação.</p>
+        </header>
+        <div class="kx-panels kx-panels-wide" id="panels-setores">
+          <article class="kx-panel is-on" data-i="0">
+            <img src="midia/setor-varejo.jpg" alt="" width="660" height="880" loading="lazy" />
+            <button type="button" class="kx-panel-tab" aria-expanded="true"><span>Varejo</span><strong>Varejo</strong></button>
+            <div class="kx-panel-body"><small>Varejo</small><h3>Na linha de frente.</h3><p>Lojas, PDVs e periféricos.</p><a class="kx-panel-link" href="field-service-varejo.html">Ver field service para varejo <span aria-hidden="true">→</span></a></div>
+          </article>
+          <article class="kx-panel" data-i="1">
+            <img src="midia/setor-bancos.jpg" alt="" width="660" height="880" loading="lazy" />
+            <button type="button" class="kx-panel-tab" aria-expanded="false"><span>Bancos</span><strong>Bancos</strong></button>
+            <div class="kx-panel-body"><small>Bancos</small><h3>Em cada agência.</h3><p>Terminais e infraestrutura.</p><a class="kx-panel-link" href="field-service-bancos.html">Ver field service para bancos <span aria-hidden="true">→</span></a></div>
+          </article>
+          <article class="kx-panel" data-i="2">
+            <img src="midia/setor-saude.jpg" alt="" width="660" height="880" loading="lazy" />
+            <button type="button" class="kx-panel-tab" aria-expanded="false"><span>Saúde</span><strong>Saúde</strong></button>
+            <div class="kx-panel-body"><small>Saúde</small><h3>Ao lado do cuidado.</h3><p>Clínicas, hospitais e laboratórios.</p><a class="kx-panel-link" href="field-service-saude.html">Ver field service para saúde <span aria-hidden="true">→</span></a></div>
+          </article>
+          <article class="kx-panel" data-i="3">
+            <img src="midia/setor-industria.jpg" alt="" width="660" height="880" loading="lazy" />
+            <button type="button" class="kx-panel-tab" aria-expanded="false"><span>Indústria</span><strong>Indústria</strong></button>
+            <div class="kx-panel-body"><small>Indústria</small><h3>No ritmo da produção.</h3><p>Ambientes e ativos operacionais.</p><a class="kx-panel-link" href="field-service-industria.html">Ver field service para indústria <span aria-hidden="true">→</span></a></div>
+          </article>
+          <article class="kx-panel" data-i="4">
+            <img src="midia/setor-telecom.jpg" alt="" width="660" height="880" loading="lazy" />
+            <button type="button" class="kx-panel-tab" aria-expanded="false"><span>Telecom</span><strong>Telecom</strong></button>
+            <div class="kx-panel-body"><small>Telecom</small><h3>Em cada conexão.</h3><p>Redes e conectividade local.</p><a class="kx-panel-link" href="field-service-telecom.html">Ver field service para telecom <span aria-hidden="true">→</span></a></div>
+          </article>
+          <article class="kx-panel" data-i="5">
+            <img src="midia/setor-transporte.jpg" alt="" width="660" height="880" loading="lazy" />
+            <button type="button" class="kx-panel-tab" aria-expanded="false"><span>Transporte</span><strong>Transporte</strong></button>
+            <div class="kx-panel-body"><small>Transporte</small><h3>Ao longo da rota.</h3><p>Bases, terminais e centros logísticos.</p><a class="kx-panel-link" href="field-service-transporte.html">Ver field service para transporte <span aria-hidden="true">→</span></a></div>
+          </article>
+          <article class="kx-panel" data-i="6">
+            <img src="midia/setor-eventos.jpg" alt="" width="660" height="880" loading="lazy" />
+            <button type="button" class="kx-panel-tab" aria-expanded="false"><span>Eventos</span><strong>Eventos</strong></button>
+            <div class="kx-panel-body"><small>Eventos</small><h3>Na hora de acontecer.</h3><p>Montagem, suporte e desmontagem.</p><a class="kx-panel-link" href="field-service-eventos.html">Ver field service para eventos <span aria-hidden="true">→</span></a></div>
+          </article>
+        </div>
+      </section>
+
+      <section id="parceiros" class="section night partners reveal" aria-labelledby="parceiros-title">
+        <div class="wrap">
+          <div class="section-head">
+            <div>
+              <div class="eyebrow">Quem confia na operação</div>
+              <h2 id="parceiros-title">Parceiros em campo.</h2>
+            </div>
+            <p>
+              Empresas atendidas pela NovaSync em operações de Field Service
+              de TI.
+            </p>
+          </div>
+          <div class="partner-grid">
+            <article class="partner-card">
+              <img src="melhoretec-logo-white-dark.png" alt="Logo da Melhoretec" width="120" height="120" loading="lazy" />
+              <blockquote>Gostaria de destacar a excelência da Novasync no atendimento aos chamados da Melhoretec. Temos tido uma experiência muito positiva, principalmente pelo ótimo tempo de agendamento e pela agilidade no atendimento.<br><br>Os técnicos demonstram conhecimento, são capacitados e, além de resolverem as demandas com eficiência, conduzem o atendimento de forma muito humana e atenciosa.<br><br>A parceria tem sido muito importante para nós, e deixamos aqui nosso reconhecimento pelo excelente trabalho e pela qualidade do suporte prestado.</blockquote>
+              <cite>Gustavo Agostini — Suporte Melhoretec</cite>
+            </article>
+            <article class="partner-card">
+              <img src="novalogi-logo-white-dark.png" alt="Logo da Novalogi" width="120" height="120" loading="lazy" />
+              <blockquote>A Novasync nos ajudou muito a otimizar o tempo de suporte aos nossos clientes. A equipe conta com excelentes profissionais, altamente capacitados e preparados para atender às mais diversas demandas, tanto de hardware quanto de software. Estamos muito satisfeitos com a parceria e com a qualidade do atendimento prestado.</blockquote>
+              <cite>Novalogi</cite>
+            </article>
+          </div>
+        </div>
       </section>
       <section
         id="faq"
@@ -843,5 +832,6 @@
             <p class="technical-form-status" id="technical-form-status" role="status" aria-live="polite"></p>
         </form>
     </dialog>
+  
   </body>
 </html>
