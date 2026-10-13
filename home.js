@@ -152,6 +152,14 @@
     });
   });
 
+  // Parceiros: um depoimento por vez, escolhido pelo logo.
+  const pqTabs = [...document.querySelectorAll('.pq-tabs button')], pqQuotes = [...document.querySelectorAll('.pq-quote')];
+  const pq = i => { pqTabs.forEach((b, k) => { b.setAttribute('aria-selected', String(k === i)); b.tabIndex = k === i ? 0 : -1; }); pqQuotes.forEach((p, k) => { p.hidden = k !== i; }); };
+  pqTabs.forEach((b, i) => {
+    b.addEventListener('click', () => pq(i));
+    b.addEventListener('keydown', e => { const d = e.key === 'ArrowRight' || e.key === 'ArrowDown' ? 1 : e.key === 'ArrowLeft' || e.key === 'ArrowUp' ? -1 : 0; if (d) { const k = (i + d + pqTabs.length) % pqTabs.length; pq(k); pqTabs[k].focus(); e.preventDefault(); } });
+  });
+
   // 7. O pedido em uma frase: a frase vira a primeira mensagem.
   const cm = ['#cm-ramo', '#cm-uf', '#cm-fazer'].map($), wa = $('#cm-wa');
   const compose = () => {

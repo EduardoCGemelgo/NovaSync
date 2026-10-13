@@ -131,3 +131,40 @@ html.still .sv-body img { clip-path:none; }
 /* Serviços: a seção inteira cabe numa tela, para a trava parar uma vez só */
 .sv-t { font-size:clamp(40px,min(7.6vw,10.2vh),116px); }
 .sv-row { padding:clamp(14px,2.2vh,28px) 0; }
+
+/* ===== Parceiros: um depoimento grande por vez, tudo numa tela ===== */
+.landing-art .partners.pq { background:#0a0e1a; border-radius:0; min-height:100svh; display:grid; align-items:center; padding-block:clamp(96px,13vh,140px) clamp(48px,8vh,90px); position:relative; overflow:hidden; }
+.pq::before { content:"\201C"; position:absolute; left:clamp(8px,3vw,60px); top:clamp(40px,6vh,90px); font-size:clamp(260px,38vh,440px); line-height:1; color:#131b33; font-weight:600; pointer-events:none; }
+.pq > .wrap { position:relative; display:grid; grid-template-columns:minmax(0,.8fr) minmax(0,1.5fr); gap:clamp(32px,6vw,110px); align-items:center; }
+.pq-side h2 { margin-top:16px; font-size:clamp(34px,min(4.4vw,7vh),68px); font-weight:500; letter-spacing:-.06em; line-height:1.03; }
+.pq-tabs { display:grid; gap:10px; margin-top:clamp(24px,5vh,48px); }
+.pq-tabs button { display:flex; align-items:center; gap:16px; width:100%; padding:12px 16px; border:1px solid #2b3250; border-radius:20px; background:#0d1220; color:#c9d3e6; text-align:left; font-size:17px; font-weight:600; letter-spacing:-.02em; cursor:pointer; transition:border-color .2s,background .2s; }
+.pq-tabs button img { width:52px; height:52px; object-fit:contain; border-radius:12px; background:#080b14; }
+.pq-tabs button small { display:block; margin-top:2px; color:#8e99b3; font:11px ui-monospace,monospace; letter-spacing:.1em; text-transform:uppercase; font-weight:400; }
+.pq-tabs button:hover { border-color:#6f7794; }
+.pq-tabs button[aria-selected="true"] { border-color:#c0d1f5; background:#141c33; color:#fff; }
+.pq-quote { margin:0; }
+.pq-quote[hidden] { display:none; }
+.pq-quote blockquote { margin:0; }
+.pq-quote blockquote p { margin:0 0 .8em; color:#e3e9f7; font-size:clamp(17px,min(1.9vw,3.1vh),28px); font-weight:400; line-height:1.55; letter-spacing:-.02em; }
+.pq-quote figcaption { margin-top:clamp(16px,3vh,28px); padding-top:16px; border-top:1px solid #2b3250; color:#eef1ff; font-size:17px; font-weight:600; }
+.pq-quote figcaption span { display:block; margin-top:2px; color:#8e99b3; font:11px ui-monospace,monospace; letter-spacing:.1em; text-transform:uppercase; font-weight:400; }
+@media (max-width:860px) { .landing-art .partners.pq { min-height:0; } .pq > .wrap { grid-template-columns:1fr; gap:26px; } .pq-tabs { grid-template-columns:1fr 1fr; } .pq-tabs button { padding:10px 12px; font-size:15px; } .pq-tabs button img { width:40px; height:40px; } }
+
+/* ===== Qual é o seu ramo?: tudo numa tela ===== */
+#setores.section { padding-block:clamp(96px,13vh,120px) clamp(28px,5vh,56px); }
+#setores .section-head { margin-bottom:clamp(14px,2.4vh,24px); align-items:end; }
+#setores .section-head h2 { font-size:clamp(32px,min(4vw,6.4vh),60px); }
+#setores .section-head h2 br { display:none; }
+#setores .section-head p { font-size:14px; margin-bottom:0; }
+#setores .rm-panel { margin-top:clamp(14px,2.6vh,28px); gap:clamp(24px,4vw,64px); grid-template-columns:minmax(0,.5fr) minmax(0,1.5fr); align-items:start; }
+#setores .rm-panel img { aspect-ratio:auto; width:100%; height:clamp(240px,calc(100svh - 390px),520px); max-height:none; }
+#setores .rm-panel h3 { font-size:clamp(28px,min(3.2vw,5.2vh),50px); }
+#setores .rm-panel .lead { margin-top:12px; font-size:clamp(14px,1.15vw,17px); }
+#setores .rm-when { margin-top:clamp(12px,2.4vh,22px); padding:12px 18px 12px 42px; }
+#setores .rm-when::before { top:20px; }
+#setores .rm-when p { margin-top:4px; font-size:14px; line-height:1.5; }
+#setores .rm-chips { margin-top:clamp(10px,2vh,16px); }
+#setores .rm-cta { margin-top:clamp(12px,2.4vh,22px); }
+@media (max-width:900px) { #setores .rm-panel { grid-template-columns:1fr; } #setores .rm-panel img { height:min(34svh,300px); } #setores .section-head h2 br { display:inline; } }
+@media (max-height:800px) and (min-width:901px) { #setores .rm-chips { display:none; } #setores .section-head p { display:none; } #setores .rm-panel img { height:clamp(240px,calc(100svh - 330px),520px); } }
