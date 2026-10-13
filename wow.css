@@ -13,6 +13,7 @@
 .wow-scrub .sw.on { color:#eef1ff; }
 
 /* ===== Cortina: o capítulo sobe com o cantos arredondados ===== */
+.wow-curtain { --wp:1; --ct:#0a0e1a; box-shadow:0 0 0 100vmax var(--ct); background:var(--ct);
   clip-path:inset(calc((1 - var(--wp)) * 34vh) -100vmax 0 -100vmax round calc((1 - var(--wp)) * 56px) calc((1 - var(--wp)) * 56px) 0 0); }
 
 /* ===== Linha que se desenha no topo da seção ===== */

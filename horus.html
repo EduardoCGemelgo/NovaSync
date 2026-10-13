@@ -16,9 +16,11 @@
     <link rel="stylesheet" href="novasync.css" />
     <link rel="stylesheet" href="landing-art.css" />
     <link rel="stylesheet" href="horus.css" />
+    <link rel="stylesheet" href="horus2.css" />
     <script defer src="novasync.js"></script>
     <script defer src="trava.js"></script>
     <script defer src="horus.js"></script>
+    <script defer src="horus2.js"></script>
     <link rel="canonical" href="https://nova-sync.net/horus.html" />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="NovaSync" />
@@ -231,11 +233,12 @@
       <!-- 1. Produto como herói: o texto sai, a tela sobe e se endireita (paradas: título; tela em pé) -->
       <section class="hx-hero" data-scene data-stops="0 1" aria-labelledby="hx-title">
         <div class="hx-stick">
+          <video class="hx-herobg" data-vid muted loop playsinline preload="metadata" aria-hidden="true"><source src="midia/noite-20h.mp4" type="video/mp4" /></video>
           <div class="hx-hero-copy">
-            <h1 id="hx-title">Cada chamado.<br /><span class="hx-grad">Em um só lugar.</span></h1>
+            <h1 id="hx-title" class="hx-rise">Cada chamado.<br /><span class="hx-grad">Em um só lugar.</span></h1>
             <div class="hx-actions">
               <a class="button primary" href="https://wa.me/5511993287070">Quero conhecer</a
-              ><a class="hx-link" href="#vida-do-chamado">Ver como funciona <span aria-hidden="true">↓</span></a>
+              ><a class="hx-link" href="#dois-lados">Ver como funciona <span aria-hidden="true">↓</span></a>
             </div>
           </div>
           <figure class="hx-device hx-device-desk" aria-label="Tela ilustrativa do painel de chamados do Horus">
@@ -301,10 +304,32 @@
             <source src="midia/loja-scroll-m.mp4" type="video/mp4" media="(max-width: 700px)" />
             <source src="midia/loja-scroll.mp4" type="video/mp4" />
           </video>
-          <p class="hx-words">Chega de planilha, de print no grupo e de ligação para saber se o técnico já foi. Cada chamado tem status, prazo e relatório. No mesmo lugar.</p>
+          <p class="hx-words">O chamado nasce no grupo de WhatsApp. O status vive na planilha. O relatório chega por e-mail. E a pergunta de sempre vem por ligação.</p>
         </div>
       </section>
 
+      <!-- 2b. Situação: cada canal guarda um pedaço (uma parada por canal) -->
+      <section id="como-e-hoje" class="hx-chaos" data-scene data-stops="0 .33 .66 1" data-beats="4" aria-labelledby="caos-title">
+        <div class="hx-stick">
+          <div class="cx-stage" aria-hidden="true">
+            <img class="cx-img" src="midia/horus-painel-3.jpg" alt="" width="1200" height="1608" loading="lazy" decoding="async" />
+            <span class="cx-chip" data-from="0" style="--l:14%;--t:12%;--r:-3deg;--k:#4ade80"><i></i>Grupo da operação <small>47 novas</small></span>
+            <span class="cx-chip" data-from="1" style="--l:34%;--t:34%;--r:2.5deg;--k:#fbbf24"><i></i>chamados_v7.xlsx</span>
+            <span class="cx-chip" data-from="2" style="--l:12%;--t:58%;--r:-2deg;--k:#82a0ff"><i></i>Re: Re: Re: chamado</span>
+            <span class="cx-chip" data-from="3" style="--l:36%;--t:80%;--r:3deg;--k:#ff6b6b"><i></i>Ligação perdida <small>3x</small></span>
+          </div>
+          <div class="cx-copy wrap">
+            <p class="eyebrow">Como é hoje</p>
+            <h2 id="caos-title" class="hx-rise">Cada canal guarda<br /><span class="hx-grad">um pedaço do chamado.</span></h2>
+            <ol class="cx-list">
+              <li data-from="0" data-at="0"><span>01</span><div><strong>No grupo de WhatsApp</strong><small>O endereço sumiu no meio da conversa.</small></div></li>
+              <li data-from="1" data-at="1"><span>02</span><div><strong>Na planilha</strong><small>A última versão está no computador de alguém.</small></div></li>
+              <li data-from="2" data-at="2"><span>03</span><div><strong>No e-mail</strong><small>O relatório veio, sem o anexo.</small></div></li>
+              <li data-from="3" data-at="3"><span>04</span><div><strong>Na ligação</strong><small>"O técnico já foi?" Ninguém sabe ao certo.</small></div></li>
+            </ol>
+          </div>
+        </div>
+      </section>
 
       <!-- 3. A pergunta que toda operação já fez (paradas: a conversa cheia; a resposta do Horus) -->
       <section id="o-tecnico-ja-foi" class="hx-chat" data-scene data-stops=".8 1" aria-labelledby="chat-title">
@@ -335,6 +360,47 @@
             </ul>
             <div class="chat-dim"></div>
             <div class="chat-answer"><small>Horus · CH-2481</small><strong>Loja 214 · Pinheiros · Finalizado</strong><div><span>No prazo</span><span>RAT-2481.pdf anexado</span><span>Rafael M., Zona Oeste</span></div></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 3b. Implicação: o que acontece quando ninguém sabe (uma parada por consequência) -->
+      <section id="quando-ninguem-sabe" class="hx-impl" data-scene data-stops="0 .5 1" data-beats="3" aria-labelledby="impl-title">
+        <div class="hx-stick">
+          <img class="im-bg" src="midia/drama-banco.jpg" alt="" width="2200" height="1237" loading="lazy" decoding="async" aria-hidden="true" />
+          <div class="im-grid wrap">
+            <div class="im-copy">
+              <p class="eyebrow" id="impl-title">Quando ninguém sabe</p>
+              <div class="im-caps">
+                <div class="im-cap" data-at="0"><small>01 / 03</small><h2>O prazo<br /><span class="hx-grad">estoura.</span></h2><p>Ninguém viu vencer. O chamado só reaparece quando a data já passou.</p></div>
+                <div class="im-cap" data-at="1"><small>02 / 03</small><h2>A loja<br /><span class="hx-grad">para.</span></h2><p>O cliente liga, o atendente não sabe responder e o fornecedor pergunta quem vai resolver.</p></div>
+                <div class="im-cap" data-at="2"><small>03 / 03</small><h2>O relatório<br /><span class="hx-grad">some.</span></h2><p>A prova da visita fica no celular de alguém, num e-mail sem resposta ou num papel.</p></div>
+              </div>
+            </div>
+            <div class="im-cards" aria-hidden="true">
+              <figure class="im-card" data-from="0"><img src="midia/horus-painel-2.jpg" alt="" width="1200" height="1608" loading="lazy" decoding="async" style="object-position:50% 45%" /></figure>
+              <figure class="im-card" data-from="1"><img src="midia/drama-loja.jpg" alt="" width="2200" height="1237" loading="lazy" decoding="async" style="object-position:66% 50%" /></figure>
+              <figure class="im-card" data-from="2"><img src="midia/horus-painel-1.jpg" alt="" width="1200" height="1608" loading="lazy" decoding="async" /></figure>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 3c. A virada: os canais convergem para um lugar só (parada 1: espalhados; parada 2: um só) -->
+      <section id="um-so-lugar" class="hx-one" data-scene data-stops="0 1" aria-labelledby="one-title">
+        <div class="hx-stick">
+          <p class="eyebrow one-eye">A virada</p>
+          <div class="one-glow" aria-hidden="true"></div>
+          <svg class="one-mark" role="img" aria-label="Horus"><use href="#horus-mark"/></svg>
+          <span class="one-chip" aria-hidden="true" style="--x:-36vw;--y:-22svh;--r:-6deg;--k:#4ade80"><i></i>Grupo do WhatsApp</span>
+          <span class="one-chip" aria-hidden="true" style="--x:30vw;--y:-26svh;--r:5deg;--k:#fbbf24"><i></i>chamados_v7.xlsx</span>
+          <span class="one-chip" aria-hidden="true" style="--x:-30vw;--y:10svh;--r:4deg;--k:#82a0ff"><i></i>Re: Re: chamado</span>
+          <span class="one-chip" aria-hidden="true" style="--x:34vw;--y:2svh;--r:-5deg;--k:#ff6b6b"><i></i>Ligação perdida</span>
+          <span class="one-chip" aria-hidden="true" style="--x:-8vw;--y:-34svh;--r:3deg;--k:#a58bff"><i></i>Print do cliente</span>
+          <span class="one-chip" aria-hidden="true" style="--x:14vw;--y:14svh;--r:-4deg;--k:#22d3ee"><i></i>Áudio de 2 min</span>
+          <div class="one-txt">
+            <div class="one-pre" aria-hidden="true"><h2>Seis canais.<br /><span class="hx-grad">Nenhuma certeza.</span></h2></div>
+            <div class="one-fin"><h2 id="one-title">Um chamado.<br /><span class="hx-grad">Um lugar só.</span></h2><p>Status, prazo e relatório no mesmo registro: para a sua equipe, para o técnico e para o cliente.</p></div>
           </div>
         </div>
       </section>
@@ -483,30 +549,60 @@
         </div>
       </section>
 
-      <!-- 5b. Onde o chamado acontece -->
-      <section class="hx-places wrap" aria-labelledby="places-title">
-        <h2 id="places-title">Onde tiver TI,<br /><span class="hx-grad">tem chamado.</span></h2>
-        <div class="hx-photos">
-          <figure class="hx-photo"><img src="midia/rack-2048.jpg" srcset="midia/rack.jpg 1024w, midia/rack-2048.jpg 2048w" sizes="(max-width:900px) 100vw, 50vw" alt="Rack de rede com switches e cabos organizados" width="1024" height="576" loading="lazy" /><figcaption><strong>Rede e infraestrutura</strong>Rack, switches e cabeamento.</figcaption></figure>
-          <figure class="hx-photo"><img src="midia/bancada-2048.jpg" srcset="midia/bancada.jpg 1024w, midia/bancada-2048.jpg 2048w" sizes="(max-width:900px) 100vw, 50vw" alt="Bancada de manutenção com PDV aberto, ferramentas e fonte de reposição" width="1024" height="576" loading="lazy" /><figcaption><strong>Manutenção de equipamentos</strong>PDV, impressoras e periféricos.</figcaption></figure>
+      <!-- 5b. Prazo à vista e o celular que não depende de sinal (paradas: painel; celular sem internet) -->
+      <section id="prazo-a-vista" class="hx-live" data-scene data-stops="0 1" data-beats="2" aria-labelledby="live-title">
+        <div class="hx-stick">
+          <img class="lv-bg" src="midia/home-van-amanhecer.jpg" alt="" width="2048" height="1144" loading="lazy" decoding="async" aria-hidden="true" />
+          <div class="lv-grid wrap">
+            <div class="lv-caps">
+              <div class="lv-cap" data-at="0"><p class="eyebrow">Prazo à vista</p><h2 id="live-title">Quem vai estourar, você vê antes.</h2><p>No prazo, vence hoje ou excedido: cada chamado mostra a situação, e o painel soma tudo por período, empresa e estado.</p></div>
+              <div class="lv-cap" data-at="1"><p class="eyebrow">Sem sinal, sem problema</p><h2>No subsolo, o atendimento continua.</h2><p>O técnico registra a visita no celular. Quando a internet volta, tudo sobe sozinho para o chamado.</p></div>
+            </div>
+            <div class="lv-stage">
+              <figure class="lv-dash"><img src="midia/horus-painel-kpis.jpg" alt="Painel do Horus: chamados no período, cumprimento de prazo, tempo médio e relatórios gerados, com os chamados no prazo, em risco e vencidos." width="1600" height="450" loading="lazy" decoding="async" /><figcaption>Painel do Horus · dados fictícios</figcaption></figure>
+              <figure class="lv-phone" data-from="1"><img src="midia/horus-cel-envios.jpg" alt="Tela de envios do celular do técnico sem internet: o atendimento e o relatório ficam na fila e saem sozinhos quando a conexão volta." width="640" height="831" loading="lazy" decoding="async" /><figcaption>Dados fictícios</figcaption></figure>
+            </div>
+          </div>
         </div>
       </section>
 
-      <!-- 6. Detalhes, no padrão de lista numerada do site -->
-      <section class="section wrap horus" aria-labelledby="detalhes-title">
-        <div class="horus-copy">
-          <div class="eyebrow">Plataforma / Detalhes</div>
-          <h2 id="detalhes-title">Os detalhes<br /><em>que a operação sente.</em></h2>
-          <p>O que sustenta o dia a dia de quem abre, acompanha e fecha chamados no Horus.</p>
+      <!-- 5c. Onde o chamado acontece: a faixa de fotos anda de lado com a rolagem -->
+      <section id="onde" class="hx-where" data-scene data-stops="0 .33 .66 1" aria-labelledby="places-title">
+        <div class="hx-stick">
+          <div class="wh-mq" aria-hidden="true"><div class="wh-mq-track"><span>Varejo</span><span>Bancos</span><span>Saúde</span><span>Indústria</span><span>Telecom</span><span>Transporte</span><span>Eventos</span><span>Varejo</span><span>Bancos</span><span>Saúde</span><span>Indústria</span><span>Telecom</span><span>Transporte</span><span>Eventos</span></div></div>
+          <div class="wh-track">
+            <div class="wh-intro">
+              <h2 id="places-title" class="hx-rise">Onde tiver TI,<br /><span class="hx-grad">tem chamado.</span></h2>
+              <ul class="wh-nums"><li><b data-count="350">0</b><span>técnicos parceiros</span></li><li><b data-count="27">0</b><span>estados</span></li></ul>
+            </div>
+            <figure class="wh-card"><img src="midia/home-hero.jpg" alt="Técnico com maleta caminhando por uma rua ao entardecer, em direção a uma loja iluminada" width="2048" height="1144" loading="lazy" decoding="async" style="object-position:30% 50%" /><figcaption><strong>Visita em loja</strong>O técnico da região, no horário combinado.</figcaption></figure>
+            <figure class="wh-card"><img src="midia/rack-2048.jpg" alt="Rack de rede com switches e cabos organizados" width="2048" height="1152" loading="lazy" decoding="async" /><figcaption><strong>Rede e infraestrutura</strong>Rack, switches e cabeamento.</figcaption></figure>
+            <figure class="wh-card"><img src="midia/home-campo.jpg" alt="Mãos de um técnico conectando um cabo de rede a uma tomada iluminada" width="2400" height="1340" loading="lazy" decoding="async" style="object-position:72% 50%" /><figcaption><strong>Instalação e pontos de rede</strong>Do cabo à tomada, registrado.</figcaption></figure>
+            <figure class="wh-card"><img src="midia/bancada-2048.jpg" alt="Bancada de manutenção com PDV aberto, ferramentas e fonte de reposição" width="2048" height="1152" loading="lazy" decoding="async" /><figcaption><strong>Manutenção de equipamentos</strong>PDV, impressoras e periféricos.</figcaption></figure>
+            <figure class="wh-card"><img src="midia/servico-sustentar.jpg" alt="Mãos de luvas trocando uma placa dentro de um equipamento aberto" width="924" height="768" loading="lazy" decoding="async" /><figcaption><strong>Sustentação do parque</strong>Troca de peça, com a peça no histórico.</figcaption></figure>
+            <figure class="wh-card"><img src="midia/servico-transformar.jpg" alt="Sala de implantação com racks, mesas e computadores e a cidade ao fundo" width="1024" height="768" loading="lazy" decoding="async" /><figcaption><strong>Implantação e migração</strong>Muitos pontos ao mesmo tempo.</figcaption></figure>
+          </div>
         </div>
-        <ul class="horus-list">
-          <li><span>01</span><strong>Prazo em dias úteis</strong><small>Dois dias úteis a partir da abertura, pulando fins de semana e feriados nacionais.</small></li>
-          <li><span>02</span><strong>Status do prazo à vista</strong><small>No prazo, vence hoje ou excedido, sinalizado em cada chamado.</small></li>
-          <li><span>03</span><strong>Verificação em duas etapas</strong><small>Login protegido por um código além da senha.</small></li>
-          <li><span>04</span><strong>Cadastro de clientes</strong><small>Endereço estruturado uma vez, reaproveitado em cada chamado novo.</small></li>
-          <li><span>05</span><strong>Fechamento semanal</strong><small>Os atendimentos da semana reunidos para conferência e aprovação.</small></li>
-          <li><span>06</span><strong>Histórico consultável</strong><small>Chamados finalizados com relatório e peças, prontos para quando alguém perguntar.</small></li>
-        </ul>
+      </section>
+
+      <!-- 6. Detalhes -->
+      <section class="hx-det" aria-labelledby="detalhes-title">
+        <video class="hx-det-bg" data-vid muted loop playsinline preload="none" aria-hidden="true"><source src="midia/painel-fundo.mp4" type="video/mp4" /></video>
+        <div class="wrap">
+          <div class="hx-det-head">
+            <div class="eyebrow">Plataforma / Detalhes</div>
+            <h2 id="detalhes-title" class="hx-rise">Os detalhes<br /><span class="hx-grad">que a operação sente.</span></h2>
+            <p>O que sustenta o dia a dia de quem abre, acompanha e fecha chamados no Horus.</p>
+          </div>
+          <ul class="hx-det-grid">
+            <li class="dt" style="--i:0"><span>01</span><strong>Prazo em dias úteis</strong><small>Dois dias úteis a partir da abertura, pulando fins de semana e feriados nacionais.</small></li>
+            <li class="dt" style="--i:1"><span>02</span><strong>Status do prazo à vista</strong><small>No prazo, vence hoje ou excedido, sinalizado em cada chamado.</small></li>
+            <li class="dt" style="--i:2"><span>03</span><strong>Verificação em duas etapas</strong><small>Login protegido por um código além da senha.</small></li>
+            <li class="dt" style="--i:3"><span>04</span><strong>Cadastro de clientes</strong><small>Endereço estruturado uma vez, reaproveitado em cada chamado novo.</small></li>
+            <li class="dt" style="--i:4"><span>05</span><strong>Fechamento semanal</strong><small>Os atendimentos da semana reunidos para conferência e aprovação.</small></li>
+            <li class="dt" style="--i:5"><span>06</span><strong>Histórico consultável</strong><small>Chamados finalizados com relatório e peças, prontos para quando alguém perguntar.</small></li>
+          </ul>
+        </div>
       </section>
 
       <section id="faq" class="section wrap faq reveal" style="border-top: 1px solid var(--line)">
@@ -540,6 +636,7 @@
 
       <!-- 7. Fechamento, no padrão de contato do site -->
       <section id="contato" class="contact night">
+        <video class="hx-cbg" data-vid muted loop playsinline preload="none" aria-hidden="true"><source src="midia/noite-22h.mp4" type="video/mp4" /></video>
         <div class="wrap">
           <div>
             <div>
