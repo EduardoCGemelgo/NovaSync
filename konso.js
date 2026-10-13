@@ -144,8 +144,8 @@
       ? 'Com sorte alguém percebe logo. Sem registro automático, a hora real da falha e do prazo fica na memória de quem viu.'
       : `A operação só volta ${quando} e o chamado abre depois disso.`;
     $('#hora-com-txt').textContent = util
-      ? 'Chamado aberto com a hora exata da falha, o prazo de 2 dias úteis contando e o histórico do sinal anexado.'
-      : 'O prazo de 2 dias úteis já está contando, o histórico do sinal está anexado e o técnico da região é designado na abertura do dia útil.';
+      ? 'Chamado aberto com a hora exata da falha, o prazo de 2 dias úteis contando e o histórico do sinal registrado.'
+      : 'O prazo de 2 dias úteis já está contando, o histórico do sinal fica registrado e o técnico da região é designado na abertura do dia útil.';
     const max = 62 * 60;
     $('#hora-bar-sem').style.width = `${Math.max(2, Math.min(100, gap / max * 100))}%`;
     $('#hora-bar-com').style.width = `${Math.max(2, KONSO_MIN / max * 100)}%`;
