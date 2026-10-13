@@ -2,7 +2,7 @@
 (() => {
   const main = document.getElementById('conteudo') || document.querySelector('main');
   if (!main) return;
-  const PAGES = [['index.html', 'Início'], ['horus.html', 'Horus'], ['konso.html', 'Konso']];
+  const PAGES = [['index.html', 'Início'], ['horus.html', 'Horus'], ['konso.html', 'Konso'], ['empresas-de-field-service.html', 'Guia de field service']];
   const SETORES = [['varejo', 'Varejo'], ['bancos', 'Bancos'], ['saude', 'Saúde'], ['industria', 'Indústria'], ['telecom', 'Telecom'], ['transporte', 'Transporte'], ['eventos', 'Eventos']];
   const NAMES = {
     'cobertura': 'Cobertura', 'servicos': 'O que fazemos', 'como-funciona': 'Como funciona', 'horus': 'Horus', 'setores': 'Setores', 'parceiros': 'Parceiros', 'cadastro-tecnico': 'Cadastro técnico', 'sobre': 'Sobre', 'contato': 'Contato', 'faq': 'FAQ',
