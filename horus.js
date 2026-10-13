@@ -1,68 +1,109 @@
-/* Horus: só o painel de chamados simulado. O resto (cenas, trava, painéis, circuito) vem do kx.js. */
+/* Horus: a rolagem conduz cada cena via --p (0 a 1); a trava (trava.js) anda de parada em parada. */
 (() => {
-  const { reduce, $ } = kx;
-  const hm = m => `${String(Math.floor(m / 60) % 24).padStart(2, '0')}:${String(m % 60).padStart(2, '0')}`;
-  // Chamados do painel: local, problema e estado inicial (ab aberto, al designado, at em atendimento, pe aguardando peça, fi finalizado)
-  const EQ = [
-    ['Loja 214 · Pinheiros', 'PDV 03 não liga', 'at', ['ok', 'No prazo']],
-    ['Unidade Centro · Campinas', 'Troca de switch', 'al', ['am', 'Vence hoje']],
-    ['Clínica Vila Mariana', 'Impressora de etiquetas', 'ab', ['ok', 'No prazo']],
-    ['Loja 108 · Moema', 'Instalação de PDV', 'fi', ['ok', 'No prazo']],
-    ['CD Barueri', 'Coletor sem rede', 'pe', ['ex', 'Excedido']],
-    ['Agência Centro', 'Totem de senha', 'fi', ['ok', 'No prazo']],
-    ['Datacenter SP', 'Troca de fonte do rack', 'fi', ['ok', 'No prazo']],
-    ['CD Cajamar', 'Câmera do dock', 'at', ['ok', 'No prazo']],
-  ];
-  const LABEL = { ab: 'Aberto', al: 'Técnico designado', at: 'Em atendimento', co: 'Atendimento concluído', fi: 'Finalizado', pe: 'Aguardando peça' };
-  const PROBLEMAS = ['Impressora sem papel e sem rede', 'Leitor de código sem resposta', 'Tela do terminal apagada', 'Rede sem conexão', 'PDV com erro de impressão'];
-  const tiles = $('#live-tiles'), log = $('#live-log'), clock = $('#live-clock'), btn = $('#live-run');
-  let now = 8 * 60, numero = 2481, running = false;
-  const els = EQ.map(([local, prob, s, [k, txt]], i) => {
-    const li = document.createElement('li');
-    li.className = 'kx-tile';
-    li.innerHTML = `<strong>${local}</strong><small>CH-${2481 - i} · ${prob}</small><em></em><span class="sla ${k}">${txt}</span>`;
-    tiles.append(li);
-    return li;
-  });
-  const setS = (i, s, sla) => {
-    els[i].dataset.s = s;
-    els[i].querySelector('em').textContent = LABEL[s];
-    if (sla) { const b = els[i].querySelector('.sla'); b.className = `sla ${sla[0]}`; b.textContent = sla[1]; }
-  };
-  EQ.forEach(([, , s], i) => setS(i, s));
-  const say = (txt, cls = '') => {
-    const li = document.createElement('li');
-    li.className = cls;
-    li.innerHTML = `<b>${hm(now)}</b>${txt}`;
-    log.append(li);
-    while (log.children.length > 6) log.firstChild.remove();
-  };
-  const wait = ms => new Promise(r => setTimeout(r, reduce.matches ? 0 : ms));
-  const tick = () => { clock.textContent = hm(now); };
-  let uso = 0;
-  async function abrir() {
-    if (running) return;
-    running = true; btn.disabled = true;
-    const livres = els.map((_, i) => i).filter(i => els[i].dataset.s === 'fi' && els[i].offsetParent); // só os que aparecem (no celular são 4)
-    const i = livres[Math.floor(Math.random() * livres.length)];
-    const c = ++numero, [local] = EQ[i], prob = PROBLEMAS[uso++ % PROBLEMAS.length];
-    els[i].querySelector('small').textContent = `CH-${c} · ${prob}`;
-    now += 6; tick(); setS(i, 'ab', ['ok', 'No prazo']); say(`CH-${c} aberto em ${local}. Prazo: 2 dias úteis.`, 'bad');
-    await wait(1500);
-    now += 18; tick(); setS(i, 'al'); say(`Técnico da região designado para CH-${c}. Visita agendada.`);
-    await wait(1600);
-    now += 140; tick(); setS(i, 'at'); say(`Check-in no local. CH-${c} em atendimento.`);
-    await wait(1600);
-    now += 55; tick(); setS(i, 'co'); say(`Atendimento concluído. RAT-${c}.pdf anexado ao chamado.`);
-    await wait(1600);
-    now += 20; tick(); setS(i, 'fi'); say(`CH-${c} finalizado dentro do prazo.`, 'ok');
-    running = false; btn.disabled = false;
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)');
+  const clamp = n => Math.min(1, Math.max(0, n));
+  const scenes = [...document.querySelectorAll('[data-scene]')];
+
+  // Frase palavra por palavra: cada palavra ganha seu índice --i.
+  const words = document.querySelector('.hx-words');
+  const list = words.textContent.trim().split(/\s+/);
+  words.replaceChildren(...list.flatMap((w, i) => {
+    const s = document.createElement('span');
+    s.textContent = w;
+    s.style.setProperty('--i', i);
+    return [s, ' '];
+  }));
+  words.style.setProperty('--n', list.length);
+
+  // Mockups desenhados em largura fixa (data-w) e escalados para o espaço disponível.
+  const fit = new ResizeObserver(entries => entries.forEach(e =>
+    e.target.style.setProperty('--s', e.contentRect.width / e.target.dataset.w)));
+  document.querySelectorAll('.hx-fit').forEach(el => fit.observe(el));
+
+  // Vídeo da loja avança com a rolagem (codificado com quadro-chave a cada 2 frames para a busca ser instantânea).
+  const video = document.querySelector('.hx-statement video');
+  const vScene = video.closest('[data-scene]');
+  video.play().then(() => video.pause()).catch(() => {}); // iOS só entrega quadros depois de um play
+  function scrub() {
+    if (reduce.matches || !video.duration) return;
+    const t = Number(vScene.style.getPropertyValue('--p')) * (video.duration - .05);
+    if (Math.abs(video.currentTime - t) > 1 / 48) video.currentTime = t;
   }
-  btn.addEventListener('click', abrir);
-  say(`Horus acompanhando ${els.filter(e => e.offsetParent).length} chamados. Prazos à vista.`, 'ok');
-  tick();
-  // sozinho, a cada ~11 s, enquanto o painel estiver na tela (parado se a pessoa prefere menos movimento)
-  let visible = false;
-  new IntersectionObserver(([e]) => { visible = e.isIntersecting; }, { threshold: .4 }).observe($('.kx-board'));
-  if (!reduce.matches) setInterval(() => { if (visible && !running && !document.hidden) abrir(); }, 11000);
+  video.addEventListener('loadedmetadata', scrub);
+
+  // "O técnico já foi?": a conversa cresce com a rolagem; no fim o Horus responde (--h = 0 a 1).
+  const chat = document.querySelector('.hx-chat');
+  const chatN = document.getElementById('chat-n');
+  function setChat() {
+    const p = Number(chat.style.getPropertyValue('--p'));
+    chat.style.setProperty('--h', clamp((p - .82) / .16).toFixed(3));
+    chatN.textContent = Math.min(7, Math.max(0, Math.floor(p * 8.6)));
+  }
+
+  // "Dois lados, um chamado": a etapa decide o que aparece na tela da empresa, no celular e na legenda.
+  const duo = document.querySelector('.hx-duo');
+  const shows = [...duo.querySelectorAll('[data-show]')].map(el => [el, el.dataset.show.split(' ')]);
+  let stage = 0;
+  function setDuo() {
+    const p = Number(duo.style.getPropertyValue('--p'));
+    const n = reduce.matches ? 5 : Math.min(5, Math.max(1, Math.floor(p * 5) + 1));
+    if (n === stage) return;
+    const prev = stage;
+    stage = n;
+    shows.forEach(([el, ns]) => el.classList.toggle('is-on', ns.includes(String(n))));
+    duo.dataset.dir = '';
+    void duo.offsetWidth; // reinicia a animação do fio entre as telas
+    if (prev && !reduce.matches) duo.dataset.dir = n === 2 ? 'to' : n > 2 ? 'from' : '';
+  }
+
+  let queued = false;
+  function frame() {
+    queued = false;
+    const h = innerHeight;
+    for (const el of scenes) {
+      const r = el.getBoundingClientRect();
+      const p = reduce.matches ? 1 : clamp(-r.top / Math.max(1, r.height - h));
+      el.style.setProperty('--p', p.toFixed(4));
+    }
+    setChat();
+    setDuo();
+    scrub();
+  }
+  const schedule = () => { if (!queued) { queued = true; requestAnimationFrame(frame); } };
+
+  // Trava de rolagem (trava.js). Paradas: o topo, os pontos de cada cena presa (data-stops, fração do trecho preso:
+  // a cena toca inteira durante o deslize), o início das outras seções e o fim.
+  // Um trecho que rola mais que a tela ganha paradas intermediárias; dentro de uma cena presa não, a tela não troca.
+  const root = document.documentElement;
+  const blocks = [...document.querySelectorAll('main > section:not([data-scene])')];
+  trava(() => {
+    const h = innerHeight, end = root.scrollHeight - h;
+    const fitY = y => Math.round(Math.min(end, Math.max(0, y)));
+    const top = el => el.getBoundingClientRect().top + scrollY;
+    const holds = scenes.map(el => [top(el), top(el) + el.offsetHeight - h]);
+    const beats = scenes.flatMap((el, i) => el.dataset.stops.split(' ').map(p => fitY(holds[i][0] + p * (holds[i][1] - holds[i][0]))));
+    // início de seção (onde o link leva) e fim nunca saem, senão o link cai fora da parada
+    const pins = new Set([0, end, ...blocks.map(s => fitY(top(s) - parseFloat(getComputedStyle(s).scrollMarginTop)))]);
+    const a = [0];
+    for (const y of [...pins, ...beats].sort((p, q) => p - q)) {
+      if (y - a.at(-1) < h * .3) { // quase iguais: fica a de cima, salvo início de seção e fim
+        if (!pins.has(y) || y - a.at(-1) < 3) continue;
+        if (y === end && !pins.has(a.at(-1))) a.pop();
+      }
+      let s = a.at(-1);
+      for (const [hs, he] of [...holds, [y, y]]) { // trechos livres entre s e y
+        if (he <= s) continue;
+        const e = Math.min(hs, y);
+        if (e - s > h * 1.2) for (let n = Math.ceil((e - s) / (h * .92)), i = 1; i < n; i++) a.push(Math.round(s + (e - s) * i / n));
+        if (hs >= y) break;
+        s = he;
+      }
+      a.push(y);
+    }
+    return { a };
+  });
+  addEventListener('scroll', schedule, { passive: true });
+  addEventListener('resize', schedule);
+  reduce.addEventListener('change', schedule);
+  frame();
 })();

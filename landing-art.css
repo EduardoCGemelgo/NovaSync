@@ -283,3 +283,12 @@ html[data-motion='paused'] .brand-orbit .travel { animation:none; }
  .landing-art .horus-list li { grid-template-columns:36px 1fr; padding:22px 4px; }
  .landing-art .horus-list strong { font-size:19px; }
 }
+
+/* Menu: com tantos itens, a barra só cabe em tela larga; abaixo disso vira o menu do celular */
+.landing-art .nav-links a, .landing-art .nav-actions a { white-space:nowrap; }
+@media(min-width:1201px) and (max-width:1380px) {
+ .landing-art .nav-links { display:none; }
+ .landing-art .menu-toggle { display:block; }
+ .landing-art .nav-actions { margin-left:auto; }
+ .landing-art .mobile-menu { width:calc(100% - var(--art-gutter)*2); margin:10px auto 0; border:1px solid #353747; border-radius:24px; padding:16px 28px; background:#10111b; max-height:calc(100dvh - 120px); overflow:auto; }
+}

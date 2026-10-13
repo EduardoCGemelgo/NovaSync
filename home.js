@@ -1,32 +1,200 @@
-/* Home: o que é só da home. O resto (cenas presas, trava, painéis, números) vem do kx.js.
-   html.still = movimento reduzido ou "Pausar animações": o mapa (mapa-3d.js) lê esta classe. */
+/* Home: a página anda de parada em parada (trava.js). A abertura (trailer) escolhe a cena e toca o corte; a mesa de despacho
+   (despacho.js) conta a rede pelo progresso da rolagem; depois vêm o custo em uma frase, os serviços, o "como funciona",
+   o seletor de ramo e o pedido em uma frase. html.still = movimento reduzido ou "Pausar animações": sem trava. */
 (() => {
-  const { reduce, $ } = kx;
   const root = document.documentElement;
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)');
   const still = () => reduce.matches || root.dataset.motion === 'paused';
-  const mode = () => { root.classList.toggle('still', still()); kx.schedule(); };
+  const $ = s => document.querySelector(s);
+  const clamp = n => Math.min(1, Math.max(0, n));
+  let queued = false;
+
+  // Celular do Horus e painel do "como funciona": desenhados em largura fixa (data-w) e escalados.
+  const fit = new ResizeObserver(entries => entries.forEach(e =>
+    e.target.style.setProperty('--s', e.contentRect.width / e.target.dataset.w)));
+  document.querySelectorAll('.hx-fit').forEach(el => fit.observe(el));
+
+  // 1. Hero, o trailer: uma tela de rolagem por cena; entre cenas, um corte de cinema.
+  const story = $('.hm-story');
+  const shots = [...story.querySelectorAll('.hm-beat')];
+  const wall = story.querySelector('.hm-wall');
+  const cta = story.querySelector('.button');
+  const CUTS = [ // corte entre a cena i e a i+1: animação (home.css), duração em ms, curva
+    ['wall', 1200, 'cubic-bezier(.65,0,.35,1)'],
+    ['whip', 800, 'cubic-bezier(.8,0,.2,1)'],
+    ['zoom', 1100, 'cubic-bezier(.7,0,.3,1)'],
+    ['volta', 1500, 'cubic-bezier(.2,.7,.1,1)'],
+  ];
+  const last = shots.length - 1;
+  let scene = 0;
+  function cut(to, from) {
+    scene = to;
+    shots.forEach(s => { s.classList.remove('is-on', 'is-out'); s.style.animation = ''; });
+    wall.style.animation = '';
+    shots[to].classList.add('is-on');
+    cta.tabIndex = to === last || still() ? 0 : -1;
+    if (from === null || still()) return;
+    // Voltando, o mesmo corte toca de trás para frente. Salto de várias cenas usa o corte que chega ao destino.
+    const fwd = to > from;
+    const [name, ms, ease] = CUTS[fwd ? to - 1 : to];
+    const run = `${ms}ms ${ease} both ${fwd ? 'normal' : 'reverse'}`;
+    shots[from].classList.add('is-out');
+    void story.offsetWidth; // reinicia a animação mesmo quando o corte repete
+    (fwd ? shots[from] : shots[to]).style.animation = `hm-${name}-out ${run}`;
+    (fwd ? shots[to] : shots[from]).style.animation = `hm-${name}-in ${run}`;
+    if (name === 'wall') wall.style.animation = `hm-wall ${run}`;
+  }
+
+  // 2. Mesa de despacho: --p da cena vai para o desenho (despacho.js) e escolhe o texto da vez.
+  const scenes = [...document.querySelectorAll('[data-scene]')];
+  const dpTexts = [...document.querySelectorAll('.dp-copy > div')];
+  let dpStage = -1;
+  function scenesFrame() {
+    const h = innerHeight;
+    for (const el of scenes) {
+      const r = el.getBoundingClientRect();
+      const p = still() ? 1 : clamp(-r.top / Math.max(1, r.height - h));
+      el.style.setProperty('--p', p.toFixed(4));
+      if (el.id === 'cobertura') {
+        window.despacho?.set(p, still());
+        const n = p < .2 ? 0 : p < .42 ? 1 : p < .64 ? 2 : p < .88 ? 3 : 4;
+        if (n !== dpStage) { dpStage = n; el.dataset.stage = n; dpTexts.forEach((d, i) => d.classList.toggle('is-on', i === n)); }
+      }
+    }
+  }
+
+  // 3. Como funciona: uma parada da trava por etapa, com a etapa no meio da tela; a etapa da vez comanda o painel.
+  const steps = [...document.querySelectorAll('.hm-step')];
+  const panels = [...document.querySelectorAll('.hm-panel')];
+  const line = [...document.querySelectorAll('.hm-line li')];
+  const status = $('[data-flow-status]');
+  const device = $('.hm-flow-device');
+  const stacked = matchMedia('(max-width: 900px)'); // mesmo corte do home.css
+  const STATUS = ['Escopo recebido', 'Técnico designado', 'Em execução', 'Relatório disponível'];
+  function setStage(n) {
+    steps.forEach((s, i) => s.classList.toggle('is-on', i === n));
+    panels.forEach((p, i) => p.classList.toggle('is-on', i === n));
+    line.forEach((li, i) => li.classList.toggle('done', i <= n));
+    status.textContent = STATUS[n];
+  }
+
+  // Trava de rolagem da página toda (trava.js). Paradas: o topo, cada cena do trailer, os pontos de cada cena presa,
+  // o início de cada seção, cada etapa do "como funciona" e o fim; um trecho mais alto que a tela ganha paradas
+  // intermediárias, para nada ficar sem ser visto. O corte do trailer começa no mesmo instante do deslize.
+  const blocks = [...document.querySelectorAll('main > section:not([data-scene])')];
+  const strip = $('.service-strip');
+  function stops() {
+    const h = innerHeight, end = root.scrollHeight - h;
+    const fitY = y => Math.round(Math.min(end, Math.max(0, y)));
+    const top = el => el.getBoundingClientRect().top + scrollY;
+    const unit = story.offsetHeight / shots.length;
+    const beats = shots.map((_, i) => fitY(top(story) + i * unit));
+    const holds = scenes.map(el => [top(el), top(el) + el.offsetHeight - h]);
+    const sbeats = scenes.flatMap((el, i) => el.dataset.stops.split(' ').map(p => fitY(holds[i][0] + p * (holds[i][1] - holds[i][0]))));
+    // No celular o painel fica preso em cima: a etapa se alinha ao meio da área livre abaixo dele.
+    const mid = stacked.matches ? (parseFloat(getComputedStyle(device).top) + device.offsetHeight + h) / 2 : h / 2;
+    const marks = steps.map(s => fitY(top(s) + s.offsetHeight / 2 - mid));
+    // Início de cada seção, onde o link do menu leva (scroll-margin-top incluso), e o fim: essas nunca saem,
+    // senão o link cai fora da parada e a trava leva para outro lugar. O topo de uma cena presa não conta:
+    // a 1ª parada dela já mostra a cena (o link do menu para a cena cai na parada mais próxima).
+    const pins = new Set([0, end, ...blocks.map(s => fitY(top(s) - parseFloat(getComputedStyle(s).scrollMarginTop)))]);
+    const held = [beats[0], fitY(top(strip.nextElementSibling))]; // o trailer vai direto à próxima cena, a faixa só passa
+    const a = [0];
+    for (const y of [...pins, ...beats, ...sbeats, ...marks].sort((p, q) => p - q)) {
+      if (y - a.at(-1) < h * .3) { // quase iguais: fica a de cima, salvo início de seção e fim
+        if (!pins.has(y) || y - a.at(-1) < 3) continue;
+        if (y === end && !pins.has(a.at(-1))) a.pop();
+      }
+      const prev = a.at(-1);
+      if (!(prev >= held[0] && y <= held[1])) {
+        let s = prev;
+        for (const [hs, he] of [...holds, [y, y]]) { // trechos livres entre s e y (dentro de uma cena presa a tela não troca)
+          if (he <= s) continue;
+          const e = Math.min(hs, y);
+          if (e - s > h * 1.2) for (let n = Math.ceil((e - s) / (h * .92)), i = 1; i < n; i++) a.push(Math.round(s + (e - s) * i / n));
+          if (hs >= y) break;
+          s = he;
+        }
+      }
+      a.push(y);
+    }
+    return { a, beats, marks };
+  }
+  // a parada define a cena do trailer e a etapa do "como funciona": a última já passada
+  const tag = (list, y) => Math.max(0, list.filter(v => v <= y).length - 1);
+  let stage = 0;
+  function show(y, { beats, marks }, first) {
+    const to = tag(beats, y), st = tag(marks, y);
+    if (first || to !== scene) cut(to, first ? null : scene);
+    if (first || st !== stage) setStage(stage = st);
+  }
+  const pick = trava(stops, show);
+
+  // 4. O custo de esperar: a conta anda em tempo real, na taxa que a pessoa digitou.
+  const tickEl = $('#cx-tick'), rate = $('#rate'), costBox = $('#cost-calculator');
+  const brl = n => n.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+  let acc = 0, lastT = 0, costSeen = false;
+  new IntersectionObserver(([e]) => { costSeen = e.isIntersecting; lastT = 0; }, { threshold: .3 }).observe(costBox);
+  (function loop(now) {
+    if (costSeen && !still() && !document.hidden) {
+      if (lastT) acc += (Number(rate.value) || 0) / 3600 * (now - lastT) / 1000;
+      lastT = now;
+      tickEl.textContent = brl(acc);
+    }
+    requestAnimationFrame(loop);
+  })(0);
+  costBox.querySelectorAll('.cx-sentence input').forEach(i => {
+    const size = () => { i.style.width = Math.max(2, String(i.value).length + 1) + 'ch'; };
+    i.addEventListener('input', size); size();
+  });
+
+  // 5. Serviços: um aberto por vez.
+  const svs = [...document.querySelectorAll('.sv')];
+  svs.forEach(li => li.querySelector('.sv-row').addEventListener('click', () => {
+    svs.forEach(o => { const on = o === li && !o.classList.contains('is-on'); o.classList.toggle('is-on', on); o.querySelector('.sv-row').setAttribute('aria-expanded', String(on)); });
+    setTimeout(schedule, 750);
+  }));
+
+  // 6. Qual é o seu ramo?
+  const tabs = [...document.querySelectorAll('.rm-tabs button')];
+  const rmPanels = [...document.querySelectorAll('.rm-panel')];
+  function rm(i) {
+    tabs.forEach((b, k) => { b.setAttribute('aria-selected', String(k === i)); b.tabIndex = k === i ? 0 : -1; });
+    rmPanels.forEach((p, k) => { p.hidden = k !== i; });
+  }
+  tabs.forEach((b, i) => {
+    b.addEventListener('click', () => rm(i));
+    b.addEventListener('keydown', e => {
+      const d = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
+      if (d) { const k = (i + d + tabs.length) % tabs.length; rm(k); tabs[k].focus(); e.preventDefault(); }
+    });
+  });
+
+  // 7. O pedido em uma frase: a frase vira a primeira mensagem.
+  const cm = ['#cm-ramo', '#cm-uf', '#cm-fazer'].map($), wa = $('#cm-wa');
+  const compose = () => {
+    const [r, u, f] = cm.map(s => s.value);
+    wa.href = 'https://wa.me/5511993287070?text=' + encodeURIComponent(`Olá! Eu sou do ramo ${r} e preciso de técnicos em ${u} para ${f}.`);
+  };
+  cm.forEach(s => s.addEventListener('change', compose));
+  compose();
+
+  function frame() {
+    queued = false;
+    scenesFrame();
+    pick();
+  }
+  function schedule() {
+    if (!queued) { queued = true; requestAnimationFrame(frame); }
+  }
+  function mode() {
+    root.classList.toggle('still', still());
+    cta.tabIndex = still() || scene === last ? 0 : -1; // sem movimento, todas as cenas ficam à vista
+    schedule();
+  }
+  addEventListener('scroll', schedule, { passive: true });
+  addEventListener('resize', schedule);
   reduce.addEventListener('change', mode);
   new MutationObserver(mode).observe(root, { attributes: true, attributeFilter: ['data-motion'] });
-  root.classList.toggle('still', still());
-
-  // O dia em campo: o relógio anda entre os horários dos acontecimentos; cada um tem a sua imagem.
-  const dia = $('#dia');
-  const layers = [...dia.querySelectorAll('.kx-layers>*')], evs = [...dia.querySelectorAll('[data-ev]')];
-  const T = [3 * 60 + 47, 22 * 60 + 14, 31 * 60 + 58, 32 * 60 + 30]; // minutos desde 00:00 do 1º dia (31:58 = 07:58 do dia seguinte)
-  const PARADAS = [1, 2, 3, 0], TECNICOS = [0, 0, 0, 3];
-  const hm = m => `${String(Math.floor(m / 60) % 24).padStart(2, '0')}:${String(m % 60).padStart(2, '0')}`;
-  let cur = -1;
-  kx.onFrame(() => {
-    const p = reduce.matches ? 0 : Number(dia.style.getPropertyValue('--p'));
-    const f = Math.min(3, Math.max(0, p * 4 - .5)), i = Math.min(2, Math.floor(f));
-    $('#dia-clock').textContent = hm(Math.round(T[i] + (T[i + 1] - T[i]) * (f - i)));
-    const n = Math.min(3, Math.max(0, Math.floor(p * 4)));
-    if (n === cur) return;
-    cur = n;
-    $('#m-paradas').textContent = PARADAS[n];
-    $('#m-tecnicos').textContent = TECNICOS[n];
-    evs.forEach((e, k) => e.classList.toggle('is-on', k === n));
-    layers.forEach((el, k) => el.classList.toggle('is-on', k === n));
-  });
-  kx.schedule();
+  mode();
 })();

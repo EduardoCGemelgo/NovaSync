@@ -1,7 +1,6 @@
 <!doctype html>
 <html lang="pt-BR">
   <head>
-    <meta name="theme-color" content="#050609" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
@@ -12,11 +11,9 @@
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
     <link rel="stylesheet" href="novasync.css" />
     <link rel="stylesheet" href="landing-art.css" />
-    <link rel="stylesheet" href="kx.css" />
-    <link rel="stylesheet" href="site.css" />
+    <link rel="stylesheet" href="setor.css" />
     <script defer src="novasync.js"></script>
-    <script defer src="trava.js"></script>
-    <script defer src="kx.js"></script>
+    <script defer src="setor.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap">
@@ -79,7 +76,7 @@
 }
 </script>
 </head>
-  <body class="landing-art kx">
+  <body class="landing-art setor">
     <a href="#conteudo" class="skip">Pular para o conteúdo</a>
     <header class="nav">
       <div class="wrap">
@@ -127,104 +124,86 @@
         ><a href="diagnostico.html">Fazer o diagnóstico </a>
       </nav>
     </header>
+    <main id="conteudo" class="st-split">
+      <aside class="st-photo" aria-hidden="true">
+        <img src="midia/setor-eventos-hero.jpg" alt="" style="--fx:28%" width="2048" height="1143" fetchpriority="high" />
+        <div class="st-photo-cap"><small>Equipamento parado</small><b>Eventos</b></div>
+      </aside>
 
-    <main id="conteudo">
-      <!-- Hero: o setor à noite; o título sai e a prova entra (paradas: título; os números) -->
-      <section class="kx-hero kx-hero-2" data-scene data-stops="0 1" aria-labelledby="kx-title">
-        <div class="kx-stick">
-          <img class="kx-hero-bg" src="midia/setor-eventos-hero.jpg" alt="Auditório vazio antes de um evento, com palco, notebooks no balcão e um case de rede de luz vermelha." width="2048" height="1143" fetchpriority="high" />
-          <div class="kx-hero-copy">
-            <p class="eyebrow">Field service · Eventos</p>
-            <h1 id="kx-title">Uma operação temporária que começa pronta e termina organizada.</h1>
-            <p class="kx-sub">Ativação, suporte e desmobilização de tecnologia para eventos, feiras e operações com prazo definido e múltiplos pontos de execução.</p>
-            <div class="kx-actions">
-              <a class="button primary" href="diagnostico.html">Fazer o diagnóstico</a
-              ><a class="kx-link" href="#custo">Ver o que custa esperar <span aria-hidden="true">↓</span></a>
-            </div>
+      <div class="st-flow">
+        <header class="st-intro">
+          <div class="eyebrow">Field service · Eventos</div>
+          <h1>Uma operação temporária que começa pronta e termina organizada.</h1>
+          <p class="st-lead">Ativação, suporte e desmobilização de tecnologia para eventos, feiras e operações com prazo definido e múltiplos pontos de execução.</p>
+          <div class="st-actions">
+            <a class="button primary" href="#chamado">Abrir um chamado de teste</a
+            ><a class="st-link" href="diagnostico.html">Fazer o diagnóstico <span aria-hidden="true">→</span></a>
           </div>
-          <div class="kx-proof">
-            <div><b>350</b><span>técnicos de referência</span></div>
-            <div><b>27</b><span>unidades da federação</span></div>
-            <div><b>2</b><span>dias úteis de prazo</span></div>
-          </div>
-        </div>
-      </section>
+        </header>
 
-      <!-- Problema -->
-      <section id="custo" class="kx-block kx-fill wrap" aria-labelledby="custo-title">
-        <header class="kx-head"><h2 id="custo-title">O que custa um problema na hora.</h2></header>
-        <ul class="kx-rows" id="rows"><li><h3>Evento que não espera</h3><p>Equipamento que falha na montagem ou durante o evento não tem segunda chance de horário.</p></li><li><h3>Ninguém no local</h3><p>Sem técnico no local, um problema pequeno vira atraso para todo o resto.</p></li><li><h3>Desmontagem sem controle</h3><p>Sem inventário na retirada, equipamento se perde e a conta chega depois.</p></li></ul>
-      </section>
+        <section class="st-cost" aria-labelledby="custo-title">
+          <h2 id="custo-title">O que custa um problema na hora.</h2>
+          <ol><li><h3>Evento que não espera</h3><p>Equipamento que falha na montagem ou durante o evento não tem segunda chance de horário.</p></li><li><h3>Ninguém no local</h3><p>Sem técnico no local, um problema pequeno vira atraso para todo o resto.</p></li><li><h3>Desmontagem sem controle</h3><p>Sem inventário na retirada, equipamento se perde e a conta chega depois.</p></li></ol>
+        </section>
 
-      <!-- Um caso: o exemplo do setor, palavra por palavra (paradas: metade; tudo aceso) -->
-      <section id="exemplo" class="kx-statement" data-scene data-stops=".5 1" aria-label="Exemplo de aplicação">
-        <div class="kx-stick">
-          <img class="kx-bg" src="midia/setor-eventos.jpg" alt="" width="660" height="880" loading="lazy" aria-hidden="true" />
-          <div class="kx-statement-copy">
-            <p class="kx-tag">Preparação de uma área de credenciamento</p>
-            <p class="kx-words">Um evento precisa instalar estações, impressoras e conectividade no credenciamento. O escopo organiza montagem, testes antes da abertura, suporte durante a operação e retirada. Os responsáveis e as janelas de cada etapa são definidos no planejamento.</p>
-            <small>Cenário ilustrativo para explicar o planejamento do serviço.</small>
-          </div>
-        </div>
-      </section>
+        <section class="st-sim" id="chamado" aria-labelledby="sim-title">
+          <p class="st-tag">Veja como seria</p>
+          <h2 id="sim-title">Abra um chamado de eventos.<br /><em>De mentira, por enquanto.</em></h2>
+          <p class="st-note">Escolha o que aconteceu. O chamado se monta logo abaixo, do jeito que o Horus mostra para a sua equipe. Nada é enviado até você clicar no botão do WhatsApp.</p>
+          <form class="sim" id="sim" data-setor="Eventos" onsubmit="return false">
+            <fieldset><legend>O que parou?</legend><div class="chips"><label><input type="radio" name="o" value="Credenciamento" /><span>Credenciamento</span></label><label><input type="radio" name="o" value="Rede do evento" /><span>Rede do evento</span></label><label><input type="radio" name="o" value="Impressora de crachá" /><span>Impressora de crachá</span></label><label><input type="radio" name="o" value="Totem" /><span>Totem</span></label><label><input type="radio" name="o" value="Outro equipamento" /><span>Outro equipamento</span></label></div></fieldset>
+            <fieldset><legend>Quando?</legend><div class="chips"><label><input type="radio" name="q" value="Agora" /><span>Agora</span></label><label><input type="radio" name="q" value="Hoje" /><span>Hoje</span></label><label><input type="radio" name="q" value="Nesta semana" /><span>Nesta semana</span></label></div></fieldset>
+            <fieldset><legend>Quantas unidades?</legend><div class="chips"><label><input type="radio" name="n" value="1" /><span>1</span></label><label><input type="radio" name="n" value="2 a 10" /><span>2 a 10</span></label><label><input type="radio" name="n" value="Mais de 10" /><span>Mais de 10</span></label></div></fieldset>
+            <label class="sim-sel">Em qual estado?<select id="sim-uf"><option value="">Escolha o estado</option><option value="AC">AC</option><option value="AL">AL</option><option value="AP">AP</option><option value="AM">AM</option><option value="BA">BA</option><option value="CE">CE</option><option value="DF">DF</option><option value="ES">ES</option><option value="GO">GO</option><option value="MA">MA</option><option value="MT">MT</option><option value="MS">MS</option><option value="MG">MG</option><option value="PA">PA</option><option value="PB">PB</option><option value="PR">PR</option><option value="PE">PE</option><option value="PI">PI</option><option value="RJ">RJ</option><option value="RN">RN</option><option value="RS">RS</option><option value="RO">RO</option><option value="RR">RR</option><option value="SC">SC</option><option value="SP">SP</option><option value="SE">SE</option><option value="TO">TO</option></select></label>
+          </form>
+          <article class="ch" id="sim-ch" aria-live="polite">
+            <div class="ch-top"><b data-num>CH-····</b><span class="st-pill">Rascunho</span><span class="ch-ex">Exemplo ilustrativo</span></div>
+            <h3 data-t></h3>
+            <dl><dt>Local</dt><dd data-local></dd><dt>Prazo padrão</dt><dd data-prazo></dd><dt>Técnico</dt><dd data-tec></dd></dl>
+            <ol class="ch-line" aria-label="Etapas do chamado"><li>Aberto</li><li>Técnico designado</li><li>Em atendimento</li><li>Relatório em PDF</li></ol>
+            <div class="ch-cta"><a class="button primary" data-wa href="https://wa.me/5511993287070?text=Ol%C3%A1!%20Quero%20falar%20sobre%20field%20service%20para%20Eventos." aria-disabled="true">Enviar este chamado pelo WhatsApp</a><a class="st-link" href="diagnostico.html">Detalhar no diagnóstico <span aria-hidden="true">→</span></a></div>
+          </article>
+        </section>
 
-      <!-- Necessidade -->
-      <section class="kx-block kx-fill wrap" aria-labelledby="a-title">
-        <header class="kx-head"><h2 id="a-title">Quando o prazo é curto, cada detalhe de campo conta.</h2></header>
-        <ul class="kx-trio"><li><h3>Prazo concentrado</h3><p>Organize instalações e ajustes em uma janela curta, com escopo e responsáveis claramente definidos.</p></li><li><h3>Muitos pontos de execução</h3><p>Coordene redes, telecom e equipamentos em áreas diferentes do mesmo evento.</p></li><li><h3>Encerramento controlado</h3><p>Registre a retirada, a conferência e a desmobilização dos ativos ao final da operação.</p></li></ul>
-      </section>
-      <section class="kx-block kx-fill wrap" aria-labelledby="b-title">
-        <header class="kx-head"><h2 id="b-title">Do primeiro acesso ao último equipamento.</h2></header>
-        <ul class="kx-trio"><li><h3>Ativação de infraestrutura</h3><p>Instalação de redes, telecom e pontos de suporte necessários para colocar a operação em funcionamento.</p></li><li><h3>Suporte durante o evento</h3><p>Atendimento técnico em campo para ajustes, manutenção e continuidade dos pontos definidos.</p></li><li><h3>Desativação e retirada</h3><p>Desmonte, conferência e desmobilização com evidências e próximos encaminhamentos.</p></li></ul>
-      </section>
+        <section class="st-ex" aria-labelledby="ex-title">
+          <p class="st-tag">Exemplo de aplicação</p>
+          <h2 id="ex-title">Preparação de uma área de credenciamento</h2>
+          <p>Um evento precisa instalar estações, impressoras e conectividade no credenciamento. O escopo organiza montagem, testes antes da abertura, suporte durante a operação e retirada. Os responsáveis e as janelas de cada etapa são definidos no planejamento.</p>
+          <small>Cenário ilustrativo para explicar o planejamento do serviço.</small>
+        </section>
 
-      <!-- Como cada visita acontece (uma parada por etapa) -->
-      <section id="sequencia" class="kx-circuit" data-scene data-stops="0.125 0.375 0.625 0.875" style="height:420vh" aria-labelledby="seq-title">
-        <div class="kx-stick wrap">
-          <header class="kx-head kx-head-left"><h2 id="seq-title">Uma sequência simples para uma execução sob controle.</h2></header>
-          <ol class="kx-nodes" aria-label="Etapas da visita" style="grid-template-columns:repeat(4,minmax(0,1fr))"><li data-node="1"><b>01 · Briefing da demanda</b></li><li data-node="2"><b>02 · Designação de técnico</b></li><li data-node="3"><b>03 · Execução em campo</b></li><li data-node="4"><b>04 · Relatório e fechamento</b></li></ol>
-          <div class="kx-wire" aria-hidden="true"><i></i></div>
-          <div class="kx-detail kx-detail-text"><article data-detail="1"><h3>01 · Briefing da demanda</h3><p>Você compartilha data, local, escopo, janela e critérios do evento.</p><div class="kx-big" aria-hidden="true">1<small>de 4</small></div></article><article data-detail="2"><h3>02 · Designação de técnico</h3><p>Indicamos profissional compatível com a necessidade e a região.</p><div class="kx-big" aria-hidden="true">2<small>de 4</small></div></article><article data-detail="3"><h3>03 · Execução em campo</h3><p>A equipe ativa, sustenta ou ajusta os pontos combinados.</p><div class="kx-big" aria-hidden="true">3<small>de 4</small></div></article><article data-detail="4"><h3>04 · Relatório e fechamento</h3><p>Consolidamos evidências e o encerramento da operação.</p><div class="kx-big" aria-hidden="true">4<small>de 4</small></div></article></div>
-        </div>
-      </section>
+        <section class="st-do" aria-label="O que a NovaSync faz em Eventos">
+          <div class="grp"><h2>Quando o prazo é curto, cada detalhe de campo conta.</h2><dl><div><dt>Prazo concentrado</dt><dd>Organize instalações e ajustes em uma janela curta, com escopo e responsáveis claramente definidos.</dd></div><div><dt>Muitos pontos de execução</dt><dd>Coordene redes, telecom e equipamentos em áreas diferentes do mesmo evento.</dd></div><div><dt>Encerramento controlado</dt><dd>Registre a retirada, a conferência e a desmobilização dos ativos ao final da operação.</dd></div></dl></div>
+          <div class="grp"><h2>Do primeiro acesso ao último equipamento.</h2><dl><div><dt>Ativação de infraestrutura</dt><dd>Instalação de redes, telecom e pontos de suporte necessários para colocar a operação em funcionamento.</dd></div><div><dt>Suporte durante o evento</dt><dd>Atendimento técnico em campo para ajustes, manutenção e continuidade dos pontos definidos.</dd></div><div><dt>Desativação e retirada</dt><dd>Desmonte, conferência e desmobilização com evidências e próximos encaminhamentos.</dd></div></dl></div>
+        </section>
 
-      <!-- FAQ -->
-      <section id="faq" class="section wrap faq reveal" style="border-top: 1px solid var(--line)">
-        <div>
-          <div class="eyebrow">Eventos / Antes de solicitar</div>
-          <h2>Dúvidas sobre o atendimento.</h2>
-        </div>
-        <div><details><summary>Com que antecedência devo solicitar o suporte?</summary><p>Envie a demanda assim que tiver local, datas e uma estimativa dos equipamentos. A equipe verifica disponibilidade e requisitos; a confirmação depende do escopo e das condições do evento.</p></details><details><summary>Montagem e desmontagem entram no mesmo atendimento?</summary><p>Informe separadamente os horários e as atividades de montagem, operação e desmontagem. Essas etapas podem ser planejadas em conjunto, com responsabilidades e condições definidas na proposta.</p></details></div>
-      </section>
+        <section class="st-seq" aria-labelledby="seq-title">
+          <h2 id="seq-title">Uma sequência simples para uma execução sob controle.</h2>
+          <ol><li><h3>01 · Briefing da demanda</h3><p>Você compartilha data, local, escopo, janela e critérios do evento.</p></li><li><h3>02 · Designação de técnico</h3><p>Indicamos profissional compatível com a necessidade e a região.</p></li><li><h3>03 · Execução em campo</h3><p>A equipe ativa, sustenta ou ajusta os pontos combinados.</p></li><li><h3>04 · Relatório e fechamento</h3><p>Consolidamos evidências e o encerramento da operação.</p></li></ol>
+        </section>
 
-      <!-- Outros setores -->
-      <section class="kx-more wrap" aria-labelledby="more-title">
-        <p class="kx-tag" id="more-title">Outros setores</p>
-        <ul class="kx-chips"><li><a href="field-service-varejo.html">Varejo</a></li><li><a href="field-service-bancos.html">Bancos</a></li><li><a href="field-service-saude.html">Saúde</a></li><li><a href="field-service-industria.html">Indústria</a></li><li><a href="field-service-telecom.html">Telecom</a></li><li><a href="field-service-transporte.html">Transporte</a></li><li><a href="field-service-eventos.html" aria-current="page">Eventos</a></li></ul>
-      </section>
+        <section id="faq" class="faq" aria-labelledby="faq-title">
+          <div><div class="eyebrow">Eventos / Antes de solicitar</div><h2 id="faq-title">Dúvidas sobre o atendimento.</h2></div>
+          <div><details><summary>Com que antecedência devo solicitar o suporte?</summary><p>Envie a demanda assim que tiver local, datas e uma estimativa dos equipamentos. A equipe verifica disponibilidade e requisitos; a confirmação depende do escopo e das condições do evento.</p></details><details><summary>Montagem e desmontagem entram no mesmo atendimento?</summary><p>Informe separadamente os horários e as atividades de montagem, operação e desmontagem. Essas etapas podem ser planejadas em conjunto, com responsabilidades e condições definidas na proposta.</p></details></div>
+        </section>
 
-      <!-- Fecho -->
-      <section id="contato" class="contact night">
-        <div class="wrap">
-          <div>
-            <div>
-              <div class="eyebrow">Próximo passo / Eventos</div>
-              <h2>Vamos colocar a sua<br /><em>demanda em campo.</em></h2>
-            </div>
-            <div>
-              <p>Conte o que a operação precisa. A equipe confirma cobertura, prazo e condições e alinha o atendimento.</p>
-              <a href="diagnostico.html" class="button">Fazer o diagnóstico</a>
-            </div>
-          </div>
+        <section class="st-more" aria-labelledby="more-title">
+          <p class="st-tag" id="more-title">Outros setores</p>
+          <ul><li><a href="field-service-varejo.html">Varejo</a></li><li><a href="field-service-bancos.html">Bancos</a></li><li><a href="field-service-saude.html">Saúde</a></li><li><a href="field-service-industria.html">Indústria</a></li><li><a href="field-service-telecom.html">Telecom</a></li><li><a href="field-service-transporte.html">Transporte</a></li><li><a href="field-service-eventos.html" aria-current="page">Eventos</a></li></ul>
+        </section>
+
+        <section id="contato" class="st-end">
+          <h2>Vamos colocar a sua<br /><em>demanda em campo.</em></h2>
+          <p>Conte o que a operação precisa. A equipe confirma cobertura, prazo e condições e alinha o atendimento.</p>
+          <div class="st-actions"><a class="button primary" href="diagnostico.html">Fazer o diagnóstico</a></div>
           <div class="contact-links">
             <div><span>WHATSAPP</span><a href="https://wa.me/5511993287070?text=Ol%C3%A1!%20Quero%20falar%20sobre%20field%20service%20para%20Eventos.">(11) 99328-7070 </a></div>
             <div><span>COMERCIAL</span><a href="mailto:comercial@nova-sync.net">comercial@nova-sync.net </a></div>
             <div><span>JÁ É CLIENTE</span><a href="https://app.nova-sync.net">Acessar o Horus </a></div>
           </div>
-        </div>
-      </section>
+        </section>
+      </div>
     </main>
-
     <footer class="footer">
       <div class="wrap">
         <span>© 2026 NovaSync · Operação em campo. Em sincronia.</span
