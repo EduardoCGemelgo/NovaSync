@@ -48,17 +48,13 @@
   // 2. Mesa de despacho: --p da cena vai para o desenho (despacho.js) e escolhe o texto da vez.
   const scenes = [...document.querySelectorAll('[data-scene]')];
   const dpTexts = [...document.querySelectorAll('.dp-copy > div')];
-  let dpStage = -1, khStage = -1;
+  let dpStage = -1;
   function scenesFrame() {
     const h = innerHeight;
     for (const el of scenes) {
       const r = el.getBoundingClientRect();
       const p = still() ? 1 : clamp(-r.top / Math.max(1, r.height - h));
       el.style.setProperty('--p', p.toFixed(4));
-      if (el.id === 'konso-horus') {
-        const n = p < .22 ? 0 : p < .47 ? 1 : p < .75 ? 2 : 3;
-        if (n !== khStage) { khStage = n; el.querySelectorAll('.kh-copy > div, .kh-cards > div').forEach(d => d.classList.toggle('is-on', +d.dataset.s === n)); }
-      }
       if (el.id === 'cobertura') {
         window.despacho?.set(p, still());
         const n = p < .2 ? 0 : p < .42 ? 1 : p < .64 ? 2 : p < .88 ? 3 : 4;
