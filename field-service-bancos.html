@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="pt-BR">
   <head>
+    <meta name="theme-color" content="#050609" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
@@ -11,8 +12,11 @@
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
     <link rel="stylesheet" href="novasync.css" />
     <link rel="stylesheet" href="landing-art.css" />
-    <link rel="stylesheet" href="sector-pages.css" />
+    <link rel="stylesheet" href="kx.css" />
+    <link rel="stylesheet" href="site.css" />
     <script defer src="novasync.js"></script>
+    <script defer src="trava.js"></script>
+    <script defer src="kx.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap">
@@ -21,12 +25,12 @@
 <meta property="og:locale" content="pt_BR">
 <meta property="og:title" content="Field Service para Bancos e Fintechs | NovaSync">
 <meta property="og:description" content="Field Service de TI para agências, terminais e infraestrutura financeira. Coordenação técnica com escopo, prazo e registro do atendimento.">
-<meta property="og:image" content="https://nova-sync.net/midia/og-home.jpg">
-<meta property="og:image:alt" content="NovaSync">
+<meta property="og:image" content="https://nova-sync.net/midia/setor-bancos-hero.jpg">
+<meta property="og:image:alt" content="Hall de agência bancária à noite, com um caixa eletrônico exibindo alerta vermelho.">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Field Service para Bancos e Fintechs | NovaSync">
 <meta name="twitter:description" content="Field Service de TI para agências, terminais e infraestrutura financeira. Coordenação técnica com escopo, prazo e registro do atendimento.">
-<meta name="twitter:image" content="https://nova-sync.net/midia/og-home.jpg">
+<meta name="twitter:image" content="https://nova-sync.net/midia/setor-bancos-hero.jpg">
 <link rel="canonical" href="https://nova-sync.net/field-service-bancos.html">
 <meta property="og:url" content="https://nova-sync.net/field-service-bancos.html">
 <script type="application/ld+json">
@@ -75,7 +79,7 @@
 }
 </script>
 </head>
-  <body class="landing-art sector-page">
+  <body class="landing-art kx">
     <a href="#conteudo" class="skip">Pular para o conteúdo</a>
     <header class="nav">
       <div class="wrap">
@@ -121,151 +125,104 @@
         ><a href="diagnostico.html">Fazer o diagnóstico </a>
       </nav>
     </header>
+
     <main id="conteudo">
-      <div class="wrap sector-hero">
-        <div class="breadcrumb">
-          <a href="index.html">Início</a> /
-          <a href="index.html#setores">Setores</a> / Field Service para Bancos e
-          Fintechs
+      <!-- Hero: o setor à noite; o título sai e a prova entra (paradas: título; os números) -->
+      <section class="kx-hero kx-hero-2" data-scene data-stops="0 1" aria-labelledby="kx-title">
+        <div class="kx-stick">
+          <img class="kx-hero-bg" src="midia/setor-bancos-hero.jpg" alt="Hall de agência bancária à noite, com um caixa eletrônico exibindo alerta vermelho." width="2048" height="1143" fetchpriority="high" />
+          <div class="kx-hero-copy">
+            <p class="eyebrow">Field service · Bancos</p>
+            <h1 id="kx-title">Disponibilidade para cada ponto da operação financeira.</h1>
+            <p class="kx-sub">Suporte técnico em agências, terminais de autoatendimento e unidades distribuídas, com coordenação de chamados e evidências de campo.</p>
+            <div class="kx-actions">
+              <a class="button primary" href="diagnostico.html">Fazer o diagnóstico</a
+              ><a class="kx-link" href="#custo">Ver o que custa esperar <span aria-hidden="true">↓</span></a>
+            </div>
+          </div>
+          <div class="kx-proof">
+            <div><b>350</b><span>técnicos de referência</span></div>
+            <div><b>27</b><span>unidades da federação</span></div>
+            <div><b>2</b><span>dias úteis de prazo</span></div>
+          </div>
         </div>
-        <div class="eyebrow">NovaSync / Atendimento especializado</div>
-        <h1>Disponibilidade para cada ponto da operação financeira.</h1>
-        <p>
-          Suporte técnico em agências, terminais de autoatendimento e unidades
-          distribuídas, com coordenação de chamados e evidências de campo.
-        </p>
-        <a class="button primary" href="diagnostico.html">Fazer o diagnóstico</a>
-      </div>
-      <div class="wrap sector-body">
-        <section class="sector-cost">
-          <div>
-            <h2>O que custa um terminal fora do ar.</h2>
-            <div class="grid">
-              <article>
-                <h3>Cliente sem atendimento</h3>
-                <p>
-                  Terminal ou posto parado transfere a fila para o caixa e o cliente para outro canal.
-                </p>
-              </article>
-              <article>
-                <h3>Visita fora da janela</h3>
-                <p>
-                  Atendimento sem horário combinado interfere na rotina da agência e gera retrabalho para todo mundo.
-                </p>
-              </article>
-              <article>
-                <h3>Atendimento sem prova</h3>
-                <p>
-                  Sem evidência e relatório, fica difícil comprovar o que foi feito quando alguém pergunta.
-                </p>
-              </article>
-            </div>
+      </section>
+
+      <!-- Problema -->
+      <section id="custo" class="kx-block kx-fill wrap" aria-labelledby="custo-title">
+        <header class="kx-head"><h2 id="custo-title">O que custa um terminal fora do ar.</h2></header>
+        <ul class="kx-rows" id="rows"><li><h3>Cliente sem atendimento</h3><p>Terminal ou posto parado transfere a fila para o caixa e o cliente para outro canal.</p></li><li><h3>Visita fora da janela</h3><p>Atendimento sem horário combinado interfere na rotina da agência e gera retrabalho para todo mundo.</p></li><li><h3>Atendimento sem prova</h3><p>Sem evidência e relatório, fica difícil comprovar o que foi feito quando alguém pergunta.</p></li></ul>
+      </section>
+
+      <!-- Um caso: o exemplo do setor, palavra por palavra (paradas: metade; tudo aceso) -->
+      <section id="exemplo" class="kx-statement" data-scene data-stops=".5 1" aria-label="Exemplo de aplicação">
+        <div class="kx-stick">
+          <img class="kx-bg" src="midia/setor-bancos.jpg" alt="" width="660" height="880" loading="lazy" aria-hidden="true" />
+          <div class="kx-statement-copy">
+            <p class="kx-tag">Substituição de estações em agências</p>
+            <p class="kx-words">Uma operação financeira precisa trocar estações de trabalho em várias agências. O escopo reúne os ativos, os responsáveis locais e as regras de acesso. A execução segue a janela combinada e registra os testes e as pendências de cada unidade.</p>
+            <small>Cenário ilustrativo para explicar o planejamento do serviço.</small>
           </div>
-        </section>
-        <section>
-          <div>
-            <h2>Menos indisponibilidade entre agência, terminal e suporte.</h2>
-            <p class="section-intro">
-              Operações financeiras precisam tratar cada visita com contexto,
-              segurança operacional e registro claro do que foi executado.
-            </p>
-            <div class="grid">
-              <article class="card">
-                <h3>Rede de unidades</h3>
-                <p>
-                  Atenda agências e pontos distribuídos com uma operação de
-                  campo coordenada por região.
-                </p>
-              </article>
-              <article class="card">
-                <h3>Autoatendimento</h3>
-                <p>
-                  Apoie manutenção de caixas eletrônicos, quiosques, periféricos
-                  e infraestrutura local.
-                </p>
-              </article>
-              <article class="card">
-                <h3>Rastreabilidade</h3>
-                <p>
-                  Organize evidências, status da visita e próximos
-                  encaminhamentos em cada chamado.
-                </p>
-              </article>
-            </div>
-          </div>
-        </section>
-        <section>
-          <div>
-            <h2>Execução técnica alinhada ao contexto bancário.</h2>
-            <div class="grid">
-              <article class="card">
-                <h3>Microinformática</h3>
-                <p>
-                  Troca, instalação e suporte a estações, periféricos e pontos
-                  de atendimento.
-                </p>
-              </article>
-              <article class="card">
-                <h3>Redes e infraestrutura</h3>
-                <p>
-                  Ativações, verificações e manutenção em ambientes que
-                  sustentam a operação.
-                </p>
-              </article>
-              <article class="card">
-                <h3>Rollouts e desmobilização</h3>
-                <p>
-                  Coordenação de implantação, adequação e retirada de ativos em
-                  múltiplas unidades.
-                </p>
-              </article>
-            </div>
-          </div>
-        </section>
-        <section>
-          <div>
-            <h2>Do briefing ao fechamento, sem perder o contexto.</h2>
-            <div class="grid steps">
-              <article class="card step">
-                <h3>Briefing da demanda</h3>
-                <p>
-                  Você compartilha local, escopo, janela e critérios de
-                  atendimento.
-                </p>
-              </article>
-              <article class="card step">
-                <h3>Designação de técnico</h3>
-                <p>
-                  Indicamos profissional compatível com a necessidade e a
-                  região.
-                </p>
-              </article>
-              <article class="card step">
-                <h3>Execução em campo</h3>
-                <p>
-                  A visita acontece com acompanhamento dos marcos da operação.
-                </p>
-              </article>
-              <article class="card step">
-                <h3>Relatório e fechamento</h3>
-                <p>Consolidamos evidências e próximos encaminhamentos.</p>
-              </article>
-            </div>
-          </div>
-        </section>
-      </div>
-<section class="wrap sector-example" aria-labelledby="example-title"><div class="eyebrow">Exemplo de aplicação</div><h2 id="example-title">Substituição de estações em agências</h2><p>Uma operação financeira precisa trocar estações de trabalho em várias agências. O escopo reúne os ativos, os responsáveis locais e as regras de acesso. A execução segue a janela combinada e registra os testes e as pendências de cada unidade.</p><small>Cenário ilustrativo para explicar o planejamento do serviço.</small></section>
-<section class="wrap sector-faq" aria-labelledby="sector-faq-title"><div><div class="eyebrow">Antes de solicitar</div><h2 id="sector-faq-title">Dúvidas sobre o atendimento.</h2></div><div class="sector-questions"><details><summary>Como preparar o acesso à agência?<span aria-hidden="true">+</span></summary><p>Informe os procedimentos de identificação, as autorizações necessárias, o responsável local e a janela permitida. Esses requisitos precisam ser alinhados antes da designação e da visita.</p></details>
-<details><summary>O atendimento pode ocorrer fora do expediente?<span aria-hidden="true">+</span></summary><p>Informe a janela desejada ao solicitar o serviço. A equipe verifica a disponibilidade na região e combina as condições antes de confirmar o atendimento.</p></details></div></section>
-      <section class="contact night">
+        </div>
+      </section>
+
+      <!-- Necessidade -->
+      <section class="kx-block kx-fill wrap" aria-labelledby="a-title">
+        <header class="kx-head"><h2 id="a-title">Menos indisponibilidade entre agência, terminal e suporte.</h2></header>
+        <ul class="kx-trio"><li><h3>Rede de unidades</h3><p>Atenda agências e pontos distribuídos com uma operação de campo coordenada por região.</p></li><li><h3>Autoatendimento</h3><p>Apoie manutenção de caixas eletrônicos, quiosques, periféricos e infraestrutura local.</p></li><li><h3>Rastreabilidade</h3><p>Organize evidências, status da visita e próximos encaminhamentos em cada chamado.</p></li></ul>
+      </section>
+      <section class="kx-block kx-fill wrap" aria-labelledby="b-title">
+        <header class="kx-head"><h2 id="b-title">Execução técnica alinhada ao contexto bancário.</h2></header>
+        <ul class="kx-trio"><li><h3>Microinformática</h3><p>Troca, instalação e suporte a estações, periféricos e pontos de atendimento.</p></li><li><h3>Redes e infraestrutura</h3><p>Ativações, verificações e manutenção em ambientes que sustentam a operação.</p></li><li><h3>Rollouts e desmobilização</h3><p>Coordenação de implantação, adequação e retirada de ativos em múltiplas unidades.</p></li></ul>
+      </section>
+
+      <!-- Como cada visita acontece (uma parada por etapa) -->
+      <section id="sequencia" class="kx-circuit" data-scene data-stops="0.125 0.375 0.625 0.875" style="height:420vh" aria-labelledby="seq-title">
+        <div class="kx-stick wrap">
+          <header class="kx-head kx-head-left"><h2 id="seq-title">Do briefing ao fechamento, sem perder o contexto.</h2></header>
+          <ol class="kx-nodes" aria-label="Etapas da visita" style="grid-template-columns:repeat(4,minmax(0,1fr))"><li data-node="1"><b>Briefing da demanda</b></li><li data-node="2"><b>Designação de técnico</b></li><li data-node="3"><b>Execução em campo</b></li><li data-node="4"><b>Relatório e fechamento</b></li></ol>
+          <div class="kx-wire" aria-hidden="true"><i></i></div>
+          <div class="kx-detail kx-detail-text"><article data-detail="1"><h3>Briefing da demanda</h3><p>Você compartilha local, escopo, janela e critérios de atendimento.</p><div class="kx-big" aria-hidden="true">1<small>de 4</small></div></article><article data-detail="2"><h3>Designação de técnico</h3><p>Indicamos profissional compatível com a necessidade e a região.</p><div class="kx-big" aria-hidden="true">2<small>de 4</small></div></article><article data-detail="3"><h3>Execução em campo</h3><p>A visita acontece com acompanhamento dos marcos da operação.</p><div class="kx-big" aria-hidden="true">3<small>de 4</small></div></article><article data-detail="4"><h3>Relatório e fechamento</h3><p>Consolidamos evidências e próximos encaminhamentos.</p><div class="kx-big" aria-hidden="true">4<small>de 4</small></div></article></div>
+        </div>
+      </section>
+
+      <!-- FAQ -->
+      <section id="faq" class="section wrap faq reveal" style="border-top: 1px solid var(--line)">
+        <div>
+          <div class="eyebrow">Bancos / Antes de solicitar</div>
+          <h2>Dúvidas sobre o atendimento.</h2>
+        </div>
+        <div><details><summary>Como preparar o acesso à agência?</summary><p>Informe os procedimentos de identificação, as autorizações necessárias, o responsável local e a janela permitida. Esses requisitos precisam ser alinhados antes da designação e da visita.</p></details><details><summary>O atendimento pode ocorrer fora do expediente?</summary><p>Informe a janela desejada ao solicitar o serviço. A equipe verifica a disponibilidade na região e combina as condições antes de confirmar o atendimento.</p></details></div>
+      </section>
+
+      <!-- Outros setores -->
+      <section class="kx-more wrap" aria-labelledby="more-title">
+        <p class="kx-tag" id="more-title">Outros setores</p>
+        <ul class="kx-chips"><li><a href="field-service-varejo.html">Varejo</a></li><li><a href="field-service-bancos.html" aria-current="page">Bancos</a></li><li><a href="field-service-saude.html">Saúde</a></li><li><a href="field-service-industria.html">Indústria</a></li><li><a href="field-service-telecom.html">Telecom</a></li><li><a href="field-service-transporte.html">Transporte</a></li><li><a href="field-service-eventos.html">Eventos</a></li></ul>
+      </section>
+
+      <!-- Fecho -->
+      <section id="contato" class="contact night">
         <div class="wrap">
           <div>
-            <h2>Vamos colocar sua demanda em campo.</h2>
-            <a href="diagnostico.html" class="button">Fazer o diagnóstico</a>
+            <div>
+              <div class="eyebrow">Próximo passo / Bancos</div>
+              <h2>Vamos colocar a sua<br /><em>demanda em campo.</em></h2>
+            </div>
+            <div>
+              <p>Conte o que a operação precisa. A equipe confirma cobertura, prazo e condições e alinha o atendimento.</p>
+              <a href="diagnostico.html" class="button">Fazer o diagnóstico</a>
+            </div>
+          </div>
+          <div class="contact-links">
+            <div><span>WHATSAPP</span><a href="https://wa.me/5511993287070?text=Ol%C3%A1!%20Quero%20falar%20sobre%20field%20service%20para%20Bancos.">(11) 99328-7070 </a></div>
+            <div><span>COMERCIAL</span><a href="mailto:comercial@nova-sync.net">comercial@nova-sync.net </a></div>
+            <div><span>JÁ É CLIENTE</span><a href="https://app.nova-sync.net">Acessar o Horus </a></div>
           </div>
         </div>
       </section>
     </main>
+
     <footer class="footer">
       <div class="wrap">
         <span>© 2026 NovaSync · Operação em campo. Em sincronia.</span

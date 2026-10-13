@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="pt-BR">
   <head>
+    <meta name="theme-color" content="#050609" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
@@ -11,8 +12,11 @@
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
     <link rel="stylesheet" href="novasync.css" />
     <link rel="stylesheet" href="landing-art.css" />
-    <link rel="stylesheet" href="sector-pages.css" />
+    <link rel="stylesheet" href="kx.css" />
+    <link rel="stylesheet" href="site.css" />
     <script defer src="novasync.js"></script>
+    <script defer src="trava.js"></script>
+    <script defer src="kx.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap">
@@ -21,12 +25,12 @@
 <meta property="og:locale" content="pt_BR">
 <meta property="og:title" content="Field Service para Saúde | NovaSync">
 <meta property="og:description" content="Atendimento de TI em campo para clínicas, hospitais e laboratórios. Planejamento de visitas e suporte à infraestrutura da sua operação.">
-<meta property="og:image" content="https://nova-sync.net/midia/og-home.jpg">
-<meta property="og:image:alt" content="NovaSync">
+<meta property="og:image" content="https://nova-sync.net/midia/setor-saude-hero.jpg">
+<meta property="og:image:alt" content="Corredor de hospital à noite, com um armário de rede de luz vermelha junto ao posto de enfermagem.">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Field Service para Saúde | NovaSync">
 <meta name="twitter:description" content="Atendimento de TI em campo para clínicas, hospitais e laboratórios. Planejamento de visitas e suporte à infraestrutura da sua operação.">
-<meta name="twitter:image" content="https://nova-sync.net/midia/og-home.jpg">
+<meta name="twitter:image" content="https://nova-sync.net/midia/setor-saude-hero.jpg">
 <link rel="canonical" href="https://nova-sync.net/field-service-saude.html">
 <meta property="og:url" content="https://nova-sync.net/field-service-saude.html">
 <script type="application/ld+json">
@@ -75,7 +79,7 @@
 }
 </script>
 </head>
-  <body class="landing-art sector-page">
+  <body class="landing-art kx">
     <a href="#conteudo" class="skip">Pular para o conteúdo</a>
     <header class="nav">
       <div class="wrap">
@@ -121,140 +125,104 @@
         ><a href="diagnostico.html">Fazer o diagnóstico </a>
       </nav>
     </header>
+
     <main id="conteudo">
-      <div class="wrap sector-hero">
-        <div class="breadcrumb">
-          <a href="index.html">Início</a> /
-          <a href="index.html#setores">Setores</a> / Field Service para Saúde
+      <!-- Hero: o setor à noite; o título sai e a prova entra (paradas: título; os números) -->
+      <section class="kx-hero kx-hero-2" data-scene data-stops="0 1" aria-labelledby="kx-title">
+        <div class="kx-stick">
+          <img class="kx-hero-bg" src="midia/setor-saude-hero.jpg" alt="Corredor de hospital à noite, com um armário de rede de luz vermelha junto ao posto de enfermagem." width="2048" height="1143" fetchpriority="high" />
+          <div class="kx-hero-copy">
+            <p class="eyebrow">Field service · Saúde</p>
+            <h1 id="kx-title">Continuidade técnica para ambientes onde cada atendimento importa.</h1>
+            <p class="kx-sub">Suporte em hospitais, clínicas e laboratórios, com atenção a infraestrutura, equipamentos de atendimento, rastreabilidade e janelas operacionais.</p>
+            <div class="kx-actions">
+              <a class="button primary" href="diagnostico.html">Fazer o diagnóstico</a
+              ><a class="kx-link" href="#custo">Ver o que custa esperar <span aria-hidden="true">↓</span></a>
+            </div>
+          </div>
+          <div class="kx-proof">
+            <div><b>350</b><span>técnicos de referência</span></div>
+            <div><b>27</b><span>unidades da federação</span></div>
+            <div><b>2</b><span>dias úteis de prazo</span></div>
+          </div>
         </div>
-        <div class="eyebrow">NovaSync / Atendimento especializado</div>
-        <h1>
-          Continuidade técnica para ambientes onde cada atendimento importa.
-        </h1>
-        <p>
-          Suporte em hospitais, clínicas e laboratórios, com atenção a
-          infraestrutura, equipamentos de atendimento, rastreabilidade e janelas
-          operacionais.
-        </p>
-        <a class="button primary" href="diagnostico.html">Fazer o diagnóstico</a>
-      </div>
-      <div class="wrap sector-body">
-        <section class="sector-cost">
-          <div>
-            <h2>O que custa um equipamento parado.</h2>
-            <div class="grid">
-              <article>
-                <h3>Recepção parada</h3>
-                <p>
-                  Sem computador ou impressora na recepção, a fila cresce, o paciente espera e a equipe volta ao papel.
-                </p>
-              </article>
-              <article>
-                <h3>Atendimento remarcado</h3>
-                <p>
-                  Quando um equipamento de apoio fica fora do ar, o atendimento costuma ser remarcado ou atrasar o dia inteiro.
-                </p>
-              </article>
-              <article>
-                <h3>Visita sem registro</h3>
-                <p>
-                  Sem relatório, a unidade não sabe o que foi feito, quando e por quem, nem o que ficou pendente.
-                </p>
-              </article>
-            </div>
+      </section>
+
+      <!-- Problema -->
+      <section id="custo" class="kx-block kx-fill wrap" aria-labelledby="custo-title">
+        <header class="kx-head"><h2 id="custo-title">O que custa um equipamento parado.</h2></header>
+        <ul class="kx-rows" id="rows"><li><h3>Recepção parada</h3><p>Sem computador ou impressora na recepção, a fila cresce, o paciente espera e a equipe volta ao papel.</p></li><li><h3>Atendimento remarcado</h3><p>Quando um equipamento de apoio fica fora do ar, o atendimento costuma ser remarcado ou atrasar o dia inteiro.</p></li><li><h3>Visita sem registro</h3><p>Sem relatório, a unidade não sabe o que foi feito, quando e por quem, nem o que ficou pendente.</p></li></ul>
+      </section>
+
+      <!-- Um caso: o exemplo do setor, palavra por palavra (paradas: metade; tudo aceso) -->
+      <section id="exemplo" class="kx-statement" data-scene data-stops=".5 1" aria-label="Exemplo de aplicação">
+        <div class="kx-stick">
+          <img class="kx-bg" src="midia/setor-saude.jpg" alt="" width="660" height="880" loading="lazy" aria-hidden="true" />
+          <div class="kx-statement-copy">
+            <p class="kx-tag">Renovação de estações de uma recepção</p>
+            <p class="kx-words">Uma clínica precisa substituir computadores e impressoras na recepção. O planejamento considera os horários de atendimento, os responsáveis por liberar o acesso e os testes dos equipamentos de TI. A visita registra o que foi concluído e o que precisa de acompanhamento.</p>
+            <small>Cenário ilustrativo para explicar o planejamento do serviço.</small>
           </div>
-        </section>
-        <section>
-          <div>
-            <h2>Suporte técnico com contexto, cuidado e registro.</h2>
-            <div class="grid">
-              <article>
-                <h3>Continuidade assistencial</h3>
-                <p>
-                  Priorize ocorrências que afetam recepção, atendimento e
-                  rotinas internas.
-                </p>
-              </article>
-              <article>
-                <h3>Ambientes distribuídos</h3>
-                <p>
-                  Coordene visitas em hospitais, clínicas, laboratórios e
-                  unidades de apoio.
-                </p>
-              </article>
-              <article>
-                <h3>Rastreabilidade</h3>
-                <p>
-                  Registre evidências, status e encaminhamentos para facilitar o
-                  acompanhamento.
-                </p>
-              </article>
-            </div>
-          </div>
-        </section>
-        <section>
-          <div>
-            <h2>Infraestrutura de campo para operações de saúde.</h2>
-            <div class="grid">
-              <article>
-                <h3>Estações e periféricos</h3>
-                <p>
-                  Suporte a postos de atendimento, impressoras e dispositivos
-                  operacionais.
-                </p>
-              </article>
-              <article>
-                <h3>Redes e telecom</h3>
-                <p>
-                  Ativações, verificações e manutenção da conectividade local.
-                </p>
-              </article>
-              <article>
-                <h3>Manutenção planejada</h3>
-                <p>
-                  Execução em janelas combinadas para reduzir interferências no
-                  fluxo.
-                </p>
-              </article>
-            </div>
-          </div>
-        </section>
-        <section>
-          <div>
-            <h2>Visibilidade da primeira demanda ao relatório.</h2>
-            <div class="grid">
-              <article>
-                <h3>1. Briefing da demanda</h3>
-                <p>Escopo, unidade, janela e critérios são organizados.</p>
-              </article>
-              <article>
-                <h3>2. Designação de técnico</h3>
-                <p>O profissional é indicado para o contexto da visita.</p>
-              </article>
-              <article>
-                <h3>3. Execução em campo</h3>
-                <p>O atendimento é acompanhado pelos marcos definidos.</p>
-              </article>
-              <article>
-                <h3>4. Relatório e fechamento</h3>
-                <p>Evidências e próximos passos são consolidados.</p>
-              </article>
-            </div>
-          </div>
-        </section>
-      </div>
-<section class="wrap sector-example" aria-labelledby="example-title"><div class="eyebrow">Exemplo de aplicação</div><h2 id="example-title">Renovação de estações de uma recepção</h2><p>Uma clínica precisa substituir computadores e impressoras na recepção. O planejamento considera os horários de atendimento, os responsáveis por liberar o acesso e os testes dos equipamentos de TI. A visita registra o que foi concluído e o que precisa de acompanhamento.</p><small>Cenário ilustrativo para explicar o planejamento do serviço.</small></section>
-<section class="wrap sector-faq" aria-labelledby="sector-faq-title"><div><div class="eyebrow">Antes de solicitar</div><h2 id="sector-faq-title">Dúvidas sobre o atendimento.</h2></div><div class="sector-questions"><details><summary>Quais equipamentos entram no escopo?<span aria-hidden="true">+</span></summary><p>Apresente a relação de computadores, impressoras, periféricos e infraestrutura de rede que precisam de suporte. Equipamentos médico-assistenciais exigem uma avaliação específica de escopo e habilitação antes de qualquer confirmação.</p></details>
-<details><summary>Como conciliar a visita com a rotina da unidade?<span aria-hidden="true">+</span></summary><p>Informe os horários de menor movimento, as restrições de acesso e o contato responsável. A janela e os procedimentos da visita são alinhados com a unidade antes da execução.</p></details></div></section>
-      <section class="contact night">
+        </div>
+      </section>
+
+      <!-- Necessidade -->
+      <section class="kx-block kx-fill wrap" aria-labelledby="a-title">
+        <header class="kx-head"><h2 id="a-title">Suporte técnico com contexto, cuidado e registro.</h2></header>
+        <ul class="kx-trio"><li><h3>Continuidade assistencial</h3><p>Priorize ocorrências que afetam recepção, atendimento e rotinas internas.</p></li><li><h3>Ambientes distribuídos</h3><p>Coordene visitas em hospitais, clínicas, laboratórios e unidades de apoio.</p></li><li><h3>Rastreabilidade</h3><p>Registre evidências, status e encaminhamentos para facilitar o acompanhamento.</p></li></ul>
+      </section>
+      <section class="kx-block kx-fill wrap" aria-labelledby="b-title">
+        <header class="kx-head"><h2 id="b-title">Infraestrutura de campo para operações de saúde.</h2></header>
+        <ul class="kx-trio"><li><h3>Estações e periféricos</h3><p>Suporte a postos de atendimento, impressoras e dispositivos operacionais.</p></li><li><h3>Redes e telecom</h3><p>Ativações, verificações e manutenção da conectividade local.</p></li><li><h3>Manutenção planejada</h3><p>Execução em janelas combinadas para reduzir interferências no fluxo.</p></li></ul>
+      </section>
+
+      <!-- Como cada visita acontece (uma parada por etapa) -->
+      <section id="sequencia" class="kx-circuit" data-scene data-stops="0.125 0.375 0.625 0.875" style="height:420vh" aria-labelledby="seq-title">
+        <div class="kx-stick wrap">
+          <header class="kx-head kx-head-left"><h2 id="seq-title">Visibilidade da primeira demanda ao relatório.</h2></header>
+          <ol class="kx-nodes" aria-label="Etapas da visita" style="grid-template-columns:repeat(4,minmax(0,1fr))"><li data-node="1"><b>Briefing da demanda</b></li><li data-node="2"><b>Designação de técnico</b></li><li data-node="3"><b>Execução em campo</b></li><li data-node="4"><b>Relatório e fechamento</b></li></ol>
+          <div class="kx-wire" aria-hidden="true"><i></i></div>
+          <div class="kx-detail kx-detail-text"><article data-detail="1"><h3>Briefing da demanda</h3><p>Escopo, unidade, janela e critérios são organizados.</p><div class="kx-big" aria-hidden="true">1<small>de 4</small></div></article><article data-detail="2"><h3>Designação de técnico</h3><p>O profissional é indicado para o contexto da visita.</p><div class="kx-big" aria-hidden="true">2<small>de 4</small></div></article><article data-detail="3"><h3>Execução em campo</h3><p>O atendimento é acompanhado pelos marcos definidos.</p><div class="kx-big" aria-hidden="true">3<small>de 4</small></div></article><article data-detail="4"><h3>Relatório e fechamento</h3><p>Evidências e próximos passos são consolidados.</p><div class="kx-big" aria-hidden="true">4<small>de 4</small></div></article></div>
+        </div>
+      </section>
+
+      <!-- FAQ -->
+      <section id="faq" class="section wrap faq reveal" style="border-top: 1px solid var(--line)">
+        <div>
+          <div class="eyebrow">Saúde / Antes de solicitar</div>
+          <h2>Dúvidas sobre o atendimento.</h2>
+        </div>
+        <div><details><summary>Quais equipamentos entram no escopo?</summary><p>Apresente a relação de computadores, impressoras, periféricos e infraestrutura de rede que precisam de suporte. Equipamentos médico-assistenciais exigem uma avaliação específica de escopo e habilitação antes de qualquer confirmação.</p></details><details><summary>Como conciliar a visita com a rotina da unidade?</summary><p>Informe os horários de menor movimento, as restrições de acesso e o contato responsável. A janela e os procedimentos da visita são alinhados com a unidade antes da execução.</p></details></div>
+      </section>
+
+      <!-- Outros setores -->
+      <section class="kx-more wrap" aria-labelledby="more-title">
+        <p class="kx-tag" id="more-title">Outros setores</p>
+        <ul class="kx-chips"><li><a href="field-service-varejo.html">Varejo</a></li><li><a href="field-service-bancos.html">Bancos</a></li><li><a href="field-service-saude.html" aria-current="page">Saúde</a></li><li><a href="field-service-industria.html">Indústria</a></li><li><a href="field-service-telecom.html">Telecom</a></li><li><a href="field-service-transporte.html">Transporte</a></li><li><a href="field-service-eventos.html">Eventos</a></li></ul>
+      </section>
+
+      <!-- Fecho -->
+      <section id="contato" class="contact night">
         <div class="wrap">
           <div>
-            <h2>Vamos colocar sua demanda em campo.</h2>
-            <a href="diagnostico.html" class="button">Fazer o diagnóstico</a>
+            <div>
+              <div class="eyebrow">Próximo passo / Saúde</div>
+              <h2>Vamos colocar a sua<br /><em>demanda em campo.</em></h2>
+            </div>
+            <div>
+              <p>Conte o que a operação precisa. A equipe confirma cobertura, prazo e condições e alinha o atendimento.</p>
+              <a href="diagnostico.html" class="button">Fazer o diagnóstico</a>
+            </div>
+          </div>
+          <div class="contact-links">
+            <div><span>WHATSAPP</span><a href="https://wa.me/5511993287070?text=Ol%C3%A1!%20Quero%20falar%20sobre%20field%20service%20para%20Saúde.">(11) 99328-7070 </a></div>
+            <div><span>COMERCIAL</span><a href="mailto:comercial@nova-sync.net">comercial@nova-sync.net </a></div>
+            <div><span>JÁ É CLIENTE</span><a href="https://app.nova-sync.net">Acessar o Horus </a></div>
           </div>
         </div>
       </section>
     </main>
+
     <footer class="footer">
       <div class="wrap">
         <span>© 2026 NovaSync · Operação em campo. Em sincronia.</span
