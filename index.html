@@ -137,7 +137,14 @@
       "about": {
         "@id": "https://nova-sync.net/#org"
       },
-      "primaryImageOfPage": "https://nova-sync.net/midia/og-home.jpg"
+      "primaryImageOfPage": "https://nova-sync.net/midia/og-home.jpg",
+      "speakable": {
+        "@type": "SpeakableSpecification",
+        "cssSelector": [
+          "#hero-title",
+          "#sobre .section-head p"
+        ]
+      }
     },
     {
       "@type": "Service",
@@ -203,6 +210,42 @@
           }
         }
       ]
+    },
+    {
+      "@type": "HowTo",
+      "@id": "https://nova-sync.net/#como-funciona",
+      "name": "Como funciona um atendimento de field service de TI com a NovaSync",
+      "inLanguage": "pt-BR",
+      "step": [
+        {
+          "@type": "HowToStep",
+          "position": 1,
+          "name": "Primeiro, entendemos a demanda.",
+          "text": "Alinhamos o escopo, o local, o prazo e os critérios que vão orientar o atendimento.",
+          "url": "https://nova-sync.net/#como-funciona"
+        },
+        {
+          "@type": "HowToStep",
+          "position": 2,
+          "name": "Conectamos o técnico à operação.",
+          "text": "A designação considera a região, a disponibilidade e a necessidade técnica da visita.",
+          "url": "https://nova-sync.net/#como-funciona"
+        },
+        {
+          "@type": "HowToStep",
+          "position": 3,
+          "name": "Acompanhamos a execução.",
+          "text": "O atendimento avança com registro de status, evidências e eventual necessidade de retorno.",
+          "url": "https://nova-sync.net/#como-funciona"
+        },
+        {
+          "@type": "HowToStep",
+          "position": 4,
+          "name": "Fechamos com informação.",
+          "text": "O relatório do atendimento reúne o que foi feito, o resultado da visita e os próximos encaminhamentos.",
+          "url": "https://nova-sync.net/#como-funciona"
+        }
+      ]
     }
   ]
 }
@@ -258,8 +301,7 @@
       <section id="inicio" class="hm-hero" aria-labelledby="hero-title">
         <div class="hero hero-centered hm-hero-copy">
           <div class="hero-inner">
-            <div class="eyebrow">Field Service de TI · Cobertura nacional</div>
-            <h1 id="hero-title">Operações em campo.<br /><em>Supervisionadas.</em></h1>
+            <h1 id="hero-title"><span class="eyebrow">Field Service de TI · Cobertura nacional</span>Operações em campo.<br /><em>Supervisionadas.</em></h1>
             <p class="hero-copy">Técnicos de TI em todo o Brasil. Você acompanha cada visita, do agendamento ao relatório.</p>
             <div class="hero-actions">
               <a class="button primary" href="diagnostico.html">Fazer o diagnóstico</a
@@ -609,7 +651,7 @@
         <div>
           <details>
             <summary>
-              O que preciso informar para solicitar atendimento?
+              <h3 class="faq-q">O que preciso informar para solicitar atendimento?</h3>
             </summary>
             <p>
               Local, prazo desejado, equipamentos envolvidos e o que precisa ser
@@ -618,7 +660,7 @@
             </p>
           </details>
           <details>
-            <summary>Qual é o prazo para ter um técnico no local?</summary>
+            <summary><h3 class="faq-q">Qual é o prazo para ter um técnico no local?</h3></summary>
             <p>
               O prazo é combinado conforme o escopo, a região e a
               disponibilidade técnica. Informe sua necessidade para que a equipe
@@ -626,7 +668,7 @@
             </p>
           </details>
           <details>
-            <summary>Como acompanho o que foi feito?</summary>
+            <summary><h3 class="faq-q">Como acompanho o que foi feito?</h3></summary>
             <p>
               O acompanhamento reúne o status da demanda. No fechamento, o
               Relatório do atendimento consolida os registros da visita, as
@@ -634,7 +676,7 @@
             </p>
           </details>
           <details>
-            <summary>Posso contratar uma demanda pontual?</summary>
+            <summary><h3 class="faq-q">Posso contratar uma demanda pontual?</h3></summary>
             <p>
               Sim. A operação pode atender demandas pontuais, contratos
               recorrentes e projetos temporários, incluindo ativações, eventos e
@@ -642,7 +684,7 @@
             </p>
           </details>
           <details>
-            <summary>E se o técnico precisar voltar?</summary>
+            <summary><h3 class="faq-q">E se o técnico precisar voltar?</h3></summary>
             <p>
               A necessidade de retorno é registrada junto ao motivo e às
               pendências, como o recebimento de uma peça. A próxima visita é

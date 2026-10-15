@@ -1661,3 +1661,5 @@ html[data-motion="paused"] .hero-centered::before { animation: none !important; 
 .cookie-aviso a { color: #c0d1f5; text-decoration: underline; text-underline-offset: 4px; }
 .cookie-aviso div { display: flex; gap: 8px; }
 .cookie-aviso .button { min-height: 44px; padding: 8px 18px; font-size: 14px; cursor: pointer; }
+/* Pergunta do FAQ como título (h3) sem mudar o visual do summary */
+summary .faq-q { display: inline; margin: 0; font: inherit; color: inherit; letter-spacing: inherit; text-transform: inherit; }

@@ -44,3 +44,9 @@ body.utility-page { min-height: 100dvh; display: flex; flex-direction: column; b
 .registration-confirmation .confirmation-steps li + li { margin-top: 10px; }
 .registration-confirmation .confirmation-steps + p { margin-top: 20px; }
 .registration-confirmation .confirmation-steps a { text-decoration: underline; text-underline-offset: 3px; }
+/* Tabelas dos guias e artigos */
+.policy-page .tbl-wrap { overflow-x: auto; margin: 18px 0 22px; }
+.policy-page .tbl { width: 100%; border-collapse: collapse; font-size: 15px; line-height: 1.5; }
+.policy-page .tbl th, .policy-page .tbl td { padding: 11px 14px; border-bottom: 1px solid rgba(255, 255, 255, .12); text-align: left; vertical-align: top; }
+.policy-page .tbl th { color: #f2f4ff; font-weight: 600; white-space: nowrap; }
+.policy-page .tbl td:first-child { color: #e6e9f8; font-weight: 500; }

@@ -34,6 +34,9 @@ Grafia do nome: NovaSync, uma única palavra, com N e S maiúsculos. Não confun
 - [Field service para transporte e mobilidade](https://nova-sync.net/field-service-transporte.html)
 - [Field service para eventos e operações temporárias](https://nova-sync.net/field-service-eventos.html)
 - [Guia: empresas de field service no Brasil e como escolher](https://nova-sync.net/empresas-de-field-service.html): definição, tipos de fornecedor, critérios e perguntas para contratar.
+- [O que é RAT](https://nova-sync.net/o-que-e-rat.html): O que é RAT (relatório de atendimento técnico): campos obrigatórios, papel x digital, assinatura e LGPD.
+- [SLA em field service](https://nova-sync.net/sla-em-field-service.html): SLA em field service: tempo de resposta, de atendimento e de solução, como contar o prazo e o que medir.
+- [Acompanhar técnico terceirizado](https://nova-sync.net/como-acompanhar-tecnico-terceirizado.html): Como acompanhar um técnico terceirizado: o que combinar antes, ver durante e exigir no fim da visita.
 - [Quem somos](https://nova-sync.net/sobre.html): empresa, CNPJ 62.718.285/0001-58, sede em São Paulo/SP, desde setembro de 2025, cobertura, Horus e contato.
 - [Política de privacidade](https://nova-sync.net/politica-de-privacidade.html)
 - [Central de ajuda do Horus](https://app.nova-sync.net/ajuda): perguntas frequentes por perfil (empresa, técnico e cliente).

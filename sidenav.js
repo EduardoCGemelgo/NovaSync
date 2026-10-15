@@ -2,7 +2,7 @@
 (() => {
   const main = document.getElementById('conteudo') || document.querySelector('main');
   if (!main) return;
-  const PAGES = [['index.html', 'Início'], ['horus.html', 'Horus'], ['konso.html', 'Konso'], ['empresas-de-field-service.html', 'Guia de field service'], ['sobre.html', 'Quem somos']];
+  const PAGES = [['index.html', 'Início'], ['horus.html', 'Horus'], ['konso.html', 'Konso'], ['empresas-de-field-service.html', 'Guia de field service'], ['o-que-e-rat.html', 'O que é RAT'], ['sla-em-field-service.html', 'SLA em field service'], ['como-acompanhar-tecnico-terceirizado.html', 'Técnico terceirizado'], ['sobre.html', 'Quem somos']];
   const SETORES = [['varejo', 'Varejo'], ['bancos', 'Bancos'], ['saude', 'Saúde'], ['industria', 'Indústria'], ['telecom', 'Telecom'], ['transporte', 'Transporte'], ['eventos', 'Eventos']];
   const NAMES = {
     'cobertura': 'Cobertura', 'servicos': 'O que fazemos', 'como-funciona': 'Como funciona', 'horus': 'Horus', 'setores': 'Setores', 'parceiros': 'Parceiros', 'cadastro-tecnico': 'Cadastro técnico', 'sobre': 'Sobre', 'contato': 'Contato', 'faq': 'FAQ',
