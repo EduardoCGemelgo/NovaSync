@@ -62,7 +62,7 @@
 .one-pre { position:absolute; left:0; right:0; top:0; opacity:clamp(0,calc(1.2 - var(--c) * 3.5),1); transform:translateY(calc(var(--c) * -30px)); }
 .one-pre h2, .one-fin h2 { font-size:clamp(34px,min(6.6vw,12svh),110px); font-weight:600; letter-spacing:-.065em; line-height:1; }
 .one-fin { opacity:clamp(0,calc((var(--c) - .62) * 4),1); transform:translateY(calc((1 - var(--c)) * 40px)); }
-.one-fin p, .one-pre p { max-width:46ch; margin-top:16px; color:#c3cde0; font-size:clamp(15px,1.4vw,20px); }
+.one-fin p, .one-pre p { max-width:46ch; margin:16px auto 0; color:#c3cde0; font-size:clamp(15px,1.4vw,20px); }
 
 /* ===== Cena: prazo à vista, sem sinal não para ===== */
 .hx-live { height:240vh; }
