@@ -68,12 +68,20 @@
     }
   }
 
-  // 3. Galeria horizontal: quanto a faixa passa da largura da tela.
+  // 3. Galeria horizontal: quanto a faixa passa da largura da tela. Sobra pouca? Os cartões encolhem e a cena não prende.
+  // A altura e as paradas (data-stops, lidas pela trava) acompanham o quanto a faixa anda: uma parada a cada ~60% da tela.
   const where = $$('.hx-where');
   function measure() {
     for (const w of where) {
       const t = w.querySelector('.wh-track');
-      w.style.setProperty('--max', Math.max(0, t.scrollWidth - innerWidth));
+      w.classList.remove('wh-fit');
+      let max = t.scrollWidth - innerWidth;
+      if (max < innerWidth * .2) { w.classList.add('wh-fit'); max = t.scrollWidth - innerWidth; }
+      max = Math.max(0, max);
+      const n = max < 8 ? 0 : Math.min(3, Math.max(1, Math.round(max / (innerWidth * .6))));
+      w.style.setProperty('--max', max);
+      w.style.setProperty('--hold', Math.round(max * 1.3) + 'px');
+      w.dataset.stops = n ? Array.from({ length: n + 1 }, (_, i) => +(i / n).toFixed(2)).join(' ') : '0';
     }
   }
 

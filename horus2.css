@@ -66,6 +66,7 @@
 
 /* ===== Cena: prazo à vista, sem sinal não para ===== */
 .hx-live { height:240vh; }
+.hx-live .lv-grid { width:min(1560px,calc(100% - var(--art-gutter,24px) * 2)); }
 .lv-bg { position:absolute; left:0; top:-4%; width:100%; height:108%; object-fit:cover; opacity:.34; transform:translate3d(0,calc(var(--p) * -4%),0) scale(1.05); -webkit-mask-image:linear-gradient(#000 40%,#0000); mask-image:linear-gradient(#000 40%,#0000); }
 .hx-live .hx-stick::after { content:""; position:absolute; inset:0; background:linear-gradient(90deg,#050609f0 0%,#05060999 60%,#05060955); }
 .lv-grid { position:relative; z-index:2; display:grid; grid-template-columns:.6fr 1.4fr; align-items:center; gap:clamp(24px,4vw,70px); height:100%; padding-top:78px; padding-bottom:24px; box-sizing:border-box; }
@@ -82,13 +83,13 @@
 .lv-dash figcaption, .lv-phone figcaption { margin-top:10px; color:#7f89a3; font-size:12px; }
 .lv-live .lv-dash { transform:none; }
 .hx-live[data-b="1"] .lv-dash { transform:translateX(-4%) scale(.92); opacity:.35; filter:blur(2px); }
-.lv-phone { position:absolute; right:3%; bottom:-6%; width:31%; margin:0; opacity:0; transform:translateY(24%) rotate(4deg); transition:opacity .7s, transform 1.1s cubic-bezier(.2,.8,.2,1); }
+.lv-phone { position:absolute; right:2%; bottom:-6%; width:44%; margin:0; opacity:0; transform:translateY(24%) rotate(4deg); transition:opacity .7s, transform 1.1s cubic-bezier(.2,.8,.2,1); }
 .lv-phone.is-seen { opacity:1; transform:none; }
 .lv-phone img { border:5px solid #2b3144; border-radius:30px; box-shadow:0 50px 100px -30px #000, 0 0 80px -20px #6d8fe088; }
 .lv-phone figcaption { text-align:center; }
 
 /* ===== Cena: onde tiver TI (galeria horizontal conduzida pela rolagem) ===== */
-.hx-where { height:380vh; --max:0; }
+.hx-where { height:calc(100svh + var(--hold,280svh)); --max:0; }
 .hx-where .hx-stick { display:flex; align-items:center; }
 .wh-mq { position:absolute; left:0; right:0; top:11%; overflow:hidden; }
 .wh-mq-track { display:flex; width:max-content; animation:wh-mq 70s linear infinite; }
@@ -96,7 +97,7 @@
 .wh-mq-track span::after { content:"✦"; margin-left:clamp(28px,4vw,64px); font-size:.3em; vertical-align:middle; color:#46557f; -webkit-text-stroke:0; }
 .hx-where.off .wh-mq-track { animation-play-state:paused; }
 @keyframes wh-mq { to { transform:translateX(-50%); } }
-.wh-track { position:relative; z-index:1; display:flex; align-items:center; gap:clamp(16px,2.4vw,36px); padding:70px var(--art-gutter,24px) 0; transform:translate3d(calc(var(--p) * var(--max) * -1px),0,0); will-change:transform; }
+.wh-track { position:relative; z-index:1; display:flex; margin-inline:auto; align-items:center; gap:clamp(16px,2.4vw,36px); padding:70px var(--art-gutter,24px) 0; transform:translate3d(calc(var(--p) * var(--max) * -1px),0,0); will-change:transform; }
 .wh-intro { flex:0 0 min(620px,84vw); padding-right:clamp(10px,3vw,50px); }
 .wh-intro h2 { font-size:clamp(38px,min(6.4vw,11svh),104px); font-weight:600; letter-spacing:-.065em; line-height:1; }
 .wh-nums { display:flex; gap:clamp(24px,4vw,56px); margin:clamp(18px,4svh,40px) 0 0; padding:0; list-style:none; }
@@ -108,6 +109,8 @@
 .wh-card:nth-of-type(even) { transform:translateY(-4svh); }
 .wh-card img { width:100%; height:100%; object-fit:cover; }
 .wh-card figcaption { position:absolute; inset:auto 0 0; padding:90px 24px 22px; background:linear-gradient(#05060900,#050609f2); color:#afb8cc; font-size:14px; }
+.wh-fit .wh-track { width:100%; min-width:0; box-sizing:border-box; }
+.wh-fit .wh-card { flex-shrink:1; min-width:0; }
 .wh-card figcaption strong { display:block; color:#eef1ff; font-size:clamp(20px,2vw,27px); font-weight:600; letter-spacing:-.035em; }
 
 /* ===== Detalhes: cartões com brilho no cursor ===== */
@@ -280,7 +283,7 @@
 
 /* ===== A vida de um chamado: lista das 5 etapas + tela real ===== */
 .hx-duo.hx-cc { height:560vh; }
-.hx-duo.hx-cc .hx-stick { display:grid; grid-template-columns:minmax(0,1.3fr) minmax(300px,.8fr); grid-template-rows:auto auto; grid-template-areas:"s t" "s l"; align-content:center; column-gap:clamp(24px,4vw,64px); align-items:center; position:sticky; top:0; width:auto; margin:0; height:100svh; padding:clamp(92px,13vh,120px) var(--art-gutter,24px) clamp(24px,5vh,48px); background:#06070d; overflow:hidden; box-sizing:border-box; }
+.hx-duo.hx-cc .hx-stick { display:grid; grid-template-columns:minmax(0,1.3fr) minmax(300px,.8fr); grid-template-rows:auto auto; grid-template-areas:"s t" "s l"; align-content:center; column-gap:clamp(24px,4vw,64px); align-items:center; position:sticky; top:0; width:auto; margin:0; height:100svh; padding:clamp(92px,13vh,120px) max(var(--art-gutter,24px),calc((100% - 1760px) / 2)) clamp(24px,5vh,48px); background:#06070d; overflow:hidden; box-sizing:border-box; }
 .st-text { grid-area:t; align-self:end; } .st-list { grid-area:l; align-self:start; } .st-stage { grid-area:s; }
 .st-text h2 { font-size:clamp(26px,min(3vw,5vh),44px); margin:8px 0 clamp(14px,3vh,28px); line-height:1.05; }
 .st-text h2 .hx-dim { display:block; margin-left:0; }
@@ -298,8 +301,8 @@
 .st-shots { position:relative; aspect-ratio:1600/1000; background:#0b0e17; }
 .st-shots img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:top; opacity:0; transition:opacity .5s; }
 .st-shots img.is-on { opacity:1; }
-.st-shots img[src*="relatorio"] { height:auto; top:50%; transform:translateY(-50%); }
-.st-phone { position:absolute; left:-2%; bottom:-6%; margin:0; width:min(22%,200px); aspect-ratio:600/1243; border:5px solid #1b2030; border-radius:22px; overflow:hidden; background:#0a0c12; box-shadow:0 30px 70px -10px #000; opacity:0; transform:translateY(20px); transition:opacity .5s,transform .5s; }
+.st-shots img:is([src*="relatorio"],[src*="kpis"]) { height:auto; top:50%; transform:translateY(-50%); }
+.st-phone { position:absolute; left:-2%; bottom:-6%; margin:0; width:min(24%,clamp(160px,26svh,300px)); aspect-ratio:600/1243; border:5px solid #1b2030; border-radius:22px; overflow:hidden; background:#0a0c12; box-shadow:0 30px 70px -10px #000; opacity:0; transform:translateY(20px); transition:opacity .5s,transform .5s; }
 .hx-cc:not([data-b="0"]):not([data-b="4"]) .st-phone { opacity:1; transform:none; }
 .st-phone img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:top; opacity:0; transition:opacity .4s; }
 .st-phone img.is-on { opacity:1; }
