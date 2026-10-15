@@ -226,7 +226,7 @@
 
 .hx-duo .duo-stage { perspective:2000px; grid-template-columns:minmax(0,1.9fr) clamp(36px,5vw,80px) minmax(0,.75fr); row-gap:clamp(10px,2vh,22px); }
 .duo-steps { grid-column:1 / -1; display:flex; gap:8px; margin:0 0 4px; padding:0; list-style:none; }
-.duo-steps li { flex:1; padding-top:10px; border-top:3px solid #262b3c; color:#6c7690; font:11px ui-monospace,monospace; letter-spacing:.08em; text-transform:uppercase; transition:color .4s,border-color .4s; }
+.duo-steps li { flex:1; padding-top:10px; border-top:3px solid #262b3c; color:#6c7690; font:12px ui-monospace,monospace; letter-spacing:.08em; text-transform:uppercase; transition:color .4s,border-color .4s; }
 .duo-steps li.is-on { color:#dfe7fb; border-top-color:#c0d1f5; }
 .duo-steps li i { display:inline-block; width:7px; height:7px; margin-right:8px; border-radius:50%; background:currentColor; }
 .hx-duo .duo-desk { width:100%; transform:rotateY(5deg) rotateX(1deg); transform-origin:100% 50%; box-shadow:0 60px 140px -40px #6d8fe066,0 0 0 1px #ffffff0a; }
@@ -250,7 +250,7 @@
   .duo-link { display:none; }
   .duo-card { display:none; }
   .duo-steps { gap:4px; } .duo-steps li { font-size:0; padding-top:6px; } .duo-steps li i { margin:0; width:0; }
-  .duo-badge { left:8px; bottom:8px; padding:6px 11px; font-size:11px; }
+  .duo-badge { left:8px; bottom:8px; padding:6px 11px; font-size:12px; }
   .hx-duo .duo-phone { transform:none; width:min(100%,calc((100svh - 560px) * .705),230px); }
 }
 
@@ -292,7 +292,7 @@
 .st-list li.is-on { opacity:1; background:#ffffff0a; border-color:#c0d1f544; }
 .st-n { font:700 12px ui-monospace,monospace; color:#8e99b3; padding-top:4px; }
 .is-on > .st-n { color:#c0d1f5; }
-.st-list small { display:block; color:#9fb3dc; font:700 11px ui-monospace,monospace; letter-spacing:.1em; text-transform:uppercase; }
+.st-list small { display:block; color:#9fb3dc; font:700 12px ui-monospace,monospace; letter-spacing:.1em; text-transform:uppercase; }
 .st-list strong { display:block; margin-top:2px; font-size:clamp(17px,1.5vw,22px); font-weight:600; letter-spacing:-.03em; }
 .st-list p { margin:0; max-height:0; overflow:hidden; color:#b5bed2; font-size:14px; line-height:1.55; transition:max-height .5s,margin .5s; }
 .st-list li.is-on p { max-height:6em; margin-top:6px; }
@@ -320,3 +320,27 @@
 html.still .hx-duo.hx-cc { height:auto; }
 html.still .hx-duo.hx-cc .hx-stick { position:relative; height:auto; min-height:100svh; }
 html.still .st-list li { opacity:1; } html.still .st-list p { max-height:none; margin-top:6px; }
+
+/* ===== Celular: prints do sistema recortados no trecho que importa (antes saíam a 0,2x e ilegíveis) =====
+   Recorte em px do print: canto (--x0, --y0) e lado do quadro (--s). Faixas baixas (relatório, painel) centralizam com --y0 negativo. */
+@media (max-width:600px) {
+  .st-shots, .tr-desk .tr-screen { aspect-ratio:1; overflow:hidden; }
+  .tr-report .tr-screen { aspect-ratio:680/367; overflow:hidden; }
+  .lv-dash { aspect-ratio:800/450; overflow:hidden; border:1px solid #2a3046; border-radius:20px; }
+  .st-shots img, .tr-desk .tr-shot img, .tr-report .tr-shot img, .lv-dash img { position:absolute; inset:auto; width:calc(160000% / var(--s)); max-width:none; height:auto; left:calc(var(--x0) * -100% / var(--s)); top:calc(var(--y0) * -100% / var(--s)); transform:none; border:0; border-radius:0; box-shadow:none; object-fit:fill; }
+  img[src*="tela-lista"] { --x0:130; --y0:110; --s:640; }
+  img[src*="tela-chamado"] { --x0:150; --y0:320; --s:640; }
+  img[src*="tela-conversa"] { --x0:690; --y0:90; --s:560; }
+  img[src*="tela-relatorio"] { --x0:140; --y0:-156; --s:680; }
+  img[src*="painel-kpis"] { --x0:0; --y0:-175; --s:800; }
+  .tr-report img[src*="tela-relatorio"], .lv-dash img { --y0:0; }
+  .st-phone { display:none; }
+  .st-desk { width:min(100%,calc(100svh - 510px)); }
+  .st-list li:not(.is-on) small { display:none; }
+  /* tour: sem moldura nem 3D; a tela inteira no quadro e a legenda embaixo explica */
+  .hx-tour .tr-rig { transform:none; }
+  .tr-desk { width:min(100cqw,100cqh); --ry:0deg; --rx:0deg; }
+  .tr-desk .tr-lid { padding:0; border:0; background:none; box-shadow:none; }
+  .tr-desk .tr-screen { border:1px solid #2a3046; border-radius:16px; }
+  .tr-lid::before, .tr-desk .tr-base, .tr-pin { display:none; }
+}

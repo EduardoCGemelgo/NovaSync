@@ -43,7 +43,7 @@
 .diag-err { color: #ffb4a8; font-size: 14px; margin: 14px 0 0; min-height: 1.2em; }
 .diag-summary { margin: 22px 0 0; padding: 18px 20px; border: 1px solid #30364a; border-radius: 18px; background: #0b0e17; color: #b9c1d3; font-size: 14px; line-height: 1.7; white-space: pre-wrap; font-family: inherit; }
 .diag-fallback { color: #b9c1d3; padding: 160px 0 60px; }
-.diag-note { margin: 34px 0 0; color: #6f7794; font-size: 12px; }
+.diag-note { margin: 34px 0 0; color: #9aa3bd; font-size: 14px; }
 .diag-note a { color: #9fb3dc; text-decoration: underline; text-underline-offset: 3px; }
 .diag [hidden] { display: none !important; }
 

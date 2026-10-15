@@ -53,7 +53,7 @@ body.setor { --ac:#c0d1f5; --hot:#ff6b6b; --ok:#4ade80; background:#07080e; over
 .ch { position:relative; margin-top:34px; padding:clamp(22px,2.4vw,34px); border:1px solid #2f3850; border-radius:26px; background:linear-gradient(#10141f,#0a0d15); box-shadow:0 50px 120px -50px #6d8fe055; }
 .ch-top { display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:10px; }
 .ch-top b { font:600 15px ui-monospace,monospace; color:#b9cdf3; }
-.ch-ex { color:#6c7690; font:11px ui-monospace,monospace; letter-spacing:.1em; text-transform:uppercase; }
+.ch-ex { color:#6c7690; font:12px ui-monospace,monospace; letter-spacing:.1em; text-transform:uppercase; }
 .ch h3 { margin-top:18px; font-size:clamp(24px,2.6vw,38px); font-weight:500; letter-spacing:-.045em; line-height:1.1; }
 .ch h3 .ph { color:#4a526a; }
 .ch dl { display:grid; grid-template-columns:auto 1fr; gap:10px 22px; margin:24px 0 0; font-size:15px; }
@@ -67,7 +67,7 @@ body.setor { --ac:#c0d1f5; --hot:#ff6b6b; --ok:#4ade80; background:#07080e; over
 .ch-line li.now::before { background:var(--ok); box-shadow:0 0 12px #4ade8099; }
 .ch-cta { display:flex; flex-wrap:wrap; align-items:center; gap:12px 22px; margin-top:28px; }
 .ch-cta .button[aria-disabled="true"] { opacity:.4; pointer-events:none; }
-.st-pill { display:inline-block; padding:4px 10px; border:1px solid #7c5cff66; border-radius:999px; background:#7c5cff29; color:#a58bff; font-size:10px; font-weight:800; letter-spacing:.06em; text-transform:uppercase; }
+.st-pill { display:inline-block; padding:4px 10px; border:1px solid #7c5cff66; border-radius:999px; background:#7c5cff29; color:#a58bff; font-size:12px; font-weight:800; letter-spacing:.06em; text-transform:uppercase; }
 .st-pill.is-on { border-color:#22d3ee59; background:#22d3ee21; color:#22d3ee; }
 
 /* Exemplo, o que fazemos e a sequência */
@@ -96,7 +96,7 @@ body.setor { --ac:#c0d1f5; --hot:#ff6b6b; --ok:#4ade80; background:#07080e; over
 .st-end { padding-bottom:clamp(60px,9vh,100px); }
 .st-end p { max-width:46ch; margin-top:20px; color:#b9c1d3; }
 .st-end .contact-links { margin-top:44px; display:grid; gap:22px; border-top:1px solid #3e4a61; padding-top:28px; }
-.st-end .contact-links span { display:block; margin-bottom:4px; color:#8e99b3; font:11px ui-monospace,monospace; letter-spacing:.12em; }
+.st-end .contact-links span { display:block; margin-bottom:4px; color:#8e99b3; font:12px ui-monospace,monospace; letter-spacing:.12em; }
 .st-end .contact-links a { overflow-wrap:anywhere; }
 .setor .footer { position:relative; z-index:1; }
 

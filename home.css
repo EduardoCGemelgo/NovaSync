@@ -120,7 +120,7 @@ body.hm { overflow-x:clip; }
 .hm-step p { max-width:36ch; color:var(--muted); font-size:16px; }
 .hm-flow-device { position:sticky; top:max(110px,calc(50svh - 250px)); margin:0; }
 .hm-console { max-width:none; }
-.hm-line { display:grid; grid-template-columns:repeat(4,1fr); gap:8px; margin:0; padding:18px 0 0; list-style:none; color:#8590ad; font-size:11px; }
+.hm-line { display:grid; grid-template-columns:repeat(4,1fr); gap:8px; margin:0; padding:18px 0 0; list-style:none; color:#8590ad; font-size:12px; }
 .hm-line li::before { content:''; display:block; height:3px; margin-bottom:9px; border-radius:3px; background:#262b3c; transition:background .45s; }
 .hm-line li.done { color:#dfe7fb; }
 .hm-line li.done::before { background:#c0d1f5; }
@@ -151,7 +151,7 @@ body.hm { overflow-x:clip; }
 .hm-card::before { content:''; position:absolute; inset:0; z-index:-1; background:linear-gradient(#07080e00 35%,#07080ef0 100%); }
 .hm-card:hover img { transform:scale(1.05); }
 .hm-card:focus-visible { outline:2px solid #c0d1f5; outline-offset:-4px; }
-.hm-card span { color:#b2c8ef; font:11px ui-monospace,monospace; letter-spacing:.08em; }
+.hm-card span { color:#b2c8ef; font:12px ui-monospace,monospace; letter-spacing:.08em; }
 .hm-card strong { margin:10px 0 6px; font-size:26px; font-weight:500; letter-spacing:-.04em; line-height:1.15; }
 .hm-card small { color:#b9c1d3; font-size:14px; }
 .hm-card.is-cta { background:radial-gradient(circle at 70% 20%,#2a3a63,#10131f 70%); }
@@ -171,7 +171,7 @@ body.hm { overflow-x:clip; }
   /* no celular a foto fica em pé: texto embaixo, sobre o degradê */
   .hm-beat:not(.hm-need,.hm-here) { justify-content:flex-end; padding-bottom:13svh; }
   .hm-beat:not(.hm-need,.hm-here)::before { background:linear-gradient(0deg,#000f,#000a 38%,#0000 70%); }
-  .hm-when { font-size:11px; margin-bottom:16px; }
+  .hm-when { font-size:12px; margin-bottom:16px; }
   .hm-term { --ox:43%; --oy:46%; } /* a foto em pé desloca a tela da maquininha */
   .hm-photo { border-radius:22px; }
   /* painel compacto: fica preso no topo e precisa deixar espaço para o texto da etapa */
