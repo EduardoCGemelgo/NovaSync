@@ -73,6 +73,47 @@
         "url": "https://nova-sync.net/",
         "logo": "https://nova-sync.net/logo-512.png"
       }
+    },
+    {
+      "@type": "Service",
+      "@id": "https://nova-sync.net/field-service-eventos.html#servico",
+      "name": "Field service de TI para eventos e operações temporárias",
+      "serviceType": "Field service de TI",
+      "description": "Suporte de TI para montagem, operação e desmontagem de eventos. Planejamento técnico de redes, equipamentos e atendimento presencial.",
+      "provider": {
+        "@id": "https://nova-sync.net/#org"
+      },
+      "areaServed": {
+        "@type": "Country",
+        "name": "Brasil"
+      },
+      "audience": {
+        "@type": "BusinessAudience",
+        "name": "Eventos e operações temporárias"
+      },
+      "url": "https://nova-sync.net/field-service-eventos.html"
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://nova-sync.net/field-service-eventos.html#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Com que antecedência devo solicitar o suporte?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Envie a demanda assim que tiver local, datas e uma estimativa dos equipamentos. A equipe verifica disponibilidade e requisitos; a confirmação depende do escopo e das condições do evento."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Montagem e desmontagem entram no mesmo atendimento?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Informe separadamente os horários e as atividades de montagem, operação e desmontagem. Essas etapas podem ser planejadas em conjunto, com responsabilidades e condições definidas na proposta."
+          }
+        }
+      ]
     }
   ]
 }
@@ -171,7 +212,7 @@
           </form>
           <article class="ch" id="sim-ch" aria-live="polite">
             <div class="ch-top"><b data-num>CH-····</b><span class="st-pill">Rascunho</span><span class="ch-ex">Exemplo ilustrativo</span></div>
-            <h3 data-t></h3>
+            <h3 data-t>Escolha o que parou.</h3>
             <dl><dt>Local</dt><dd data-local></dd><dt>Prazo padrão</dt><dd data-prazo></dd><dt>Técnico</dt><dd data-tec></dd></dl>
             <ol class="ch-line" aria-label="Etapas do chamado"><li>Aberto</li><li>Técnico designado</li><li>Em atendimento</li><li>Relatório em PDF</li></ol>
             <div class="ch-cta"><a class="button primary" data-wa href="https://wa.me/5511993287070?text=Ol%C3%A1!%20Quero%20falar%20sobre%20field%20service%20para%20Eventos." aria-disabled="true">Enviar este chamado pelo WhatsApp</a><a class="st-link" href="diagnostico.html">Detalhar no diagnóstico <span aria-hidden="true">→</span></a></div>
@@ -212,7 +253,7 @@
           <div class="st-actions"><a class="button primary" href="diagnostico.html">Fazer o diagnóstico</a></div>
           <div class="contact-links">
             <div><span>WHATSAPP</span><a href="https://wa.me/5511993287070?text=Ol%C3%A1!%20Quero%20falar%20sobre%20field%20service%20para%20Eventos.">(11) 99328-7070 </a></div>
-            <div><span>COMERCIAL</span><a href="mailto:comercial@nova-sync.net">comercial@nova-sync.net </a></div>
+            <div><span>COMERCIAL</span><!--email_off--><a href="mailto:comercial@nova-sync.net">comercial@nova-sync.net </a><!--/email_off--></div>
             <div><span>JÁ É CLIENTE</span><a href="https://app.nova-sync.net">Acessar o Horus </a></div>
           </div>
         </section>
@@ -221,6 +262,7 @@
     <footer class="footer">
       <div class="wrap">
         <span>© 2026 NovaSync · Operação em campo. Em sincronia.</span
+        ><a href="sobre.html">Quem somos</a
         ><a href="politica-de-privacidade.html">Política de Privacidade</a
         ><a href="index.html#inicio">Voltar ao início </a>
       </div>

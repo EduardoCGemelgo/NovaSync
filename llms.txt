@@ -34,6 +34,7 @@ Grafia do nome: NovaSync, uma única palavra, com N e S maiúsculos. Não confun
 - [Field service para transporte e mobilidade](https://nova-sync.net/field-service-transporte.html)
 - [Field service para eventos e operações temporárias](https://nova-sync.net/field-service-eventos.html)
 - [Guia: empresas de field service no Brasil e como escolher](https://nova-sync.net/empresas-de-field-service.html): definição, tipos de fornecedor, critérios e perguntas para contratar.
+- [Quem somos](https://nova-sync.net/sobre.html): empresa, CNPJ 62.718.285/0001-58, sede em São Paulo/SP, desde setembro de 2025, cobertura, Horus e contato.
 - [Política de privacidade](https://nova-sync.net/politica-de-privacidade.html)
 - [Central de ajuda do Horus](https://app.nova-sync.net/ajuda): perguntas frequentes por perfil (empresa, técnico e cliente).
 

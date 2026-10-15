@@ -98,8 +98,8 @@
         <li>Operação</li><li>Problema</li><li>Impacto</li><li>Mudança</li><li>Próximo passo</li>
       </ol>
       <p class="diag-count" id="diag-count" aria-live="polite"></p>
-      <h1 id="s-title"></h1>
-      <p class="dg-text" id="s-text"></p>
+      <h1 id="s-title">Como é a sua operação?</h1>
+      <p class="dg-text" id="s-text">Três cliques para entendermos o porte. Nenhum dado seu é guardado.</p>
 
       <fieldset data-step="1" hidden>
         <legend class="sr">Passo 1: como é a sua operação</legend>
@@ -137,16 +137,17 @@
         <button type="button" class="button" id="d-back" hidden>Voltar</button>
         <button type="button" class="button primary" id="d-next">Continuar</button>
         <a class="button primary" id="d-wa" href="https://wa.me/5511993287070" hidden>Enviar pelo WhatsApp</a>
-        <a class="linklike" id="d-mail" href="mailto:comercial@nova-sync.net" hidden>Prefiro enviar por e-mail</a>
+        <!--email_off--><a class="linklike" id="d-mail" href="mailto:comercial@nova-sync.net" hidden>Prefiro enviar por e-mail</a><!--/email_off-->
       </div>
       <p class="diag-note">Nada é guardado em servidor: o que você responde só segue na mensagem que você decidir enviar. Prefere falar agora? <a href="https://wa.me/5511993287070">WhatsApp (11) 99328-7070</a>.</p>
     </div>
   </form>
-  <p class="diag-fallback wrap" id="d-nojs">Para fazer o diagnóstico, ative o JavaScript. Se preferir, fale direto pelo <a href="https://wa.me/5511993287070">WhatsApp</a> ou por <a href="mailto:comercial@nova-sync.net">comercial@nova-sync.net</a>.</p>
+  <p class="diag-fallback wrap" id="d-nojs">Para fazer o diagnóstico, ative o JavaScript. Se preferir, fale direto pelo <a href="https://wa.me/5511993287070">WhatsApp</a> ou por <!--email_off--><a href="mailto:comercial@nova-sync.net">comercial@nova-sync.net</a><!--/email_off-->.</p>
 </main>
 <footer class="footer">
       <div class="wrap">
         <span>© 2026 NovaSync · Operação em campo. Em sincronia.</span
+        ><a href="sobre.html">Quem somos</a
         ><a href="politica-de-privacidade.html">Política de Privacidade</a
         ><a href="index.html#inicio">Voltar ao início </a>
       </div>
