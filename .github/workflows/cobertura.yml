@@ -33,4 +33,5 @@ jobs:
           git add cobertura.json
           if git diff --cached --quiet; then echo "sem mudança"; exit 0; fi
           git commit -m "cobertura: tabela de $(date -u +%Y-%m-%d)"
+          git pull --rebase origin Site
           git push

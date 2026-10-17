@@ -28,4 +28,5 @@ jobs:
           git add -- '*.html'
           if git diff --cached --quiet; then echo "sem mudança"; exit 0; fi
           git commit -m "versão: carimbo dos arquivos js e css"
+          git pull --rebase origin Site
           git push

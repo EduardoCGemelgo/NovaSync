@@ -137,7 +137,7 @@ const MEDICAO_CONVERSAO_CONTATO = ""; // ex.: "AW-XXXXXXXXXX/rotulo-da-conversao
     document.head.append(tag);
     // Contato comercial = clique no WhatsApp ou no e-mail comercial. Cadastro de técnico não conta.
     document.addEventListener("click", (e) => {
-      const link = e.target.closest?.('a[href*="wa.me"], a[href^="mailto:comercial"]');
+      const link = e.target.closest?.('a[href*="wa.me"]:not(#technical-form-fallback a), a[href^="mailto:comercial"]');
       if (!link) return;
       window.gtag("event", "contato_comercial", { canal: link.href.startsWith("mailto:") ? "email" : "whatsapp" });
       if (MEDICAO_CONVERSAO_CONTATO) window.gtag("event", "conversion", { send_to: MEDICAO_CONVERSAO_CONTATO });

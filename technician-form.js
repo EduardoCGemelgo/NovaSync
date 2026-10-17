@@ -49,17 +49,23 @@
   function validConsent() { showError(consent, consent.checked ? '' : 'Para se inscrever, aceite a Política de Privacidade.'); return consent.checked; }
   consent.addEventListener('change', () => { validConsent(); statusMessage(''); });
 
-  // Se o envio falhar, o que foi digitado (menos a senha) fica guardado nesta aba, e o WhatsApp vira opção.
-  const guardar = () => { try { sessionStorage.setItem(RASCUNHO, JSON.stringify(Object.fromEntries(fields.filter(f => !SENHAS.has(f.name)).map(f => [f.name, f.value])))); } catch {} };
-  try { const r = JSON.parse(sessionStorage.getItem(RASCUNHO)); if (r) fields.forEach(f => { if (!SENHAS.has(f.name) && typeof r[f.name] === 'string') f.value = r[f.name]; }); } catch {}
+  // Se o envio falhar, o que foi digitado fica guardado nesta aba (sem senha, CPF e RG), e o WhatsApp vira opção.
+  const FORA_DO_RASCUNHO = new Set([...SENHAS, 'cpf', 'rg']);
+  const guardar = () => { try { sessionStorage.setItem(RASCUNHO, JSON.stringify(Object.fromEntries(fields.filter(f => !FORA_DO_RASCUNHO.has(f.name)).map(f => [f.name, f.value])))); } catch {} };
+  try { const r = JSON.parse(sessionStorage.getItem(RASCUNHO)); if (r) fields.forEach(f => { if (!FORA_DO_RASCUNHO.has(f.name) && typeof r[f.name] === 'string') f.value = r[f.name]; }); } catch {}
   function falhou(message) {
     guardar();
+    fallback.hidden = false;
+    statusMessage(message + ' Se preferir, use o WhatsApp no link logo abaixo.');
+  }
+  // A mensagem é montada no clique, com o que está nos campos agora; o link na página fica sem dados pessoais.
+  const whatsapp = fallback.querySelector('a');
+  whatsapp.addEventListener('click', event => {
+    event.preventDefault();
     const v = name => form.elements.namedItem(name).value.trim();
     const texto = `Olá! Tentei me cadastrar como técnico no site da NovaSync e o envio falhou.\nNome: ${v('nome')}\nCidade: ${v('cidade')}/${v('estado')}\nTelefone: ${v('telefone')}\nE-mail: ${v('email')}`;
-    fallback.querySelector('a').href = 'https://wa.me/5511993287070?text=' + encodeURIComponent(texto);
-    fallback.hidden = false;
-    statusMessage(message);
-  }
+    window.open(whatsapp.href + '?text=' + encodeURIComponent(texto), '_blank', 'noopener');
+  });
   function normalize(field) {
     if (SENHAS.has(field.name)) return;
     field.value = field.value.trim();
@@ -149,7 +155,7 @@
     // Enter na etapa 1 avança em vez de enviar.
     if (step < steps.length - 1) { next.click(); return; }
     if (!validAll(fields)) return;
-    if (!validConsent()) { statusMessage('Para enviar, aceite a Política de Privacidade.'); consent.focus(); return; }
+    if (!validConsent()) { statusMessage('Falta marcar o aceite da Política de Privacidade.'); consent.focus(); return; }
     form.setAttribute('aria-busy', 'true'); submit.disabled = true; back.disabled = true; fallback.hidden = true;
     status.classList.remove('is-error'); status.textContent = 'Enviando cadastro…';
     const body = {consentimento: consent.checked, website: form.elements.namedItem('website')?.value || ''};
@@ -160,12 +166,13 @@
     fetch(API, {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(body), credentials: 'omit'})
       .then(async response => {
         const result = await response.json().catch(() => null);
-        return result && response.status < 500 ? result : {ok: false, falhou: true};
+        // 5xx, resposta que não é JSON e 429 (muitos envios do mesmo IP, comum no 4G): o WhatsApp vira opção.
+        return result && response.status < 500 && response.status !== 429 ? result : {ok: false, falhou: true, message: result?.message};
       })
       .then(result => {
         if (result.ok) { try { sessionStorage.removeItem(RASCUNHO); } catch {} location.href = new URL('cadastro-enviado.html', location.href).href; return; }
         liberar();
-        if (result.falhou) { falhou('Não foi possível enviar agora. Tente novamente em instantes.'); window.turnstile?.reset(); return; }
+        if (result.falhou) { falhou(result.message || 'Não foi possível enviar agora. Tente novamente em instantes.'); window.turnstile?.reset(); return; }
         let primeiro = null;
         for (const [en, message] of Object.entries(result.errors || {})) {
           const field = form.elements.namedItem(DA_API[en] || en);
