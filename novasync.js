@@ -113,7 +113,7 @@ if(coverageMap?.contentDocument?.querySelector('svg'))connectCoverageMap();
 
 // Rede cadastrada: valores preservados do index.html original fornecido pelo usuário.
 const referenceCapacity={"AC":7,"AL":9,"AM":6,"AP":5,"BA":17,"CE":15,"DF":9,"ES":8,"GO":10,"MA":12,"MG":28,"MS":9,"MT":15,"PA":16,"PB":13,"PE":18,"PI":7,"PR":13,"RJ":13,"RN":7,"RO":8,"RR":6,"RS":26,"SC":14,"SE":7,"SP":47,"TO":5};
-function updateCoverageCard(){if(!state||!state.value)return;/* "Todo o Brasil": o total vem do mapa-3d.js */document.getElementById("coverage-state-name").textContent=state.options[state.selectedIndex].text;const target=referenceCapacity[state.value]??0;const count=document.getElementById("coverage-count");count.dataset.target=String(target);count.textContent=String(target);const readable=document.getElementById("coverage-count-readable");if(readable)readable.textContent=String(target);document.dispatchEvent(new CustomEvent("novasync:coverage",{detail:target}));}
+function updateCoverageCard(){if(!state||!state.value)return;document.getElementById("coverage-state-name").textContent=state.options[state.selectedIndex].text;const target=referenceCapacity[state.value]??0;const count=document.getElementById("coverage-count");count.dataset.target=String(target);count.textContent=String(target);const readable=document.getElementById("coverage-count-readable");if(readable)readable.textContent=String(target);document.dispatchEvent(new CustomEvent("novasync:coverage",{detail:target}));}
 state?.addEventListener("change",updateCoverageCard);if(document.getElementById("coverage-count"))updateCoverageCard();
 
 // Medição (Google Ads / Analytics). Só carrega depois do aceite no aviso de cookies.

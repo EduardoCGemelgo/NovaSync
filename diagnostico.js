@@ -41,11 +41,11 @@
   const trail = [...document.querySelectorAll("#diag-trail li")];
   // Coluna da esquerda: o que se pergunta em cada passo e por quê, no tom da home.
   const META = [
-    { rotulo: "01 — Operação", titulo: "Como é a sua operação?", texto: "Três cliques para entendermos o porte. Nenhum dado seu é guardado.", img: "midia/home-campo.jpg" },
-    { rotulo: "02 — O problema", titulo: "O que mais acontece hoje?", texto: "Marque o que você reconhece. É por aqui que o problema aparece.", img: "midia/drama-loja.jpg" },
-    { rotulo: "03 — O impacto", titulo: "O que acontece quando isso para?", texto: "Equipamento parado não é só um conserto. Marque o que já chegou até você.", img: "midia/rack.jpg" },
-    { rotulo: "04 — A mudança", titulo: "Se isso fosse resolvido, o que mudaria?", texto: "Diga o que mais pesa para você. É isso que orienta a conversa.", img: "midia/mao-celular.jpg" },
-    { rotulo: "05 — O próximo passo", titulo: "Por onde começamos?", texto: "Escolha um passo concreto. A mensagem segue com tudo o que você respondeu.", img: "midia/servico-ativar.jpg" },
+    { rotulo: "01 — Operação", titulo: "Como é a sua operação?", texto: "Três cliques para entendermos o porte. Nenhum dado seu é guardado.", img: "midia/home-campo.webp" },
+    { rotulo: "02 — O problema", titulo: "O que mais acontece hoje?", texto: "Marque o que você reconhece. É por aqui que o problema aparece.", img: "midia/drama-loja.webp" },
+    { rotulo: "03 — O impacto", titulo: "O que acontece quando isso para?", texto: "Equipamento parado não é só um conserto. Marque o que já chegou até você.", img: "midia/rack.webp" },
+    { rotulo: "04 — A mudança", titulo: "Se isso fosse resolvido, o que mudaria?", texto: "Diga o que mais pesa para você. É isso que orienta a conversa.", img: "midia/mao-celular.webp" },
+    { rotulo: "05 — O próximo passo", titulo: "Por onde começamos?", texto: "Escolha um passo concreto. A mensagem segue com tudo o que você respondeu.", img: "midia/servico-ativar.webp" },
   ];
   const FOTO_RAMO = { Varejo: "drama-loja", "Bancos e fintechs": "drama-banco", Saúde: "drama-hospital", Indústria: "setor-industria", Telecom: "setor-telecom", Transporte: "setor-transporte", Eventos: "setor-eventos" };
   const el = {
@@ -159,7 +159,7 @@
     $("#s-title").textContent = m.titulo;
     $("#s-text").textContent = m.texto;
     // Passo 2: a foto acompanha o ramo escolhido no passo 1.
-    $("#s-img").src = i === 1 && FOTO_RAMO[um("ramo")] ? "midia/" + FOTO_RAMO[um("ramo")] + ".jpg" : m.img;
+    $("#s-img").src = i === 1 && FOTO_RAMO[um("ramo")] ? "midia/" + FOTO_RAMO[um("ramo")] + ".webp" : m.img;
     montarQuadro(i);
     el.count.textContent = `Passo ${i + 1} de ${steps.length}`;
     el.err.textContent = "";

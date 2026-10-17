@@ -36,7 +36,8 @@ body:has(#technician-dialog[open]) { overflow: hidden; }
 .technical-password-hints li[data-ok]::before { content: "✓ "; }
 #technician-form .technical-show-password { display: inline-flex; align-items: center; gap: 8px; margin-top: 12px; font-weight: 500; cursor: pointer; }
 #technician-form .technical-show-password input { width: 18px; min-width: 18px; height: 18px; min-height: 0; margin: 0; }
-
+#technician-form .technical-consent { display: flex; align-items: flex-start; gap: 8px; font-weight: 500; cursor: pointer; }
+#technician-form .technical-consent input { width: 18px; min-width: 18px; height: 18px; min-height: 0; margin: 2px 0 0; }
 @media (max-width: 560px) {
   #technician-dialog { width: calc(100% - 16px); max-height: calc(100dvh - 16px); padding: 20px; border-radius: 16px; }
   #technician-dialog > header { top: -20px; gap: 12px; }

@@ -12,6 +12,9 @@
   const SENHAS = new Set(['senha', 'confirmar_senha']);
   const password = form.elements.namedItem('senha');
   const confirmPassword = form.elements.namedItem('confirmar_senha');
+  const consent = form.elements.namedItem('consentimento');
+  const fallback = document.getElementById('technical-form-fallback');
+  const RASCUNHO = 'novasync-cadastro-tecnico';
 
   // Duas etapas: 1) dados e endereço, 2) senha. Sem JavaScript as duas aparecem juntas.
   const steps = [...form.querySelectorAll('.technical-step')];
@@ -43,6 +46,20 @@
   }
   const otherValue = field => field.name === 'confirmar_senha' ? password.value : undefined;
   function validate(field) { const message = rules.error(field.name, field.value, otherValue(field)); showError(field, message); return !message; }
+  function validConsent() { showError(consent, consent.checked ? '' : 'Para se inscrever, aceite a Política de Privacidade.'); return consent.checked; }
+  consent.addEventListener('change', () => { validConsent(); statusMessage(''); });
+
+  // Se o envio falhar, o que foi digitado (menos a senha) fica guardado nesta aba, e o WhatsApp vira opção.
+  const guardar = () => { try { sessionStorage.setItem(RASCUNHO, JSON.stringify(Object.fromEntries(fields.filter(f => !SENHAS.has(f.name)).map(f => [f.name, f.value])))); } catch {} };
+  try { const r = JSON.parse(sessionStorage.getItem(RASCUNHO)); if (r) fields.forEach(f => { if (!SENHAS.has(f.name) && typeof r[f.name] === 'string') f.value = r[f.name]; }); } catch {}
+  function falhou(message) {
+    guardar();
+    const v = name => form.elements.namedItem(name).value.trim();
+    const texto = `Olá! Tentei me cadastrar como técnico no site da NovaSync e o envio falhou.\nNome: ${v('nome')}\nCidade: ${v('cidade')}/${v('estado')}\nTelefone: ${v('telefone')}\nE-mail: ${v('email')}`;
+    fallback.querySelector('a').href = 'https://wa.me/5511993287070?text=' + encodeURIComponent(texto);
+    fallback.hidden = false;
+    statusMessage(message);
+  }
   function normalize(field) {
     if (SENHAS.has(field.name)) return;
     field.value = field.value.trim();
@@ -132,28 +149,33 @@
     // Enter na etapa 1 avança em vez de enviar.
     if (step < steps.length - 1) { next.click(); return; }
     if (!validAll(fields)) return;
-    form.setAttribute('aria-busy', 'true'); submit.disabled = true; back.disabled = true;
+    if (!validConsent()) { statusMessage('Para enviar, aceite a Política de Privacidade.'); consent.focus(); return; }
+    form.setAttribute('aria-busy', 'true'); submit.disabled = true; back.disabled = true; fallback.hidden = true;
     status.classList.remove('is-error'); status.textContent = 'Enviando cadastro…';
-    const body = {consentimento: true, website: form.elements.namedItem('website')?.value || ''};
+    const body = {consentimento: consent.checked, website: form.elements.namedItem('website')?.value || ''};
     for (const [pt, en] of Object.entries(PARA_API)) body[en] = form.elements.namedItem(pt).value;
     const turnstile = form.elements.namedItem('cf-turnstile-response');
     if (turnstile) body['cf-turnstile-response'] = turnstile.value;
     const liberar = () => { form.removeAttribute('aria-busy'); submit.disabled = false; back.disabled = false; };
     fetch(API, {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(body), credentials: 'omit'})
-      .then(response => response.json().catch(() => ({ok: false, message: 'Não foi possível enviar agora. Tente novamente em instantes.'})))
+      .then(async response => {
+        const result = await response.json().catch(() => null);
+        return result && response.status < 500 ? result : {ok: false, falhou: true};
+      })
       .then(result => {
-        if (result.ok) { location.href = new URL('cadastro-enviado.html', location.href).href; return; }
+        if (result.ok) { try { sessionStorage.removeItem(RASCUNHO); } catch {} location.href = new URL('cadastro-enviado.html', location.href).href; return; }
         liberar();
+        if (result.falhou) { falhou('Não foi possível enviar agora. Tente novamente em instantes.'); window.turnstile?.reset(); return; }
         let primeiro = null;
         for (const [en, message] of Object.entries(result.errors || {})) {
           const field = form.elements.namedItem(DA_API[en] || en);
-          if (field && fields.includes(field)) { showError(field, message); primeiro = primeiro || field; }
+          if (field && (fields.includes(field) || field === consent)) { showError(field, message); primeiro = primeiro || field; }
         }
         statusMessage(result.message || 'Não foi possível enviar agora. Tente novamente em instantes.');
         if (primeiro) { if (stepOf(primeiro) !== step) showStep(stepOf(primeiro), false); primeiro.focus(); }
         window.turnstile?.reset();
       })
-      .catch(() => { liberar(); statusMessage('Sem conexão com o servidor. Confira sua internet e tente novamente.'); });
+      .catch(() => { liberar(); falhou('Sem conexão com o servidor. Confira sua internet e tente novamente.'); });
   });
   window.addEventListener('pageshow', () => { form.removeAttribute('aria-busy'); submit.disabled = false; back.disabled = false; statusMessage(''); });
   // Ao abrir o cadastro de novo, começa pela etapa 1.

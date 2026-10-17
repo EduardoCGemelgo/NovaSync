@@ -62,14 +62,6 @@ body.hm { overflow-x:clip; }
 /* 2. Cobertura: uma tela, uma parada. No desktop o mapa ocupa a altura toda à esquerda e o texto fica à direita. */
 .hm-cov .coverage-copy>.eyebrow { margin-bottom:12px; }
 .hm-cov .coverage-copy { scroll-margin-top:90px; } /* no celular o cartão tem parada própria (data-stop), abaixo do menu */
-.map-3d { position:relative; }
-.map-3d>:is(svg,canvas) { display:block; width:100%; height:100%; }
-.map-3d path { stroke:#0e0e1a; stroke-width:24; fill-rule:evenodd; cursor:pointer; transition:fill .3s; }
-.map-3d canvas { touch-action:pan-y; }
-@media (hover:hover) and (pointer:fine) { /* com mouse o mapa aproxima e passa da moldura (mapa-3d.js): some aos poucos em vez de cortar reto */
-  html:not(.still) .map-3d canvas { mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent),linear-gradient(transparent,#000 6%,#000 94%,transparent); mask-composite:intersect; }
-}
-.map-tip { position:absolute; z-index:1; padding:6px 11px; border:1px solid #3d4058; border-radius:10px; background:#10131fe8; color:#eef1ff; font-size:12px; white-space:nowrap; pointer-events:none; transform:translate(-50%,calc(-100% - 14px)); }
 @media (min-width:1000px) and (min-height:700px) {
   .hm-cov .coverage-lead { box-sizing:border-box; width:min(1440px,calc(100% - 96px)); min-height:100svh; grid-template-columns:1.7fr 1fr; grid-template-rows:auto auto; align-content:center; align-items:start; column-gap:56px; padding-block:100px 28px; }
   .hm-cov .coverage-heading { grid-area:1 / 2; align-self:end; margin:0; text-align:left; }
