@@ -21,6 +21,16 @@ Grafia do nome: NovaSync, uma única palavra, com N e S maiúsculos. Não confun
 - Para quem: empresas que precisam de execução técnica em campo em vários pontos do país (lojas, agências, unidades, plantas), seus clientes e os técnicos parceiros que executam as visitas.
 - Privacidade: a NovaSync não vende dados. A política de privacidade descreve quais dados são tratados, com quem são compartilhados e por quanto tempo.
 
+## Números do Horus
+
+Medido no Horus nos 52 chamados finalizados entre 23/09/2026 e 19/10/2026, em 16 estados (chamados de teste fora da conta; horas corridas):
+
+- Mediana de 22 horas entre a abertura do chamado e o início do atendimento no local.
+- Mediana de 26 horas entre a abertura e a conclusão do atendimento.
+- 88% dos chamados resolvidos na primeira visita.
+
+Fonte: https://nova-sync.net/sobre.html#numeros
+
 ## Páginas
 
 - [Início](https://nova-sync.net/): visão geral, setores atendidos e cobertura no Brasil.
