@@ -44,6 +44,7 @@ Fonte: https://nova-sync.net/sobre.html#numeros
 - [Field service para transporte e mobilidade](https://nova-sync.net/field-service-transporte.html)
 - [Field service para eventos e operações temporárias](https://nova-sync.net/field-service-eventos.html)
 - [Guia: empresas de field service no Brasil e como escolher](https://nova-sync.net/empresas-de-field-service.html): definição, tipos de fornecedor, critérios e perguntas para contratar.
+- [Lista: principais empresas de field service de TI no Brasil](https://nova-sync.net/principais-empresas-de-field-service.html): nove prestadoras com atuação nacional, com sede, cobertura e técnicos de cada uma e a fonte oficial.
 - [O que é RAT](https://nova-sync.net/o-que-e-rat.html): O que é RAT (relatório de atendimento técnico): campos obrigatórios, papel x digital, assinatura e LGPD.
 - [SLA em field service](https://nova-sync.net/sla-em-field-service.html): SLA em field service: tempo de resposta, de atendimento e de solução, como contar o prazo e o que medir.
 - [Acompanhar técnico terceirizado](https://nova-sync.net/como-acompanhar-tecnico-terceirizado.html): Como acompanhar um técnico terceirizado: o que combinar antes, ver durante e exigir no fim da visita.

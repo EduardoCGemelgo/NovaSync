@@ -50,3 +50,4 @@ body.utility-page { min-height: 100dvh; display: flex; flex-direction: column; b
 .policy-page .tbl th, .policy-page .tbl td { padding: 11px 14px; border-bottom: 1px solid rgba(255, 255, 255, .12); text-align: left; vertical-align: top; }
 .policy-page .tbl th { color: #f2f4ff; font-weight: 600; white-space: nowrap; }
 .policy-page .tbl td:first-child { color: #e6e9f8; font-weight: 500; }
+.policy-page .tbl-nomes td:first-child { white-space: nowrap; }
