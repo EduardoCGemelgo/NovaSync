@@ -35,7 +35,7 @@ Fonte: https://nova-sync.net/sobre.html#numeros
 
 - [Início](https://nova-sync.net/): visão geral, setores atendidos e cobertura no Brasil.
 - [Horus](https://nova-sync.net/horus.html): a plataforma de gestão de chamados, com perguntas frequentes.
-- [Konso](https://nova-sync.net/konso.html): o vigia de equipamentos e chamados, que detecta a falha, abre o chamado no Horus e aciona o técnico da região.
+- [Konso](https://nova-sync.net/konso.html): o vigia de equipamentos e chamados, em piloto: lê o sinal do equipamento, abre o chamado no Horus e aciona o técnico da região.
 - [Field service para varejo](https://nova-sync.net/field-service-varejo.html)
 - [Field service para bancos e fintechs](https://nova-sync.net/field-service-bancos.html)
 - [Field service para saúde](https://nova-sync.net/field-service-saude.html)
