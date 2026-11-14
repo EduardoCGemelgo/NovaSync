@@ -4,13 +4,13 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="google-site-verification" content="MnqBIFDmxXtR1ftUqHm-EqZQVk6Md9OFMd__nM3XZEA">
-  <title>Diagnóstico de field service em 5 passos | NovaSync</title>
-<meta name="description" content="Responda 5 perguntas sobre a sua operação, entenda o que o equipamento parado causa e escolha o próximo passo com a NovaSync.">
+  <title>Diagnóstico de assistência técnica em 5 passos | NovaSync</title>
+<meta name="description" content="Diga como você trabalha com máquinas, veja o que o equipamento parado causa e escolha o próximo passo com a NovaSync: comércio, fabricante ou operação em várias unidades.">
   <link rel="canonical" href="https://nova-sync.net/diagnostico.html">
 <link rel="stylesheet" href="novasync.css?v=a7be9648">
 <link rel="stylesheet" href="utility-pages.css?v=a460c33b">
 <link rel="stylesheet" href="diagnostico.css?v=caf6c44d">
-<script src="diagnostico.js?v=86151b91" defer></script>
+<script src="diagnostico.js?v=26615050" defer></script>
 <script src="novasync.js?v=a889706d" defer></script>
     <script defer src="sidenav.js?v=76822384"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -19,13 +19,13 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="NovaSync">
 <meta property="og:locale" content="pt_BR">
-<meta property="og:title" content="Diagnóstico de field service em 5 passos | NovaSync">
-<meta property="og:description" content="Responda 5 perguntas sobre a sua operação, entenda o que o equipamento parado causa e escolha o próximo passo com a NovaSync.">
+<meta property="og:title" content="Diagnóstico de assistência técnica em 5 passos | NovaSync">
+<meta property="og:description" content="Diga como você trabalha com máquinas, veja o que o equipamento parado causa e escolha o próximo passo com a NovaSync: comércio, fabricante ou operação em várias unidades.">
 <meta property="og:image" content="https://nova-sync.net/midia/og-home.jpg">
 <meta property="og:image:alt" content="NovaSync">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Diagnóstico de field service em 5 passos | NovaSync">
-<meta name="twitter:description" content="Responda 5 perguntas sobre a sua operação, entenda o que o equipamento parado causa e escolha o próximo passo com a NovaSync.">
+<meta name="twitter:title" content="Diagnóstico de assistência técnica em 5 passos | NovaSync">
+<meta name="twitter:description" content="Diga como você trabalha com máquinas, veja o que o equipamento parado causa e escolha o próximo passo com a NovaSync: comércio, fabricante ou operação em várias unidades.">
 <meta name="twitter:image" content="https://nova-sync.net/midia/og-home.jpg">
     <link rel="icon" href="/favicon.ico" sizes="48x48">
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
@@ -47,6 +47,7 @@
           ><a href="index.html#como-funciona">Como funciona</a
           ><a href="horus.html">Horus</a
           ><a href="konso.html">Konso</a
+          ><a href="pos-venda.html">Pós-venda</a
           ><details class="nav-sectors"><summary>Setores</summary><ul><li><a href="field-service-varejo.html">Varejo</a></li><li><a href="field-service-bancos.html">Bancos</a></li><li><a href="field-service-saude.html">Saúde</a></li><li><a href="field-service-industria.html">Indústria</a></li><li><a href="field-service-telecom.html">Telecom</a></li><li><a href="field-service-transporte.html">Transporte</a></li><li><a href="field-service-eventos.html">Eventos</a></li></ul></details><a href="index.html#faq">FAQ</a
           ><a href="index.html#cadastro-tecnico">Cadastro técnico</a>
         </nav>
@@ -74,6 +75,7 @@
         ><a href="index.html#como-funciona">Como funciona</a
         ><a href="horus.html">Horus</a
         ><a href="konso.html">Konso</a
+        ><a href="pos-venda.html">Pós-venda</a
         ><details class="nav-sectors"><summary>Setores</summary><ul><li><a href="field-service-varejo.html">Varejo</a></li><li><a href="field-service-bancos.html">Bancos</a></li><li><a href="field-service-saude.html">Saúde</a></li><li><a href="field-service-industria.html">Indústria</a></li><li><a href="field-service-telecom.html">Telecom</a></li><li><a href="field-service-transporte.html">Transporte</a></li><li><a href="field-service-eventos.html">Eventos</a></li></ul></details><a href="index.html#faq">FAQ</a
         ><a href="index.html#cadastro-tecnico">Cadastro técnico</a
         ><a href="https://app.nova-sync.net">Área do cliente </a
@@ -93,17 +95,19 @@
     <div class="dg-panel">
       <div class="eyebrow">Diagnóstico</div>
       <ol class="diag-trail" id="diag-trail" aria-hidden="true">
-        <li>Operação</li><li>Problema</li><li>Impacto</li><li>Mudança</li><li>Próximo passo</li>
+        <li>Você</li><li>Problema</li><li>Impacto</li><li>Mudança</li><li>Próximo passo</li>
       </ol>
       <p class="diag-count" id="diag-count" aria-live="polite"></p>
-      <h1 id="s-title">Como é a sua operação?</h1>
-      <p class="dg-text" id="s-text">Três cliques para entendermos o porte. Nenhum dado seu é guardado.</p>
+      <h1 id="s-title">Como você trabalha com máquinas?</h1>
+      <p class="dg-text" id="s-text">Uma pergunta para levar você ao caminho certo. Nenhum dado seu é guardado.</p>
 
       <fieldset data-step="1" hidden>
-        <legend class="sr">Passo 1: como é a sua operação</legend>
-        <div class="diag-group"><b>Ramo</b><div class="chips" data-name="ramo"></div></div>
-        <div class="diag-group"><b>Quantas unidades atendidas (lojas, agências, clínicas, bases)</b><div class="chips" data-name="unidades"></div></div>
-        <div class="diag-group"><b>Em quantos estados</b><div class="chips" data-name="estados"></div></div>
+        <legend class="sr">Passo 1: como você trabalha com máquinas</legend>
+        <div class="diag-group"><b>Qual destas frases é a sua?</b><div class="chips stack" data-name="perfil"></div></div>
+        <div class="diag-group" id="d-comercio" hidden><p class="hint">Para o comércio não tem questionário. O Konso fica instalado no computador do caixa, avisa quando algo sai do normal e chama a NovaSync quando precisa. A partir de R$ 37 por máquina, por mês.</p><a class="button primary" href="konso.html#planos">Ver o plano aberto do Konso</a></div>
+        <div class="diag-group" id="g-ramo" hidden><b>Ramo</b><div class="chips" data-name="ramo"></div></div>
+        <div class="diag-group" id="g-unidades" hidden><b id="l-unidades"></b><div class="chips" data-name="unidades"></div></div>
+        <div class="diag-group" id="g-estados" hidden><b>Em quantos estados</b><div class="chips" data-name="estados"></div></div>
       </fieldset>
 
       <fieldset data-step="2" hidden>

@@ -423,3 +423,27 @@ html.still .sv-body img { clip-path:none; }
 @media (max-width:900px) { .hk-horus .horus-mark, .hk-wm { height:clamp(22px,6.6vw,40px); max-width:100%; } }
 /* Celular: o texto ocupa a largura toda, então o véu escuro também (antes a direita ficava clara atrás das letras) */
 @media (max-width:600px) { .hk-horus::after { background:linear-gradient(#07080eb3,#07080ee0); } }
+
+/* Dois caminhos: pós-venda para empresas e plano aberto */
+.hm-cam-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:clamp(12px,1.4vw,20px); }
+.hm-cam-card { position:relative; isolation:isolate; overflow:hidden; display:flex; flex-direction:column; justify-content:flex-end; min-height:clamp(340px,46vh,460px); padding:clamp(24px,3vw,44px); border:1px solid #2b3250; border-radius:34px; color:#eef1ff; transition:border-color .25s, transform .25s; }
+.hm-cam-card:hover { border-color:#7d8db0; transform:translateY(-4px); }
+.hm-cam-card img { position:absolute; z-index:-2; inset:0; width:100%; height:100%; object-fit:cover; filter:brightness(.6); transition:transform .6s; }
+.hm-cam-card:hover img { transform:scale(1.04); }
+.hm-cam-card::after { content:""; position:absolute; z-index:-1; inset:0; background:linear-gradient(#07080e33 0,#07080eb3 45%,#07080ef5 100%); }
+.hm-cam-card small { color:#b9cdf3; font:12px ui-monospace,monospace; letter-spacing:.14em; text-transform:uppercase; }
+.hm-cam-card h3 { margin-top:12px; font-size:clamp(26px,min(3vw,5vh),46px); font-weight:500; letter-spacing:-.055em; line-height:1.05; }
+.hm-cam-card h3 em { font-style:normal; color:#b9cdf3; }
+.hm-cam-card p { margin-top:14px; max-width:44ch; color:#b9c1d3; font-size:15px; line-height:1.6; }
+.hm-cam-card span { margin-top:20px; color:#fff; font-weight:600; font-size:15px; }
+.hm-cam-card span i { font-style:normal; }
+.hm-cam-fatos { display:grid; grid-template-columns:repeat(3,1fr); gap:clamp(16px,3vw,44px); margin:clamp(26px,4vh,44px) 0 0; }
+.hm-cam-fatos div { display:flex; flex-direction:column; }
+.hm-cam-fatos dd { margin:0; font-size:clamp(34px,4.2vw,64px); font-weight:500; letter-spacing:-.06em; line-height:1; color:#eef1ff; }
+.hm-cam-fatos dt { margin-top:8px; max-width:30ch; color:#8e99b3; font-size:14px; line-height:1.5; }
+.hm-cam-fonte { margin-top:16px; color:#6c7690; font-size:12px; }
+@media (max-width:800px) {
+  .hm-cam-grid { grid-template-columns:1fr; }
+  .hm-cam-card { min-height:300px; }
+  .hm-cam-fatos { grid-template-columns:1fr; }
+}

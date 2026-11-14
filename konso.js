@@ -46,7 +46,7 @@
   const layers = [...night.querySelectorAll('.kx-layers>*')];
   const evs = [...night.querySelectorAll('[data-ev]')];
   const T = [18 * 60, 20 * 60, 22 * 60, 24 * 60, 26 * 60 + 14, 28 * 60, 30 * 60 + 48, 32 * 60];
-  const RUIDO = [0, 2, 13, 13, 13, 13, 13, 13], CHAM = [0, 0, 0, 0, 1, 1, 1, 1];
+  const RUIDO = [0, 1, 2, 3, 4, 4, 5, 5], CHAM = [0, 0, 0, 0, 1, 1, 1, 1]; // ocorrências registradas e avisos
   const fmt = n => n.toLocaleString('pt-BR');
   let nStage = -1;
   function setNight(p) {
@@ -122,9 +122,9 @@
   reduce.addEventListener('change', schedule);
   frame();
 
-  // S.03: quanto tempo o equipamento fica parado sem ninguém ver, comparado ao Konso (tolerância 5 min + varredura 2 min).
+  // S.03: quanto tempo o equipamento fica parado sem ninguém ver, comparado ao Konso (leitura a cada 10 min).
   const DIAS = ['segunda', 'terça', 'quarta', 'quinta', 'sexta', 'sábado', 'domingo'];
-  const KONSO_MIN = 7, ABRE = 8, FECHA = 18;
+  const KONSO_MIN = 10, ABRE = 8, FECHA = 18;
   const dur = m => m >= 60 ? `${Math.floor(m / 60)}h ${String(Math.round(m % 60)).padStart(2, '0')}min` : `${Math.round(m)} min`;
   const slider = $('#hora-slider');
   function hora() {
@@ -141,11 +141,11 @@
     }
     $('#hora-sem').textContent = util ? 'Dentro do expediente: alguém pode ver' : `${dur(gap)} parado até alguém ver`;
     $('#hora-sem-txt').textContent = util
-      ? 'Com sorte alguém percebe logo. Sem registro automático, a hora real da falha e do prazo fica na memória de quem viu.'
+      ? 'Com sorte alguém percebe logo. Sem registro automático, a hora real da falha fica na memória de quem viu.'
       : `A operação só volta ${quando} e o chamado abre depois disso.`;
     $('#hora-com-txt').textContent = util
-      ? 'Chamado aberto com a hora exata da falha, o prazo de 2 dias úteis contando e o histórico do sinal registrado.'
-      : 'O prazo de 2 dias úteis já está contando, o histórico do sinal fica registrado e o técnico da região é designado na abertura do dia útil.';
+      ? 'A falha entra na leitura seguinte, com a hora e o que a máquina mostrava antes. O suspeito aparece no Konso.'
+      : 'A falha entra na leitura seguinte, com a hora e o que a máquina mostrava antes. Quem abre a operação já encontra o suspeito.';
     const max = 62 * 60;
     $('#hora-bar-sem').style.width = `${Math.max(2, Math.min(100, gap / max * 100))}%`;
     $('#hora-bar-com').style.width = `${Math.max(2, KONSO_MIN / max * 100)}%`;
@@ -195,12 +195,15 @@
     }, { rootMargin: '200px' }).observe(v);
   });
 
-  // S.05: painel simulado. Estados: ok, tol (tolerância), bad (chamado aberto), tec (técnico designado), val (validando).
+  // S.05: Konso simulado. Estados: ok, tol (investigando), bad (aviso), tec (visita pedida), val (conferindo).
   const EQ = [
-    ['PDV 03', 'Loja 214 · Pinheiros'], ['Switch core', 'CD Barueri'], ['Totem de senha', 'Agência Centro'], ['Impressora de etiquetas', 'Clínica Vila Mariana'],
-    ['Coletor 07', 'CD Barueri'], ['Rack 02', 'Datacenter SP'], ['Câmera do dock', 'CD Cajamar'], ['Nobreak', 'Loja 108 · Moema'],
+    ['PDV 03', 'Loja 214 · Pinheiros'], ['Totem 2', 'Mercado Aurora · Loja 2'], ['Totem de senha', 'Agência Centro'], ['PC da etiqueta', 'Clínica Vila Mariana'],
+    ['Caixa 2', 'Padaria Central'], ['Quiosque', 'Shopping Oeste'], ['PDV 01', 'Loja 108 · Moema'], ['Servidor da loja', 'CD Barueri'],
   ];
-  const LABEL = { ok: 'Online', tol: 'Tolerância 5 min', bad: 'Chamado aberto', tec: 'Técnico designado', val: 'Validando' };
+  const LABEL = { ok: 'Tudo certo', tol: 'Investigando', bad: 'Aviso', tec: 'Visita pedida', val: 'Conferindo' };
+  // [o que a leitura mostrou, suspeito]
+  const FALHAS = [['leitor de cartão caiu pela 4ª vez em 7 dias', 'cabo USB do leitor'], ['impressora com a fila presa há 20 min', 'serviço de impressão'],
+    ['rede caindo e voltando desde 01:40', 'cabo ou porta do switch'], ['disco em 96%, enchendo 2% por dia', 'registros do aplicativo']];
   const tiles = $('#live-tiles'), log = $('#live-log'), clock = $('#live-clock'), btn = $('#live-run');
   const els = EQ.map(([n, l]) => {
     const li = document.createElement('li');
@@ -209,7 +212,7 @@
     tiles.append(li);
     return li;
   });
-  let now = 2 * 60, chamado = 2480, running = false;
+  let now = 2 * 60, running = false;
   const setS = (i, s) => { els[i].dataset.s = s; els[i].querySelector('em').textContent = LABEL[s]; };
   els.forEach((_, i) => setS(i, 'ok'));
   const say = (txt, cls = '') => {
@@ -227,19 +230,20 @@
     const livres = els.map((_, i) => i).filter(i => els[i].dataset.s === 'ok' && els[i].offsetParent); // só os que aparecem (no celular são 4)
     const i = livres[Math.floor(Math.random() * livres.length)];
     const nome = `${EQ[i][0]} · ${EQ[i][1]}`;
-    now += 7; tick(); setS(i, 'tol'); say(`${nome} sem sinal. Aguardando a tolerância.`, 'bad');
+    const [lido, suspeito] = FALHAS[Math.floor(Math.random() * FALHAS.length)];
+    now += 10; tick(); setS(i, 'tol'); say(`${nome}: ${lido}. Montando a linha do tempo.`, 'bad');
     await wait(1600);
-    now += 5; tick(); setS(i, 'bad'); const c = ++chamado; say(`Chamado CH-${c} aberto no Horus. Prazo: 2 dias úteis.`, 'bad');
+    now += 1; tick(); setS(i, 'bad'); say(`Aviso de ${EQ[i][0]}. Suspeito principal: ${suspeito}.`, 'bad');
     await wait(1700);
-    now += 2; tick(); setS(i, 'tec'); say(`Técnico da região designado para CH-${c}.`);
+    now += 340; tick(); setS(i, 'tec'); say(`Visita pedida para ${EQ[i][0]}. Técnico da região sai com o escopo.`);
     await wait(1700);
-    now += 330; tick(); setS(i, 'val'); say(`Sinal de ${EQ[i][0]} voltou. Aguardando o responsável no local.`);
+    now += 95; tick(); setS(i, 'val'); say(`Técnico atendeu ${EQ[i][0]}. Conferindo as próximas leituras.`);
     await wait(1700);
-    now += 6; tick(); setS(i, 'ok'); say(`CH-${c} finalizado: sinal normal e confirmação do responsável.`, 'ok');
+    now += 20; tick(); setS(i, 'ok'); say(`${EQ[i][0]}: leituras normais de novo. Aviso encerrado.`, 'ok');
     running = false; btn.disabled = false;
   }
   btn.addEventListener('click', queda);
-  say(`Konso vigiando ${els.filter(e => e.offsetParent).length} equipamentos. Nenhum alerta.`, 'ok');
+  say(`Konso lendo ${els.filter(e => e.offsetParent).length} máquinas. Nenhum aviso.`, 'ok');
   // sozinho, a cada ~11 s, enquanto o painel estiver na tela (parado se a pessoa prefere menos movimento)
   let visible = false;
   new IntersectionObserver(([e]) => { visible = e.isIntersecting; }, { threshold: .4 }).observe($('.kx-board'));

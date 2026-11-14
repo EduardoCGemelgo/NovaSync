@@ -9,6 +9,8 @@ Grafia do nome: NovaSync, uma única palavra, com N e S maiúsculos. Não confun
 ## O que a NovaSync faz
 
 - Atendimento técnico em campo (field service de TI) para varejo, bancos e fintechs, saúde, indústria, telecom, transporte e mobilidade, e eventos.
+- Pós-venda para empresas (fabricantes, integradores e redes com parque espalhado): NovaSync e Konso vendidos juntos, com total mensal e visitas inclusas por ano, sob proposta. A empresa fala com o cliente dela; o Konso identifica o problema; a NovaSync atende à distância ou no local.
+- Plano aberto do Konso, só para máquinas do próprio negócio e até 10 máquinas (11 ou mais, ou máquinas instaladas em clientes, vão para o pós-venda): até 3 máquinas, R$ 59 por máquina por mês; até 10 máquinas, R$ 37 por máquina por mês com 15 créditos por máquina por mês (150 com 10 máquinas). 1 crédito = R$ 1; crédito guardado vale até 6 meses; só o caso resolvido é cobrado.
 - Rede de referência de 350 técnicos nas 27 unidades da federação. A equipe confirma cobertura, prazo e condições pelo WhatsApp.
 - Prazo padrão de atendimento: dois dias úteis a partir da abertura, pulando fins de semana e feriados nacionais.
 - Escopo típico: rede e infraestrutura (rack, switches e cabeamento) e manutenção de equipamentos (PDV, impressoras e periféricos).
@@ -35,7 +37,8 @@ Fonte: https://nova-sync.net/sobre.html#numeros
 
 - [Início](https://nova-sync.net/): visão geral, setores atendidos e cobertura no Brasil.
 - [Horus](https://nova-sync.net/horus.html): a plataforma de gestão de chamados, com perguntas frequentes.
-- [Konso](https://nova-sync.net/konso.html): o vigia de equipamentos e chamados, em piloto: lê o sinal do equipamento, abre o chamado no Horus e aciona o técnico da região.
+- [Konso](https://nova-sync.net/konso.html): assistência técnica para todo negócio, em piloto: instalado no Windows, lê a máquina a cada 10 minutos, aponta o suspeito da falha, resolve à distância o que tem solução conhecida e mostra o parque inteiro em uma tela; se precisar, a NovaSync envia o técnico da região. Plano aberto a partir de R$ 37 por máquina por mês.
+- [Pós-venda para empresas](https://nova-sync.net/pos-venda.html): pós-venda completo para fabricantes, integradores e redes com parque espalhado, com o Konso e o atendimento da NovaSync em um contrato só.
 - [Field service para varejo](https://nova-sync.net/field-service-varejo.html)
 - [Field service para bancos e fintechs](https://nova-sync.net/field-service-bancos.html)
 - [Field service para saúde](https://nova-sync.net/field-service-saude.html)

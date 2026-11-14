@@ -1,0 +1,53 @@
+/* Pós-venda para empresas. Carrega depois de novasync.css e kx.css. */
+.pv-hero { position:relative; isolation:isolate; display:grid; align-items:end; min-height:100svh; padding-block:clamp(130px,18vh,200px) clamp(48px,8vh,96px); overflow:hidden; }
+.pv-hero-bg { position:absolute; z-index:-2; inset:0; width:100%; height:100%; object-fit:cover; filter:brightness(.5) saturate(.8); }
+.pv-hero::after { content:""; position:absolute; z-index:-1; inset:0; background:linear-gradient(90deg,#050609f2 0,#050609b3 55%,#05060966 100%),linear-gradient(#05060900 55%,#050609 100%); }
+.pv-hero h1 { margin-top:18px; font-size:clamp(40px,6.4vw,104px); font-weight:600; letter-spacing:-.06em; line-height:1.02; }
+.pv-lead { max-width:56ch; margin-top:26px; color:#c3cadb; font-size:clamp(16px,1.4vw,20px); line-height:1.6; }
+.pv-hero .kx-actions { justify-content:flex-start; margin-top:34px; }
+.pv-quem { display:flex; flex-wrap:wrap; gap:10px; margin:clamp(36px,6vh,64px) 0 0; padding:0; list-style:none; }
+.pv-quem li { padding:8px 16px; border:1px solid #3a4160; border-radius:99px; background:#0b0d16b3; color:#cfd6e6; font-size:13.5px; }
+
+/* Cenas presas: uma imagem por parada, a fala troca com a rolagem (pv.js põe --p e .is-on) */
+.pv-cena { height:calc(var(--n) * 105vh + 100vh); }
+.pv-cena .kx-stick::after { content:""; position:absolute; inset:0; background:linear-gradient(90deg,#050609e6 0%,#05060980 42%,#05060900 78%),linear-gradient(#05060966,#05060900 30%,#050609cc 100%); }
+.pv-cena-ui { position:relative; z-index:2; height:100%; display:grid; grid-template-rows:auto 1fr auto; padding-top:120px; padding-bottom:34px; }
+.pv-falas { position:relative; align-self:end; min-height:clamp(250px,40vh,380px); }
+.pv-falas article { position:absolute; inset:auto 0 0; display:grid; grid-template-columns:minmax(0,1fr) minmax(0,.8fr); gap:6px clamp(24px,4vw,70px); align-items:end; opacity:0; transform:translateY(16px); transition:opacity .45s,transform .45s; pointer-events:none; }
+.pv-falas article.is-on { opacity:1; transform:none; pointer-events:auto; }
+.pv-falas article > * { grid-column:1; }
+.pv-falas small { color:#ffd9a0; font:12px ui-monospace,monospace; letter-spacing:.14em; text-transform:uppercase; }
+.pv-falas h3 { font-size:clamp(34px,5vw,84px); font-weight:600; letter-spacing:-.06em; line-height:1; }
+.pv-falas p { max-width:50ch; margin-top:12px; color:#c3cde0; font-size:clamp(15px,1.3vw,18px); line-height:1.6; }
+.pv-falas .kx-term { grid-column:2; grid-row:1 / span 3; align-self:end; margin:0; background:#080a11d9; backdrop-filter:blur(10px); }
+.pv-passos { position:relative; display:grid; grid-template-columns:repeat(var(--n),1fr); margin:26px 0 0; padding:14px 0 0; list-style:none; border-top:1px solid #ffffff2a; color:#7c86a0; font:12px ui-monospace,monospace; letter-spacing:.1em; text-transform:uppercase; }
+.pv-passos::after { content:""; position:absolute; top:-1px; left:0; height:2px; width:calc(var(--p) * 100%); background:linear-gradient(90deg,var(--vio),#ffc46b); }
+.pv-passos li.is-on { color:#eef1ff; }
+
+.pv-cta { margin-top:34px; text-align:center; }
+.pv-ponte p { max-width:60ch; margin:0 auto; padding:clamp(22px,3vw,34px); border:1px dashed #2c3248; border-radius:20px; color:#b9c1d3; text-align:center; font-size:clamp(15px,1.3vw,18px); }
+.pv-ponte a { color:#d7c5ff; text-decoration:underline; text-underline-offset:4px; }
+.pv .kx-planos b { font-size:clamp(30px,3.2vw,44px); }
+
+@media (max-width:900px) {
+  .pv-falas article { grid-template-columns:1fr; }
+  .pv-falas .kx-term { grid-column:1; grid-row:auto; margin-top:14px; display:block; }
+  .pv-falas { min-height:clamp(330px,56vh,460px); }
+  .pv-cena-ui { padding-top:96px; padding-bottom:22px; }
+  .pv-cena .kx-head h2 .kx-dim { display:none; }
+  .pv-passos { font-size:10px; letter-spacing:.04em; }
+  #maquina .kx-layers img { object-position:68% 50%; } /* o totem fica à direita do quadro */
+}
+/* Movimento reduzido: sem cena presa; as falas viram uma lista sobre a primeira imagem */
+@media (prefers-reduced-motion:reduce) {
+  .pv-cena { height:auto; }
+  .pv-cena-ui { display:block; }
+  .pv-falas { min-height:0; }
+  .pv-falas article { position:static; opacity:1; transform:none; pointer-events:auto; margin-top:34px; }
+  .pv-cena .kx-layers > :first-child { opacity:.35; }
+  .pv-passos { display:none; }
+}
+@media (max-width:700px) {
+  .pv-hero { min-height:0; padding-top:120px; }
+  .pv-hero h1 { font-size:clamp(34px,10.4vw,48px); }
+}
