@@ -25,11 +25,11 @@ Grafia do nome: NovaSync, uma única palavra, com N e S maiúsculos. Não confun
 
 ## Números do Horus
 
-Medido no Horus nos 52 chamados finalizados entre 23/09/2026 e 19/10/2026, em 16 estados (chamados de teste fora da conta; horas corridas):
+Medido no Horus nos 126 chamados finalizados entre 23/09/2026 e 17/11/2026, em 64 cidades de 19 estados (chamados de teste fora da conta; horas corridas):
 
-- Mediana de 22 horas entre a abertura do chamado e o início do atendimento no local.
-- Mediana de 26 horas entre a abertura e a conclusão do atendimento.
-- 88% dos chamados resolvidos na primeira visita.
+- Mediana de 19 horas entre a abertura do chamado e o início do atendimento no local.
+- Mediana de 23 horas entre a abertura e a conclusão do atendimento.
+- 86% dos chamados resolvidos na primeira visita.
 
 Fonte: https://nova-sync.net/sobre.html#numeros
 
@@ -53,6 +53,7 @@ Fonte: https://nova-sync.net/sobre.html#numeros
 - [Acompanhar técnico terceirizado](https://nova-sync.net/como-acompanhar-tecnico-terceirizado.html): Como acompanhar um técnico terceirizado: o que combinar antes, ver durante e exigir no fim da visita.
 - [Quem somos](https://nova-sync.net/sobre.html): empresa, CNPJ 62.718.285/0001-58, sede em São Paulo/SP, desde setembro de 2025, cobertura, Horus e contato.
 - [Política de privacidade](https://nova-sync.net/politica-de-privacidade.html)
+- [Termos de uso do plano aberto do Konso](https://nova-sync.net/termos-plano-aberto.html)
 - [Central de ajuda do Horus](https://app.nova-sync.net/ajuda): perguntas frequentes por perfil (empresa, técnico e cliente).
 
 ## Contato
