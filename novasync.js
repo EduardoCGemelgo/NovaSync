@@ -96,19 +96,21 @@ dialog?.addEventListener("close", () => {
     if (!a || e.defaultPrevented || e.button || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
     if (a.target || a.origin !== location.origin || pagina(a.pathname) !== aqui) return;
     const id = decodeURIComponent(a.hash.slice(1)) || (SECOES.includes(a.pathname.slice(1)) ? a.pathname.slice(1) : "");
-    if (id === "cadastro" || !ir(id)) return; // #cadastro abre o formulário (acima)
+    if (id === "cadastro" || (id && !document.getElementById(id))) return; // #cadastro abre o formulário (acima)
     e.preventDefault();
+    // Endereço antes da rolagem: no Chrome, o pushState durante a rolagem suave a interrompe.
     if (endereco(id) !== location.pathname + location.search) history.pushState(null, "", endereco(id));
+    ir(id);
   });
   // Chegada por /cobertura ou por um link antigo com "#": rola até a seção e tira o "#" do endereço.
   const hash = decodeURIComponent(location.hash.slice(1));
   const alvo = hash && hash !== "cadastro" ? hash : aqui === "/" && SECOES.includes(location.pathname.slice(1)) ? location.pathname.slice(1) : "";
   if (alvo && document.getElementById(alvo)) {
     if (hash) history.replaceState(null, "", endereco(alvo));
-    ir(alvo, "instant");
-    // Imagens e fontes mudam a altura até o load: rola de novo se a pessoa ainda não mexeu.
-    const y = scrollY;
-    addEventListener("load", () => { if (Math.abs(scrollY - y) < 2) ir(alvo, "instant"); }, { once: true });
+    // Só depois do load: as paradas da trava (home.js, trava.js) são medidas com a página no topo, e imagens e fontes
+    // já deram a altura final.
+    const rolar = () => setTimeout(() => ir(alvo, "instant"));
+    if (document.readyState === "complete") rolar(); else addEventListener("load", rolar, { once: true });
   }
 })();
 
