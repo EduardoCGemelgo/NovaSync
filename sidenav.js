@@ -2,7 +2,7 @@
 (() => {
   const main = document.getElementById('conteudo') || document.querySelector('main');
   if (!main) return;
-  const PAGES = [['index.html', 'Início'], ['horus.html', 'Horus'], ['konso.html', 'Konso'], ['empresas-de-field-service.html', 'Guia de field service'], ['o-que-e-rat.html', 'O que é RAT'], ['sla-em-field-service.html', 'SLA em field service'], ['como-acompanhar-tecnico-terceirizado.html', 'Técnico terceirizado'], ['sobre.html', 'Quem somos']];
+  const PAGES = [['/', 'Início'], ['/horus', 'Horus'], ['/konso', 'Konso'], ['/empresas-de-field-service', 'Guia de field service'], ['/o-que-e-rat', 'O que é RAT'], ['/sla-em-field-service', 'SLA em field service'], ['/como-acompanhar-tecnico-terceirizado', 'Técnico terceirizado'], ['/sobre', 'Quem somos']];
   const SETORES = [['varejo', 'Varejo'], ['bancos', 'Bancos'], ['saude', 'Saúde'], ['industria', 'Indústria'], ['telecom', 'Telecom'], ['transporte', 'Transporte'], ['eventos', 'Eventos']];
   const NAMES = {
     'cobertura': 'Cobertura', 'servicos': 'O que fazemos', 'como-funciona': 'Como funciona', 'horus': 'Horus', 'setores': 'Setores', 'parceiros': 'Parceiros', 'cadastro-tecnico': 'Cadastro técnico', 'sobre': 'Sobre', 'contato': 'Contato', 'faq': 'FAQ',
@@ -21,16 +21,17 @@
     items.push({ s, label });
   });
 
-  const file = location.pathname.split('/').pop() || 'index.html';
-  const isSetor = /^field-service-/.test(file);
+  // Endereço sem .html; as seções da home (/cobertura...) são a própria home. Mesma lista em novasync.js e no Caddyfile.
+  const file = /^\/(servicos|como-funciona|cobertura|faq|cadastro-tecnico|contato|setores)$/.test(location.pathname) ? '/' : location.pathname.replace(/\.html$/, '').replace(/^\/index$/, '/');
+  const isSetor = /^\/field-service-/.test(file);
   const li = (href, text, cur) => `<li><a href="${href}"${cur ? ' aria-current="page"' : ''}>${text}</a></li>`;
 
   const panel = document.createElement('aside');
   panel.className = 'sn-panel'; panel.id = 'sn-panel'; panel.setAttribute('aria-label', 'Mapa do site');
   panel.innerHTML = '<button class="sn-close" type="button" aria-label="Fechar mapa">×</button><h2>Neste site</h2><ul>'
     + PAGES.map(([f, t]) => li(f, t, f === file)).join('')
-    + `<li><a href="index.html#setores"${isSetor ? ' aria-current="page"' : ''}>Setores</a><ul>${SETORES.map(([k, t]) => li(`field-service-${k}.html`, t, file === `field-service-${k}.html`)).join('')}</ul></li>`
-    + li('diagnostico.html', 'Diagnóstico', file === 'diagnostico.html') + '</ul>'
+    + `<li><a href="/setores"${isSetor ? ' aria-current="page"' : ''}>Setores</a><ul>${SETORES.map(([k, t]) => li(`/field-service-${k}`, t, file === `/field-service-${k}`)).join('')}</ul></li>`
+    + li('/diagnostico', 'Diagnóstico', file === '/diagnostico') + '</ul>'
     + (items.length > 1 ? `<h2>Nesta página</h2><ul>${items.map(x => li('#' + x.s.id, x.label)).join('')}</ul>` : '');
   const veil = document.createElement('div'); veil.className = 'sn-veil';
   document.body.append(veil, panel);
