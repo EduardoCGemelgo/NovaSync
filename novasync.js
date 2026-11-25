@@ -75,6 +75,45 @@ dialog?.addEventListener("close", () => {
   if (location.hash === "#cadastro") history.replaceState(null, "", location.pathname + location.search);
 });
 
+// Endereços sem "#": cada seção da home tem endereço próprio (nova-sync.net/cobertura), que o Caddy da VPS responde
+// com a home (infra/vps/caddy/Caddyfile do novasync-app) e este trecho rola até a seção. Nos demais links de seção,
+// a página rola e o endereço fica limpo. Mesma lista em sidenav.js e no Caddyfile.
+(() => {
+  const SECOES = ["servicos", "como-funciona", "cobertura", "faq", "cadastro-tecnico", "contato", "setores"];
+  const pagina = (p) => (SECOES.includes(p.slice(1)) ? "/" : p.replace(/\.html$/, "").replace(/^\/index$/, "/"));
+  const aqui = pagina(location.pathname);
+  const endereco = (id) => (aqui === "/" && SECOES.includes(id) ? "/" + id : aqui) + location.search;
+  // Sem modo, vale o scroll-behavior do CSS (suave, ou direto com reduced-motion).
+  const ir = (id, behavior) => {
+    const el = id ? document.getElementById(id) : null;
+    if (id && !el) return false;
+    if (el) el.scrollIntoView({ behavior }); else scrollTo({ top: 0, behavior });
+    if (id === "conteudo") { el.tabIndex = -1; el.focus({ preventScroll: true }); } // link "pular para o conteúdo"
+    return true;
+  };
+  document.addEventListener("click", (e) => {
+    const a = e.target.closest?.("a[href]");
+    if (!a || e.defaultPrevented || e.button || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+    if (a.target || a.origin !== location.origin || pagina(a.pathname) !== aqui) return;
+    const id = decodeURIComponent(a.hash.slice(1)) || (SECOES.includes(a.pathname.slice(1)) ? a.pathname.slice(1) : "");
+    if (id === "cadastro" || (id && !document.getElementById(id))) return; // #cadastro abre o formulário (acima)
+    e.preventDefault();
+    // Endereço antes da rolagem: no Chrome, o pushState durante a rolagem suave a interrompe.
+    if (endereco(id) !== location.pathname + location.search) history.pushState(null, "", endereco(id));
+    ir(id);
+  });
+  // Chegada por /cobertura ou por um link antigo com "#": rola até a seção e tira o "#" do endereço.
+  const hash = decodeURIComponent(location.hash.slice(1));
+  const alvo = hash && hash !== "cadastro" ? hash : aqui === "/" && SECOES.includes(location.pathname.slice(1)) ? location.pathname.slice(1) : "";
+  if (alvo && document.getElementById(alvo)) {
+    if (hash) history.replaceState(null, "", endereco(alvo));
+    // Só depois do load: as paradas da trava (home.js, trava.js) são medidas com a página no topo, e imagens e fontes
+    // já deram a altura final.
+    const rolar = () => setTimeout(() => ir(alvo, "instant"));
+    if (document.readyState === "complete") rolar(); else addEventListener("load", rolar, { once: true });
+  }
+})();
+
 // Reveal progressivo (respeita reduced-motion).
 (() => {
   const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -150,7 +189,7 @@ const MEDICAO_CONVERSAO_CONTATO = ""; // ex.: "AW-XXXXXXXXXX/rotulo-da-conversao
     aviso.setAttribute("role", "region");
     aviso.setAttribute("aria-label", "Aviso de cookies");
     aviso.innerHTML =
-      '<p>Usamos cookies do Google para medir visitas e o resultado dos nossos anúncios. <a href="/politica-de-privacidade.html#cookies-tecnologias">Saiba mais</a></p>' +
+      '<p>Usamos cookies do Google para medir visitas e o resultado dos nossos anúncios. <a href="/politica-de-privacidade#cookies-tecnologias">Saiba mais</a></p>' +
       '<div><button type="button" class="button" data-cookie="nao">Recusar</button><button type="button" class="button primary" data-cookie="sim">Aceitar</button></div>';
     aviso.addEventListener("click", (e) => {
       const escolha = e.target.closest("[data-cookie]")?.dataset.cookie;

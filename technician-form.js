@@ -170,7 +170,7 @@
         return result && response.status < 500 && response.status !== 429 ? result : {ok: false, falhou: true, message: result?.message};
       })
       .then(result => {
-        if (result.ok) { try { sessionStorage.removeItem(RASCUNHO); } catch {} location.href = new URL('cadastro-enviado.html', location.href).href; return; }
+        if (result.ok) { try { sessionStorage.removeItem(RASCUNHO); } catch {} location.href = new URL('/cadastro-enviado', location.href).href; return; }
         liberar();
         if (result.falhou) { falhou(result.message || 'Não foi possível enviar agora. Tente novamente em instantes.'); window.turnstile?.reset(); return; }
         let primeiro = null;

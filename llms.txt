@@ -10,7 +10,7 @@ Grafia do nome: NovaSync, uma única palavra, com N e S maiúsculos. Não confun
 
 - Atendimento técnico em campo (field service de TI) para varejo, bancos e fintechs, saúde, indústria, telecom, transporte e mobilidade, e eventos.
 - Pós-venda para empresas (fabricantes, integradores e redes com parque espalhado): NovaSync e Konso vendidos juntos, com total mensal e visitas inclusas por ano, sob proposta. A empresa fala com o cliente dela; o Konso identifica o problema; a NovaSync atende à distância ou no local.
-- Plano aberto do Konso, só para máquinas do próprio negócio e até 10 máquinas (11 ou mais, ou máquinas instaladas em clientes, vão para o pós-venda): até 3 máquinas, R$ 59 por máquina por mês; 4 máquinas, R$ 177 por mês com 60 créditos; de 5 a 10 máquinas, R$ 37 por máquina por mês com 15 créditos por máquina por mês (150 com 10 máquinas). 1 crédito = R$ 1; pacote de 1.000 créditos por R$ 950; crédito do plano vale 6 meses e crédito comprado vale 12 meses; só o caso resolvido é cobrado. Regras completas: https://nova-sync.net/termos-plano-aberto.html
+- Plano aberto do Konso, só para máquinas do próprio negócio e até 10 máquinas (11 ou mais, ou máquinas instaladas em clientes, vão para o pós-venda): até 3 máquinas, R$ 59 por máquina por mês; 4 máquinas, R$ 177 por mês com 60 créditos; de 5 a 10 máquinas, R$ 37 por máquina por mês com 15 créditos por máquina por mês (150 com 10 máquinas). 1 crédito = R$ 1; pacote de 1.000 créditos por R$ 950; crédito do plano vale 6 meses e crédito comprado vale 12 meses; só o caso resolvido é cobrado. Regras completas: https://nova-sync.net/termos-plano-aberto
 - Rede de referência de 350 técnicos nas 27 unidades da federação. A equipe confirma cobertura, prazo e condições pelo WhatsApp.
 - Prazo padrão de atendimento: dois dias úteis a partir da abertura, pulando fins de semana e feriados nacionais.
 - Escopo típico: rede e infraestrutura (rack, switches e cabeamento) e manutenção de equipamentos (PDV, impressoras e periféricos).
@@ -31,29 +31,29 @@ Medido no Horus nos 126 chamados finalizados entre 23/09/2026 e 17/11/2026, em 6
 - Mediana de 23 horas entre a abertura e a conclusão do atendimento.
 - 86% dos chamados resolvidos na primeira visita.
 
-Fonte: https://nova-sync.net/sobre.html#numeros
+Fonte: https://nova-sync.net/sobre#numeros
 
 ## Páginas
 
 - [Início](https://nova-sync.net/): visão geral, setores atendidos e cobertura no Brasil.
-- [Horus](https://nova-sync.net/horus.html): a plataforma de gestão de chamados, com perguntas frequentes.
-- [Konso](https://nova-sync.net/konso.html): assistência técnica para todo negócio, em piloto: instalado no Windows, lê a máquina a cada 10 minutos, aponta o suspeito da falha, resolve à distância o que tem solução conhecida e mostra o parque inteiro em uma tela; se precisar, a NovaSync envia o técnico da região. Plano aberto a partir de R$ 37 por máquina por mês.
-- [Pós-venda para empresas](https://nova-sync.net/pos-venda.html): pós-venda completo para fabricantes, integradores e redes com parque espalhado, com o Konso e o atendimento da NovaSync em um contrato só.
-- [Field service para varejo](https://nova-sync.net/field-service-varejo.html)
-- [Field service para bancos e fintechs](https://nova-sync.net/field-service-bancos.html)
-- [Field service para saúde](https://nova-sync.net/field-service-saude.html)
-- [Field service para indústria](https://nova-sync.net/field-service-industria.html)
-- [Field service para telecom](https://nova-sync.net/field-service-telecom.html)
-- [Field service para transporte e mobilidade](https://nova-sync.net/field-service-transporte.html)
-- [Field service para eventos e operações temporárias](https://nova-sync.net/field-service-eventos.html)
-- [Guia: empresas de field service no Brasil e como escolher](https://nova-sync.net/empresas-de-field-service.html): definição, tipos de fornecedor, critérios e perguntas para contratar.
-- [Lista: principais empresas de field service de TI no Brasil](https://nova-sync.net/principais-empresas-de-field-service.html): nove prestadoras com atuação nacional, com sede, cobertura e técnicos de cada uma e a fonte oficial.
-- [O que é RAT](https://nova-sync.net/o-que-e-rat.html): O que é RAT (relatório de atendimento técnico): campos obrigatórios, papel x digital, assinatura e LGPD.
-- [SLA em field service](https://nova-sync.net/sla-em-field-service.html): SLA em field service: tempo de resposta, de atendimento e de solução, como contar o prazo e o que medir.
-- [Acompanhar técnico terceirizado](https://nova-sync.net/como-acompanhar-tecnico-terceirizado.html): Como acompanhar um técnico terceirizado: o que combinar antes, ver durante e exigir no fim da visita.
-- [Quem somos](https://nova-sync.net/sobre.html): empresa, CNPJ 69.773.878/0001-66, sede em São Paulo/SP, desde setembro de 2025, cobertura, Horus e contato.
-- [Política de privacidade](https://nova-sync.net/politica-de-privacidade.html)
-- [Termos de uso do plano aberto do Konso](https://nova-sync.net/termos-plano-aberto.html)
+- [Horus](https://nova-sync.net/horus): a plataforma de gestão de chamados, com perguntas frequentes.
+- [Konso](https://nova-sync.net/konso): assistência técnica para todo negócio, em piloto: instalado no Windows, lê a máquina a cada 10 minutos, aponta o suspeito da falha, resolve à distância o que tem solução conhecida e mostra o parque inteiro em uma tela; se precisar, a NovaSync envia o técnico da região. Plano aberto a partir de R$ 37 por máquina por mês.
+- [Pós-venda para empresas](https://nova-sync.net/pos-venda): pós-venda completo para fabricantes, integradores e redes com parque espalhado, com o Konso e o atendimento da NovaSync em um contrato só.
+- [Field service para varejo](https://nova-sync.net/field-service-varejo)
+- [Field service para bancos e fintechs](https://nova-sync.net/field-service-bancos)
+- [Field service para saúde](https://nova-sync.net/field-service-saude)
+- [Field service para indústria](https://nova-sync.net/field-service-industria)
+- [Field service para telecom](https://nova-sync.net/field-service-telecom)
+- [Field service para transporte e mobilidade](https://nova-sync.net/field-service-transporte)
+- [Field service para eventos e operações temporárias](https://nova-sync.net/field-service-eventos)
+- [Guia: empresas de field service no Brasil e como escolher](https://nova-sync.net/empresas-de-field-service): definição, tipos de fornecedor, critérios e perguntas para contratar.
+- [Lista: principais empresas de field service de TI no Brasil](https://nova-sync.net/principais-empresas-de-field-service): nove prestadoras com atuação nacional, com sede, cobertura e técnicos de cada uma e a fonte oficial.
+- [O que é RAT](https://nova-sync.net/o-que-e-rat): O que é RAT (relatório de atendimento técnico): campos obrigatórios, papel x digital, assinatura e LGPD.
+- [SLA em field service](https://nova-sync.net/sla-em-field-service): SLA em field service: tempo de resposta, de atendimento e de solução, como contar o prazo e o que medir.
+- [Acompanhar técnico terceirizado](https://nova-sync.net/como-acompanhar-tecnico-terceirizado): Como acompanhar um técnico terceirizado: o que combinar antes, ver durante e exigir no fim da visita.
+- [Quem somos](https://nova-sync.net/sobre): empresa, CNPJ 69.773.878/0001-66, sede em São Paulo/SP, desde setembro de 2025, cobertura, Horus e contato.
+- [Política de privacidade](https://nova-sync.net/politica-de-privacidade)
+- [Termos de uso do plano aberto do Konso](https://nova-sync.net/termos-plano-aberto)
 - [Central de ajuda do Horus](https://app.nova-sync.net/ajuda): perguntas frequentes por perfil (empresa, técnico e cliente).
 
 ## Contato
